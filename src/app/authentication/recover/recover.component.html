@@ -13,7 +13,7 @@
 		                    <input type="text" name="username" [formControl] = "this.form.controls['username']"
 		                        placeholder="Type your username and we'll send you an email" class="form-control"
 		                        required>
-		                    <span *ngIf = "form.controls['username'].hasError('required') && form.controls['username'].touched" class="invalid">
+		                    <span *ngIf = "form.controls['username'].hasError('required') && (form.controls['username'].touched || this.submitted)" class="invalid">
 		                        Please enter your username
                             </span>
 		                </div>

@@ -13,7 +13,7 @@
 		                    <input type="text" name="username" [formControl]="form.controls['username']"
 		                        placeholder="Use your Interplex username" class="form-control"
 		                        required>
-		                    <span *ngIf =  "form.controls['username'].hasError('required') && form.controls['username'].touched"  class="invalid">
+		                    <span *ngIf =  "form.controls['username'].hasError('required') && (form.controls['username'].touched || this.submitted)"  class="invalid">
 		                        Please enter your username
 							</span>
 		                </div>
@@ -23,7 +23,7 @@
 		                    <input name="password" type="password" [formControl]="form.controls['password']"
 							placeholder="Type your password" class="form-control"
 		                        required>
-		                    <span *ngIf = "form.controls['password'].hasError('required') && form.controls['password'].touched" class="invalid">
+		                    <span *ngIf = "form.controls['password'].hasError('required') && (form.controls['password'].touched || this.submitted)" class="invalid">
 		                        Please enter your password
 							</span>
 		                </div>

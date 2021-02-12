@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   public form: FormGroup = Object.create(null);
+  public submitted = false;
 
   constructor(private router : Router,
               private fb : FormBuilder) {}
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
+    this.submitted = true;
     console.log("Submitted!");
     console.log(this.form.value);
   }

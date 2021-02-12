@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class RecoverComponent implements OnInit {
 
   public form = Object.create(null);
+  public submitted = false;
 
   constructor(private router : Router,
               private fb : FormBuilder) { }
@@ -21,6 +22,7 @@ export class RecoverComponent implements OnInit {
   }
 
   onSubmit(){
+    this.submitted = true;
     console.log(this.form.value);
   }
 }

@@ -10,6 +10,7 @@ import { Error404Component } from './error404/error404.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './layouts/dashboard/dashboard.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,9 +21,9 @@ import { DashboardComponent } from './layouts/dashboard/dashboard.component';
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(AppRoutes),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forRoot(AppRoutes),
   ],
   providers: [],
   bootstrap: [AppComponent]
