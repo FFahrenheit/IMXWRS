@@ -12,4 +12,16 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  recover(){
+
+  }
+
+  login(){
+    console.log("Hello");  
+  }
+
+  goLogin(){
+    console.log("Hmm");
+  }
+
 }

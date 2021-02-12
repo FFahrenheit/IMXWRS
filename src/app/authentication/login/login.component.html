@@ -1,1 +1,44 @@
-<p>login works!</p>
+<div class="login-background">
+	  <div class="container">
+	    <div class="row">
+	    	<div class="card mx-auto text-center mt-5 shadow p-3 mb-5 bg-white rounded login-card">
+	    		<div class="card-body">
+	    			<img src="../../../assets/logo.png" class = "login-logo" alt="Interplex logo">
+	    			<br>
+	    			<h2 class="title">Welcome to the Waiver Requests System</h2>
+	                <form id="login" class="mx-3 login" (ngSubmit)="login()">
+		                <div class="form-group">
+		                    <label for="">Username: </label>
+		                    <font color="red">*</font>
+		                    <input type="text" name="username"
+		                        placeholder="Use your Interplex username" class="form-control"
+		                        required>
+		                    <div class="invalid-feedback">
+		                        Please enter your username
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label for="">Password: </label>
+		                    <font color="red">*</font>
+		                    <input name="password" type="password" placeholder="Type your password" class="form-control"
+		                        required>
+		                    <div class="invalid-feedback">
+		                        Please enter your password
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <button type="button" (click) = "goLogin()"class="btn btn-primary px-5 login btn-lg py-1">
+		                    	Login
+		                	</button>
+		                </div>
+		            </form>
+		            <span (click) = "recover()" class="fake-link login">
+		            	Did you forgot your password?
+		            </span>
+	    		</div>
+	    	</div>
+	    </div>
+	  </div>
+      <app-footer>
+      </app-footer>
+</div>

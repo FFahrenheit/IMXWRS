@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
 import { AuthenticationRoutes } from './authentication.routing';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
