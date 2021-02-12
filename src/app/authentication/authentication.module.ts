@@ -5,16 +5,21 @@ import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
 import { AuthenticationRoutes } from './authentication.routing';
 import { FooterComponent } from './footer/footer.component';
+import { RecoverComponent } from './recover/recover.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
-    FooterComponent
+    FooterComponent,
+    RecoverComponent
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(AuthenticationRoutes)
+    RouterModule.forChild(AuthenticationRoutes),
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class AuthenticationModule { }

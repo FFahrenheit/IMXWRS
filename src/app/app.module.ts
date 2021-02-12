@@ -7,6 +7,7 @@ import { AppRoutes } from './app.routing';
 import { BlankComponent } from './layouts/blank/blank.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { Error404Component } from './error404/error404.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,11 +18,9 @@ import { Error404Component } from './error404/error404.component';
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(AppRoutes,
-    {
-      scrollPositionRestoration: 'enabled'
-    }
-    )
+    RouterModule.forRoot(AppRoutes),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

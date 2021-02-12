@@ -1,0 +1,34 @@
+<div class="login-background">
+    <div class="container">
+	    <div class="row">
+	    	<div class="card mx-auto text-center mt-5 shadow p-2 mb-5 bg-white rounded login-card">
+	    		<div class="card-body">
+	    			<img src="../../../assets/icon.png" class = "recover-logo" alt="Interplex logo">
+	    			<br>
+	    			<h2 class="title">Recover password for the IPXWRS</h2>
+	                <form class="mx-3 login" (ngSubmit) = "onSubmit()">
+		                <div class="form-group">
+		                    <label for="">Username: </label>
+		                    <font color="red">*</font>
+		                    <input type="text" name="username" [formControl] = "this.form.controls['username']"
+		                        placeholder="Type your username and we'll send you an email" class="form-control"
+		                        required>
+		                    <span *ngIf = "form.controls['username'].hasError('required') && form.controls['username'].touched" class="invalid">
+		                        Please enter your username
+                            </span>
+		                </div>
+		                <div class="form-group">
+		                    <button type="submit" class="btn btn-primary px-5 login btn-lg py-1">Recover password</button>
+		                </div>
+		            </form>
+		            <a [routerLink]="['/authentication/login']"  class="login">
+		            	Login instead
+		            </a>
+	    		</div>
+	    	</div>
+	    </div>
+	  </div>
+      <app-footer>
+
+      </app-footer>
+</div>

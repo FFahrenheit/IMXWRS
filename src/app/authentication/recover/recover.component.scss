@@ -9,10 +9,9 @@ body,html{
     background-repeat: no-repeat;
     background-size: cover;
 }
-
-.login-logo{
+.recover-logo{
     margin: 5px;
-    width: 80%;
+    width: 25%;
     height: auto;
     display: block;
     margin-left: auto;
@@ -27,6 +26,20 @@ body,html{
 .login{
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 20px;   
+}
+
+.login-footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: red;
+    color: white;
+    text-align: center;
+    align-content: center;
+    background-color: white;
 }
 
 .fake-link:hover{
