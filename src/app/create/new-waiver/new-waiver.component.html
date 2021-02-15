@@ -1,9 +1,8 @@
 <div class="container text-center pt-2">
     <h4 class="text-left my-3">Create new Waiver Request</h4>
-    <form>
+    <form [formGroup]="waiverDetails">
 
         <div class="row d-flex justify-content-center">
-
 
             <div class="col-md-6">
                 <div class="form-group row pt-2">
@@ -16,16 +15,16 @@
                     <legend class="col-form-label col-md-4 pt-0">Type</legend>
                     <div class="col-md-8">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1"
-                                value="option1" checked>
-                            <label class="form-check-label" for="gridRadios1">
+                            <input formControlName="type" class="form-check-input" type="radio" name="type" id="type1"
+                                value="internal" checked>
+                            <label class="form-check-label" for="type1">
                                 Internal
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2"
-                                value="option2">
-                            <label class="form-check-label" for="gridRadios2">
+                            <input formControlName="type" class="form-check-input" type="radio" name="type" id="type2"
+                                value="external">
+                            <label class="form-check-label" for="type2">
                                 External
                             </label>
                         </div>
@@ -37,19 +36,35 @@
                         <input type="text" class="form-control" placeholder="Customer">
                     </div>
                 </div>
-                
+
                 <div class="form-group row pt-2">
                     <label for="" class="col-md-4 col-form-label">Type of deviation</label>
-                    <div class="col-md-8">
-                        <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
+                    <div class="col-md-7">
+                        <select formControlName="typeNo" class="custom-select mb-2 mr-sm-2 mb-sm-0"
+                            id="inlineFormCustomSelect">
+                            <option value="1">Type 1</option>
+                            <option value="2">Type 2</option>
+                            <option value="3">Type 3</option>
+                            <option value="4">Type 4</option>
                         </select>
                     </div>
+                    <div class="col-md-1 d-flex justify-content-center deviation-info">
+                        <button class="btn btn-disabled fa fa-info">
+                        </button>
+                        <span class="deviation-info-text">
+                            <font style="font-weight: bold;">Type 1:</font> Forward documentation only <br>
+                            <font style="font-weight: bold;">Type 2:</font> Any product feature <br>
+                            <font style="font-weight: bold;">Type 3:</font> 
+                            Any product deviation that affects components and / or costs, Scrap and inventory
+                            <br>
+                            <font style="font-weight: bold;">Type 4:</font> Any product recurrent deviation
+
+                        </span>
+
+
+                    </div>
                 </div>
-                <div class="form-group row pt-2">
+                <div class="form-group row pt-2" *ngIf="waiverDetails.controls['typeNo'].value == '3'">
                     <div class="col-md-4">
                         <label>
                             Mannager approval
@@ -64,7 +79,7 @@
                         </div>
                     </div>
                 </div>
-                <div *ngIf="true">
+                <div *ngIf="waiverDetails.controls['type'].value == 'external'">
                     <h5 class="text-left m-3">External authorization</h5>
                     <div class="form-group row pt-2">
                         <label for="" class="col-md-4 col-form-label">Title</label>
@@ -95,9 +110,78 @@
 
 
             <div class="col-md-6">
-                <h5 class="text-left">Pieces</h5>
-            </div>
+                <form [formGroup]="formPieces">
+                    <h5 class="text-left">Pieces</h5>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Customer P/N</th>
+                                <th scope="col">IMX P/N</th>
+                                <th scope="col">&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody formArrayName="pieces">
+                            <tr *ngFor="let piece of pieces.controls; let i = index" [formGroupName]="i">
+                                <td>
+                                    <input class="form-control" type="text" formControlName="customer"
+                                        placeholder="Customer P/N">
+                                </td>
+                                <td>
+                                    <input class="form-control" type="text" formControlName="internal"
+                                        placeholder="Interplex P/N">
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary fa fa-plus" *ngIf="i == 0" type="button"
+                                        (click)="addPiece()"></button>
+                                    <button class="btn btn-danger fa fa-trash" *ngIf="i != 0" type="button"
+                                        (click)="deletePiece(i)"></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+                <div class="form-group row pt-2 pr-4">
+                    <legend class="col-form-label col-md-4 pt-0">Lasts for</legend>
+                    <div class="col-md-8 pr-4">
+                        <div class="form-check">
+                            <input formControlName="lapse" class="form-check-input" type="radio" name="lapse" id="lapse1" value="quantity"
+                                checked>
+                            <label class="form-check-label" for="lapse1">
+                                Quantity
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input  formControlName="lapse" class="form-check-input" type="radio" name="lapse" id="lapse2" value="time">
+                            <label class="form-check-label" for="lapse2">
+                                Time
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="waiverDetails.controls['lapse'].value == 'quantity'" class="form-group row pt-2 pl-2 pr-4">
+                    <div class="col-md-8">
+                        <input type="number" class="form-control" placeholder="Quantity">
+                    </div>
+                    <div class="col-md-4">
+                        <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+                            <option value="lb">lb</option>
+                            <option value="pieces" selected>pieces</option>
+                        </select>
+                    </div>
+                </div>
+                <div *ngIf="waiverDetails.controls['lapse'].value == 'time'" class="form-group row pt-2">
+                    <div class="col-md-6">
+                        <label>Start date</label>
+                        <input class="form-control" type="date">
+                    </div>
+                    <div class="col-md-6">
+                        <label>End date or deadline</label>
+                        <input class="form-control" type="date">
+                    </div>
+                </div>
 
+                <button type="button" (click)="next()" class="btn px-5 btn-success float-right">Next</button>
+            </div>
 
         </div>
     </form>

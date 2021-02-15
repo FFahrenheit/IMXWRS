@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CreateRoutes } from './create.routing';
 import { NewWaiverComponent } from './new-waiver/new-waiver.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -10,6 +11,7 @@ import { NewWaiverComponent } from './new-waiver/new-waiver.component';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     RouterModule.forChild(CreateRoutes)
   ]
 })
