@@ -51,7 +51,8 @@ export class NewWaiverComponent implements OnInit {
   }
 
   next(){
-    console.log(this.waiverDetails);
-    console.log(this.formPieces);
+    console.log(this.waiverDetails.value);
+    console.log(this.formPieces.value);
+    this.router.navigate(['create','details']);
   }
 }

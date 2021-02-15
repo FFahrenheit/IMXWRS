@@ -1,6 +1,7 @@
 label, legend{
     color: black;
 }
+
 .deviation-info {
     position: relative;
     display: inline-block;
@@ -39,3 +40,7 @@ label, legend{
     visibility: visible;
     opacity: 1;
   }
+
+  .area{
+    min-height: 80px;
+}
