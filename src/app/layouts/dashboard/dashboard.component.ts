@@ -11,10 +11,12 @@ export class DashboardComponent implements OnInit {
 
   public shown = true;
 
+  public selectedIndex = 0;
+
   public sidebar = [
     {
       name: "New WR",
-      route: [ 'create' , 'new']
+      route: [ 'create' , 'new'],
     },
     {
       name: "My activities",
@@ -39,8 +41,9 @@ export class DashboardComponent implements OnInit {
     });
 }
 
-  goTo(route : any ){
+  goTo(route : any , i: any){
     this.router.navigate(route);
+    this.selectedIndex = i;
   }
 
 }

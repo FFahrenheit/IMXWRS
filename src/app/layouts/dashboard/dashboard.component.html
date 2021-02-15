@@ -1,9 +1,9 @@
 <div id="wrapper" class="d-flex">
     <div class="bg-light border-right" id="sidebar-wrapper">
-        <div class="sidebar-heading menu-title"> IPXWRS </div>
+        <div class="sidebar-heading menu-title"> IMXWRS </div>
         <div class="list-group list-group-flush">
-            <a *ngFor="let link of sidebar;" class="list-group-item list-group-item-action bg-light clickable"
-                (click)="goTo(link.route)">
+            <a *ngFor="let link of sidebar;let i = index" class="list-group-item list-group-item-action bg-light clickable"
+                (click)="goTo(link.route,i)" [class.active-link]="selectedIndex === i" >
                 {{link.name}}
             </a>
         </div>
