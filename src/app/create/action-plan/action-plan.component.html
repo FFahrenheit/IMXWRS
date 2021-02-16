@@ -1,0 +1,42 @@
+<div class="container text-center pt-2">
+    <h4 class="text-left my-3">Action plan</h4>
+    <form [formGroup]="actionPlan">
+        <div class="row justify-content-center">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Responsable</th>
+                            <th scope="col">Action to do</th>
+                            <th scope="col">Commitment</th>
+                            <th scope="col">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody formArrayName="actions">
+                        <tr *ngFor="let action of actions.controls;let i = index" [formGroupName]="i">
+                            <td>
+                                <input type="text" class="form-control responsable" formControlName="responsable"
+                                    placeholder="Designed user">
+                            </td>
+                            <td>
+                                <textarea class="form-control action" formControlName="action"
+                                    placeholder="Describe the action"></textarea>
+                            </td>
+                            <td>
+                                <input type="date" class="form-control date" formControlName="date">
+                            </td>
+                            <td>
+                                <button class="btn btn-primary fa fa-plus" *ngIf="i == 0" type="button"
+                                    (click)="addAction()"></button>
+                                <button class="btn btn-danger fa fa-trash" *ngIf="i != 0" type="button"
+                                    (click)="deleteAction(i)"></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <button type="button" (click)="next()" class="btn px-5 mb-5 btn-success float-right">Next</button>
+
+    </form>
+</div>

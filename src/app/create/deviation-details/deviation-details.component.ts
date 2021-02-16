@@ -52,6 +52,7 @@ export class DeviationDetailsComponent implements OnInit {
 
   next(){
     console.log(this.riskDetails.get('required_action').value);
+    this.router.navigate(['create','actions']);
   }
 
 }
