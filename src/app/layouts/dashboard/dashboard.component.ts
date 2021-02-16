@@ -46,4 +46,8 @@ export class DashboardComponent implements OnInit {
     this.selectedIndex = i;
   }
 
+  logout(){
+    this.router.navigate(['authentication','login']);
+  }
+
 }

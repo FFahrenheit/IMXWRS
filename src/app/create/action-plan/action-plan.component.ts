@@ -43,5 +43,6 @@ export class ActionPlanComponent implements OnInit {
 
   next(){
     console.log(this.actionPlan.value);
+    this.router.navigate(['create','confirm']);
   }
 }

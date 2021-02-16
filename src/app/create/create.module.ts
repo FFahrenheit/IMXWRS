@@ -6,12 +6,14 @@ import { NewWaiverComponent } from './new-waiver/new-waiver.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DeviationDetailsComponent } from './deviation-details/deviation-details.component';
 import { ActionPlanComponent } from './action-plan/action-plan.component';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 @NgModule({
   declarations: [
     NewWaiverComponent,
     DeviationDetailsComponent,
-    ActionPlanComponent
+    ActionPlanComponent,
+    ConfirmComponent
   ],
   imports: [
     CommonModule,
