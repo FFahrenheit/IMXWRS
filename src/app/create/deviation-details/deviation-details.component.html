@@ -1,6 +1,6 @@
 <div class="container text-center pt-2">
     <h4 class="text-left my-3">Deviation details</h4>
-    <form>
+    <form [formGroup]="riskDetails">
         <div class="row justify-content-center">
             <div class="col-md-12">
 
@@ -31,10 +31,10 @@
                         </div>
                     </div>
                 </div>
+                <h5 class="text-left ml-2"> Required deviation(s) </h5>
 
-                <div class="form-group row pt-2">
-                    <form [formGroup] = "formDeviations" >
-                        <h5 class="text-left ml-2"> Required deviation(s) </h5>
+                <div class="form-group row pt-2 table-responsive">
+                    <form [formGroup]="formDeviations">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
@@ -44,19 +44,19 @@
                                     <th scope="col">&nbsp;</th>
                                 </tr>
                             </thead>
-                            <tbody  formArrayName="deviations">
-                                <tr *ngFor="let deviation of deviations.controls; let i = index" [formGroupName]="i">
+                            <tbody formArrayName="deviations">
+                                <tr *ngFor="let deviation of deviations.controls;let i = index" [formGroupName]="i">
                                     <td>
-                                        <input class="form-control" type="text" formControlName="current"
-                                            placeholder="Customer P/N">
+                                        <textarea class="form-control mini-area" formControlName="current"
+                                            placeholder="Current deviation"></textarea>
                                     </td>
                                     <td>
-                                        <input class="form-control" type="text" formControlName="required"
-                                            placeholder="Interplex P/N">
+                                        <textarea class="form-control mini-area" formControlName="required"
+                                            placeholder="Required deviation"></textarea>
                                     </td>
                                     <td>
-                                        <input class="form-control" type="text" formControlName="reason"
-                                            placeholder="Interplex P/N">
+                                        <textarea class="form-control mini-area" formControlName="reason"
+                                            placeholder="Reason"></textarea>
                                     </td>
                                     <td>
                                         <button class="btn btn-primary fa fa-plus" *ngIf="i == 0" type="button"
@@ -68,6 +68,68 @@
                             </tbody>
                         </table>
                     </form>
+                </div>
+                <h5 class="text-left ml-2">Risk summary</h5><br>
+
+                <div class="form-group row pt-2">
+                    <div class="col-md-3">
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-form-label">Corrective action required</label>
+                            <div class="col-sm-6 ">
+                                <select formControlName="required_action" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+                                    <option value="PDCA" selected>PDCA</option>
+                                    <option value="8DS">8DS</option>
+                                    <option value="A3">A3</option>
+                                    <option value="other">Other (specify)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-form-label">Original risk</label>
+                            <div class="col-sm-6 ">
+                                <select formControlName="original_risk" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+                                    <option value="low" selected>Low</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="high">High</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-form-label">Current risk</label>
+                            <div class="col-sm-6 ">
+                                <select formControlName="current_risk" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+                                    <option value="low" selected>Low</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="high">High</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-form-label">Risk with actions</label>
+                            <div class="col-sm-6 ">
+                                <select formControlName="risk_with_actions" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+                                    <option value="low" selected>Low</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="high">High</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row pt-2 mb-5">
+                    <div class="col-md-3 mb-2">
+                        <input type="text" class="form-control" formControlName = "aux_action" placeholder="Corrective action"
+                        *ngIf = "riskDetails.get('required_action').value == 'other'">
+                    </div>
+                    <div class="col-md-9">
+                        <button type="button" (click)="next()" class="btn px-5 btn-success float-right">Next</button>
+                    </div>
                 </div>
 
             </div>

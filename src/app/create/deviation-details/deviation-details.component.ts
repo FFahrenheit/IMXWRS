@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class DeviationDetailsComponent implements OnInit {
 
   formDeviations : FormGroup = Object.create(null);
+  riskDetails : FormGroup = Object.create(null);
 
   constructor(private fb : FormBuilder,
               private router : Router) {
@@ -20,11 +21,19 @@ export class DeviationDetailsComponent implements OnInit {
       deviations: this.fb.array([]),
     });
 
+    this.riskDetails = this.fb.group({
+      original_risk: ['low', Validators.compose([Validators.required])],
+      current_risk : ['low', Validators.compose([Validators.required])],
+      risk_with_actions: ['low',Validators.compose([Validators.required])],
+      required_action: ['8DS',Validators.compose([Validators.required])],
+      aux_action: ['', Validators.compose([Validators.required])] 
+    });
+
     this.addDeviation();
   }
 
   get deviations(): FormArray {
-    return this.deviations.get('deviations') as FormArray;
+    return this.formDeviations.get('deviations') as FormArray;
   }
 
   addDeviation(){
@@ -39,6 +48,10 @@ export class DeviationDetailsComponent implements OnInit {
 
   deleteDeviation(index): void {
     this.deviations.removeAt(index);
+  }
+
+  next(){
+    console.log(this.riskDetails.get('required_action').value);
   }
 
 }
