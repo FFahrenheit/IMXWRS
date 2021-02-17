@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CreateWrService } from 'src/app/services/create-wr.service';
 
 @Component({
   selector: 'app-action-plan',
@@ -12,7 +13,8 @@ export class ActionPlanComponent implements OnInit {
   public actionPlan : FormGroup = Object.create(null);
 
   constructor(private fb : FormBuilder,
-              private router : Router) { 
+              private router : Router,
+              private waiverService : CreateWrService) { 
   }
 
   ngOnInit(): void {
@@ -20,6 +22,8 @@ export class ActionPlanComponent implements OnInit {
       actions: this.fb.array([])
     });
     this.addAction();
+
+    console.log(this.waiverService.wr);
   }
 
   

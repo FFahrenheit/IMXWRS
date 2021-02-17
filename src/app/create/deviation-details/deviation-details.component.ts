@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Deviation, SecondStep } from 'src/app/interfaces/create-wr';
 import { CreateWrService } from 'src/app/services/create-wr.service';
 
 @Component({
@@ -66,9 +67,11 @@ export class DeviationDetailsComponent implements OnInit {
   }
 
   next(){
-    console.log(this.riskDetails.get('required_action').value);
     if(this.riskDetails.valid && this.formDeviations.valid){
       console.log('Valid');
+      this.waiverService.setSecondStep(this.getForm());
+      this.waiverService.setDeviations(this.getDeviations());
+      this.router.navigate(['create','actions']);
     }else{
       console.log('Invalid');
       this.riskDetails.markAllAsTouched();
@@ -76,11 +79,50 @@ export class DeviationDetailsComponent implements OnInit {
     }
   }
 
+  getForm(){
+    const risk : SecondStep = {
+      riskAnalysis : this.getVal('risk_analysis'),
+      rpnBefore : this.getVal('rpn_before'),
+      rpnAfter : this.getVal('rpn_after'),
+      originalRisk : this.getVal('original_risk'),
+      currentRisk : this.getVal('current_risk'),
+      riskWithActions : this.getVal('risk_with_actions'),
+      requiredAction : (this.getVal('required_action') == 'other') ? this.getVal('aux_action') : this.getVal('required_action')
+    };
+
+    return risk;
+  }
+
+  getDeviations(){
+    let deviations = [];
+    this.deviations.value.forEach(d=>{
+      const deviation : Deviation = {
+        current : d['current'],
+        required : d['required'],
+        reason : d['reason'],
+      }
+      deviations.push(deviation);
+    })
+
+    return deviations;
+  }
+
+  getVal(field){
+    return this.riskDetails.controls[field].value;
+  }
+
   getStyle(field){
     if(!this.riskDetails.controls[field].touched){
       return '';
     }
     return (this.riskDetails.controls[field].valid) ? 'is-valid' : 'is-invalid';
+  }
+
+  check(deviation : FormGroup, field : string) : string{
+    if(!deviation.controls[field].touched){
+      return '';
+    }
+    return deviation.controls[field].hasError('required') ? 'is-invalid' : 'is-valid';
   }
 
 }

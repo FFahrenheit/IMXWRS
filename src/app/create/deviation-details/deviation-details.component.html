@@ -48,15 +48,15 @@
                                 <tr *ngFor="let deviation of deviations.controls;let i = index" [formGroupName]="i">
                                     <td>
                                         <textarea class="form-control mini-area" formControlName="current"
-                                            placeholder="Current deviation"></textarea>
+                                            [class]="check(deviation,'current')" placeholder="Current deviation"></textarea>
                                     </td>
                                     <td>
                                         <textarea class="form-control mini-area" formControlName="required"
-                                            placeholder="Required deviation"></textarea>
+                                            [class]="check(deviation,'required')" placeholder="Required deviation"></textarea>
                                     </td>
                                     <td>
                                         <textarea class="form-control mini-area" formControlName="reason"
-                                            placeholder="Reason"></textarea>
+                                        [class]="check(deviation,'reason')" placeholder="Reason"></textarea>
                                     </td>
                                     <td>
                                         <button class="btn btn-primary fa fa-plus" *ngIf="i == 0" type="button"

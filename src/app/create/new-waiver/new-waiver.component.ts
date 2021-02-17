@@ -1,5 +1,4 @@
 import { DatePipe } from '@angular/common';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -171,7 +170,6 @@ export class NewWaiverComponent implements OnInit {
   getPieces(){
     let pieces = [];
     this.pieces.value.forEach(p=>{
-      console.log(p);
       const piece : Piece = {
         customer : p['customer'],
         internal : p['internal']

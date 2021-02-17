@@ -1,6 +1,8 @@
 export interface WR{
-    details?  : FirstStep,
-    pieces?   : Piece[] 
+    details?   : FirstStep,
+    pieces?    : Piece[],
+    risk?      : SecondStep,
+    deviations?: Deviation[]
 }
 
 export interface FirstStep{
