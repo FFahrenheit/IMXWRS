@@ -9,6 +9,7 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { Error404Component } from './error404/error404.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './layouts/dashboard/dashboard.component';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -25,7 +26,7 @@ import { DashboardComponent } from './layouts/dashboard/dashboard.component';
     ReactiveFormsModule,
     RouterModule.forRoot(AppRoutes),
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
