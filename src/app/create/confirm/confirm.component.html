@@ -1,8 +1,8 @@
-<div class="card my-2">
+<div class="card my-2 pb-5">
     <div class="container text-center pt-2">
         <h4 class="text-left my-3">Confirm waiver request</h4>
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <attribute name="Request No: " value="placeholder"></attribute>
                 <attribute name="Customer: " value="placeholder"></attribute>
                 <attribute name="Originator: " value="placeholder"></attribute>
@@ -11,13 +11,102 @@
                 <attribute name="Type of deviation: " value="placeholder"></attribute>
                 <attribute name="Status: " value="placeholder"></attribute>
                 <attribute name="Type: " value="placeholder"></attribute>
+
                 <h5 class="text-left subtitle-att ">External authorization</h5>
                 <attribute name="Tile:" value="placeholder"></attribute>
                 <attribute name="Name: " value="placeholder"></attribute>
                 <attribute name="Date: " value="placeholder"></attribute>
                 <attribute name="Comments: " value="placeholder"></attribute>
+
+                <h5 class="text-left subtitle-att">Pieces</h5>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Customer P/N</th>
+                                <th scrope="col">Interplex P/N</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let number of numbers">
+                                <td> CSTMR00{{number}} </td>
+                                <td> IMX000{{number}} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h5 class="text-left subtitle-att ">Risks</h5>
+                <attribute name="Original risk:" value="placeholder"></attribute>
+                <attribute name="AMEF RPN before: " value="placeholder"></attribute>
+                <attribute name="Risk analysis: " value="placeholder"></attribute>
+                <hr class="separator">
+                <attribute name="Current risk: " value="placeholder"></attribute>
+                <hr class="separator">
+                <attribute name="Risk with actions: " value="placeholder"></attribute>
+                <attribute name="Corrective action required:" value="placeholder"></attribute>
+                <attribute name="AMEF RPN after: " value="placeholder"></attribute>
             </div>
-            <div class="col-md-6">
+
+            <div class="col-md-7">
+
+                <h5 class="text-left subtitle-att">Required deviations</h5>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Current</th>
+                                <th scope="col">Required</th>
+                                <th scope="col">Reason</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let number of numbers">
+                                <td> Lorem ipsum </td>
+                                <td> Dolor sit amet </td>
+                                <td> Consectetur adipiscing elit </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h5 class="text-left subtitle-att">Action plan</h5>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Responsable</th>
+                                <th scope="col">Action</th>
+                                <th scope="col">Commitment date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let number of numbers">
+                                <td> Lorem ipsum </td>
+                                <td> Dolor sit amet </td>
+                                <td> Consectetur adipiscing elit </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h5 class="text-left subtitle-att">Required authorizations</h5>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Title</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Signed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let number of numbers">
+                                <td> Lorem ipsum </td>
+                                <td> Dolor sit amet </td>
+                                <td> Consectetur adipiscing elit </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

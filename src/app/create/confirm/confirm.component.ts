@@ -9,6 +9,8 @@ import { CreateWrService } from 'src/app/services/create-wr.service';
 })
 export class ConfirmComponent implements OnInit {
 
+  public numbers = Array(3).fill(0).map((x,i)=>i);
+
   constructor(private router : Router,
               private waiverService : CreateWrService) { 
   }
