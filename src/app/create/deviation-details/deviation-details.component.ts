@@ -25,11 +25,23 @@ export class DeviationDetailsComponent implements OnInit {
     });
 
     this.riskDetails = this.fb.group({
-      original_risk: ['low', Validators.compose([Validators.required])],
-      current_risk : ['low', Validators.compose([Validators.required])],
-      risk_with_actions: ['low',Validators.compose([Validators.required])],
-      required_action: ['8DS',Validators.compose([Validators.required])],
-      aux_action: ['', Validators.compose([Validators.required])] 
+      risk_analysis: ['', Validators.compose([Validators.required])],
+      rpn_before : [0,Validators.compose([Validators.required])],
+      rpn_after : [0,Validators.compose([Validators.required])],
+      original_risk: ['', Validators.compose([Validators.required])],
+      current_risk : ['', Validators.compose([Validators.required])],
+      risk_with_actions: ['',Validators.compose([Validators.required])],
+      required_action: ['',Validators.compose([Validators.required])],
+      aux_action: [''] 
+    });
+
+    this.riskDetails.get('required_action').valueChanges.subscribe(action=>{
+      if(action == 'other'){
+        this.riskDetails.controls['aux_action'].setValidators([Validators.required]);
+      }else{
+        this.riskDetails.controls['aux_action'].clearValidators();
+      }
+      this.riskDetails.controls['aux_action'].updateValueAndValidity();
     });
 
     this.addDeviation();
@@ -55,7 +67,20 @@ export class DeviationDetailsComponent implements OnInit {
 
   next(){
     console.log(this.riskDetails.get('required_action').value);
-    this.router.navigate(['create','actions']);
+    if(this.riskDetails.valid && this.formDeviations.valid){
+      console.log('Valid');
+    }else{
+      console.log('Invalid');
+      this.riskDetails.markAllAsTouched();
+      this.formDeviations.markAllAsTouched();
+    }
+  }
+
+  getStyle(field){
+    if(!this.riskDetails.controls[field].touched){
+      return '';
+    }
+    return (this.riskDetails.controls[field].valid) ? 'is-valid' : 'is-invalid';
   }
 
 }

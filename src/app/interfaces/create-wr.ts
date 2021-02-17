@@ -28,3 +28,19 @@ export interface Piece{
     customer : string, 
     internal : string
 }
+
+export interface SecondStep{
+    riskAnalysis : string,
+    rpnBefore : number,
+    rpnAfter: number,
+    requiredAction : string,
+    originalRisk : string,
+    currentRisk : string,
+    riskWithActions : string
+}
+
+export interface Deviation{
+    current : string,
+    required : string,
+    reason : string
+}

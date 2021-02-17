@@ -9,7 +9,7 @@
                         <div class="form-group row pt-2">
                             <label for="" class="col-md-4 col-form-label">Risk analysis</label>
                             <div class="col-md-8">
-                                <textarea class="form-control area" rows="3"
+                                <textarea [class] = "getStyle('risk_analysis')" formControlName="risk_analysis" class="form-control area" rows="3"
                                     placeholder="Please describe the risk of the required deviation(s)"></textarea>
                             </div>
                         </div>
@@ -18,7 +18,7 @@
                         <div class="form-group row">
                             <label class="col-sm-6 col-form-label">AMEF RPN before</label>
                             <div class="col-sm-6 ">
-                                <input type="number" class="form-control" value="0">
+                                <input [class] = "getStyle('rpn_before')" formControlName="rpn_before" type="number" class="form-control" value="0">
                             </div>
                         </div>
                     </div>
@@ -26,7 +26,7 @@
                         <div class="form-group row">
                             <label class="col-sm-6 col-form-label">AMEF RPN after</label>
                             <div class="col-sm-6 ">
-                                <input type="number" class="form-control" value="0">
+                                <input [class] = "getStyle('rpn_after')" formControlName="rpn_after" type="number" class="form-control" value="0">
                             </div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                         <div class="form-group row">
                             <label class="col-sm-6 col-form-label">Corrective action required</label>
                             <div class="col-sm-6 ">
-                                <select formControlName="required_action" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+                                <select [class] = "getStyle('required_action')" formControlName="required_action" class="custom-select mb-2 mr-sm-2 mb-sm-0">
                                     <option value="PDCA" selected>PDCA</option>
                                     <option value="8DS">8DS</option>
                                     <option value="A3">A3</option>
@@ -89,7 +89,7 @@
                         <div class="form-group row">
                             <label class="col-sm-6 col-form-label">Original risk</label>
                             <div class="col-sm-6 ">
-                                <select formControlName="original_risk" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+                                <select [class] = "getStyle('original_risk')" formControlName="original_risk" class="custom-select mb-2 mr-sm-2 mb-sm-0">
                                     <option value="low" selected>Low</option>
                                     <option value="medium">Medium</option>
                                     <option value="high">High</option>
@@ -101,7 +101,7 @@
                         <div class="form-group row">
                             <label class="col-sm-6 col-form-label">Current risk</label>
                             <div class="col-sm-6 ">
-                                <select formControlName="current_risk" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+                                <select [class] = "getStyle('current_risk')" formControlName="current_risk" class="custom-select mb-2 mr-sm-2 mb-sm-0">
                                     <option value="low" selected>Low</option>
                                     <option value="medium">Medium</option>
                                     <option value="high">High</option>
@@ -113,7 +113,7 @@
                         <div class="form-group row">
                             <label class="col-sm-6 col-form-label">Risk with actions</label>
                             <div class="col-sm-6 ">
-                                <select formControlName="risk_with_actions" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+                                <select [class] = "getStyle('risk_with_actions')" formControlName="risk_with_actions" class="custom-select mb-2 mr-sm-2 mb-sm-0">
                                     <option value="low" selected>Low</option>
                                     <option value="medium">Medium</option>
                                     <option value="high">High</option>
@@ -124,7 +124,7 @@
                 </div>
                 <div class="form-group row pt-2 mb-5">
                     <div class="col-md-3 mb-2">
-                        <input type="text" class="form-control" formControlName = "aux_action" placeholder="Corrective action"
+                        <input [class] = "getStyle('aux_action')" type="text" class="form-control" formControlName = "aux_action" placeholder="Corrective action"
                         *ngIf = "riskDetails.get('required_action').value == 'other'">
                     </div>
                     <div class="col-md-9">

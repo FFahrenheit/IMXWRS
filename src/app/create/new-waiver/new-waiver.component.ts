@@ -1,4 +1,5 @@
 import { DatePipe } from '@angular/common';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -114,7 +115,7 @@ export class NewWaiverComponent implements OnInit {
   }
 
   next(){
-    if(this.waiverDetails.valid){
+    if(this.waiverDetails.valid && this.formPieces.valid){
       this.waiverService.setFirstStep(this.getForm());
       this.waiverService.setPieces(this.getPieces());
       this.router.navigate(['create', 'details'])
@@ -157,22 +158,14 @@ export class NewWaiverComponent implements OnInit {
     if(!this.waiverDetails.controls[control].touched){
       return '';
     }
-    if(this.waiverDetails.controls[control].hasError('required')){
-      return 'is-invalid';
-    }else{
-      return 'is-valid';
-    }
+    return this.waiverDetails.controls[control].hasError('required') ? 'is-invalid' : 'is-valid';
   }
 
   checkPiece(piece : FormGroup,field : string){
     if(!piece.controls[field].touched){
       return '';
     }
-    if(piece.controls[field].hasError('required')){
-      return 'is-invalid';
-    }else{
-      return 'is-valid';
-    }
+    return piece.controls[field].hasError('required') ? 'is-invalid' : 'is-valid';
   }
 
   getPieces(){
