@@ -124,10 +124,12 @@
                             <tr *ngFor="let piece of pieces.controls; let i = index" [formGroupName]="i">
                                 <td>
                                     <input class="form-control" type="text" formControlName="customer"
+                                        [class] = "checkPiece(piece,'customer')"
                                         placeholder="Customer P/N">
                                 </td>
                                 <td>
                                     <input class="form-control" type="text" formControlName="internal"
+                                        [class] = "checkPiece(piece,'internal')"
                                         placeholder="Interplex P/N">
                                 </td>
                                 <td>

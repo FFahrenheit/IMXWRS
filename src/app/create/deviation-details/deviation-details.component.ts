@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CreateWrService } from 'src/app/services/create-wr.service';
 
 @Component({
   selector: 'app-deviation-details',
@@ -13,10 +14,12 @@ export class DeviationDetailsComponent implements OnInit {
   riskDetails : FormGroup = Object.create(null);
 
   constructor(private fb : FormBuilder,
-              private router : Router) {
+              private router : Router,
+              private waiverService : CreateWrService) {
    }
 
   ngOnInit(): void {
+    console.log(this.waiverService.wr);
     this.formDeviations = this.fb.group({
       deviations: this.fb.array([]),
     });

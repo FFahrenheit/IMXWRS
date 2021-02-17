@@ -1,5 +1,6 @@
 export interface WR{
-    details ? : FirstStep,
+    details?  : FirstStep,
+    pieces?   : Piece[] 
 }
 
 export interface FirstStep{
@@ -8,7 +9,7 @@ export interface FirstStep{
     customer : string,
     externalAuthorization ? : ExternalAuth,
     typeNo : number,
-    needManager : boolean,
+    needsManager : boolean,
     appliesTo : string,
     quantity ? : number,
     specification ? : string,
@@ -21,4 +22,9 @@ export interface ExternalAuth{
     name : string,
     date : Date,
     comments ? : string
+}
+
+export interface Piece{
+    customer : string, 
+    internal : string
 }

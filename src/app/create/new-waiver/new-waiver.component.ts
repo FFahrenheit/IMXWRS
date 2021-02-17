@@ -2,6 +2,8 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ExternalAuth, FirstStep, Piece } from 'src/app/interfaces/create-wr';
+import { CreateWrService } from 'src/app/services/create-wr.service';
 
 @Component({
   selector: 'app-new-waiver',
@@ -17,7 +19,8 @@ export class NewWaiverComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private datePipe : DatePipe
+    private datePipe : DatePipe,
+    private waiverService : CreateWrService
   ) {
   }
 
@@ -38,8 +41,8 @@ export class NewWaiverComponent implements OnInit {
       extComments : [''],
       needsManager : [false],
       lapse: ['quantity',Validators.compose([Validators.required])],
-      quantity : ['',Validators.compose([Validators.required])],
-      specification: ['',Validators.compose([Validators.required])],
+      quantity : [''],
+      specification: [''],
       startDate : [defaultDate],
       endDate : [defaultDate]
     })
@@ -59,18 +62,20 @@ export class NewWaiverComponent implements OnInit {
   }
 
   updateExtAuth(t){
+    console.log(t);
     if(t == 'external'){
       this.waiverDetails.controls['extTitle'].setValidators([Validators.required]);
       this.waiverDetails.controls['extName'].setValidators([Validators.required]);
       this.waiverDetails.controls['extDate'].setValidators([Validators.required]);
-
     }
     else{
       this.waiverDetails.controls['extTitle'].clearValidators();
       this.waiverDetails.controls['extName'].clearValidators();
       this.waiverDetails.controls['extDate'].clearValidators();
     }
-    this.waiverDetails.updateValueAndValidity();
+    this.waiverDetails.controls['extTitle'].updateValueAndValidity();
+    this.waiverDetails.controls['extName'].updateValueAndValidity();
+    this.waiverDetails.controls['extDate'].updateValueAndValidity();  
   }
 
   updateLapse(t){
@@ -85,7 +90,10 @@ export class NewWaiverComponent implements OnInit {
       this.waiverDetails.controls['quantity'].clearValidators();
       this.waiverDetails.controls['specification'].clearValidators();
     }
-    this.waiverDetails.updateValueAndValidity();
+    this.waiverDetails.controls['startDate'].updateValueAndValidity();
+    this.waiverDetails.controls['endDate'].updateValueAndValidity();
+    this.waiverDetails.controls['quantity'].updateValueAndValidity();
+    this.waiverDetails.controls['specification'].updateValueAndValidity();
   }
 
   get pieces(): FormArray {
@@ -94,8 +102,8 @@ export class NewWaiverComponent implements OnInit {
 
   addPiece(): void {
     const piece = this.fb.group({
-      customer: [ '' ],
-      internal: [ '' ]
+      customer: [ '' , Validators.compose([Validators.required])],
+      internal: [ '' , Validators.compose([Validators.required])]
     });
 
     this.pieces.push(piece);
@@ -106,29 +114,78 @@ export class NewWaiverComponent implements OnInit {
   }
 
   next(){
-    console.log(this.waiverDetails.value);
-    console.log(this.formPieces.value);
-
     if(this.waiverDetails.valid){
-      console.log("Valid");
+      this.waiverService.setFirstStep(this.getForm());
+      this.waiverService.setPieces(this.getPieces());
+      this.router.navigate(['create', 'details'])
     }else{
-      console.log("Invalid");
-      Object.keys(this.waiverDetails.controls).forEach(field => { // {1}
-        const control = this.waiverDetails.get(field);            // {2}
-        control.markAsTouched({ onlySelf: true });       // {3}
-      });
+      this.waiverDetails.markAllAsTouched();
+      this.formPieces.markAllAsTouched();
     }
+  }
+
+  getForm(){
+    let extAuth : ExternalAuth = {
+      title : this.get('extTitle'),
+      name : this.get('extName'),
+      date : this.get('extDate'),
+      comments : this.get('extComments') || ""
+    };
+
+    const form : FirstStep = {
+      area : this.get('area'),
+      type : this.get('type'),
+      customer : this.get('customer'),
+      externalAuthorization : (this.get('type') == 'external') ? extAuth : null,
+      typeNo : this.get('typeNo'),
+      needsManager : (this.get('typeNo')=='3') ? this.get('needsManager') : false,
+      appliesTo  : this.get('lapse'),
+      quantity : (this.get('lapse')=='quantity') ? this.get('quantity') : null,
+      specification : (this.get('lapse')=='quantity') ? this.get('specification') : null,
+      startDate : (this.get('lapse')!='quantity') ? this.get('startDate') : null ,
+      endDate : (this.get('lapse')!='quantity') ? this.get('endDate') : null
+    };
+
+    return form;
+  }
+
+  get(control){
+    return this.waiverDetails.controls[control].value;
   }
 
   getClass(control){
     if(!this.waiverDetails.controls[control].touched){
       return '';
+    }
+    if(this.waiverDetails.controls[control].hasError('required')){
+      return 'is-invalid';
     }else{
-      if(this.waiverDetails.controls[control].hasError('required')){
-        return 'is-invalid';
-      }else{
-        return 'is-valid';
-      }
+      return 'is-valid';
     }
   }
+
+  checkPiece(piece : FormGroup,field : string){
+    if(!piece.controls[field].touched){
+      return '';
+    }
+    if(piece.controls[field].hasError('required')){
+      return 'is-invalid';
+    }else{
+      return 'is-valid';
+    }
+  }
+
+  getPieces(){
+    let pieces = [];
+    this.pieces.value.forEach(p=>{
+      console.log(p);
+      const piece : Piece = {
+        customer : p['customer'],
+        internal : p['internal']
+      };
+      pieces.push(piece);
+    })
+    return pieces;
+  }
+
 }
