@@ -8,7 +8,7 @@
                         <tr>
                             <th scope="col">Responsable</th>
                             <th scope="col">Action to do</th>
-                            <th scope="col">Commitment</th>
+                            <th scope="col">Commitment date</th>
                             <th scope="col">&nbsp;</th>
                         </tr>
                     </thead>
@@ -16,14 +16,14 @@
                         <tr *ngFor="let action of actions.controls;let i = index" [formGroupName]="i">
                             <td>
                                 <input type="text" class="form-control responsable" formControlName="responsable"
-                                    placeholder="Designed user">
+                                    placeholder="Designed user" [class]="getStyle(action,'responsable')">
                             </td>
                             <td>
                                 <textarea class="form-control action" formControlName="action"
-                                    placeholder="Describe the action"></textarea>
+                                    placeholder="Describe the action"  [class]="getStyle(action,'action')"></textarea>
                             </td>
                             <td>
-                                <input type="date" class="form-control date" formControlName="date">
+                                <input type="date" class="form-control date" formControlName="date"  [class]="getStyle(action,'date')">
                             </td>
                             <td>
                                 <button class="btn btn-primary fa fa-plus" *ngIf="i == 0" type="button"

@@ -68,12 +68,10 @@ export class DeviationDetailsComponent implements OnInit {
 
   next(){
     if(this.riskDetails.valid && this.formDeviations.valid){
-      console.log('Valid');
       this.waiverService.setSecondStep(this.getForm());
       this.waiverService.setDeviations(this.getDeviations());
       this.router.navigate(['create','actions']);
     }else{
-      console.log('Invalid');
       this.riskDetails.markAllAsTouched();
       this.formDeviations.markAllAsTouched();
     }

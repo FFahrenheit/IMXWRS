@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { WR, FirstStep, Piece , SecondStep, Deviation } from '../interfaces/create-wr';
+import { WR, FirstStep, Piece , SecondStep, Deviation, Action } from '../interfaces/create-wr';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +29,11 @@ export class CreateWrService {
   setDeviations(deviations : Deviation[]){
     this.wr.deviations = deviations;
     console.log(this.wr.deviations);
+  }
+
+  setActions(actions : Action[]){
+    this.wr.actions = actions;
+    console.log(this.wr.actions);
   }
 
 }

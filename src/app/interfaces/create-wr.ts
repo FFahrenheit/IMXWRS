@@ -2,7 +2,8 @@ export interface WR{
     details?   : FirstStep,
     pieces?    : Piece[],
     risk?      : SecondStep,
-    deviations?: Deviation[]
+    deviations?: Deviation[],
+    actions?   : Action[]
 }
 
 export interface FirstStep{
@@ -45,4 +46,10 @@ export interface Deviation{
     current : string,
     required : string,
     reason : string
+}
+
+export interface Action{
+    responsable : string,
+    action : string,
+    date : Date
 }
