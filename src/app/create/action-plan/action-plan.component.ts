@@ -52,6 +52,7 @@ export class ActionPlanComponent implements OnInit {
     if(this.actionPlan.valid){
       console.log("Valid");
       this.waiverService.setActions(this.getActions());
+      this.router.navigate(['create','confirm']);
     }else{
       console.log("Invalid");
       this.actionPlan.markAllAsTouched();
