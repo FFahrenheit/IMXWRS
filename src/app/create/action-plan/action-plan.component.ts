@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Action } from 'src/app/interfaces/create-wr';
@@ -10,7 +10,7 @@ import { CreateWrService } from 'src/app/services/create-wr.service';
   templateUrl: './action-plan.component.html',
   styleUrls: ['./action-plan.component.scss']
 })
-export class ActionPlanComponent implements OnInit {
+export class ActionPlanComponent implements OnInit, OnDestroy {
 
   public actionPlan : FormGroup = Object.create(null);
 
@@ -26,10 +26,27 @@ export class ActionPlanComponent implements OnInit {
     this.actionPlan = this.fb.group({
       actions: this.fb.array([])
     });
-    this.addAction();
+
+    if(this.waiverService.wr?.actions.length == 0){
+      this.addAction();
+    }else{
+      this.waiverService.wr.actions.forEach(a=>{
+        const action = this.fb.group({
+          responsable: [ a.responsable || '', Validators.compose([Validators.required])],
+          action: [ a.action || '', Validators.compose([Validators.required])],
+          date: [a.date || this.datePipe.transform(new Date(),"yyyy-MM-dd"), Validators.compose([Validators.required])]
+        });
+    
+        this.actions.push(action);
+      });
+    }
   }
 
-  
+  ngOnDestroy(){
+      this.waiverService.setActions(this.getActions());
+      this.router.navigate(['create','confirm']);
+  }
+
   get actions(): FormArray {
     return this.actionPlan.get('actions') as FormArray;
   }
@@ -50,9 +67,7 @@ export class ActionPlanComponent implements OnInit {
 
   next(){
     if(this.actionPlan.valid){
-      console.log("Valid");
-      this.waiverService.setActions(this.getActions());
-      this.router.navigate(['create','confirm']);
+      this.ngOnDestroy();
     }else{
       console.log("Invalid");
       this.actionPlan.markAllAsTouched();

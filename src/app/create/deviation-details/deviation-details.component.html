@@ -128,7 +128,7 @@
                         *ngIf = "riskDetails.get('required_action').value == 'other'">
                     </div>
                     <div class="col-md-9">
-                        <button type="button" (click)="next()" class="btn px-5 btn-success float-right">Next</button>
+                        <button [ngClass]="{'no-ok' : !riskDetails.valid || !formDeviations.valid}" type="button" (click)="next()" class="btn px-5 btn-success float-right">Next</button>
                     </div>
                 </div>
 

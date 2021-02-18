@@ -181,7 +181,7 @@
                     </div>
                 </div>
 
-                <button type="button" (click)="next()" class="btn px-5 btn-success float-right">Next</button>
+                <button [ngClass]="{'no-ok' : !waiverDetails.valid || !formPieces.valid}" type="button" (click)="next()" class="btn px-5 btn-success float-right">Next</button>
             </div>
 
         </div>

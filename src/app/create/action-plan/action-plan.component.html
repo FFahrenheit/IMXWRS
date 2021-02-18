@@ -36,7 +36,7 @@
                 </table>
             </div>
         </div>
-        <button type="button" (click)="next()" class="btn px-5 mb-5 btn-success float-right">Next</button>
+        <button [ngClass]="{'no-ok' : !actionPlan.valid}"  type="button" (click)="next()" class="btn px-5 mb-5 btn-success float-right">Next</button>
 
     </form>
 </div>
