@@ -3,20 +3,22 @@
         <h4 class="text-left my-3">Confirm waiver request</h4>
         <div class="row justify-content-center">
             <div class="col-md-5">
-                <attribute name="Request No: " value="placeholder"></attribute>
-                <attribute name="Customer: " value="placeholder"></attribute>
-                <attribute name="Originator: " value="placeholder"></attribute>
-                <attribute name="Area: " value="placeholder"></attribute>
-                <attribute name="Date of creation:" value="placeholder"></attribute>
-                <attribute name="Type of deviation: " value="placeholder"></attribute>
-                <attribute name="Status: " value="placeholder"></attribute>
-                <attribute name="Type: " value="placeholder"></attribute>
+                <attribute name="Request No: " [value]="wr.origin?.number"></attribute>
+                <attribute name="Customer: " [value]="wr.details?.customer || '' "></attribute>
+                <attribute name="Originator: " [value]="wr.origin?.originator || '' "></attribute>
+                <attribute name="Area: " [value]="wr.details?.area || ''"></attribute>
+                <attribute name="Date of creation:" [value]="datePipe.transform(wr.origin.date,'yyyy-MM-dd') || ''"></attribute>
+                <attribute name="Type of deviation: " [value]="wr.details?.type || '' "></attribute>
+                <!-- <attribute name="Status: " value="Creating..."></attribute> -->
+                <attribute name="Type: " [value]="wr.details?.typeNo || ''"></attribute>
 
-                <h5 class="text-left subtitle-att ">External authorization</h5>
-                <attribute name="Tile:" value="placeholder"></attribute>
-                <attribute name="Name: " value="placeholder"></attribute>
-                <attribute name="Date: " value="placeholder"></attribute>
-                <attribute name="Comments: " value="placeholder"></attribute>
+                <div *ngIf="wr != null && wr.details?.type=='external'">
+                    <h5 class="text-left subtitle-att ">External authorization</h5>
+                    <attribute name="Tile:" [value]="placeholder"></attribute>
+                    <attribute name="Name: " [value]="placeholder"></attribute>
+                    <attribute name="Date: " [value]="placeholder"></attribute>
+                    <attribute name="Comments: " [value]="placeholder"></attribute>
+                </div>
 
                 <h5 class="text-left subtitle-att">Pieces</h5>
                 <div class="table-responsive">
@@ -28,24 +30,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let number of numbers">
-                                <td> CSTMR00{{number}} </td>
-                                <td> IMX000{{number}} </td>
+                            <tr *ngFor="let piece of wr.pieces">
+                                <td> {{ piece.customer }} </td>
+                                <td> {{ piece.internal }} </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 
                 <h5 class="text-left subtitle-att ">Risks</h5>
-                <attribute name="Original risk:" value="placeholder"></attribute>
-                <attribute name="AMEF RPN before: " value="placeholder"></attribute>
-                <attribute name="Risk analysis: " value="placeholder"></attribute>
+                <attribute name="Original risk:" [value]="wr.risk?.originalRisk || ''"></attribute>
+                <attribute name="AMEF RPN before: " [value]="wr.risk?.rpnBefore || ''"></attribute>
+                <attribute name="Risk analysis: " [value]="wr.risk?.riskAnalysis || ''"></attribute>
                 <hr class="separator">
-                <attribute name="Current risk: " value="placeholder"></attribute>
+                <attribute name="Current risk: " [value]="wr.risk?.currentRisk || '' "></attribute>
                 <hr class="separator">
-                <attribute name="Risk with actions: " value="placeholder"></attribute>
-                <attribute name="Corrective action required:" value="placeholder"></attribute>
-                <attribute name="AMEF RPN after: " value="placeholder"></attribute>
+                <attribute name="Risk with actions: " [value]="wr.risk?.riskWithActions || ''"></attribute>
+                <attribute name="Corrective action required:" [value]="wr.risk?.requiredAction || ''"></attribute>
+                <attribute name="AMEF RPN after: " [value]="wr.risk?.rpnAfter || '' "></attribute>
             </div>
 
             <div class="col-md-7">
@@ -61,10 +63,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let number of numbers">
-                                <td> Lorem ipsum </td>
-                                <td> Dolor sit amet </td>
-                                <td> Consectetur adipiscing elit </td>
+                            <tr *ngFor="let deviation of wr.deviations">
+                                <td> {{ deviation.current }} </td>
+                                <td> {{ deviation.required }} </td>
+                                <td> {{ deviation.reason }} </td>
                             </tr>
                         </tbody>
                     </table>
@@ -80,10 +82,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let number of numbers">
-                                <td> Lorem ipsum </td>
-                                <td> Dolor sit amet </td>
-                                <td> Consectetur adipiscing elit </td>
+                            <tr *ngFor="let action of wr.actions">
+                                <td> {{ action.responsable }} </td>
+                                <td> {{ action.action }} </td>
+                                <td>  {{ action.date }} </td>
                             </tr>
                         </tbody>
                     </table>

@@ -27,7 +27,7 @@ export class ActionPlanComponent implements OnInit, OnDestroy {
       actions: this.fb.array([])
     });
 
-    if(this.waiverService.wr?.actions.length == 0){
+    if(this.waiverService.wr.actions == null || this.waiverService.wr?.actions.length == 0){
       this.addAction();
     }else{
       this.waiverService.wr.actions.forEach(a=>{

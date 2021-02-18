@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { WR, FirstStep, Piece , SecondStep, Deviation, Action } from '../interfaces/create-wr';
+import { WR, FirstStep, Piece , SecondStep, Deviation, Action, Origin } from '../interfaces/create-wr';
 
 @Injectable({
   providedIn: 'root'
@@ -36,4 +36,8 @@ export class CreateWrService {
     console.log(this.wr.actions);
   }
 
+  setOrigin(origin : Origin){
+    this.wr.origin = origin;
+    console.log(this.wr.origin);
+  }
 }
