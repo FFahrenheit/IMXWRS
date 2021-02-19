@@ -19,6 +19,13 @@ export const AppRoutes: Routes = [
                     import('./create/create.module').then(
                         (m) => m.CreateModule
                     )
+            },
+            {
+                path: 'waivers',
+                loadChildren: () => 
+                    import('./waivers/waivers.module').then(
+                        (m) => m.WaiversModule
+                    )
             }
         ]
     },

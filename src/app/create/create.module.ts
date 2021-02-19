@@ -9,6 +9,7 @@ import { ActionPlanComponent } from './action-plan/action-plan.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { AttributeComponent } from '../shared/attribute/attribute.component';
 import { ConfirmModalComponent } from '../shared/confirm-modal/confirm-modal.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -16,13 +17,12 @@ import { ConfirmModalComponent } from '../shared/confirm-modal/confirm-modal.com
     DeviationDetailsComponent,
     ActionPlanComponent,
     ConfirmComponent,
-    AttributeComponent,
-    ConfirmModalComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterModule.forChild(CreateRoutes)
+    RouterModule.forChild(CreateRoutes),
+    SharedModule
   ]
 })
 export class CreateModule { }

@@ -5,18 +5,17 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
 import { BlankComponent } from './layouts/blank/blank.component';
-import { SpinnerComponent } from './shared/spinner/spinner/spinner.component';
 import { Error404Component } from './errors/error404/error404.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './layouts/dashboard/dashboard.component';
 import { DatePipe } from '@angular/common';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     BlankComponent,
-    SpinnerComponent,
     Error404Component,
     DashboardComponent,
   ],
@@ -25,6 +24,7 @@ import { DatePipe } from '@angular/common';
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(AppRoutes),
+    SharedModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
