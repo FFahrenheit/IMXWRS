@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
       route: ['waivers', 'status']
     },
     {
-      name: "Check WR's",
+      name: "Waiver log",
       route: [ 'waivers', 'all']
     },
   ]

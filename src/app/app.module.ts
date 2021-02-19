@@ -19,7 +19,6 @@ import { DatePipe } from '@angular/common';
     SpinnerComponent,
     Error404Component,
     DashboardComponent,
-    // AttributeComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Origin, WR } from 'src/app/interfaces/create-wr';
 import { CreateWrService } from 'src/app/services/create-wr.service';
 
@@ -34,4 +35,7 @@ export class ConfirmComponent implements OnInit {
     console.log(this.waiverService.wr);
   }
 
+  select(result){
+    console.log(result);
+  }
 }

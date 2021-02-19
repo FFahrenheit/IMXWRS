@@ -8,6 +8,7 @@ import { DeviationDetailsComponent } from './deviation-details/deviation-details
 import { ActionPlanComponent } from './action-plan/action-plan.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { AttributeComponent } from '../shared/attribute/attribute.component';
+import { ConfirmModalComponent } from '../shared/confirm-modal/confirm-modal.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { AttributeComponent } from '../shared/attribute/attribute.component';
     ActionPlanComponent,
     ConfirmComponent,
     AttributeComponent,
+    ConfirmModalComponent,
   ],
   imports: [
     CommonModule,

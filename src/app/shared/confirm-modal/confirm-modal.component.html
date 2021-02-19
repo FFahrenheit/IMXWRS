@@ -1,0 +1,16 @@
+<button class="btn btn-md btn-success float-right px-5 mx-3" (click)="open(confirmModal)"> {{ trigger }} </button>
+<ng-template #confirmModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title m-title" id="modal-basic-title"> {{ title }} </h4>
+        <button type="button" class="close" style="outline:none;" aria-label="Close" (click)="modal.dismiss('CANCEL')">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body m-content">
+        {{ content }}
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success px-3" (click)="modal.close('YES')">Yes</button>
+        <button type="button" class="btn btn-danger px-3" (click)="modal.close('NO')">No</button>
+    </div>
+</ng-template>
