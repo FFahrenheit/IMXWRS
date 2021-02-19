@@ -13,6 +13,7 @@ import { CreateWrService } from 'src/app/services/create-wr.service';
 export class ActionPlanComponent implements OnInit, OnDestroy {
 
   public actionPlan : FormGroup = Object.create(null);
+  public today = this.datePipe.transform(new Date(),"yyyy-MM-dd");
 
   constructor(private fb : FormBuilder,
               private router : Router,
@@ -34,7 +35,7 @@ export class ActionPlanComponent implements OnInit, OnDestroy {
         const action = this.fb.group({
           responsable: [ a.responsable || '', Validators.compose([Validators.required])],
           action: [ a.action || '', Validators.compose([Validators.required])],
-          date: [a.date || this.datePipe.transform(new Date(),"yyyy-MM-dd"), Validators.compose([Validators.required])]
+          date: [a.date ||'', Validators.compose([Validators.required])]
         });
     
         this.actions.push(action);
@@ -55,7 +56,7 @@ export class ActionPlanComponent implements OnInit, OnDestroy {
     const action = this.fb.group({
       responsable: [ '', Validators.compose([Validators.required])],
       action: [ '', Validators.compose([Validators.required])],
-      date: [this.datePipe.transform(new Date(),"yyyy-MM-dd"), Validators.compose([Validators.required])]
+      date: ['', Validators.compose([Validators.required])]
     });
 
     this.actions.push(action);

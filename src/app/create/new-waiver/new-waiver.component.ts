@@ -44,7 +44,7 @@ export class NewWaiverComponent implements OnInit, OnDestroy {
       quantity : [this.waiverService.wr.details?.quantity || ''],
       specification: [this.waiverService.wr.details?.specification || ''],
       startDate : [this.waiverService.wr.details?.startDate || defaultDate],
-      endDate : [this.waiverService.wr.details?.endDate || defaultDate]
+      endDate : [this.waiverService.wr.details?.endDate || '']
     })
 
     this.waiverDetails.get('type').valueChanges.subscribe(t =>{

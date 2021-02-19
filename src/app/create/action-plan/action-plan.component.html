@@ -23,7 +23,7 @@
                                     placeholder="Describe the action"  [class]="getStyle(action,'action')"></textarea>
                             </td>
                             <td>
-                                <input type="date" class="form-control date" formControlName="date"  [class]="getStyle(action,'date')">
+                                <input type="date" [min] = "today" class="form-control date" formControlName="date" [class]="getStyle(action,'date')">
                             </td>
                             <td>
                                 <button class="btn btn-primary fa fa-plus" *ngIf="i == 0" type="button"

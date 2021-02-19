@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { Error404Component } from './error404/error404.component';
+import { Error404Component } from './errors/error404/error404.component';
 import { AuthGuard } from './guards/auth.guard';
 
 import { BlankComponent } from './layouts/blank/blank.component';
