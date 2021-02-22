@@ -8,6 +8,7 @@ import { DeviationDetailsComponent } from './deviation-details/deviation-details
 import { ActionPlanComponent } from './action-plan/action-plan.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { AttributeComponent } from '../shared/attribute/attribute.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -15,12 +16,12 @@ import { AttributeComponent } from '../shared/attribute/attribute.component';
     DeviationDetailsComponent,
     ActionPlanComponent,
     ConfirmComponent,
-    AttributeComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterModule.forChild(CreateRoutes)
+    RouterModule.forChild(CreateRoutes),
+    SharedModule,
   ]
 })
 export class CreateModule { }
