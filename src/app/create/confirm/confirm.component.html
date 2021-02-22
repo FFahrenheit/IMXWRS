@@ -111,5 +111,9 @@
                 </div>
             </div>
         </div>
+        <confirm-modal title = "Confirm waiver request"  (select) = "select($event)"
+                       [content] = "'Do you want to confirm this WR to ' + wr.details?.customer + '?' ">
+
+        </confirm-modal>
     </div>
 </div>

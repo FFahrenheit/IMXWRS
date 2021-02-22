@@ -10,6 +10,7 @@ import { Error404Component } from './errors/error404/error404.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './layouts/dashboard/dashboard.component';
 import { DatePipe } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { DatePipe } from '@angular/common';
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(AppRoutes),
+    NgbModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
