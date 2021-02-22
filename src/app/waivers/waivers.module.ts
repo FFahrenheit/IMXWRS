@@ -6,11 +6,12 @@ import { WaiversRoutes } from './waivers.routing';
 import { ViewWaiverComponent } from './view-waiver/view-waiver.component';
 import { WaiverComponent } from './waiver/waiver.component';
 import { SharedModule } from '../shared/shared.module';
+import { AuthorizeComponent } from './authorize/authorize.component';
 
 @NgModule({
   declarations: [
     ViewWaiverComponent, 
-    WaiverComponent,
+    WaiverComponent, AuthorizeComponent,
   ],
   imports: [
     CommonModule,
