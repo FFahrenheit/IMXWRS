@@ -34,7 +34,8 @@ export class ConfirmComponent implements OnInit {
     console.log(this.waiverService.wr);
   }
 
-  select(result){
-    console.log(result);
+  confirm(){
+    console.log("Ok!");
   }
+
 }
