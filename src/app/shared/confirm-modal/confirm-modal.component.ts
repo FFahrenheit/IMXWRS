@@ -38,5 +38,4 @@ export class ConfirmModalComponent implements OnInit {
       this.cancel.emit();
     });
   }
-
 }

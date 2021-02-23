@@ -1,0 +1,31 @@
+<div class="container text-center pt-2">
+    <h4 class="text-left my-3">Assigned tasks</h4>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">WR</th>
+                <th scope="col">Task</th>
+                <th scope="col">Commitment date</th>
+                <th scope="col">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let number of numbers; let i = index">
+                <td>
+                    WR-{{number}}
+                </td>
+                <td>
+                    Do this and that and that too
+                </td>
+                <td>
+                    23/02/2020
+                </td>
+                <td>
+                    <button class="btn btn-success">
+                        See waiver request
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

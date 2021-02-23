@@ -11,7 +11,8 @@ import { AuthorizeComponent } from './authorize/authorize.component';
 @NgModule({
   declarations: [
     ViewWaiverComponent, 
-    WaiverComponent, AuthorizeComponent,
+    WaiverComponent, 
+    AuthorizeComponent,
   ],
   imports: [
     CommonModule,

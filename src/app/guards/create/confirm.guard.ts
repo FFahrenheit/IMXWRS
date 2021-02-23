@@ -15,6 +15,7 @@ export class ConfirmGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
+      return true;
     if (this.waiverService.wr.actions == null) {
       this.router.navigate(['create', 'actions']);
     }

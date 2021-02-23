@@ -26,7 +26,14 @@ export const AppRoutes: Routes = [
                     import('./waivers/waivers.module').then(
                         (m) => m.WaiversModule
                     )
-            }
+            },
+            {
+                path: 'tasks',
+                loadChildren: () => 
+                import('./tasks/tasks.module').then(
+                    (m) => m.TasksModule
+                )
+            },
         ]
     },
     {

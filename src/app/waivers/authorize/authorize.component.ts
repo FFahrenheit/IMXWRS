@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-authorize',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthorizeComponent implements OnInit {
 
-  constructor() { }
+  public waiverId;
 
-  ngOnInit(): void {
+  constructor(private route : ActivatedRoute ) { 
   }
 
+  ngOnInit() : void {
+    this.route.paramMap.subscribe(params => {
+      this.waiverId = params.get('id');
+    })
+  }
+
+  confirm(){
+    console.log(this.waiverId);
+  }
 }

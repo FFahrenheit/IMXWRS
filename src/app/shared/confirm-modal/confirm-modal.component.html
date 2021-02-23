@@ -1,4 +1,6 @@
-<button class="btn btn-md btn-success float-right px-5 mx-3" (click)="open(confirmModal)"> {{ trigger }} </button>
+<div class="my-3">
+    <button class="btn btn-md btn-success float-right px-5 mx-3 my-3" (click)="open(confirmModal)"> {{ trigger }} </button>
+</div>
 <ng-template #confirmModal let-modal>
     <div class="modal-header">
         <h4 class="modal-title m-title" id="modal-basic-title"> {{ title }} </h4>
