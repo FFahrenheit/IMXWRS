@@ -19,15 +19,19 @@ export class DashboardComponent implements OnInit {
       route: [ 'create' , 'new'],
     },
     {
-      name: "My activities",
-      route: [ 'activities']
+      name: "Assigned activities",
+      route: [ 'tasks','assigned']
     },
     {
-      name: "Status of WR",
+      name: "My activities",
+      route: ['tasks','pending']
+    },
+    {
+      name: "My waiver requests",
       route: ['waivers', 'status']
     },
     {
-      name: "Check WR's",
+      name: "Waivers log",
       route: [ 'waivers', 'all']
     },
   ]

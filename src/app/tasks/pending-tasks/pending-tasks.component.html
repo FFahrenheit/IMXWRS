@@ -1,12 +1,13 @@
-<div class="container text-center pt-2">
-    <h4 class="text-left my-3">Assigned activities</h4>
+<div class="table-responsive container text-center pt-2">
+    <h4 class="text-left my-3">Activities to do</h4>
     <table class="table table-hover">
         <thead>
             <tr>
                 <th scope="col">WR ID</th>
                 <th scope="col">Task description</th>
                 <th scope="col">Commitment date</th>
-                <th scope="col">Sign</th>
+                <th scope="col">Waiver details</th>
+                <th scope="col">Mark as done</th>
             </tr>
         </thead>
         <tbody>
@@ -21,9 +22,14 @@
                     23/02/2020
                 </td>
                 <td>
-                    <button class="btn btn-success">
-                        See WR & sign
+                    <button class="btn btn-primary" (click)="goToWaiver(i)">
+                        Details
                     </button>
+                </td>
+                <td>
+                    <confirm-modal class="margin-zero" title="Confirm done activity" content="Mark activiy as done?"
+                    trigger = "Done" myClass="">
+                    </confirm-modal>
                 </td>
             </tr>
         </tbody>

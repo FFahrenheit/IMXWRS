@@ -11,6 +11,7 @@ export class ConfirmModalComponent implements OnInit {
   @Input() public title = 'Confirm action';
   @Input() public content = 'Do you want to confirm this action?';
   @Input() public trigger = 'Confirm';
+  @Input() public myClass = 'float-right px-5 mx-3 my-3';
 
   @Output() public accept = new EventEmitter<void>();
   @Output() public cancel = new EventEmitter<void>();
