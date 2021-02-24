@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-dashboard',
@@ -9,13 +10,17 @@ export class TaskDashboardComponent implements OnInit {
   
   public numbers = Array(3).fill(0).map((x,i)=>i);
 
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit(): void {
   }
 
   confirm(value){
     console.log(value);
+  }
+
+  sign(id){
+    this.router.navigate(['waivers','sign',id]);
   }
 
 }

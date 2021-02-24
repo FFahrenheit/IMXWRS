@@ -4,6 +4,7 @@
         <thead>
             <tr>
                 <th scope="col">WR ID</th>
+                <th scope="col">Customer</th>
                 <th scope="col">Task description</th>
                 <th scope="col">Commitment date</th>
                 <th scope="col">Waiver details</th>
@@ -14,6 +15,9 @@
             <tr *ngFor="let number of numbers; let i = index">
                 <td>
                     WR-{{number}}
+                </td>
+                <td>
+                    Customer
                 </td>
                 <td>
                     Do this and that and that too
