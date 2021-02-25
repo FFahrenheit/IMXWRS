@@ -30,6 +30,11 @@ export const CreateRoutes: Routes = [
         path: 'confirm',
         component: ConfirmComponent,
         canActivate: [ConfirmGuard]
+      },
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'new'
       }
     ],
   },

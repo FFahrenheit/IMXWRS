@@ -29,6 +29,11 @@ export const WaiversRoutes: Routes = [
       {
         path: 'all',
         component: LogComponent,
+      },
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'all'
       }
     ],
   },

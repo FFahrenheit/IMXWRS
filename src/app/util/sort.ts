@@ -26,9 +26,9 @@ export class Sort{
         if(a < b){
             return -1 * this.sortOrder;
         }else if(a > b){
-            return 1 * this.sortOrder;
+            return this.sortOrder;
         }else{
-            return 0 * this.sortOrder;
+            return 0;
         }
     }
 }

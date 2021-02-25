@@ -13,6 +13,11 @@ export const AuthenticationRoutes: Routes = [
             {
                 path: 'recover',
                 component: RecoverComponent
+            },
+            {
+                path: '',
+                pathMatch: 'full',
+                redirectTo: 'login'
             }
         ]
     }

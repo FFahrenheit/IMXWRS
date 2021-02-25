@@ -15,6 +15,10 @@ export class DashboardComponent implements OnInit {
 
   public sidebar = [
     {
+      name: "Waivers log",
+      route: [ 'waivers', 'all']
+    },
+    {
       name: "New WR",
       route: [ 'create' , 'new'],
     },
@@ -30,15 +34,12 @@ export class DashboardComponent implements OnInit {
       name: "My waiver requests",
       route: ['waivers', 'status']
     },
-    {
-      name: "Waivers log",
-      route: [ 'waivers', 'all']
-    },
   ]
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    this.selectedIndex = + sessionStorage.getItem('index') || 0;
     $("#menu-toggle").click((e)=> {
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");
@@ -48,10 +49,12 @@ export class DashboardComponent implements OnInit {
   goTo(route : any , i: any){
     this.router.navigate(route);
     this.selectedIndex = i;
+    sessionStorage.setItem('index',i);
   }
 
   logout(){
     this.router.navigate(['authentication','login']);
+    sessionStorage.removeItem('index');
   }
 
 }

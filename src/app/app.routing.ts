@@ -34,6 +34,11 @@ export const AppRoutes: Routes = [
                     (m) => m.TasksModule
                 )
             },
+            {
+                path: '',
+                pathMatch: 'full',
+                redirectTo: 'waivers'
+            }
         ]
     },
     {

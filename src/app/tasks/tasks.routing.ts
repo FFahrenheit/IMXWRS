@@ -13,6 +13,11 @@ export const TasksRoutes: Routes = [
         {
           path: 'pending',
           component: PendingTasksComponent,
+        },
+        {
+          path: '',
+          pathMatch: 'full',
+          redirectTo: 'pending'
         }
     ],
   },
