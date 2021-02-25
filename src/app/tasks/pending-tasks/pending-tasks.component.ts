@@ -19,4 +19,8 @@ export class PendingTasksComponent implements OnInit {
     this.router.navigate(['waivers','view',id]);
   }
 
+  confirm(id){
+    this.ngOnInit();
+  }
+
 }

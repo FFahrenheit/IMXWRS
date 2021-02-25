@@ -9,6 +9,8 @@ import { SharedModule } from '../shared/shared.module';
 import { AuthorizeComponent } from './authorize/authorize.component';
 import { MyWaiversComponent } from './my-waivers/my-waivers.component';
 import { SignActivityComponent } from './sign-activity/sign-activity.component';
+import { LogComponent } from './log/log.component';
+import { SortDirective } from '../directives/sort.directive';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { SignActivityComponent } from './sign-activity/sign-activity.component';
     WaiverComponent, 
     AuthorizeComponent, 
     MyWaiversComponent, 
-    SignActivityComponent,
+    SignActivityComponent, 
+    LogComponent,
+    SortDirective,
   ],
   imports: [
     CommonModule,

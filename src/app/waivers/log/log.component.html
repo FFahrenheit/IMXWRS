@@ -1,0 +1,39 @@
+<div class="table-responsive container text-center pt-2">
+    <h4 class="text-left my-3">Waivers log</h4>
+    <table class="table table-hover">
+        <thead>
+            <tr class="header">
+                <th scope="col" [appSort]="tests" data-order="desc" data-name="id">WR ID</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Creation date</th>
+                <th scope="col"  [appSort]="tests" data-order="desc" data-name="name" >Originator</th>
+                <th scope="col">Status</th>
+                <th scope="col">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let number of tests; let i = index">
+                <td>
+                    WR-{{number.id}}
+                </td>
+                <td>
+                    Customer
+                </td>
+                <td>
+                    23/02/2020
+                </td>
+                <td>
+                    {{ number.name }}
+                </td>
+                <td>
+                    Pending 
+                </td>
+                <td>
+                    <button class="btn btn-primary" (click)="goToWaiver(i)">
+                        Details
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
