@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { Error403Component } from './errors/error403/error403.component';
 import { Error404Component } from './errors/error404/error404.component';
 import { AuthGuard } from './guards/auth.guard';
 
@@ -60,6 +61,10 @@ export const AppRoutes: Routes = [
                 ),
             }
         ]
+    },
+    {
+        path: '403',
+        component: Error403Component
     },
     {
         path: '**',

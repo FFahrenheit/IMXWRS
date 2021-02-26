@@ -13,7 +13,7 @@ export class ManagerAuthorizationGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean{
       if(false){
-        this.router.navigate(['505']);
+        this.router.navigate(['403']);
       }
       return true;
   }

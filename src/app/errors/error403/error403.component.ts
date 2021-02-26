@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-error404',
-  templateUrl: './error404.component.html',
-  styleUrls: ['./error404.component.scss']
+  selector: 'app-error403',
+  templateUrl: './error403.component.html',
+  styleUrls: ['./error403.component.scss']
 })
-export class Error404Component implements OnInit {
+export class Error403Component implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router : Router) { }
 
   ngOnInit(): void {
   }
@@ -17,5 +17,4 @@ export class Error404Component implements OnInit {
     sessionStorage.removeItem('index');
     this.router.navigate(['']);
   }
-
 }
