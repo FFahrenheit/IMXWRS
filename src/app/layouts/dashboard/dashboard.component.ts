@@ -36,7 +36,22 @@ export class DashboardComponent implements OnInit {
     },
   ]
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) { 
+    this.sidebar = [
+      {
+        name: "Waivers log",
+        route: ['waivers','all']
+      },
+      {
+        name: "Pending authorizations",
+        route: ['authorizations','pending']
+      },
+      {
+        name: "My approved WR",
+        route: ['authorizations','approved']
+      }
+    ]
+  }
 
   ngOnInit(): void {
     this.selectedIndex = + sessionStorage.getItem('index') || 0;

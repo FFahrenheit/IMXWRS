@@ -1,0 +1,35 @@
+<div class="table-responsive container text-center pt-2">
+    <h4 class="text-left my-3">Waivers request that need your approval</h4>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">WR ID</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Originator</th>
+                <th scope="col">Creation date</th>
+                <th scope="col">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let number of numbers; let i = index">
+                <td>
+                    WR-{{number}}
+                </td>
+                <td>
+                    Customer
+                </td>
+                <td>
+                    Originator 
+                </td>
+                <td>
+                    23/02/2020
+                </td>
+                <td>
+                    <button class="btn btn-success" (click)="goToWaiver(i)">
+                        Review
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

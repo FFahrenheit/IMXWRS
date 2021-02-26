@@ -35,10 +35,17 @@ export const AppRoutes: Routes = [
                 )
             },
             {
+                path: 'authorizations',
+                loadChildren: () =>
+                import('./authorizations/authorizations.module').then(
+                    (m) => m.AuthorizationsModule
+                )
+            },
+            {
                 path: '',
                 pathMatch: 'full',
                 redirectTo: 'waivers'
-            }
+            },
         ]
     },
     {
