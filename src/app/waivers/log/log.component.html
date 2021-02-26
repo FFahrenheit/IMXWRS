@@ -1,6 +1,6 @@
 <div class="table-responsive container text-center pt-2">
     <h4 class="text-left my-3">Waivers log</h4>
-    <table class="table table-sm table-striped table-hover">
+    <table class="table table-md  table-hover">
         <thead>
             <tr class="header">
                 <th scope="col" [appSort]="tests" data-order="desc" data-name="id">
@@ -19,13 +19,13 @@
                 <th scope="col">
                     Status
                 </th>
-                <th scope="col">
+                <!-- <th scope="col">
                     Details
-                </th>
+                </th> -->
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let number of tests; let i = index">
+            <tr *ngFor="let number of tests; let i = index" class="pointer" (click)="goToWaiver(i)">
                 <td>
                     WR-{{number.id}}
                 </td>
@@ -41,11 +41,11 @@
                 <td>
                     Pending 
                 </td>
-                <td>
+                <!-- <td>
                     <button class="btn btn-primary" (click)="goToWaiver(i)">
                         Details
                     </button>
-                </td>
+                </td> -->
             </tr>
         </tbody>
     </table>
