@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { WR, FirstStep, Piece , SecondStep, Deviation, Action, Origin } from '../interfaces/create-wr';
+import { WR, FirstStep, Piece , SecondStep, Deviation, Action, Origin } from '../interfaces/create-wr.interface';
 
 @Injectable({
   providedIn: 'root'

@@ -12,6 +12,7 @@ import { DashboardComponent } from './layouts/dashboard/dashboard.component';
 import { DatePipe } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Error403Component } from './errors/error403/error403.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { Error403Component } from './errors/error403/error403.component';
     ReactiveFormsModule,
     RouterModule.forRoot(AppRoutes),
     NgbModule,
+    HttpClientModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
