@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { Error403Component } from './errors/error403/error403.component';
 import { Error404Component } from './errors/error404/error404.component';
 import { AuthGuard } from './guards/auth.guard';
+import { LoginGuard } from './guards/login.guard';
 
 import { BlankComponent } from './layouts/blank/blank.component';
 import { DashboardComponent } from './layouts/dashboard/dashboard.component';
@@ -52,6 +53,7 @@ export const AppRoutes: Routes = [
     {
         path: '',
         component: BlankComponent,
+        canActivate: [ LoginGuard ],
         children: [
             {
                 path: 'authentication',

@@ -18,7 +18,7 @@
                 <span class="nav-logo title-logo"> Waiver Requests System </span>
             </a>
             <span class="navbar-text float-right ml-auto">
-                Logged as mySelf
+                Logged as {{ user.name }}
                 <a (click) = "logout()" class="logout">
                     Log out
                 </a>

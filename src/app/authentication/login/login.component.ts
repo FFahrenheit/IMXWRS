@@ -27,22 +27,23 @@ export class LoginComponent implements OnInit {
 
   onSubmit(){
     this.submitted = true;
-    console.log(this.form.value);
-    const loginForm : LoginForm = {
-      username: this.form.controls['username'].value,
-      password: this.form.controls['password'].value
-    }; 
-
-    this.login.login(loginForm).subscribe((resp)=>{
-      console.log(resp);
-      if(resp){
-        this.router.navigate(['']);
-      }else{
+    if(this.form.valid){
+      const loginForm : LoginForm = {
+        username: this.form.controls['username'].value,
+        password: this.form.controls['password'].value
+      }; 
+  
+      this.login.login(loginForm).subscribe((resp)=>{
         console.log(resp);
-      }
-    },(err)=>{
-      console.log(err);
-    });
+        if(resp){
+          this.router.navigate(['waivers','all']);
+        }else{
+          console.log('error'+ resp);
+        }
+      },(err)=>{
+        console.log(err);
+      }); 
+    }
   }
 
 }

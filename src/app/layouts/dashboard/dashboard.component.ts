@@ -67,7 +67,10 @@ export class DashboardComponent implements OnInit {
       $("#wrapper").toggleClass("toggled");
     });
     this.user = this.loginService.getUser();
-    if(this.user.position != 'employee'){
+    if(this.user.position == 'developer'){
+      this.sidebar = this.userSidebar.concat(this.adminSidebar);
+    }
+    else if(this.user.position != 'employee'){
       this.sidebar = this.userSidebar;
     }else{
       this.sidebar = this.adminSidebar;
@@ -81,6 +84,7 @@ export class DashboardComponent implements OnInit {
   }
 
   logout(){
+    this.loginService.logout();
     this.router.navigate(['authentication','login']);
     sessionStorage.removeItem('index');
   }
