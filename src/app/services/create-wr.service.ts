@@ -1,5 +1,12 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { WR, FirstStep, Piece , SecondStep, Deviation, Action, Origin } from '../interfaces/create-wr.interface';
+import { WExternalAuth, WaiverRequest, WAction, Waiver, WPart, Expiration, WaiverBody } from '../interfaces/waiver-request.interface';
+
+const base_url = environment.base_url;
 
 @Injectable({
   providedIn: 'root'
@@ -8,36 +15,140 @@ export class CreateWrService {
 
   public wr : WR = {};
 
-  constructor() { 
+  constructor(private http: HttpClient) { 
+  }
+
+  confirmWaiver(body : WaiverBody){
+    return this.http.post(`${ base_url }/waivers`,body)
+               .pipe(
+                 map((resp : any)=>{
+                   console.log(resp);
+                   if(resp['ok'] == true){
+                     return true;
+                   }else{
+                     return false;
+                   }
+                 }),
+                 catchError(error=>{
+                   return of(false);
+                 })
+               );
+  }
+
+  getRequest(){
+    let actions :WAction[] = [];
+    let waivers : Waiver[] = [];
+    let parts: WPart[] = [];
+    this.wr.actions.forEach(a=>{
+      let action : WAction = {
+        date : a.date,
+        description : a.action,
+        responsable : a.responsable
+      }
+      actions.push(action);
+    });
+
+    this.wr.deviations.forEach(d=>{
+      let waiver : Waiver = {
+        currentSpecification : d.current,
+        reason : d.reason,
+        requiredSpecification: d.required
+      }
+      waivers.push(waiver);
+    });
+
+    this.wr.pieces.forEach(p=>{
+      let part : WPart = {
+        customerPN : p.customer,
+        interplexPN: p.internal
+      }
+      parts.push(part);
+    });
+
+    let externalAuth : WExternalAuth;
+    if(this.wr.details.externalAuthorization != null){
+      externalAuth  = { 
+        dateSigned : this.wr.details.externalAuthorization.date,
+        name : this.wr.details.externalAuthorization.name,
+        title : this.wr.details.externalAuthorization.title,
+        comments : this.wr.details.externalAuthorization.comments
+      }
+    }
+
+    let expiration:  Expiration;
+
+    if(this.wr.details.appliesTo == 'quantity'){
+      expiration = {
+        quantity : this.wr.details.quantity,
+        specification : this.wr.details.specification
+      }
+    }
+    else{
+      expiration = {
+        startDate: this.wr.details.startDate,
+        endDate: this.wr.details.endDate
+      }
+    }
+    
+    let waiver : WaiverRequest = {
+      number: '',
+      type: this.wr.details.type,
+      typeNumber: this.wr.details.typeNo,
+      area : this.wr.details.area,
+      currentRisk : this.wr.risk.currentRisk,
+      customer : this.wr.details.customer,
+      originalRisk : this.wr.risk.originalRisk,
+      originator : this.wr.origin.originator,
+      requiredCorrectiveAction : this.wr.risk.requiredAction,
+      requiresManager : this.wr.details.needsManager,
+      riskAnalysis : this.wr.risk.riskAnalysis,
+      riskWithActions : this.wr.risk.riskWithActions,
+      rpnAfter : this.wr.risk.rpnAfter,
+      rpnBefore: this.wr.risk.rpnBefore,
+      status: 'Pending',
+    }
+    let body : WaiverBody = {
+      waiverRequest : waiver,
+      actions : actions,
+      deviations : waivers,
+      externalAuth: externalAuth,
+      parts : parts,
+      expiration: expiration
+    }
+
+    return this.removeEmpty(body);
   }
 
   setFirstStep(fs : FirstStep){
     this.wr.details = fs;
-    console.log(this.wr.details);
   }
 
   setPieces(pieces : Piece[]){
     this.wr.pieces = pieces;
-    console.log(this.wr.pieces);
   }
 
   setSecondStep(risk : SecondStep){
     this.wr.risk = risk;
-    console.log(this.wr.risk);
   }
 
   setDeviations(deviations : Deviation[]){
     this.wr.deviations = deviations;
-    console.log(this.wr.deviations);
   }
 
   setActions(actions : Action[]){
     this.wr.actions = actions;
-    console.log(this.wr.actions);
   }
 
   setOrigin(origin : Origin){
     this.wr.origin = origin;
-    console.log(this.wr.origin);
   }
+
+  removeEmpty(obj){
+    let newObj = {};
+    Object.keys(obj).forEach((key) => {
+      if (obj[key] === Object(obj[key])) newObj[key] = this.removeEmpty(obj[key]);
+      else if (obj[key] !== undefined) newObj[key] = obj[key];
+    });
+    return newObj;
+  };
 }

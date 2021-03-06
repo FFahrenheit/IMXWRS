@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
       }; 
   
       this.login.login(loginForm).subscribe((resp)=>{
-        console.log(resp);
         if(resp){
           this.router.navigate(['waivers','all']);
         }else{

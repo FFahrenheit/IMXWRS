@@ -23,6 +23,5 @@ export class RecoverComponent implements OnInit {
 
   onSubmit(){
     this.submitted = true;
-    console.log(this.form.value);
   }
 }

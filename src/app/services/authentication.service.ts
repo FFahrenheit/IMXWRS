@@ -23,7 +23,6 @@ export class AuthenticationService {
   login(form : LoginForm){
     return this.http.post(`${ base_url }/auth/login`,form)
                .pipe(map((resp : any)=>{
-                 console.log(resp);
                  if(resp['ok']){
                    localStorage.setItem('username',resp.user.username);
                    localStorage.setItem('token',resp.token);
@@ -75,7 +74,6 @@ export class AuthenticationService {
     return this.http.post(`${ base_url }/auth/refresh`,{})
                .pipe(
                  map((resp:any)=>{
-                   console.log(resp);
                   if(resp['ok']){
                     localStorage.setItem('username',resp.user.username);
                     localStorage.setItem('token',resp.token);

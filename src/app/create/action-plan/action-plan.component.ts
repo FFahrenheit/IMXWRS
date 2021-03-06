@@ -22,7 +22,6 @@ export class ActionPlanComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log(this.waiverService.wr);
 
     this.actionPlan = this.fb.group({
       actions: this.fb.array([])

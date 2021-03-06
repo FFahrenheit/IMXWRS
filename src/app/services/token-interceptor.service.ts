@@ -20,7 +20,7 @@ export class TokenInterceptorService implements HttpInterceptor{
 
     return next.handle(tokenizedRequest).pipe(
       catchError((error) => {
-        console.log('Sucedio un error');
+        console.log('Error');
         console.warn(error);
         return throwError('Error');
       }));
