@@ -90,6 +90,7 @@ export class ActionPlanComponent implements OnInit, OnDestroy {
     if(this.actionPlan.valid){
       this.ngOnDestroy();
     }else{
+      console.log(this.getActions());
       console.log("Invalid");
       this.actionPlan.markAllAsTouched();
     }
@@ -116,19 +117,11 @@ export class ActionPlanComponent implements OnInit, OnDestroy {
     return (action.controls[field].valid) ? 'is-valid' : 'is-invalid';
   }
 
-  getUsers(action : FormGroup){
-    let name = action.controls['responsable'].value;
-    console.log(name);
+  setValues(data){
+    if(data.username != null){
+      let act = this.actions.at(data.index) as FormGroup;
+
+      act.controls['responsable'].setValue(data.username);
+    }
   }
-
-  search = (text$: Observable<string>) =>
-  text$.pipe(
-    debounceTime(200),
-    distinctUntilChanged(),
-    map(term => term === '' ? []
-      : this.users.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
-  )
-
-  formatter = (x: {name: string}) => x.name;
-
 }

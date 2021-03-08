@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, Input, OnInit, forwardRef, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, Validators, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
@@ -13,10 +13,13 @@ export class ResponsableInputComponent implements OnInit {
   public form = this.fb.group({
     name:  ['',Validators.compose([Validators.required])]
   });
-  
+
+  public savedUser : any = {};
   public model : any;
 
   @Input() public users = [];
+  @Input() public index;
+  @Output() public update = new EventEmitter();
 
   constructor(public fb : FormBuilder) { }
 
@@ -48,25 +51,28 @@ export class ResponsableInputComponent implements OnInit {
   }
 
   isValid(){
-
     let uName = this.name.value;
 
-    
     this.name.setErrors({
       'incorrect': true
     });    
 
     if(typeof uName === 'object' && uName !== null    ){
       this.name.setErrors(null);
-      return;
+      this.savedUser = uName;
     }
 
     this.users.forEach(u=>{
       if(u.name == uName){
         console.log('No error');
         this.name.setErrors(null);
-        return;
+        this.savedUser = u;
       }
     });
+
+    let data = this.savedUser;
+    data['index'] = this.index;
+
+    this.update.emit(data);
   }
 }

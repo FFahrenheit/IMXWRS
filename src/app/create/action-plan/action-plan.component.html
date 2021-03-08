@@ -15,22 +15,8 @@
                     <tbody formArrayName="actions">
                         <tr *ngFor="let action of actions.controls;let i = index" [formGroupName]="i">
                             <td>
-                                <responsable-input [users] = "users">
-
+                                <responsable-input (update)="setValues($event)" [index]="i" [users] = "users">
                                 </responsable-input>
-                                <!-- <ng-template #rt let-r="result" let-t="term">
-                                    <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
-                                    <span>
-                                        (
-                                            <ngb-highlight class="ngb-username" [result]="r.username"></ngb-highlight>
-                                        )
-                                    </span>
-                                </ng-template>
-
-                                <input (input)="getUsers(action)" [(ngModel)]="model[i]" [ngbTypeahead]="search"
-                                    [resultTemplate]="rt" [inputFormatter]="formatter" 
-                                    type="text" class="form-control responsable" formControlName="responsable"
-                                    placeholder="Designed user" [class]="getStyle(action,'responsable')"> -->
                             </td>
                             <td>
                                 <textarea class="form-control action" formControlName="action"
