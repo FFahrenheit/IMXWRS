@@ -15,15 +15,30 @@
                     <tbody formArrayName="actions">
                         <tr *ngFor="let action of actions.controls;let i = index" [formGroupName]="i">
                             <td>
-                                <input type="text" class="form-control responsable" formControlName="responsable"
-                                    placeholder="Designed user" [class]="getStyle(action,'responsable')">
+                                <responsable-input [users] = "users">
+
+                                </responsable-input>
+                                <!-- <ng-template #rt let-r="result" let-t="term">
+                                    <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+                                    <span>
+                                        (
+                                            <ngb-highlight class="ngb-username" [result]="r.username"></ngb-highlight>
+                                        )
+                                    </span>
+                                </ng-template>
+
+                                <input (input)="getUsers(action)" [(ngModel)]="model[i]" [ngbTypeahead]="search"
+                                    [resultTemplate]="rt" [inputFormatter]="formatter" 
+                                    type="text" class="form-control responsable" formControlName="responsable"
+                                    placeholder="Designed user" [class]="getStyle(action,'responsable')"> -->
                             </td>
                             <td>
                                 <textarea class="form-control action" formControlName="action"
-                                    placeholder="Describe the action"  [class]="getStyle(action,'action')"></textarea>
+                                    placeholder="Describe the action" [class]="getStyle(action,'action')"></textarea>
                             </td>
                             <td>
-                                <input type="date" [min] = "today" class="form-control date" formControlName="date" [class]="getStyle(action,'date')">
+                                <input type="date" [min]="today" class="form-control date" formControlName="date"
+                                    [class]="getStyle(action,'date')">
                             </td>
                             <td>
                                 <button class="btn btn-primary fa fa-plus" *ngIf="i == 0" type="button"
@@ -36,7 +51,8 @@
                 </table>
             </div>
         </div>
-        <button [ngClass]="{'no-ok' : !actionPlan.valid}"  type="button" (click)="next()" class="btn px-5 mb-5 btn-success float-right">Next</button>
+        <button [ngClass]="{'no-ok' : !actionPlan.valid}" type="button" (click)="next()"
+            class="btn px-5 mb-5 btn-success float-right">Next</button>
 
     </form>
 </div>

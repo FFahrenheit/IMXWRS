@@ -2,8 +2,12 @@ import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Action } from 'src/app/interfaces/create-wr.interface';
 import { CreateWrService } from 'src/app/services/create-wr.service';
+import { UsersService } from 'src/app/services/users.service';
+import { ActionUser } from 'src/app/interfaces/action-user.interface';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-action-plan',
@@ -14,11 +18,14 @@ export class ActionPlanComponent implements OnInit, OnDestroy {
 
   public actionPlan : FormGroup = Object.create(null);
   public today = this.datePipe.transform(new Date(),"yyyy-MM-dd");
+  public users : ActionUser[];
+  public model : any;
 
   constructor(private fb : FormBuilder,
               private router : Router,
               private waiverService : CreateWrService,
-              private datePipe : DatePipe) { 
+              private datePipe : DatePipe,
+              private userService : UsersService) { 
   }
 
   ngOnInit(): void {
@@ -40,6 +47,20 @@ export class ActionPlanComponent implements OnInit, OnDestroy {
         this.actions.push(action);
       });
     }
+
+
+    this.userService.getUsers()
+        .subscribe((resp:any)=>{
+          console.log(resp);
+
+          if(resp.status){
+            this.users = resp.users;
+            console.log(this.users);
+          }
+        },(error)=>{
+          console.log('Error');
+          console.log(error);
+        });
   }
 
   ngOnDestroy(){
@@ -94,5 +115,20 @@ export class ActionPlanComponent implements OnInit, OnDestroy {
     }
     return (action.controls[field].valid) ? 'is-valid' : 'is-invalid';
   }
+
+  getUsers(action : FormGroup){
+    let name = action.controls['responsable'].value;
+    console.log(name);
+  }
+
+  search = (text$: Observable<string>) =>
+  text$.pipe(
+    debounceTime(200),
+    distinctUntilChanged(),
+    map(term => term === '' ? []
+      : this.users.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+  )
+
+  formatter = (x: {name: string}) => x.name;
 
 }

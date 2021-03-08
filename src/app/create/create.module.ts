@@ -8,6 +8,8 @@ import { DeviationDetailsComponent } from './deviation-details/deviation-details
 import { ActionPlanComponent } from './action-plan/action-plan.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { SharedModule } from '../shared/shared.module';
+import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { ResponsableInputComponent } from './responsable-input/responsable-input.component';
 
 @NgModule({
   declarations: [
@@ -15,12 +17,14 @@ import { SharedModule } from '../shared/shared.module';
     DeviationDetailsComponent,
     ActionPlanComponent,
     ConfirmComponent,
+    ResponsableInputComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     RouterModule.forChild(CreateRoutes),
     SharedModule,
+    NgbTypeaheadModule,
   ]
 })
 export class CreateModule { }
