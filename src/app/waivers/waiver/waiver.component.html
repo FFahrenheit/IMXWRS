@@ -3,22 +3,33 @@
         <h4 class="text-left my-3">Waiver Request # {{ id }}</h4>
         <div class="row justify-content-center">
             <div class="col-md-5">
-                <attribute name="Request No: " [value]="wr?.origin?.number"></attribute>
-                <attribute name="Customer: " [value]="wr?.details?.customer || '' "></attribute>
-                <attribute name="Originator: " [value]="wr?.origin?.originator || '' "></attribute>
-                <attribute name="Area: " [value]="wr?.details?.area || ''"></attribute>
-                <attribute name="Date of creation:" [value]="datePipe.transform(wr?.origin.date,'yyyy-MM-dd') || ''"></attribute>
-                <attribute name="Type of deviation: " [value]="(wr?.details?.type | titlecase )|| '' "></attribute>
-                <!-- <attribute name="Status: " value="Creating..."></attribute> -->
-                <attribute name="Type: " [value]="wr?.details?.typeNo || ''"></attribute>
+                <attribute name="Request No: " [value]="wr?.number || ''"></attribute>
+                <attribute name="Customer: " [value]="wr?.customer || '' "></attribute>
+                <attribute name="Originator: " [value]="wr?.originator || '' "></attribute>
+                <attribute name="Area: " [value]="wr?.area || ''"></attribute>
+                <attribute name="Date of creation:" [value]="datePipe.transform(wr?.creationDate,'yyyy-MM-dd') || ''"></attribute>
+                <attribute name="Type of deviation: " [value]="(wr?.type | titlecase )|| '' "></attribute>
+                <attribute name="Status: " [value]="wr?.status || '' "></attribute>
+                <attribute name="Type: " [value]="wr?.typeNumber || ''"></attribute>
 
-                <div *ngIf="wr != null && wr?.details?.type=='external'">
+                <div *ngIf="wr != null && wr?.type=='external'">
                     <h5 class="text-left subtitle-att ">External authorization</h5>
-                    <attribute name="Tile:" [value]="wr?.details?.externalAuthorization?.title || '' "></attribute>
-                    <attribute name="Name: " [value]="wr?.details?.externalAuthorization?.name || ''"></attribute>
-                    <attribute name="Date: " [value]="wr?.details?.externalAuthorization?.date || ''"></attribute>
-                    <attribute name="Comments: " [value]="wr?.details?.externalAuthorization?.comments || ''"></attribute>
+                    <attribute name="Tile: " [value]="wr?.externalAuthorization?.title || '' "></attribute>
+                    <attribute name="Name: " [value]="wr?.externalAuthorization?.name || ''"></attribute>
+                    <attribute name="Date: " [value]="wr?.externalAuthorization?.date || ''"></attribute>
+                    <attribute name="Comments: " [value]="wr?.externalAuthorization?.comments || ''"></attribute>
                 </div>
+
+                <div *ngIf="wr?.expiration?.quantity != null; else date_exp">
+                    <attribute name = "Applies to: " [value]="(wr?.expiration?.quantity || '0') + ' ' + (wr?.expiration?.specification || '' )">
+                    </attribute>
+                </div>
+                <ng-template #date_exp>
+                    <attribute name="From: " [value] = "wr?.expiration?.startDate || '' ">
+                    </attribute>
+                    <attribute name="To: " [value] = "wr?.expiration?.endDate || '' ">
+                    </attribute>
+                </ng-template>
 
                 <h5 class="text-left subtitle-att">Pieces</h5>
                 <div class="table-responsive">
@@ -30,24 +41,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let piece of wr?.pieces">
-                                <td> {{ piece.customer }} </td>
-                                <td> {{ piece.internal }} </td>
+                            <tr *ngFor="let piece of wr?.parts">
+                                <td> {{ piece.customerPN || '' }} </td>
+                                <td> {{ piece.interplexPN || '' }} </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 
                 <h5 class="text-left subtitle-att ">Risks</h5>
-                <attribute name="Original risk:" [value]="( wr?.risk?.originalRisk | titlecase ) || ''"></attribute>
-                <attribute name="AMEF RPN before: " [value]="wr?.risk?.rpnBefore || ''"></attribute>
-                <attribute name="Risk analysis: " [value]="wr?.risk?.riskAnalysis || ''"></attribute>
+                <attribute name="Original risk:" [value]="( wr?.originalRisk | titlecase ) || ''"></attribute>
+                <attribute name="AMEF RPN before: " [value]="wr?.rpnBefore || ''"></attribute>
+                <attribute name="Risk analysis: " [value]="wr?.riskAnalysis || ''"></attribute>
                 <hr class="separator">
-                <attribute name="Current risk: " [value]="( wr?.risk?.currentRisk | titlecase ) || '' "></attribute>
+                <attribute name="Current risk: " [value]="( wr?.currentRisk | titlecase ) || '' "></attribute>
                 <hr class="separator">
-                <attribute name="Risk with actions: " [value]="( wr?.risk?.riskWithActions | titlecase) || ''"></attribute>
-                <attribute name="Corrective action required:" [value]="wr?.risk?.requiredAction || ''"></attribute>
-                <attribute name="AMEF RPN after: " [value]="wr?.risk?.rpnAfter || '' "></attribute>
+                <attribute name="Risk with actions: " [value]="( wr?.riskWithActions | titlecase) || ''"></attribute>
+                <attribute name="Corrective action required:" [value]="wr?.requiredCorrectiveAction || ''"></attribute>
+                <attribute name="AMEF RPN after: " [value]="wr?.rpnAfter || '' "></attribute>
             </div>
 
             <div class="col-md-7">
@@ -63,9 +74,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let deviation of wr?.deviations">
-                                <td> {{ deviation.current }} </td>
-                                <td> {{ deviation.required }} </td>
+                            <tr *ngFor="let deviation of wr?.waivers">
+                                <td> {{ deviation.currentSpecification }} </td>
+                                <td> {{ deviation.requiredSpecification }} </td>
                                 <td> {{ deviation.reason }} </td>
                             </tr>
                         </tbody>
@@ -79,13 +90,15 @@
                                 <th scope="col">Responsable</th>
                                 <th scope="col">Action</th>
                                 <th scope="col">Commitment date</th>
+                                <th scope="col">Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let action of wr?.actions">
-                                <td> {{ action.responsable }} </td>
-                                <td> {{ action.action }} </td>
-                                <td>  {{ action.date }} </td>
+                                <td> {{ action.name }} </td>
+                                <td> {{ action.description }} </td>
+                                <td>  {{ datePipe.transform(action.date,'yyyy-MM-dd') || '' }} </td>
+                                <td> {{ action.signed | titlecase }} </td>
                             </tr>
                         </tbody>
                     </table>
@@ -101,10 +114,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let number of numbers">
-                                <td> Lorem ipsum </td>
-                                <td> Dolor sit amet </td>
-                                <td> Consectetur adipiscing elit </td>
+                            <tr *ngFor="let auth of wr?.authorizations">
+                                <td> {{ auth.title | titlecase }} </td>
+                                <td> {{ auth.name }}</td>
+                                <td> {{ auth.signed | titlecase }}</td>
                             </tr>
                         </tbody>
                     </table>

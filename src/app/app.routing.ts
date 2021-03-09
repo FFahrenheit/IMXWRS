@@ -69,6 +69,10 @@ export const AppRoutes: Routes = [
         component: Error403Component
     },
     {
+        path: '404',
+        component: Error404Component
+    },
+    {
         path: '**',
         component: Error404Component,
     }
