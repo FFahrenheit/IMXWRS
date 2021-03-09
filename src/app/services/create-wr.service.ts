@@ -30,6 +30,7 @@ export class CreateWrService {
                    }
                  }),
                  catchError(error=>{
+                   console.log(error);
                    return of(false);
                  })
                );
@@ -43,7 +44,7 @@ export class CreateWrService {
       let action : WAction = {
         date : a.date,
         description : a.action,
-        responsable : a.responsable
+        responsable : a.username
       }
       actions.push(action);
     });

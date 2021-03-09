@@ -75,4 +75,8 @@ export class ResponsableInputComponent implements OnInit {
 
     this.update.emit(data);
   }
+
+  markAsTouched(){
+    this.form.markAllAsTouched();
+  }
 }

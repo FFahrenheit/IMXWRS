@@ -1,13 +1,12 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { Action } from 'src/app/interfaces/create-wr.interface';
 import { CreateWrService } from 'src/app/services/create-wr.service';
 import { UsersService } from 'src/app/services/users.service';
 import { ActionUser } from 'src/app/interfaces/action-user.interface';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { ResponsableInputComponent } from '../responsable-input/responsable-input.component';
 
 @Component({
   selector: 'app-action-plan',
@@ -20,6 +19,7 @@ export class ActionPlanComponent implements OnInit, OnDestroy {
   public today = this.datePipe.transform(new Date(),"yyyy-MM-dd");
   public users : ActionUser[];
   public model : any;
+  @ViewChildren('responsable') responsables: QueryList<ResponsableInputComponent>;
 
   constructor(private fb : FormBuilder,
               private router : Router,
@@ -41,7 +41,8 @@ export class ActionPlanComponent implements OnInit, OnDestroy {
         const action = this.fb.group({
           responsable: [ a.responsable || '', Validators.compose([Validators.required])],
           action: [ a.action || '', Validators.compose([Validators.required])],
-          date: [a.date ||'', Validators.compose([Validators.required])]
+          date: [a.date ||'', Validators.compose([Validators.required])],
+          username: ''
         });
     
         this.actions.push(action);
@@ -76,7 +77,8 @@ export class ActionPlanComponent implements OnInit, OnDestroy {
     const action = this.fb.group({
       responsable: [ '', Validators.compose([Validators.required])],
       action: [ '', Validators.compose([Validators.required])],
-      date: ['', Validators.compose([Validators.required])]
+      date: ['', Validators.compose([Validators.required])],
+      username: ''
     });
 
     this.actions.push(action);
@@ -93,6 +95,9 @@ export class ActionPlanComponent implements OnInit, OnDestroy {
       console.log(this.getActions());
       console.log("Invalid");
       this.actionPlan.markAllAsTouched();
+      this.responsables.forEach(c=>{
+        c.markAsTouched();
+      });
     }
   }
 
@@ -102,7 +107,8 @@ export class ActionPlanComponent implements OnInit, OnDestroy {
       const action : Action = {
         action : a['action'],
         date : a['date'],
-        responsable : a['responsable'] 
+        responsable : a['responsable'], 
+        username : a['username']
       }
       actions.push(action);
     });
@@ -120,8 +126,8 @@ export class ActionPlanComponent implements OnInit, OnDestroy {
   setValues(data){
     if(data.username != null){
       let act = this.actions.at(data.index) as FormGroup;
-
-      act.controls['responsable'].setValue(data.username);
+      act.controls['responsable'].setValue(data.name);
+      act.controls['username'].setValue(data.username);
     }
   }
 }

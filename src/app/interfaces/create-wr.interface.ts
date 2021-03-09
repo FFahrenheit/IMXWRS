@@ -51,6 +51,7 @@ export interface Deviation{
 
 export interface Action{
     responsable : string,
+    username: string,
     action : string,
     date : Date
 }

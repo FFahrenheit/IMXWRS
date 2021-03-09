@@ -15,7 +15,7 @@
                     <tbody formArrayName="actions">
                         <tr *ngFor="let action of actions.controls;let i = index" [formGroupName]="i">
                             <td>
-                                <responsable-input (update)="setValues($event)" [index]="i" [users] = "users">
+                                <responsable-input #responsable (update)="setValues($event)" [index]="i" [users] = "users">
                                 </responsable-input>
                             </td>
                             <td>
