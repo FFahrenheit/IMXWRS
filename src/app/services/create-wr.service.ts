@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { WR, FirstStep, Piece , SecondStep, Deviation, Action, Origin, Authorization } from '../interfaces/create-wr.interface';
-import { WExternalAuth, WaiverRequest, WAction, Waiver, WPart, Expiration, WaiverBody } from '../interfaces/waiver-request.interface';
+import { WExternalAuth, WaiverRequest, WAction, Waiver, WPart, Expiration, WaiverBody, Manager } from '../interfaces/waiver-request.interface';
 
 const base_url = environment.base_url;
 
@@ -141,13 +141,23 @@ export class CreateWrService {
       rpnBefore: this.wr.risk.rpnBefore,
       status: 'Pending',
     }
+    let managers : Manager[] = [];
+
+    this.wr.managers.forEach(m=>{
+      const manager : Manager = {
+        manager: m.username
+      }
+      managers.push(manager);
+    });
+
     let body : WaiverBody = {
       waiverRequest : waiver,
       actions : actions,
       deviations : waivers,
       externalAuth: externalAuth,
       parts : parts,
-      expiration: expiration
+      expiration: expiration,
+      managers: managers
     }
 
     return this.removeEmpty(body);

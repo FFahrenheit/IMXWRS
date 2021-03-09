@@ -45,7 +45,7 @@ export class ConfirmComponent implements OnInit {
     console.log(waiver);
     this.waiverService.confirmWaiver(waiver).subscribe((resp)=>{
       if(resp){
-        this.router.navigate(['waivers','view',this.wr.number]);
+        //this.router.navigate(['waivers','view',this.wr.number]);
       }else{
         console.log('error'+ resp);
       }

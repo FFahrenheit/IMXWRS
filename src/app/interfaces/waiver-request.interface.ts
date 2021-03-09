@@ -4,7 +4,12 @@ export interface WaiverBody{
     actions? : WAction[],
     deviations? :  Waiver[],
     externalAuth? : WExternalAuth,
-    expiration?: Expiration
+    expiration?: Expiration,
+    managers?: Manager[]
+}
+
+export interface Manager{
+    manager: string
 }
 
 export interface WaiverRequest{
