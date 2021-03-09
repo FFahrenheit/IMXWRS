@@ -13,7 +13,6 @@ export class ActionsGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
-      return true;
       if(this.waiverService.wr.deviations == null || this.waiverService.wr.risk == null){
         this.router.navigate(['create','details']);
       }

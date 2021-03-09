@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { WR, FirstStep, Piece , SecondStep, Deviation, Action, Origin } from '../interfaces/create-wr.interface';
+import { WR, FirstStep, Piece , SecondStep, Deviation, Action, Origin, Authorization } from '../interfaces/create-wr.interface';
 import { WExternalAuth, WaiverRequest, WAction, Waiver, WPart, Expiration, WaiverBody } from '../interfaces/waiver-request.interface';
 
 const base_url = environment.base_url;
@@ -18,12 +18,45 @@ export class CreateWrService {
   constructor(private http: HttpClient) { 
   }
 
+  getManagers(){
+    let type = this.wr.details.typeNo.toString();
+    let needsManager = this.wr.details.needsManager.toString();
+    let params = new HttpParams();
+
+    params = params.append('number', type);
+    params = params.append('needsManager', needsManager);
+
+    console.log(params);
+
+    return this.http.get(`${ base_url }/waivers/authorizations`,{
+      params: params
+    }).pipe(
+        map( (resp:any)=>{
+          console.log(resp);
+          this.wr.managers = [];
+          resp.managers.forEach(m=>{
+            const manager : Authorization = {
+              name: m['name'],
+              position: m['position'],
+              username: m['username']
+            }
+            this.wr.managers.push(manager);
+          });
+        }),
+        catchError((error)=>{
+          console.log(error);
+          return of(false);
+        })
+      );
+  }
+
   confirmWaiver(body : WaiverBody){
     return this.http.post(`${ base_url }/waivers`,body)
                .pipe(
                  map((resp : any)=>{
                    console.log(resp);
                    if(resp['ok'] == true){
+                     this.wr.number = resp['id'];
                      return true;
                    }else{
                      return false;

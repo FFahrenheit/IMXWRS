@@ -33,8 +33,8 @@ export class DeviationDetailsComponent implements OnInit, OnDestroy {
 
     this.riskDetails = this.fb.group({
       risk_analysis: [this.waiverService.wr.risk?.riskAnalysis || '', Validators.compose([Validators.required])],
-      rpn_before : [this.waiverService.wr.risk?.rpnBefore || 0,Validators.compose([Validators.required])],
-      rpn_after : [this.waiverService.wr.risk?.rpnAfter || 0,Validators.compose([Validators.required])],
+      rpn_before : [this.waiverService.wr.risk?.rpnBefore || '0',Validators.compose([Validators.required])],
+      rpn_after : [this.waiverService.wr.risk?.rpnAfter || '0',Validators.compose([Validators.required])],
       original_risk: [this.waiverService.wr.risk?.originalRisk || '', Validators.compose([Validators.required])],
       current_risk : [this.waiverService.wr.risk?.currentRisk || '', Validators.compose([Validators.required])],
       risk_with_actions: [this.waiverService.wr.risk?.riskWithActions || '',Validators.compose([Validators.required])],

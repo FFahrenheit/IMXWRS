@@ -4,7 +4,15 @@ export interface WR{
     risk?      : SecondStep,
     deviations?: Deviation[],
     actions?   : Action[],
-    origin?    : Origin
+    origin?    : Origin,
+    managers?  : Authorization[],
+    number?    : string
+}
+
+export interface Authorization{
+    name: string,
+    position: string,
+    username: string
 }
 
 export interface FirstStep{

@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Origin, WR } from 'src/app/interfaces/create-wr.interface';
+import { Authorization, Origin, WR } from 'src/app/interfaces/create-wr.interface';
 import { WaiverBody } from 'src/app/interfaces/waiver-request.interface';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CreateWrService } from 'src/app/services/create-wr.service';
@@ -17,6 +17,7 @@ export class ConfirmComponent implements OnInit {
 
   public placeholder = 'PLACEHOLDER';
   public numbers = Array(3).fill(0).map((x,i)=>i);
+  public managers : Authorization[];
 
   constructor(private router : Router,
               private waiverService : CreateWrService,
@@ -32,6 +33,11 @@ export class ConfirmComponent implements OnInit {
     };
     this.waiverService.setOrigin(origin);
     this.wr = this.waiverService.wr;
+    this.waiverService.getManagers().subscribe((resp)=>{
+      this.managers = this.wr.managers;
+    },error=>{
+      console.log('Failing managers: ' + error);
+    })
   }
 
   confirm(){
@@ -39,7 +45,7 @@ export class ConfirmComponent implements OnInit {
     console.log(waiver);
     this.waiverService.confirmWaiver(waiver).subscribe((resp)=>{
       if(resp){
-        console.log("wwuuu");
+        this.router.navigate(['waivers','view',this.wr.number]);
       }else{
         console.log('error'+ resp);
       }
