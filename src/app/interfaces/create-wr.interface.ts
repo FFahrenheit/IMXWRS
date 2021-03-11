@@ -33,7 +33,7 @@ export interface ExternalAuth{
     title : string,
     name : string,
     date : Date,
-    comments ? : string
+    comment ? : string
 }
 
 export interface Piece{

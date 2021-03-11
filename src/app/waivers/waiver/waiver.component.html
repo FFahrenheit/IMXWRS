@@ -16,8 +16,11 @@
                     <h5 class="text-left subtitle-att ">External authorization</h5>
                     <attribute name="Tile: " [value]="wr?.externalAuthorization?.title || '' "></attribute>
                     <attribute name="Name: " [value]="wr?.externalAuthorization?.name || ''"></attribute>
-                    <attribute name="Date: " [value]="wr?.externalAuthorization?.date || ''"></attribute>
-                    <attribute name="Comments: " [value]="wr?.externalAuthorization?.comments || ''"></attribute>
+                    <attribute name="Date: " 
+                     [value]="datePipe.transform(wr?.externalAuthorization?.dateSigned,'yyyy-MM-dd') || ''">
+
+                    </attribute>
+                    <attribute name="Comments: " [value]="wr?.externalAuthorization?.comment || ''"></attribute>
                 </div>
 
                 <div *ngIf="wr?.expiration?.quantity != null; else date_exp">

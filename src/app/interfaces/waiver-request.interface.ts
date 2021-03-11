@@ -51,7 +51,7 @@ export interface WExternalAuth{
     title : string,
     name : string,
     dateSigned : Date,
-    comments ? : string
+    comment ? : string
 }
 
 export interface Expiration{

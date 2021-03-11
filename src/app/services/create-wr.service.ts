@@ -105,7 +105,7 @@ export class CreateWrService {
         dateSigned : this.wr.details.externalAuthorization.date,
         name : this.wr.details.externalAuthorization.name,
         title : this.wr.details.externalAuthorization.title,
-        comments : this.wr.details.externalAuthorization.comments
+        comment : this.wr.details.externalAuthorization.comment
       }
     }
 
@@ -137,8 +137,8 @@ export class CreateWrService {
       requiresManager : this.wr.details.needsManager,
       riskAnalysis : this.wr.risk.riskAnalysis,
       riskWithActions : this.wr.risk.riskWithActions,
-      rpnAfter : this.wr.risk.rpnAfter,
-      rpnBefore: this.wr.risk.rpnBefore,
+      rpnAfter : this.wr.risk.rpnAfter || 0,
+      rpnBefore: this.wr.risk.rpnBefore || 0,
       status: 'Pending',
     }
     let managers : Manager[] = [];

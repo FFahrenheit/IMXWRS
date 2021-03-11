@@ -38,7 +38,7 @@ export class NewWaiverComponent implements OnInit, OnDestroy {
       extTitle : [this.waiverService.wr.details?.externalAuthorization?.title || ''],
       extName : [this.waiverService.wr.details?.externalAuthorization?.name || ''],
       extDate : [this.waiverService.wr.details?.externalAuthorization?.date || defaultDate],   
-      extComments : [this.waiverService.wr.details?.externalAuthorization?.comments || ''],
+      extComments : [this.waiverService.wr.details?.externalAuthorization?.comment || ''],
       needsManager : [this.waiverService.wr.details?.needsManager || false],
       lapse: [this.waiverService.wr.details?.appliesTo || 'quantity',Validators.compose([Validators.required])],
       quantity : [this.waiverService.wr.details?.quantity || ''],
@@ -143,7 +143,7 @@ export class NewWaiverComponent implements OnInit, OnDestroy {
       title : this.get('extTitle'),
       name : this.get('extName'),
       date : this.get('extDate'),
-      comments : this.get('extComments') || ""
+      comment : this.get('extComments') || ""
     };
 
     const form : FirstStep = {
