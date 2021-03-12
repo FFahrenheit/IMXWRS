@@ -13,7 +13,7 @@ export class WaiverComponent implements OnInit {
 
   public numbers = Array(3).fill(0).map((x,i)=>i);
   public wr;
-  public exists;
+  public exists = true;
 
   constructor(public datePipe : DatePipe,
               public waiverService : GetWaiverService,

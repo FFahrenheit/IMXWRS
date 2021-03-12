@@ -11,21 +11,21 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let number of numbers; let i = index">
+            <tr *ngFor="let act of activities">
                 <td>
-                    WR-{{number}}
+                    {{ act.request }}
                 </td>
                 <td>
-                    Customer
+                    {{ act.customer }}
                 </td>
                 <td>
-                    Do this and that and that too
+                    {{ act.description }}
                 </td>
                 <td>
-                    23/02/2020
+                    {{ datePipe.transform(act.date, 'yyyy-MM-dddd') }}
                 </td>
                 <td>
-                    <button class="btn btn-success" (click)="sign('WR'+i)">
+                    <button class="btn btn-success" (click)="sign(act.request)">
                         See WR & sign
                     </button>
                 </td>
