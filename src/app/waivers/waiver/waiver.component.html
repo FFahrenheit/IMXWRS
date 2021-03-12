@@ -133,10 +133,6 @@
     </div>
 </div>
 <ng-template #not_found>
-    <div class="text-center body">
-        <img (click)="goBack()" class="my-3 logo" src="./../../../assets/logo.png">
-        <h1 class="big-404 my-3">ERROR</h1>
-        <h2 class="error-content">We couldn't find the requested waiver request</h2>
-        <span (click)="goBack()" class="go-back">Go back</span>
-    </div>
+    <error-message title="ERROR" content="We couldn't find the requested waiver request">
+    </error-message>
 </ng-template>
