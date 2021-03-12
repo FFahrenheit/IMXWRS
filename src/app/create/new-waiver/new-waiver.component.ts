@@ -12,7 +12,7 @@ import { CreateWrService } from 'src/app/services/create-wr.service';
 })
 export class NewWaiverComponent implements OnInit, OnDestroy {
   
-  
+  public today = this.datePipe.transform(new Date(),"yyyy-MM-dd");
   formPieces : FormGroup = Object.create(null);
   waiverDetails : FormGroup = Object.create(null);
 

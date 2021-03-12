@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, forwardRef, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, Validators, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, Input, OnInit, Output, EventEmitter, AfterContentInit, ChangeDetectorRef } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
@@ -8,22 +8,42 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
   templateUrl: './responsable-input.component.html',
   styleUrls: ['./responsable-input.component.scss']
 })
-export class ResponsableInputComponent implements OnInit {
+export class ResponsableInputComponent implements OnInit,AfterContentInit {
   
-  public form = this.fb.group({
-    name:  ['',Validators.compose([Validators.required])]
-  });
+  public form : FormGroup = Object.create(null);  ;
 
   public savedUser : any = {};
   public model : any;
 
   @Input() public users = [];
   @Input() public index;
+
+  // @Input() public defaultUser = {};
   @Output() public update = new EventEmitter();
 
-  constructor(public fb : FormBuilder) { }
+  constructor(public fb : FormBuilder,
+              private cdRef: ChangeDetectorRef) { 
+  }
+  
+  ngAfterContentInit(){
+    this.cdRef.detectChanges(); 
+
+    // if(this.defaultUser != null){
+    //   console.log(this.defaultUser);
+    //   this.savedUser = this.defaultUser;
+    //   console.log(this.savedUser['responsable']);
+    //   this.form.controls['name'].setValue(this.savedUser['responsable']);
+    //   this.form.controls['name'].patchValue(this.savedUser['responsable']);
+    //   this.form.controls['name'].updateValueAndValidity();
+    // }else{
+    //   console.log('Not defined');
+    // }
+  }
 
   ngOnInit(): void {
+    this.form = this.fb.group({
+      name:  [/*this.defaultUser['responsable']||*/ '' ,Validators.compose([Validators.required])]
+    });
   }
 
   get name(): any {
@@ -64,7 +84,6 @@ export class ResponsableInputComponent implements OnInit {
 
     this.users.forEach(u=>{
       if(u.name == uName){
-        console.log('No error');
         this.name.setErrors(null);
         this.savedUser = u;
       }

@@ -42,13 +42,12 @@ export class ActionPlanComponent implements OnInit, OnDestroy {
           responsable: [ a.responsable || '', Validators.compose([Validators.required])],
           action: [ a.action || '', Validators.compose([Validators.required])],
           date: [a.date ||'', Validators.compose([Validators.required])],
-          username: ''
+          username: [a.username || '', Validators.compose([Validators.required])]
         });
     
         this.actions.push(action);
       });
     }
-
 
     this.userService.getUsers()
         .subscribe((resp:any)=>{
@@ -130,4 +129,16 @@ export class ActionPlanComponent implements OnInit, OnDestroy {
       act.controls['username'].setValue(data.username);
     }
   }
+
+  getUserIfAny(index : number){
+    let user = this.actions.at(index).value;
+    if(user['responsable'] != null && user['responsable'] != ''){
+      return {
+        username: user['username'],
+        responsable: user['responsable']
+      };
+    }
+    return null;
+  }
+
 }

@@ -173,11 +173,11 @@
                 <div *ngIf="waiverDetails.controls['lapse'].value == 'time'" class="form-group row pt-2">
                     <div class="col-md-6">
                         <label>Start date</label>
-                        <input [class]="getClass('startDate')" formControlName="startDate" class="form-control" type="date">
+                        <input [min] = "today" [class]="getClass('startDate')" formControlName="startDate" class="form-control" type="date">
                     </div>
                     <div class="col-md-6">
                         <label>End date or deadline</label>
-                        <input formControlName="endDate" [class]="getClass('endDate')" class="form-control" type="date">
+                        <input [min] = "waiverDetails.controls['startDate'].value" formControlName="endDate" [class]="getClass('endDate')" class="form-control" type="date">
                     </div>
                 </div>
 

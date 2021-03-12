@@ -11,7 +11,17 @@
                 <attribute name="Type of deviation: " [value]="(wr?.type | titlecase )|| '' "></attribute>
                 <attribute name="Status: " [value]="wr?.status || '' "></attribute>
                 <attribute name="Type: " [value]="wr?.typeNumber || ''"></attribute>
-
+                
+                <div *ngIf="wr?.expiration?.quantity != null; else date_exp">
+                    <attribute name = "Applies to: " [value]="(wr?.expiration?.quantity || '0') + ' ' + (wr?.expiration?.specification || '' )">
+                    </attribute>
+                </div>
+                <ng-template #date_exp>
+                    <attribute name="From: " [value] = "datePipe.transform(wr?.expiration?.startDate,'yyyy-MM-dd') || '' ">
+                    </attribute>
+                    <attribute name="To: " [value] = "datePipe.transform(wr?.expiration?.endDate,'yyyy-MM-dd') || '' ">
+                    </attribute>
+                </ng-template>
                 <div *ngIf="wr != null && wr?.type=='external'">
                     <h5 class="text-left subtitle-att ">External authorization</h5>
                     <attribute name="Tile: " [value]="wr?.externalAuthorization?.title || '' "></attribute>
@@ -22,17 +32,6 @@
                     </attribute>
                     <attribute name="Comments: " [value]="wr?.externalAuthorization?.comment || ''"></attribute>
                 </div>
-
-                <div *ngIf="wr?.expiration?.quantity != null; else date_exp">
-                    <attribute name = "Applies to: " [value]="(wr?.expiration?.quantity || '0') + ' ' + (wr?.expiration?.specification || '' )">
-                    </attribute>
-                </div>
-                <ng-template #date_exp>
-                    <attribute name="From: " [value] = "wr?.expiration?.startDate || '' ">
-                    </attribute>
-                    <attribute name="To: " [value] = "wr?.expiration?.endDate || '' ">
-                    </attribute>
-                </ng-template>
 
                 <h5 class="text-left subtitle-att">Pieces</h5>
                 <div class="table-responsive">
@@ -55,13 +54,13 @@
                 <h5 class="text-left subtitle-att ">Risks</h5>
                 <attribute name="Original risk:" [value]="( wr?.originalRisk | titlecase ) || ''"></attribute>
                 <attribute name="Risk analysis: " [value]="wr?.riskAnalysis || ''"></attribute>
-                <attribute name="AMEF RPN before: " [value]="wr?.rpnBefore || ''"></attribute>
+                <attribute name="AMEF RPN before: " [value]="wr?.rpnBefore || '0'"></attribute>
                 <hr class="separator">
                 <attribute name="Current risk: " [value]="( wr?.currentRisk | titlecase ) || '' "></attribute>
                 <hr class="separator">
                 <attribute name="Risk with actions: " [value]="( wr?.riskWithActions | titlecase) || ''"></attribute>
                 <attribute name="Corrective action required:" [value]="wr?.requiredCorrectiveAction || ''"></attribute>
-                <attribute name="AMEF RPN after: " [value]="wr?.rpnAfter || '' "></attribute>
+                <attribute name="AMEF RPN after: " [value]="wr?.rpnAfter || '0' "></attribute>
             </div>
 
             <div class="col-md-7">
