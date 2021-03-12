@@ -12,14 +12,11 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 export class DashboardComponent implements OnInit {
 
   public shown = true;
-  
   public user : User;
-
   public selectedIndex = 0;
-
   public sidebar;
 
-  public userSidebar = [
+  private userSidebar = [
     {
       name: "Waivers log",
       route: [ 'waivers', 'all']
@@ -42,7 +39,7 @@ export class DashboardComponent implements OnInit {
     },
   ]
 
-  public adminSidebar = [
+  private adminSidebar = [
     {
       name: "Waivers log",
       route: ['waivers','all']
@@ -70,7 +67,7 @@ export class DashboardComponent implements OnInit {
     if(this.user.position == 'developer'){
       this.sidebar = this.userSidebar.concat(this.adminSidebar);
     }
-    else if(this.user.position != 'employee'){
+    else if(this.user.position == 'employee'){
       this.sidebar = this.userSidebar;
     }else{
       this.sidebar = this.adminSidebar;

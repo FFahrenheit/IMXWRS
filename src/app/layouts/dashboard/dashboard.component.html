@@ -18,9 +18,11 @@
                 <span class="nav-logo title-logo"> Waiver Requests System </span>
             </a>
             <span class="navbar-text float-right ml-auto">
-                Logged as {{ user.name }}
+                   <span class="signed-user">
+                    <i class="fas fa-user"></i> {{ user.name }}
+                   </span>
                 <a (click) = "logout()" class="logout">
-                    Log out
+                    <i class="fas fa-sign-out-alt"></i> Log out
                 </a>
             </span>
         </nav>
