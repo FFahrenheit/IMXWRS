@@ -1,5 +1,5 @@
 import { DatePipe, Location } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { GetWaiverService } from 'src/app/services/get-waiver.service';
 
 @Component({
@@ -10,6 +10,7 @@ import { GetWaiverService } from 'src/app/services/get-waiver.service';
 export class WaiverComponent implements OnInit {
 
   @Input() public id = '';
+  @Output() public hasError = new EventEmitter<boolean>();
 
   public numbers = Array(3).fill(0).map((x,i)=>i);
   public wr;
@@ -26,6 +27,7 @@ export class WaiverComponent implements OnInit {
           if(this.exists){
             this.wr = this.waiverService.getWaiver();
           }
+          this.hasError.emit(this.exists);
         });
   }
 

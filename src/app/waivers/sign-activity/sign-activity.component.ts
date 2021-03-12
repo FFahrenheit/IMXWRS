@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class SignActivityComponent implements OnInit {
 
   public waiverId;
+  public exists = false;
 
   constructor(private route : ActivatedRoute,
               private router : Router) { 
@@ -24,4 +25,8 @@ export class SignActivityComponent implements OnInit {
     this.router.navigate(['waivers','view',this.waiverId]);
   }
 
+  updateExistance($event){
+    console.log('event : ' + $event);
+    this.exists = $event;
+  }
 }

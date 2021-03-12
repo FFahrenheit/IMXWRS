@@ -1,5 +1,5 @@
-<app-waiver [id] = " waiverId "></app-waiver>
-<confirm-modal trigger="Confirm participation" title="Sign activity" 
+<app-waiver (hasError) = "updateExistance($event)" [id] = " waiverId "></app-waiver>
+<confirm-modal *ngIf="exists" trigger="Confirm participation" title="Sign activity" 
 content="Do you confirm your participation on this waiver's action plan?"
 (accept)="confirm()">
 
