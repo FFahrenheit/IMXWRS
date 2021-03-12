@@ -1,4 +1,4 @@
-<div class="card my-2 pb-5">
+<div *ngIf="exists; else not_found" class="card my-2 pb-5">
     <div class="container text-center pt-2">
         <h4 class="text-left my-3">Waiver Request # {{ id }}</h4>
         <div class="row justify-content-center">
@@ -7,27 +7,30 @@
                 <attribute name="Customer: " [value]="wr?.customer || '' "></attribute>
                 <attribute name="Originator: " [value]="wr?.originator || '' "></attribute>
                 <attribute name="Area: " [value]="wr?.area || ''"></attribute>
-                <attribute name="Date of creation:" [value]="datePipe.transform(wr?.creationDate,'yyyy-MM-dd') || ''"></attribute>
+                <attribute name="Date of creation:" [value]="datePipe.transform(wr?.creationDate,'yyyy-MM-dd') || ''">
+                </attribute>
                 <attribute name="Type of deviation: " [value]="(wr?.type | titlecase )|| '' "></attribute>
                 <attribute name="Status: " [value]="wr?.status || '' "></attribute>
                 <attribute name="Type: " [value]="wr?.typeNumber || ''"></attribute>
-                
+
                 <div *ngIf="wr?.expiration?.quantity != null; else date_exp">
-                    <attribute name = "Applies to: " [value]="(wr?.expiration?.quantity || '0') + ' ' + (wr?.expiration?.specification || '' )">
+                    <attribute name="Applies to: "
+                        [value]="(wr?.expiration?.quantity || '0') + ' ' + (wr?.expiration?.specification || '' )">
                     </attribute>
                 </div>
                 <ng-template #date_exp>
-                    <attribute name="From: " [value] = "datePipe.transform(wr?.expiration?.startDate,'yyyy-MM-dd') || '' ">
+                    <attribute name="From: "
+                        [value]="datePipe.transform(wr?.expiration?.startDate,'yyyy-MM-dd') || '' ">
                     </attribute>
-                    <attribute name="To: " [value] = "datePipe.transform(wr?.expiration?.endDate,'yyyy-MM-dd') || '' ">
+                    <attribute name="To: " [value]="datePipe.transform(wr?.expiration?.endDate,'yyyy-MM-dd') || '' ">
                     </attribute>
                 </ng-template>
                 <div *ngIf="wr != null && wr?.type=='external'">
                     <h5 class="text-left subtitle-att ">External authorization</h5>
                     <attribute name="Tile: " [value]="wr?.externalAuthorization?.title || '' "></attribute>
                     <attribute name="Name: " [value]="wr?.externalAuthorization?.name || ''"></attribute>
-                    <attribute name="Date: " 
-                     [value]="datePipe.transform(wr?.externalAuthorization?.dateSigned,'yyyy-MM-dd') || ''">
+                    <attribute name="Date: "
+                        [value]="datePipe.transform(wr?.externalAuthorization?.dateSigned,'yyyy-MM-dd') || ''">
 
                     </attribute>
                     <attribute name="Comments: " [value]="wr?.externalAuthorization?.comment || ''"></attribute>
@@ -50,7 +53,7 @@
                         </tbody>
                     </table>
                 </div>
-                
+
                 <h5 class="text-left subtitle-att ">Risks</h5>
                 <attribute name="Original risk:" [value]="( wr?.originalRisk | titlecase ) || ''"></attribute>
                 <attribute name="Risk analysis: " [value]="wr?.riskAnalysis || ''"></attribute>
@@ -99,7 +102,7 @@
                             <tr *ngFor="let action of wr?.actions">
                                 <td> {{ action.name }} </td>
                                 <td> {{ action.description }} </td>
-                                <td>  {{ datePipe.transform(action.date,'yyyy-MM-dd') || '' }} </td>
+                                <td> {{ datePipe.transform(action.date,'yyyy-MM-dd') || '' }} </td>
                                 <td> {{ action.signed | titlecase }} </td>
                             </tr>
                         </tbody>
@@ -126,6 +129,14 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 </div>
+<ng-template #not_found>
+    <div class="text-center body">
+        <img (click)="goBack()" class="my-3 logo" src="./../../../assets/logo.png">
+        <h1 class="big-404 my-3">ERROR</h1>
+        <h2 class="error-content">We couldn't find the requested waiver request</h2>
+        <span (click)="goBack()" class="go-back">Go back</span>
+    </div>
+</ng-template>
