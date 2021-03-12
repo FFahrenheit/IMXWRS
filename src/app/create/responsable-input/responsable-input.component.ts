@@ -18,7 +18,7 @@ export class ResponsableInputComponent implements OnInit,AfterContentInit {
   @Input() public users = [];
   @Input() public index;
 
-  // @Input() public defaultUser = {};
+  @Input() public defaultUser = {};
   @Output() public update = new EventEmitter();
 
   constructor(public fb : FormBuilder,
@@ -28,21 +28,14 @@ export class ResponsableInputComponent implements OnInit,AfterContentInit {
   ngAfterContentInit(){
     this.cdRef.detectChanges(); 
 
-    // if(this.defaultUser != null){
-    //   console.log(this.defaultUser);
-    //   this.savedUser = this.defaultUser;
-    //   console.log(this.savedUser['responsable']);
-    //   this.form.controls['name'].setValue(this.savedUser['responsable']);
-    //   this.form.controls['name'].patchValue(this.savedUser['responsable']);
-    //   this.form.controls['name'].updateValueAndValidity();
-    // }else{
-    //   console.log('Not defined');
-    // }
+    if(this.defaultUser != null){
+      this.form.controls['name'].setValue({name:this.defaultUser['responsable'], username:this.defaultUser['username']});
+    }
   }
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      name:  [/*this.defaultUser['responsable']||*/ '' ,Validators.compose([Validators.required])]
+      name:  [ '' ,Validators.compose([Validators.required])]
     });
   }
 
