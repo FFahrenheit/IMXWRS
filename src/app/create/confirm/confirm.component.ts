@@ -5,6 +5,7 @@ import { Authorization, Origin, WR } from 'src/app/interfaces/create-wr.interfac
 import { WaiverBody } from 'src/app/interfaces/waiver-request.interface';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CreateWrService } from 'src/app/services/create-wr.service';
+import { AlertService } from 'src/app/shared/alert';
 
 @Component({
   selector: 'app-confirm',
@@ -14,15 +15,13 @@ import { CreateWrService } from 'src/app/services/create-wr.service';
 export class ConfirmComponent implements OnInit {
 
   public wr : WR;
-
-  public placeholder = 'PLACEHOLDER';
-  public numbers = Array(3).fill(0).map((x,i)=>i);
   public managers : Authorization[];
 
   constructor(private router : Router,
               private waiverService : CreateWrService,
               public datePipe : DatePipe,
-              public loginService : AuthenticationService) { 
+              public loginService : AuthenticationService,
+              private alert : AlertService) { 
   }
 
   ngOnInit(): void {
@@ -48,9 +47,10 @@ export class ConfirmComponent implements OnInit {
         this.waiverService.wr = null;
         this.router.navigate(['waivers','view',this.wr.number]);
       }else{
-        console.log('error'+ resp);
+        this.alert.error('Can not create WR, please try again', { autoClose: true });
       }
     },(err)=>{
+      this.alert.error('Server error',{ autoClose: true })
       console.log(err);
     }); 
   }

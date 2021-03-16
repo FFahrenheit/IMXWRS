@@ -7,6 +7,7 @@ import { AuthenticationRoutes } from './authentication.routing';
 import { FooterComponent } from './footer/footer.component';
 import { RecoverComponent } from './recover/recover.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     RouterModule.forChild(AuthenticationRoutes),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class AuthenticationModule { }

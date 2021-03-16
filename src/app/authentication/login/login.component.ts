@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginForm } from 'src/app/interfaces/login.interface';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { AlertService } from 'src/app/shared/alert';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private router : Router,
               private fb : FormBuilder,
-              private login: AuthenticationService) {}
+              private login : AuthenticationService,
+              private alert : AlertService) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -37,10 +39,11 @@ export class LoginComponent implements OnInit {
         if(resp){
           this.router.navigate(['waivers','all']);
         }else{
-          console.log('error'+ resp);
+          this.alert.error('Incorrect credentials', { autoClose : true } );
         }
       },(err)=>{
         console.log(err);
+        this.alert.error('Server error: ', { autoClose : true });
       }); 
     }
   }

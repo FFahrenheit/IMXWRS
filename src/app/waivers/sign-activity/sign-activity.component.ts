@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SignService } from 'src/app/services/sign.service';
+import { AlertService } from 'src/app/shared/alert';
 
 @Component({
   selector: 'app-sign-activity',
@@ -14,7 +15,8 @@ export class SignActivityComponent implements OnInit {
 
   constructor(private route : ActivatedRoute,
               private router : Router,
-              private signService : SignService) { 
+              private signService : SignService,
+              private alert : AlertService) { 
   }
 
   ngOnInit() : void {
@@ -28,8 +30,11 @@ export class SignActivityComponent implements OnInit {
         .subscribe(resp=>{
           if(resp){
             this.router.navigate(['waivers','view',this.waiverId]);
+          }else{
+            this.alert.error('Can not sign activity. Reload and try again', { autoClose: false });
           }
         },err=>{
+          this.alert.error('Server error');
           console.log(err);
         });
   }

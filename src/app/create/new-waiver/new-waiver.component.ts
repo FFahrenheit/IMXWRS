@@ -130,7 +130,6 @@ export class NewWaiverComponent implements OnInit, OnDestroy {
     if(this.waiverDetails.valid && this.formPieces.valid){
       this.ngOnDestroy();
     }else{
-      this.alert.error('9xd');
       this.waiverDetails.markAllAsTouched();
       this.formPieces.markAllAsTouched();
     }  }
