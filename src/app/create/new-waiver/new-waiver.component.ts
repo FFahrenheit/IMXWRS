@@ -4,6 +4,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { Router } from '@angular/router';
 import { ExternalAuth, FirstStep, Piece } from 'src/app/interfaces/create-wr.interface';
 import { CreateWrService } from 'src/app/services/create-wr.service';
+import { AlertService } from 'src/app/shared/alert';
 
 @Component({
   selector: 'app-new-waiver',
@@ -20,7 +21,8 @@ export class NewWaiverComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private router: Router,
     private datePipe : DatePipe,
-    private waiverService : CreateWrService
+    private waiverService : CreateWrService,
+    private alert : AlertService
   ) {
   }
 
@@ -128,6 +130,7 @@ export class NewWaiverComponent implements OnInit, OnDestroy {
     if(this.waiverDetails.valid && this.formPieces.valid){
       this.ngOnDestroy();
     }else{
+      this.alert.error('9xd');
       this.waiverDetails.markAllAsTouched();
       this.formPieces.markAllAsTouched();
     }  }

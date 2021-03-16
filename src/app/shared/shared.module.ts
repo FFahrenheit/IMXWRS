@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AttributeComponent } from './attribute/attribute.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { ErrorMessageComponent } from './error-message/error-message.component';
+import { AlertComponent } from './alert/alert.component';
 
 
 
@@ -11,6 +12,7 @@ import { ErrorMessageComponent } from './error-message/error-message.component';
     AttributeComponent,
     ConfirmModalComponent,
     ErrorMessageComponent,
+    AlertComponent,
   ],
   imports: [
     CommonModule
@@ -18,7 +20,8 @@ import { ErrorMessageComponent } from './error-message/error-message.component';
   exports: [
     AttributeComponent,
     ConfirmModalComponent,
-    ErrorMessageComponent
+    ErrorMessageComponent,
+    AlertComponent
   ]
 })
 export class SharedModule { }
