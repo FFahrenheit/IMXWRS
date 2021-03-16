@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SignService } from 'src/app/services/sign.service';
 
 @Component({
   selector: 'app-sign-activity',
@@ -12,7 +13,8 @@ export class SignActivityComponent implements OnInit {
   public exists = false;
 
   constructor(private route : ActivatedRoute,
-              private router : Router) { 
+              private router : Router,
+              private signService : SignService) { 
   }
 
   ngOnInit() : void {
@@ -22,7 +24,14 @@ export class SignActivityComponent implements OnInit {
   }
 
   confirm(){
-    this.router.navigate(['waivers','view',this.waiverId]);
+    this.signService.signActivity(this.waiverId)
+        .subscribe(resp=>{
+          if(resp){
+            this.router.navigate(['waivers','view',this.waiverId]);
+          }
+        },err=>{
+          console.log(err);
+        });
   }
 
   updateExistance($event){
