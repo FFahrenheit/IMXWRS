@@ -11,9 +11,31 @@ const base_url = environment.base_url;
 })
 export class AcitiviesService {
 
-  private unsignedActivities;
+  private unsignedActivities = [];
+  private activites = [];
 
   constructor(private http : HttpClient) { }
+
+  getMyTasks(){
+    return this.http.get(`${ base_url }/activities/pending`)
+    .pipe(
+      map((resp:any)=>{
+        console.log(resp);
+        if(resp['ok'] == true){
+          this.activites = resp['actions'];
+          return true;
+        }
+        return false;
+      }),
+      catchError((error)=>{
+        console.log(error);
+        return of(false);
+      })
+    );
+  }
+
+  signActivity(){
+  }
 
   getMyActivities(){
     return this.http.get(`${ base_url }/activities/unsigned`)
@@ -35,5 +57,9 @@ export class AcitiviesService {
 
   getUnsigned(){
     return this.unsignedActivities;
+  }
+
+  getPending(){
+    return this.activites;
   }
 }

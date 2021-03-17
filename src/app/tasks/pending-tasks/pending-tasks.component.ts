@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AcitiviesService } from 'src/app/services/acitivies.service';
 
 @Component({
   selector: 'app-pending-tasks',
@@ -9,10 +10,20 @@ import { Router } from '@angular/router';
 export class PendingTasksComponent implements OnInit {
 
   public numbers = Array(5).fill(0).map((x,i)=>i);
+  public activities = []; 
 
-  constructor(private router : Router) { }
+  constructor(private router : Router,
+              private activitiesService : AcitiviesService) { }
 
   ngOnInit(): void {
+    this.activitiesService.getMyTasks()
+        .subscribe(resp=>{
+          if(resp){
+            this.activities = this.activitiesService.getPending();
+          }
+        },error=>{
+          console.log(error);
+        })
   }
 
   goToWaiver(id){

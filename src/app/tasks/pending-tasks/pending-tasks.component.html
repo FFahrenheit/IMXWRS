@@ -1,6 +1,6 @@
 <div class="table-responsive container text-center pt-2">
     <h4 class="text-left my-3">Activities to do</h4>
-    <table class="table table-hover">
+    <table class="table table-hover" *ngIf="activities.length != 0;else empty_body">
         <thead>
             <tr>
                 <th scope="col">WR ID</th>
@@ -12,30 +12,36 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let number of numbers; let i = index">
+            <tr *ngFor="let activity of activities; let i = index">
                 <td>
-                    WR-{{number}}
+                    {{ activity.request }}
                 </td>
                 <td>
-                    Customer
+                    {{ activity.customer }}
                 </td>
                 <td>
-                    Do this and that and that too
+                    {{ activity.description }}
                 </td>
                 <td>
-                    23/02/2020
+                    {{ activity.date }}
                 </td>
                 <td>
-                    <button class="btn btn-primary" (click)="goToWaiver(i)">
+                    <button class="btn btn-primary" (click)="goToWaiver(activity.request)">
                         Details
                     </button>
                 </td>
                 <td>
                     <confirm-modal class="margin-zero" title="Confirm done activity" content="Mark activiy as done?"
-                    trigger = "Done" myClass="" (accept)="confirm(i)">
+                    trigger = "Done" myClass="" (accept)="confirm(activity.request)">
                     </confirm-modal>
                 </td>
             </tr>
         </tbody>
     </table>
+    <<ng-template #empty_body>
+        <error-message type="empty" title="Nothing here..." 
+        description="Congrats, you just completed your tasks">
+        </error-message>
+    </ng-template>
+    
 </div>
