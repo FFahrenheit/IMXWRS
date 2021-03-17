@@ -10,8 +10,6 @@ import { AcitiviesService } from 'src/app/services/acitivies.service';
 })
 export class TaskDashboardComponent implements OnInit {
   
-  public numbers = Array(3).fill(0).map((x,i)=>i);
-
   public activities = [];
 
   constructor(public router : Router,

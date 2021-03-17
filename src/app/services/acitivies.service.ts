@@ -34,7 +34,23 @@ export class AcitiviesService {
     );
   }
 
-  signActivity(){
+  signActivity(id : number){
+    let body = { id };
+
+    return this.http.put(`${ base_url }/activities/pending`,body)
+               .pipe(
+                 map((resp:any)=>{
+                   if(resp.ok){
+                     return true;
+                   }else{
+                     return false;
+                   }
+                 }),
+                 catchError(error=>{
+                   console.log(error);
+                   return of(false);
+                 })
+               );
   }
 
   getMyActivities(){

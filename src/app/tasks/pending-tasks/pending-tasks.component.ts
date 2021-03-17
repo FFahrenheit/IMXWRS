@@ -1,6 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AcitiviesService } from 'src/app/services/acitivies.service';
+import { AlertService } from 'src/app/shared/alert';
 
 @Component({
   selector: 'app-pending-tasks',
@@ -13,7 +15,9 @@ export class PendingTasksComponent implements OnInit {
   public activities = []; 
 
   constructor(private router : Router,
-              private activitiesService : AcitiviesService) { }
+              private activitiesService : AcitiviesService,
+              private alert : AlertService,
+              private datePipe : DatePipe) { }
 
   ngOnInit(): void {
     this.activitiesService.getMyTasks()
@@ -31,7 +35,17 @@ export class PendingTasksComponent implements OnInit {
   }
 
   confirm(id){
-    this.ngOnInit();
+    this.activitiesService.signActivity(id)
+        .subscribe(resp=>{
+          if(resp){
+            this.ngOnInit();
+            this.alert.success('Task done');
+          }else{
+            this.alert.error("Can not mark task as done. Refresh and try again");
+          }
+        },error=>{
+          this.alert.error("Can not mark task as done. Try later");
+        });
   }
 
 }

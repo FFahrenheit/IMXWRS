@@ -1,4 +1,5 @@
 <div class="table-responsive container text-center pt-2">
+    <alert></alert>
     <h4 class="text-left my-3">Activities to do</h4>
     <table class="table table-hover" *ngIf="activities.length != 0;else empty_body">
         <thead>
@@ -23,7 +24,7 @@
                     {{ activity.description }}
                 </td>
                 <td>
-                    {{ activity.date }}
+                    {{ datePipe.transform(activity.date,'yyyy-MM-dd') }}
                 </td>
                 <td>
                     <button class="btn btn-primary" (click)="goToWaiver(activity.request)">
@@ -32,13 +33,13 @@
                 </td>
                 <td>
                     <confirm-modal class="margin-zero" title="Confirm done activity" content="Mark activiy as done?"
-                    trigger = "Done" myClass="" (accept)="confirm(activity.request)">
+                    trigger = "Done" myClass="" (accept)="confirm(activity.id)">
                     </confirm-modal>
                 </td>
             </tr>
         </tbody>
     </table>
-    <<ng-template #empty_body>
+    <ng-template #empty_body>
         <error-message type="empty" title="Nothing here..." 
         description="Congrats, you just completed your tasks">
         </error-message>
