@@ -1,6 +1,7 @@
 <div class="table-responsive container text-center pt-2">
+    <alert></alert>
     <h4 class="text-left my-3">Waivers request that need your approval</h4>
-    <table class="table table-hover">
+    <table class="table table-hover" *ngIf=" authorizations.length != 0; else empty_body">
         <thead>
             <tr>
                 <th scope="col">WR ID</th>
@@ -11,25 +12,30 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let number of numbers; let i = index">
+            <tr *ngFor="let auth of authorizations">
                 <td>
-                    WR-{{number}}
+                    {{ auth.request }}
                 </td>
                 <td>
-                    Customer
+                    {{ auth.customer }}
                 </td>
                 <td>
-                    Originator 
+                    {{ auth.originator }}
                 </td>
                 <td>
-                    23/02/2020
+                    {{ datePipe.transform(auth.creationDate, 'yyyy-MM-dd') }}
                 </td>
                 <td>
-                    <button class="btn btn-success" (click)="goToWaiver(i)">
+                    <button class="btn btn-success" (click)="goToWaiver(auth.request)">
                         Review
                     </button>
                 </td>
             </tr>
         </tbody>
     </table>
+    <ng-template #empty_body>
+        <error-message type="empty" title="Nothing here..." 
+        description="Congrats! You don't have any pending waiver request"> 
+        </error-message>
+    </ng-template>
 </div>
