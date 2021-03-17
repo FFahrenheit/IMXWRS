@@ -29,7 +29,10 @@ export class SignActivityComponent implements OnInit {
     this.signService.signActivity(this.waiverId)
         .subscribe(resp=>{
           if(resp){
-            this.router.navigate(['waivers','view',this.waiverId]);
+            this.alert.success('Activity signed');
+            setTimeout(() => {
+              this.router.navigate(['waivers','view',this.waiverId]);             
+            }, 3010);
           }else{
             this.alert.error('Can not sign activity. Reload and try again', { autoClose: false });
           }
@@ -40,7 +43,6 @@ export class SignActivityComponent implements OnInit {
   }
 
   updateExistance($event){
-    console.log('event : ' + $event);
     this.exists = $event;
   }
 }

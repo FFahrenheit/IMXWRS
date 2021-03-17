@@ -11,7 +11,6 @@ import { AlertService } from 'src/app/shared/alert';
 })
 export class PendingTasksComponent implements OnInit {
 
-  public numbers = Array(5).fill(0).map((x,i)=>i);
   public activities = []; 
 
   constructor(private router : Router,
@@ -37,6 +36,7 @@ export class PendingTasksComponent implements OnInit {
   confirm(id){
     this.activitiesService.signActivity(id)
         .subscribe(resp=>{
+          window.scroll(0,0);
           if(resp){
             this.ngOnInit();
             this.alert.success('Task done');
@@ -44,6 +44,7 @@ export class PendingTasksComponent implements OnInit {
             this.alert.error("Can not mark task as done. Refresh and try again");
           }
         },error=>{
+          window.scroll(0,0);
           this.alert.error("Can not mark task as done. Try later");
         });
   }

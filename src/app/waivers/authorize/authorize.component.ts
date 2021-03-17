@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AuthorizeComponent implements OnInit {
 
   public waiverId;
+  public exists = false;
 
   constructor(private route : ActivatedRoute,
               private router : Router ) { 
@@ -20,10 +21,13 @@ export class AuthorizeComponent implements OnInit {
     })
   }
 
+  updateExistance($event){
+    this.exists = $event;  
+  }
+
   confirm(){
-    console.log(this.waiverId);
     setTimeout(()=>{
       this.router.navigate(['waivers','view',this.waiverId]);
-    },1000);
+    },3010);
   }
 }

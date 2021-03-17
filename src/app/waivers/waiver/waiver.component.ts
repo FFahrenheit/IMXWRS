@@ -10,6 +10,7 @@ import { GetWaiverService } from 'src/app/services/get-waiver.service';
 export class WaiverComponent implements OnInit {
 
   @Input() public id = '';
+  @Input() public title = '';
   @Output() public hasError = new EventEmitter<boolean>();
 
   public numbers = Array(3).fill(0).map((x,i)=>i);
