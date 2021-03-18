@@ -65,10 +65,10 @@ export class AuthenticationService {
     this.user = null;
   }
 
-  refresh(){
+  refresh(state){
 
     if(!this.isLogged()){
-      this.router.navigate(['authentication','login']);
+      this.router.navigate(['authentication','login'],{ queryParams: { returnUrl: state.url }});
     }
 
     return this.http.post(`${ base_url }/auth/refresh`,{})
@@ -89,12 +89,12 @@ export class AuthenticationService {
  
                     return true;
                   }else{
-                    this.router.navigate(['authentication','login']);
+                    this.router.navigate(['authentication','login'],{ queryParams: { returnUrl: state.url }});
                     return false;
                   }}),
                  catchError(error=>{
-                  this.router.navigate(['authentication','login']);
-                   return of(false);
+                  this.router.navigate(['authentication','login'],{ queryParams: { returnUrl: state.url }});
+                  return of(false);
                  })
                );
 

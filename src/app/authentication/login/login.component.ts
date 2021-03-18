@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoginForm } from 'src/app/interfaces/login.interface';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { AlertService } from 'src/app/shared/alert';
@@ -14,17 +14,20 @@ export class LoginComponent implements OnInit {
 
   public form: FormGroup = Object.create(null);
   public submitted = false;
+  public returnUrl = '/';
 
   constructor(private router : Router,
               private fb : FormBuilder,
               private login : AuthenticationService,
-              private alert : AlertService) {}
+              private alert : AlertService,
+              private route : ActivatedRoute) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
       username: ["", Validators.compose([Validators.required])],
       password: ["", Validators.compose([Validators.required])]
     });
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   onSubmit(){
@@ -37,7 +40,7 @@ export class LoginComponent implements OnInit {
   
       this.login.login(loginForm).subscribe((resp)=>{
         if(resp){
-          this.router.navigate(['waivers','all']);
+          this.router.navigateByUrl(this.returnUrl);
         }else{
           this.alert.error('Incorrect credentials', { autoClose : true } );
         }
