@@ -1,5 +1,6 @@
 import { DatePipe, Location } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { GetWaiverService } from 'src/app/services/get-waiver.service';
 
 @Component({
@@ -13,13 +14,13 @@ export class WaiverComponent implements OnInit {
   @Input() public title = '';
   @Output() public hasError = new EventEmitter<boolean>();
 
-  public numbers = Array(3).fill(0).map((x,i)=>i);
   public wr;
   public exists = true;
 
   constructor(public datePipe : DatePipe,
               public waiverService : GetWaiverService,
-              public location : Location) { }
+              public location : Location,
+              public router : Router) { }
 
   ngOnInit(): void {
     this.waiverService.loadWaiver(this.id)
@@ -27,6 +28,14 @@ export class WaiverComponent implements OnInit {
           this.exists = resp;
           if(this.exists){
             this.wr = this.waiverService.getWaiver();
+
+            if(this.wr != this.wr?.number){ //Changing url to keep things updated
+              let route = this.router.url;
+              route = route.replace(this.id,this.wr?.number);
+              this.id = this.wr?.number;
+              this.router.navigate(route.split('/'));
+            }
+
           }
           this.hasError.emit(this.exists);
         });
