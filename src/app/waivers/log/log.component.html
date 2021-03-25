@@ -1,18 +1,19 @@
 <div class="table-responsive container text-center pt-2">
     <h4 class="text-left my-3">Waivers log</h4>
-    <table class="table table-md  table-hover">
+    <table class="table table-md  table-hover" *ngIf="log?.length != 0;else empty_body">
         <thead>
             <tr class="header">
-                <th scope="col" [appSort]="tests" data-order="desc" data-name="id">
+                <th scope="col" [appSort]="log" data-order="desc" data-name="number">
                     <i class="fas fa-filter float-left"></i>WR ID 
                 </th>
                 <th scope="col">
                     Customer
                 </th>
-                <th scope="col">
+                <th scope="col" [appSort]="log" data-order="desc" data-name="creationDate">
                     Creation date
+                    <i class="fas fa-filter float-left"></i>
                 </th>
-                <th scope="col"  [appSort]="tests" data-order="asc" data-name="name">
+                <th scope="col"  [appSort]="log" data-order="asc" data-name="name">
                     Originator
                     <i class="fas fa-filter float-left"></i>
                 </th>
@@ -25,21 +26,21 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let number of tests; let i = index" class="pointer" (click)="goToWaiver(i)">
+            <tr *ngFor="let waiver of log; let i = index" class="pointer" (click)="goToWaiver(log[i].number)">
                 <td>
-                    WR-{{number.id}}
+                    {{ waiver.number }}
                 </td>
                 <td>
-                    Customer
+                    {{ waiver.customer }}
                 </td>
                 <td>
-                    23/02/2020
+                    {{ datePipe.transform( waiver.creationDate ,'yyyy-MM-dd') }}
                 </td>
                 <td>
-                    {{ number.name }}
+                    {{ waiver.name }}
                 </td>
                 <td>
-                    Pending 
+                    {{ waiver.status | titlecase }}
                 </td>
                 <!-- <td>
                     <button class="btn btn-primary" (click)="goToWaiver(i)">
@@ -49,4 +50,9 @@
             </tr>
         </tbody>
     </table>
+    <ng-template #empty_body>
+        <error-message type="empty" title="Nothing here..." 
+        description="There is no waiver requests with the specified filters">
+        </error-message>
+    </ng-template>
 </div>

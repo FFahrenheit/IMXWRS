@@ -11,7 +11,7 @@ import { AlertService } from 'src/app/shared/alert';
 })
 export class ApprovedWaiversComponent implements OnInit {
 
-  public authorizations = [];
+  public authorizations;
 
   constructor(private router : Router,
               private alert : AlertService,

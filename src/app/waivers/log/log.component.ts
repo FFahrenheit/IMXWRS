@@ -1,5 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { WaiversService } from 'src/app/services/waivers.service';
+import { AlertService } from 'src/app/shared/alert';
 
 @Component({
   selector: 'app-log',
@@ -8,32 +11,27 @@ import { Router } from '@angular/router';
 })
 export class LogComponent implements OnInit {
 
-  public tests = [
-    {
-      id: 1,
-      name: 'Ivan'
-    },
-    {
-      id: 2,
-      name: 'Diana'
-    },
-    {
-      id: 3,
-      name: 'Katia'
-    },
-    {
-      id: 4,
-      name: 'Chop'
-    },
-    {
-      id: 5,
-      name: 'Mex'
-    }
-  ]
+  public log; 
 
-  constructor(private router : Router) { }
+  constructor(private router : Router,
+              private waiverService : WaiversService,
+              private alert :  AlertService,
+              public datePipe : DatePipe) { }
 
   ngOnInit(): void {
+    this.waiverService.getWaiverLog()
+        .subscribe(
+          resp=>{
+            if(resp){
+              this.log = this.waiverService.getLog();
+              console.log(this.log);
+            }else{
+              this.alert.error("Couldn't load waivers, try again",{ autoClose : false });
+            }
+          },error=>{
+            this.alert.error("Couldn't load waivers",{ autoClose : false });
+          }
+        );
   }
 
   goToWaiver(id){

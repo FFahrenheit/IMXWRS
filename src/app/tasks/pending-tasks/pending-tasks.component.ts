@@ -11,7 +11,7 @@ import { AlertService } from 'src/app/shared/alert';
 })
 export class PendingTasksComponent implements OnInit {
 
-  public activities = []; 
+  public activities; 
 
   constructor(private router : Router,
               private activitiesService : AcitiviesService,

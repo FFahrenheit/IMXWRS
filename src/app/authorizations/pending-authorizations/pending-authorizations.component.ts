@@ -11,8 +11,7 @@ import { AlertService } from 'src/app/shared/alert';
 })
 export class PendingAuthorizationsComponent implements OnInit {
 
-  public numbers = Array(5).fill(0).map((x,i)=>i);
-  public authorizations = [];
+  public authorizations;
 
   constructor(private router : Router,
               private authorizationService : AuthorizationsService,

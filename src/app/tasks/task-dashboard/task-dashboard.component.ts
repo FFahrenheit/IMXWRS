@@ -10,7 +10,7 @@ import { AcitiviesService } from 'src/app/services/acitivies.service';
 })
 export class TaskDashboardComponent implements OnInit {
   
-  public activities = [];
+  public activities;
 
   constructor(public router : Router,
               private activityService : AcitiviesService,
