@@ -12,8 +12,26 @@ const base_url = environment.base_url;
 export class WaiversService {
 
   private waiversLog = [];
+  private myWaivers = [];
 
   constructor(private http : HttpClient) { }
+
+  getMyWaivers(){
+    return this.http.get(`${ base_url }/waivers`)
+               .pipe(
+                 map((resp:any)=>{
+                   if(resp.ok){
+                     this.myWaivers = resp.waivers;
+                     return true;
+                   }
+                   return false;
+                 }),
+                 catchError(error=>{
+                   console.log(error);
+                   return of(false);
+                 })
+               );
+  }
 
   getWaiverLog(){
     return this.http.get(`${ base_url }/waivers/all`)
@@ -34,5 +52,9 @@ export class WaiversService {
 
   getLog(){
     return this.waiversLog;
+  }
+
+  getMyLog(){
+    return this.myWaivers;
   }
 }

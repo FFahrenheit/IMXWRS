@@ -1,5 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { WaiversService } from 'src/app/services/waivers.service';
+import { AlertService } from 'src/app/shared/alert';
 
 @Component({
   selector: 'app-my-waivers',
@@ -8,11 +11,24 @@ import { Router } from '@angular/router';
 })
 export class MyWaiversComponent implements OnInit {
 
-  public numbers = Array(5).fill(0).map((x,i)=>i);
+  public waivers;
 
-  constructor(private router : Router) { }
+  constructor(private router : Router,
+              private waiverService : WaiversService,
+              public datePipe : DatePipe,
+              private alert : AlertService) { }
 
   ngOnInit(): void {
+    this.waiverService.getMyWaivers()
+        .subscribe(resp=>{
+          if(resp){
+            this.waivers = this.waiverService.getMyLog();
+          }else{
+            this.alert.error("Couldn't get waivers", { autoClose : false });
+          }
+        },error=>{
+          this.alert.error("Couldn't load waivers", { autoClose: false });
+        });
   }
 
   goToWaiver(id){
