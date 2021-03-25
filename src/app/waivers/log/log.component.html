@@ -1,11 +1,21 @@
 <div class="table-responsive container text-center pt-2">
     <alert></alert>
-    <h4 class="text-left my-3">Waivers log</h4>
+    <div class="row my-3">
+        <div class="col-6">
+            <h4 class="text-left">Waivers log</h4>
+        </div>
+        <div class="col-6">
+            <div class="text-right">
+                <filter *ngIf="log != null"> </filter>
+            </div>
+        </div>
+    </div>
+
     <table class="table table-md  table-hover" *ngIf="log?.length != 0;else empty_body">
         <thead>
             <tr class="header">
                 <th scope="col" [appSort]="log" data-order="desc" data-name="number">
-                    <i class="fas fa-filter float-left"></i>WR ID 
+                    <i class="fas fa-filter float-left"></i>WR ID
                 </th>
                 <th scope="col">
                     Customer
@@ -14,7 +24,7 @@
                     Creation date
                     <i class="fas fa-filter float-left"></i>
                 </th>
-                <th scope="col"  [appSort]="log" data-order="asc" data-name="name">
+                <th scope="col" [appSort]="log" data-order="asc" data-name="name">
                     Originator
                     <i class="fas fa-filter float-left"></i>
                 </th>
@@ -52,8 +62,8 @@
         </tbody>
     </table>
     <ng-template #empty_body>
-        <error-message type="empty" title="Nothing here..." 
-        description="There is no waiver requests with the specified filters">
+        <error-message type="empty" title="Nothing here..."
+            description="There is no waiver requests with the specified filters">
         </error-message>
     </ng-template>
 </div>

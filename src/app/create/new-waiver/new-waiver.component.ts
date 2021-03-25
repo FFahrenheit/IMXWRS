@@ -9,7 +9,7 @@ import { AlertService } from 'src/app/shared/alert';
 @Component({
   selector: 'app-new-waiver',
   templateUrl: './new-waiver.component.html',
-  styleUrls: ['./new-waiver.component.scss']
+  styleUrls: ['./new-waiver.component.scss'],
 })
 export class NewWaiverComponent implements OnInit, OnDestroy {
   
@@ -47,7 +47,7 @@ export class NewWaiverComponent implements OnInit, OnDestroy {
       specification: [this.waiverService.wr.details?.specification || ''],
       startDate : [this.waiverService.wr.details?.startDate || defaultDate],
       endDate : [this.waiverService.wr.details?.endDate || '']
-    })
+    });
 
     this.waiverDetails.get('type').valueChanges.subscribe(t =>{
       this.updateExtAuth(t);

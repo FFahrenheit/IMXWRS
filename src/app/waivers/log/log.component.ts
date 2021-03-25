@@ -24,7 +24,6 @@ export class LogComponent implements OnInit {
           resp=>{
             if(resp){
               this.log = this.waiverService.getLog();
-              console.log(this.log);
             }else{
               this.alert.error("Couldn't load waivers, try again",{ autoClose : false });
             }
