@@ -9,7 +9,7 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { Error404Component } from './errors/error404/error404.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './layouts/dashboard/dashboard.component';
-import { DatePipe } from '@angular/common';
+import { DatePipe, TitleCasePipe } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Error403Component } from './errors/error403/error403.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -42,7 +42,8 @@ import { AlertModule } from './shared/alert';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
-    }
+    },
+    TitleCasePipe
   ],
   bootstrap: [AppComponent]
 })

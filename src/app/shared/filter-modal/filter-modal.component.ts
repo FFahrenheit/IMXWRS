@@ -1,4 +1,4 @@
-import { DatePipe } from '@angular/common';
+import { DatePipe, TitleCasePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -18,12 +18,14 @@ export class FilterModalComponent implements OnInit {
   @Output() public cancel = new EventEmitter<void>();
   @Output() public reset = new EventEmitter<void>();
 
-  public filterForm;
+  public filterForm : FormGroup;
   public today = this.datePipe.transform(new Date(),"yyyy-MM-dd");
+  public filters : string[];
 
   constructor(private modalService : NgbModal,
               private fb : FormBuilder,
-              public datePipe : DatePipe) { }
+              public datePipe : DatePipe,
+              public titleCase : TitleCasePipe) { }
 
   ngOnInit(): void {
     this.filterForm = this.fb.group({
@@ -31,8 +33,8 @@ export class FilterModalComponent implements OnInit {
       customer : [''],
       originator : [''],
       area : [''],
-      startDate : [''],
-      endDate : [''],
+      from : [''],
+      to : [''],
       type : [''],
       typeNumber : [''],
       status: ['']
@@ -77,11 +79,16 @@ export class FilterModalComponent implements OnInit {
   }
 
   getValue(){
-    let filter = {}
+    let filter = {};
+    this.filters = [];
     Object.keys(this.filterForm.controls).forEach(key => {
       let control = this.filterForm.controls[key];
       if(control.value != null && control.value != ''){
         filter[key] = control.value;
+        let fil = this.titleCase.transform(
+          key.split(/(?=[A-Z])/).join(' ').toLocaleLowerCase()
+          ) + ' : ' + this.titleCase.transform(filter[key]);
+        this.filters.push(fil);
       }
     });
     return filter;
