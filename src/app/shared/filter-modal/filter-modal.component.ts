@@ -14,6 +14,7 @@ export class FilterModalComponent implements OnInit {
   @Input() public title = 'Filter waivers';
   @Input() public message = 'Select the filters you want to apply';
   @Input() public trigger = 'Apply filters';
+  @Input() public blocked = [];
 
   @Output() public apply = new EventEmitter<any>();
   @Output() public cancel = new EventEmitter<void>();
@@ -87,13 +88,17 @@ export class FilterModalComponent implements OnInit {
     this.filters = [];
     Object.keys(this.filterForm.controls).forEach(key => {
       let control = this.filterForm.controls[key];
+
       if(control.value != null && control.value != ''){
         filter[key] = control.value;
+        
         let fil = this.titleCase.transform(
           key.split(/(?=[A-Z])/).join(' ').toLocaleLowerCase()
           ) + ' : ' + this.titleCase.transform(filter[key]);
-        this.filters.push(fil);
+        
+          this.filters.push(fil);
       }
+
     });
     return filter;
   }

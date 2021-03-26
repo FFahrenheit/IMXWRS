@@ -17,20 +17,25 @@ export class MyWaiversComponent implements OnInit {
               private alert : AlertService) { }
 
   ngOnInit(): void {
-    this.waiverService.getMyWaivers()
-        .subscribe(resp=>{
-          if(resp){
-            this.waivers = this.waiverService.getMyLog();
-          }else{
-            this.alert.error("Couldn't get waivers", { autoClose : false });
-          }
-        },error=>{
-          this.alert.error("Couldn't load waivers", { autoClose: false });
-        });
+    this.filter();
   }
 
   goToWaiver(id){
     this.router.navigate(['waivers','view',id]);
   }
 
+  filter(data = ''){
+    this.waiverService.getWaiverLog(data)
+    .subscribe(
+      resp=>{
+        if(resp){
+          this.waivers = this.waiverService.getLog();
+        }else{
+          this.alert.error("Couldn't load waivers, try again",{ autoClose : false });
+        }
+      },error=>{
+        this.alert.error("Couldn't load waivers",{ autoClose : false });
+      }
+    );
+  }
 }
