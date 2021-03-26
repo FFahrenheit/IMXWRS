@@ -11,6 +11,7 @@ const base_url = environment.base_url;
 })
 export class WaiversService {
 
+  private savedFilters = '';
   private waiversLog = [];
   private myWaivers = [];
 
@@ -33,8 +34,25 @@ export class WaiversService {
                );
   }
 
-  getWaiverLog(){
-    return this.http.get(`${ base_url }/waivers/all`)
+  private getFilters(body){
+    let filters = [];
+    Object.keys(body).forEach(key=>{
+      let query = key + "=" + body[key];
+      filters.push(query);
+    });
+    this.savedFilters = filters.join('&');
+    return this.savedFilters;
+  }
+
+  getWaiverLog(filters){
+    console.log('Saved filters: ' + this.savedFilters);
+    let query;
+    if(filters == ''){
+      query = this.savedFilters || '';
+    }else{
+      query = this.getFilters(filters);
+    }
+    return this.http.get(`${ base_url }/waivers/all?${ query }`)
                .pipe(
                  (map((resp : any)=>{
                    if(resp.ok){

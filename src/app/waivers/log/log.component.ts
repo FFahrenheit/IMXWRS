@@ -19,26 +19,26 @@ export class LogComponent implements OnInit {
               public datePipe : DatePipe) { }
 
   ngOnInit(): void {
-    this.waiverService.getWaiverLog()
-        .subscribe(
-          resp=>{
-            if(resp){
-              this.log = this.waiverService.getLog();
-            }else{
-              this.alert.error("Couldn't load waivers, try again",{ autoClose : false });
-            }
-          },error=>{
-            this.alert.error("Couldn't load waivers",{ autoClose : false });
-          }
-        );
+    this.filter();
   }
 
   goToWaiver(id){
     this.router.navigate(['waivers','view',id]);
   }
 
-  filter(data){
-    console.log(data);
+  filter(data = ''){
+    this.waiverService.getWaiverLog(data)
+    .subscribe(
+      resp=>{
+        if(resp){
+          this.log = this.waiverService.getLog();
+        }else{
+          this.alert.error("Couldn't load waivers, try again",{ autoClose : false });
+        }
+      },error=>{
+        this.alert.error("Couldn't load waivers",{ autoClose : false });
+      }
+    );
   }
 
 }

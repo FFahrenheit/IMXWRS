@@ -1,6 +1,6 @@
-import { DatePipe, TitleCasePipe } from '@angular/common';
+import { TitleCasePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -19,12 +19,10 @@ export class FilterModalComponent implements OnInit {
   @Output() public reset = new EventEmitter<void>();
 
   public filterForm : FormGroup;
-  public today = this.datePipe.transform(new Date(),"yyyy-MM-dd");
   public filters : string[];
 
   constructor(private modalService : NgbModal,
               private fb : FormBuilder,
-              public datePipe : DatePipe,
               public titleCase : TitleCasePipe) { }
 
   ngOnInit(): void {
