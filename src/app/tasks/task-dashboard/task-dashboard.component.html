@@ -22,7 +22,7 @@
                     {{ act.description }}
                 </td>
                 <td>
-                    {{ datePipe.transform(act.date, 'yyyy-MM-dd') }}
+                    {{ act.date| date:'mediumDate' }}
                 </td>
                 <td>
                     <button class="btn btn-success" (click)="sign(act.request)">

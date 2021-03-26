@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AcitiviesService } from 'src/app/services/acitivies.service';
@@ -13,8 +12,7 @@ export class TaskDashboardComponent implements OnInit {
   public activities;
 
   constructor(public router : Router,
-              private activityService : AcitiviesService,
-              public datePipe : DatePipe) { }
+              private activityService : AcitiviesService) { }
 
   ngOnInit(): void {
     this.activityService.getMyActivities()

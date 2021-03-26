@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { WaiversService } from 'src/app/services/waivers.service';
@@ -15,8 +14,7 @@ export class LogComponent implements OnInit {
 
   constructor(private router : Router,
               private waiverService : WaiversService,
-              private alert :  AlertService,
-              public datePipe : DatePipe) { }
+              private alert :  AlertService) { }
 
   ngOnInit(): void {
     this.filter();

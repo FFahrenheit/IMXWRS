@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AcitiviesService } from 'src/app/services/acitivies.service';
@@ -15,8 +14,7 @@ export class PendingTasksComponent implements OnInit {
 
   constructor(private router : Router,
               private activitiesService : AcitiviesService,
-              private alert : AlertService,
-              private datePipe : DatePipe) { }
+              private alert : AlertService) { }
 
   ngOnInit(): void {
     this.activitiesService.getMyTasks()

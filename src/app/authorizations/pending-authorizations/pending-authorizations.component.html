@@ -23,7 +23,7 @@
                     {{ auth.originator }}
                 </td>
                 <td>
-                    {{ datePipe.transform(auth.creationDate, 'yyyy-MM-dd') }}
+                    {{ auth.creationDate|date:'medium':'UTC' }}
                 </td>
                 <td>
                     <button class="btn btn-success" (click)="goToWaiver(auth.request)">

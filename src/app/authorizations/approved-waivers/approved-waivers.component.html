@@ -20,7 +20,7 @@
                     {{ auth.customer }}
                 </td>
                 <td>
-                    {{ datePipe.transform(auth.creationDate,'yyyy-MM-dd') }}
+                    {{ auth.creationDate| date:'medium':'UTC' }}
                 </td>
                 <td>
                     {{ auth.status | titlecase }}

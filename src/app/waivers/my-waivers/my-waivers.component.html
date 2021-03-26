@@ -20,7 +20,7 @@
                     {{ waiver.customer }}
                 </td>
                 <td>
-                    {{ datePipe.transform(waiver.creationDate , 'yyyy-MM-dd') }}
+                    {{ waiver.creationDate | date:'medium':'UTC' }}
                 </td>
                 <td>
                     {{ waiver.status | titlecase }}

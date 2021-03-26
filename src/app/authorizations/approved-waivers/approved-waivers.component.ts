@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthorizationsService } from 'src/app/services/authorizations.service';
@@ -15,8 +14,7 @@ export class ApprovedWaiversComponent implements OnInit {
 
   constructor(private router : Router,
               private alert : AlertService,
-              private authorizationsService : AuthorizationsService,
-              private datePipe : DatePipe) { }
+              private authorizationsService : AuthorizationsService) { }
 
   ngOnInit(): void {
     this.authorizationsService.loadRecent()

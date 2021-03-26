@@ -24,7 +24,7 @@
                     {{ activity.description }}
                 </td>
                 <td>
-                    {{ datePipe.transform(activity.date,'yyyy-MM-dd') }}
+                    {{ activity.date | date:'mediumDate' }}
                 </td>
                 <td>
                     <button class="btn btn-primary" (click)="goToWaiver(activity.request)">
