@@ -2,6 +2,7 @@ import { TitleCasePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { WaiversService } from 'src/app/services/waivers.service';
 
 @Component({
   selector: 'filter',
@@ -20,23 +21,27 @@ export class FilterModalComponent implements OnInit {
 
   public filterForm : FormGroup;
   public filters : string[];
+  public touched = false;
 
   constructor(private modalService : NgbModal,
               private fb : FormBuilder,
-              public titleCase : TitleCasePipe) { }
+              public titleCase : TitleCasePipe,
+              public waiverService : WaiversService) { }
 
   ngOnInit(): void {
+    let saved = this.waiverService.savedObject;
     this.filterForm = this.fb.group({
-      number : [''],
-      customer : [''],
-      originator : [''],
-      area : [''],
-      from : [''],
-      to : [''],
-      type : [''],
-      typeNumber : [''],
-      status: ['']
+      number : [saved?.number || ''],
+      customer : [saved?.customer || ''],
+      originator : [saved?.originator || ''],
+      area : [saved?.area || ''],
+      from : [saved?.from ||''],
+      to : [saved?.to || ''],
+      type : [saved?.type || ''],
+      typeNumber : [saved?.typeNumber||''],
+      status: [saved?.status || '']
     });
+    this.getValue();
   }
 
   get(control){
@@ -49,6 +54,7 @@ export class FilterModalComponent implements OnInit {
         case 'YES':
           let filter = this.getValue();
           this.apply.emit(filter);
+          this.touched = true;
           break;
         case 'NO':
           this.resetForm();

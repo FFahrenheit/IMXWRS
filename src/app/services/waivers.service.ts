@@ -12,6 +12,7 @@ const base_url = environment.base_url;
 export class WaiversService {
 
   private savedFilters = '';
+  public savedObject : any;
   private waiversLog = [];
   private myWaivers = [];
 
@@ -35,6 +36,7 @@ export class WaiversService {
   }
 
   private getFilters(body){
+    this.savedObject = body;
     let filters = [];
     Object.keys(body).forEach(key=>{
       let query = key + "=" + body[key];

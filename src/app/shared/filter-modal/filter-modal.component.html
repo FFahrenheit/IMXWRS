@@ -9,7 +9,7 @@
         </span>
     </div>
     <ng-template #empty_body>
-        <br><span>No filters applied</span>
+        <br><span *ngIf="touched">No filters applied</span>
     </ng-template>
     
 </div>
