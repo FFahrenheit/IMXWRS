@@ -15,7 +15,7 @@
         </table>
     </div>
 
-    <table class="table table-md  table-hover" *ngIf="log?.length != 0;else empty_body">
+    <table class="table table-md table-hover" *ngIf="log?.length != 0;else empty_body">
         <thead>
             <tr class="header">
                 <th scope="col" [appSort]="log" data-order="desc" data-name="number">

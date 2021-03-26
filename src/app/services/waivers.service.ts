@@ -10,7 +10,7 @@ const base_url = environment.base_url;
   providedIn: 'root'
 })
 export class WaiversService {
-
+  
   private savedFilters = '';
   public savedObject : any;
   private waiversLog = [];
