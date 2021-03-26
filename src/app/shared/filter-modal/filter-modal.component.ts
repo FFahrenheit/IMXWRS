@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -13,14 +14,16 @@ export class FilterModalComponent implements OnInit {
   @Input() public message = 'Select the filters you want to apply';
   @Input() public trigger = 'Apply filters';
 
-  @Output() public apply = new EventEmitter<void>();
+  @Output() public apply = new EventEmitter<any>();
   @Output() public cancel = new EventEmitter<void>();
   @Output() public reset = new EventEmitter<void>();
 
   public filterForm;
+  public today = this.datePipe.transform(new Date(),"yyyy-MM-dd");
 
   constructor(private modalService : NgbModal,
-              private fb : FormBuilder) { }
+              private fb : FormBuilder,
+              public datePipe : DatePipe) { }
 
   ngOnInit(): void {
     this.filterForm = this.fb.group({
@@ -42,13 +45,13 @@ export class FilterModalComponent implements OnInit {
 
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      console.log(this.get('number'));
-      console.log(this.filterForm);
       switch(result){
         case 'YES':
-          this.apply.emit();
+          let filter = this.getValue();
+          this.apply.emit(filter);
           break;
         case 'NO':
+          this.resetForm();
           this.reset.emit();
           break;
         default:
@@ -62,10 +65,26 @@ export class FilterModalComponent implements OnInit {
 
   getClass(control){
     let ctrl = this.filterForm.controls[control];
-    if(!ctrl.touched ){
+    if(!ctrl.touched || ctrl.value == ''){
       return '';
     }
     return 'is-valid';
+  }
+
+  resetForm(){
+    this.reset.emit();
+    this.filterForm.reset();
+  }
+
+  getValue(){
+    let filter = {}
+    Object.keys(this.filterForm.controls).forEach(key => {
+      let control = this.filterForm.controls[key];
+      if(control.value != null && control.value != ''){
+        filter[key] = control.value;
+      }
+    });
+    return filter;
   }
 
 }

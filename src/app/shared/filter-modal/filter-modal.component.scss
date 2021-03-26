@@ -59,3 +59,16 @@ label, legend{
   cursor: default;
   border-color: rgb(133, 133, 133);
 }
+
+.popup{
+  size: 14px;
+}
+
+.popup input,select{
+  height: 90%;
+}
+
+.pt-0{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

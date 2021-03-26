@@ -5,7 +5,7 @@
 </div>
 
 <ng-template #confirmModal let-modal>
-    
+
     <div class="modal-header">
         <h4 class="modal-title m-title" id="modal-basic-title"> {{ title }} </h4>
         <button type="button" class="close" style="outline:none;" aria-label="Close" (click)="modal.dismiss('CANCEL')">
@@ -14,14 +14,14 @@
     </div>
 
     <div class="modal-body m-content mx-3">
-
-        {{ message }}
         <form [formGroup]="filterForm">
-
-            <div class="row d-flex justify-content-center">
+            <h6> 
+                {{ message }}
+            </h6>
+            <div class="row d-flex justify-content-center popup">
 
                 <div class="col-md-12">
-                    <div class="form-group row pt-2">
+                    <div class="form-group row pt-0">
                         <label for="" class="col-md-4 col-form-label has-error has-feedback">Number</label>
                         <div class="col-md-8">
                             <input formControlName="number" type="text" class="form-control"
@@ -29,15 +29,15 @@
                         </div>
                     </div>
 
-                    <div class="form-group row pt-2">
+                    <div class="form-group row pt-0">
                         <label for="" class="col-md-4 col-form-label has-error has-feedback">Originator</label>
                         <div class="col-md-8">
                             <input formControlName="originator" type="text" class="form-control"
-                                [class]="getClass('originator')" placeholder="Username of originator">
+                                [class]="getClass('originator')" placeholder="Name of originator">
                         </div>
                     </div>
 
-                    <div class="form-group row pt-2 has-error has-feedback">
+                    <div class="form-group row pt-0 has-error has-feedback">
                         <label for="" class="col-md-4 col-form-label">Area</label>
                         <div class="col-md-8">
                             <input formControlName="area" type="text" class="form-control" [class]="getClass('area')"
@@ -45,7 +45,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row pt-2">
+                    <div class="form-group row pt-0">
                         <label for="" class="col-md-4 col-form-label">Customer</label>
                         <div class="col-md-8">
                             <input type="text" formControlName="customer" class="form-control" placeholder="Customer"
@@ -53,11 +53,50 @@
                         </div>
                     </div>
 
-                    <div class="form-group row pt-2">
+                    <div class="form-group row pt-0">
+                        <label for="" class="col-md-1 col-form-label">From</label>
+                        <div class="col-md-5">
+                            <input [min]="today" [class]="getClass('startDate')" formControlName="startDate"
+                                class="form-control" type="date">
+                        </div>
+                        <label for="" class="col-md-1 col-form-label">To</label>
+                        <div class="col-md-5">
+                            <input [min]="filterForm.controls['startDate'].value" formControlName="endDate"
+                                [class]="getClass('endDate')" class="form-control" type="date">
+                        </div>
+                    </div>
+
+                    <div class="form-group row pt-0">
+                        <label for="" class="col-md-4 col-form-label">Type</label>
+                        <div class="col-md-8">
+                            <select [class]="getClass('type')" formControlName="type"
+                                class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+                                <option value=""></option>
+                                <option value="external">External</option>
+                                <option value="internal">Internal</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row pt-0">
+                        <label for="" class="col-md-4 col-form-label">Status</label>
+                        <div class="col-md-8">
+                            <select [class]="getClass('status')" formControlName="status"
+                                class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+                                <option value=""></option>
+                                <option value="open">Open</option>
+                                <option value="closed">Closed</option>
+                                <option value="pending">In authorization process</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row pt-0">
                         <label for="" class="col-md-4 col-form-label">Type of deviation</label>
                         <div class="col-md-7">
                             <select [class]="getClass('typeNumber')" formControlName="typeNumber"
                                 class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+                                <option value=""></option>
                                 <option value="1">Type 1</option>
                                 <option value="2">Type 2</option>
                                 <option value="3">Type 3</option>
@@ -83,10 +122,10 @@
             </div>
         </form>
     </div>
-    
+
     <div class="modal-footer">
         <button type="button" class="btn btn-success px-3" (click)="modal.close('YES')">Apply</button>
-        <button type="button" class="btn btn-primary px-3" (click)="modal.close('NO')">Reset</button>
+        <button type="button" class="btn btn-primary px-3" (click)="resetForm()">Reset</button>
         <button type="button" class="btn btn-secondary px-3" (click)="modal.close('')">Cancel</button>
     </div>
 </ng-template>

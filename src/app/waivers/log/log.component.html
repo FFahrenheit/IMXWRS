@@ -6,7 +6,7 @@
         </div>
         <div class="col-6">
             <div class="text-right">
-                <filter *ngIf="log != null"> </filter>
+                <filter *ngIf="log != null" (apply)="filter($event)"> </filter>
             </div>
         </div>
     </div>

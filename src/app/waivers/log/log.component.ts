@@ -37,4 +37,8 @@ export class LogComponent implements OnInit {
     this.router.navigate(['waivers','view',id]);
   }
 
+  filter(data){
+    console.log(data);
+  }
+
 }
