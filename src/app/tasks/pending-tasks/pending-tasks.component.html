@@ -5,6 +5,7 @@
         <thead>
             <tr>
                 <th scope="col">WR ID</th>
+                <th scope="col">WR status</th>
                 <th scope="col">Customer</th>
                 <th scope="col">Task description</th>
                 <th scope="col">Commitment date</th>
@@ -18,6 +19,9 @@
                     <i title="Upcoming activity" class="fas fa-exclamation-triangle upcoming" *ngIf=" dateDiff(activity.date)>=1 && dateDiff(activity.date) <= 3 "></i>
                     <i title="This activity is late" class="fas fa-exclamation-circle late" *ngIf="dateDiff(activity.date)<=0"></i>
                     {{ activity.request }}
+                </td>
+                <td>
+                    {{ activity.status | titlecase }}
                 </td>
                 <td>
                     {{ activity.customer }}
@@ -34,7 +38,8 @@
                     </button>
                 </td>
                 <td>
-                    <confirm-modal class="margin-zero" title="Confirm done activity" content="Mark activiy as done?"
+                    <confirm-modal [disabled]="activity.status == 'pending'" class="margin-zero" 
+                    [title]="(activity.status != 'open')? 'You can not do this activity until is open' :'Confirm activity done'" content="Mark activiy as done?"
                     trigger = "Done" myClass="" (accept)="confirm(activity.id)">
                     </confirm-modal>
                 </td>

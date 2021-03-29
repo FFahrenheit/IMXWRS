@@ -139,7 +139,7 @@ export class CreateWrService {
       riskWithActions : this.wr.risk.riskWithActions,
       rpnAfter : this.wr.risk.rpnAfter || 0,
       rpnBefore: this.wr.risk.rpnBefore || 0,
-      status: 'Pending',
+      status: 'pending',
     }
     let managers : Manager[] = [];
 

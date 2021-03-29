@@ -28,7 +28,7 @@ export class ConfirmComponent implements OnInit {
     let origin : Origin = {
       originator: this.loginService.getUser().username,
       date :new Date(),
-      number : 'TBD'
+      number : 'To be assigned'
     };
     this.waiverService.setOrigin(origin);
     this.wr = this.waiverService.wr;

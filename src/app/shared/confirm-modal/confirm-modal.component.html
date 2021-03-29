@@ -1,5 +1,8 @@
 <div>
-    <button class="btn btn-md btn-success" [class] = "myClass" (click)="open(confirmModal)"> {{ trigger }} </button>
+    <button class="btn btn-md btn-success" [ngClass]="{'btn-disabled':disabled}" 
+    [class] = "myClass" (click)="open(confirmModal)"> 
+    {{ trigger }} 
+</button>
 </div>
 <ng-template #confirmModal let-modal>
     <div class="modal-header">
