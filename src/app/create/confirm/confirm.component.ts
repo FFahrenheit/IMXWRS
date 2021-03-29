@@ -44,8 +44,12 @@ export class ConfirmComponent implements OnInit {
     console.log(waiver);
     this.waiverService.confirmWaiver(waiver).subscribe((resp)=>{
       if(resp){
-        this.waiverService.wr = null;
-        this.router.navigate(['waivers','view',this.wr.number]);
+        window.scroll(0,0);
+        this.alert.success('Waiver sucessfully created');
+        setTimeout(() => {
+          this.waiverService.wr = null;
+          this.router.navigate(['waivers','view',this.wr.number]);
+        }, 3500);
       }else{
         this.alert.error('Can not create WR, please try again', { autoClose: true });
       }

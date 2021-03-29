@@ -17,19 +17,19 @@ export class MyWaiversComponent implements OnInit {
               private alert : AlertService) { }
 
   ngOnInit(): void {
-    this.filter();
+    this.filter({status: ''});
   }
 
   goToWaiver(id){
     this.router.navigate(['waivers','view',id]);
   }
 
-  filter(data = ''){
-    this.waiverService.getWaiverLog(data)
+  filter(data : any = ''){
+    this.waiverService.getMyWaivers(data)
     .subscribe(
       resp=>{
         if(resp){
-          this.waivers = this.waiverService.getLog();
+          this.waivers = this.waiverService.getMyLog();
         }else{
           this.alert.error("Couldn't load waivers, try again",{ autoClose : false });
         }

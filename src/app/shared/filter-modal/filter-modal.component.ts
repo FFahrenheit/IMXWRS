@@ -30,7 +30,11 @@ export class FilterModalComponent implements OnInit {
               public waiverService : WaiversService) { }
 
   ngOnInit(): void {
-    let saved = this.waiverService.savedObject;
+    let saved;
+    console.log(this.blocked.length);
+    if(this.blocked.length == 0){
+      saved = this.waiverService.savedObject;
+    }
     this.filterForm = this.fb.group({
       number : [saved?.number || ''],
       customer : [saved?.customer || ''],

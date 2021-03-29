@@ -28,7 +28,9 @@ export class SignActivityComponent implements OnInit {
   confirm(){
     this.signService.signActivity(this.waiverId)
         .subscribe(resp=>{
+          console.log(resp);
           if(resp){
+            window.scroll(0,0);
             this.alert.success('Activity signed');
             setTimeout(() => {
               this.router.navigate(['waivers','view',this.waiverId]);             

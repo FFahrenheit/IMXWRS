@@ -18,8 +18,9 @@ export class WaiversService {
 
   constructor(private http : HttpClient) { }
 
-  getMyWaivers(){
-    return this.http.get(`${ base_url }/waivers`)
+  getMyWaivers(body){
+    let query = this.geyMyFilters(body);
+    return this.http.get(`${ base_url }/waivers?${ query }`)
                .pipe(
                  map((resp:any)=>{
                    if(resp.ok){
@@ -33,6 +34,15 @@ export class WaiversService {
                    return of(false);
                  })
                );
+  }
+
+  private geyMyFilters(body){
+    let filters = [];
+    Object.keys(body).forEach(key=>{
+      let query = key + "=" + body[key];
+      filters.push(query);
+    });
+    return filters.join('&');
   }
 
   private getFilters(body){
