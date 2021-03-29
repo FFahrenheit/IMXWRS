@@ -15,6 +15,8 @@
         <tbody>
             <tr *ngFor="let activity of activities; let i = index">
                 <td>
+                    <i title="Upcoming activity" class="fas fa-exclamation-triangle upcoming" *ngIf=" dateDiff(activity.date)>=1 && dateDiff(activity.date) <= 3 "></i>
+                    <i title="This activity is late" class="fas fa-exclamation-circle late" *ngIf="dateDiff(activity.date)<=0"></i>
                     {{ activity.request }}
                 </td>
                 <td>

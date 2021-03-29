@@ -11,6 +11,7 @@ import { AlertService } from 'src/app/shared/alert';
 export class PendingTasksComponent implements OnInit {
 
   public activities; 
+  public today : any = new Date();
 
   constructor(private router : Router,
               private activitiesService : AcitiviesService,
@@ -24,7 +25,7 @@ export class PendingTasksComponent implements OnInit {
           }
         },error=>{
           console.log(error);
-        })
+        });
   }
 
   goToWaiver(id){
@@ -45,6 +46,14 @@ export class PendingTasksComponent implements OnInit {
           window.scroll(0,0);
           this.alert.error("Can not mark task as done. Try later");
         });
+  }
+  
+  dateDiff(str){
+    let date : any = new Date(str);
+    let diff = (date.getTime() - this.today.getTime());
+    let diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+    console.log('Diff: ' + diffDays);
+    return Math.round(diffDays);
   }
 
 }

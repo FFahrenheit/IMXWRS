@@ -1,0 +1,17 @@
+
+.upcoming{
+    color: rgb(254,164,0);
+}
+
+.upcoming, .late{
+    font-weight: bolder;
+    margin-right: 10px;
+}
+
+.upcoming:hover, .late:hover{
+    cursor: pointer;
+}
+
+.late{
+    color: red;
+}

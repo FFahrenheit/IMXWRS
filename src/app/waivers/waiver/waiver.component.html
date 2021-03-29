@@ -10,7 +10,7 @@
                 <attribute name="Date of creation:" [value]="datePipe.transform(wr?.creationDate,'yyyy-MM-dd') || ''">
                 </attribute>
                 <attribute name="Type of deviation: " [value]="(wr?.type | titlecase )|| '' "></attribute>
-                <attribute name="Status: " [value]="wr?.status || '' "></attribute>
+                <attribute name="Status: " [value]="(wr?.status | titlecase )|| '' "></attribute>
                 <attribute name="Type: " [value]="wr?.typeNumber || ''"></attribute>
 
                 <div *ngIf="wr?.expiration?.quantity != null; else date_exp">

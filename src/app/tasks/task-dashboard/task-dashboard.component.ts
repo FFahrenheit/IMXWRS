@@ -10,6 +10,7 @@ import { AcitiviesService } from 'src/app/services/acitivies.service';
 export class TaskDashboardComponent implements OnInit {
   
   public activities;
+  public today : any = new Date();
 
   constructor(public router : Router,
               private activityService : AcitiviesService) { }
@@ -27,6 +28,14 @@ export class TaskDashboardComponent implements OnInit {
 
   sign(id){
     this.router.navigate(['waivers','sign',id]);
+  }
+
+  dateDiff(str){
+    let date : any = new Date(str);
+    let diff = (date.getTime() - this.today.getTime());
+    let diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+    console.log('Diff: ' + diffDays);
+    return Math.round(diffDays);
   }
 
 }
