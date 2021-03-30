@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Authorization, Origin, WR } from 'src/app/interfaces/create-wr.interface';
 import { WaiverBody } from 'src/app/interfaces/waiver-request.interface';
+import { User } from 'src/app/models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CreateWrService } from 'src/app/services/create-wr.service';
 import { AlertService } from 'src/app/shared/alert';
@@ -16,6 +17,7 @@ export class ConfirmComponent implements OnInit {
 
   public wr : WR;
   public managers : Authorization[];
+  public user : User;
 
   constructor(private router : Router,
               private waiverService : CreateWrService,
@@ -25,8 +27,9 @@ export class ConfirmComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.user = this.loginService.getUser();
     let origin : Origin = {
-      originator: this.loginService.getUser().username,
+      originator: this.user.username,
       date :new Date(),
       number : 'To be assigned'
     };

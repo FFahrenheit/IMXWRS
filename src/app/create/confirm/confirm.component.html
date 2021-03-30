@@ -6,7 +6,7 @@
             <div class="col-md-5">
                 <attribute name="Request No: " [value]="wr.origin?.number"></attribute>
                 <attribute name="Customer: " [value]="wr.details?.customer || '' "></attribute>
-                <attribute name="Originator: " [value]="wr.origin?.originator || '' "></attribute>
+                <attribute name="Originator: " [value]="user?.name || '' "></attribute>
                 <attribute name="Area: " [value]="wr.details?.area || ''"></attribute>
                 <attribute name="Date of creation:" [value]="datePipe.transform(wr.origin.date,'yyyy-MM-dd') || ''">
                 </attribute>
