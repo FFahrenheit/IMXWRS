@@ -109,6 +109,31 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div *ngIf="wr?.remarks?.length != 0">
+                    <h5 class="text-left subtitle-att">Remarks</h5>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Creator</th>
+                                    <th scrope="col">Comment</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let remark of wr?.remarks">
+                                    <td> {{ remark.name || '' }} </td>
+                                    <td> {{ remark.comment || '' }} </td>
+                                    <td> {{ remark.date | date:'medium':'UTC' || '' }}</td>
+                                    <td> {{ (remark.status | titlecase) || ''}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
                 <h5 class="text-left subtitle-att">Required authorizations</h5>
                 <div class="table-responsive">
                     <table class="table table-hover">

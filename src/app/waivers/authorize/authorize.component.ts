@@ -57,10 +57,13 @@ export class AuthorizeComponent implements OnInit {
     this.authorizationsService.addRemark(body)
         .subscribe(resp=>{
           if(resp){
-            this.alert.success("Remark sent");
             setTimeout(() => {
-              this.router.navigate(['waivers','authorize',this.waiverId]);
-            }, 3010);
+              this.alert.success("Remark sent");
+            }, 1600);
+
+            setTimeout(() => {
+              window.location.reload();//Restart the component
+            }, 3200);
           }else{
             this.alert.error("Couldn't send remark. Try again");
           }
