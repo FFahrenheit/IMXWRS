@@ -1,0 +1,21 @@
+.m-content{
+    color: rgb(48, 48, 48);
+    font-weight: 400;
+}
+
+.m-title{
+    color: rgb(63, 63, 63);
+}
+
+.btn-disabled{
+    background-color: rgb(145, 145, 145);
+    border-color: rgb(161, 161, 161);
+}
+
+.btn-disabled:hover{
+    cursor: default;
+}
+
+.disabled{
+    cursor: default;
+}

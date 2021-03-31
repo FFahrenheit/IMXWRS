@@ -6,6 +6,7 @@ import { ErrorMessageComponent } from './error-message/error-message.component';
 import { AlertComponent } from './alert/alert.component';
 import { FilterModalComponent } from './filter-modal/filter-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RemarkModalComponent } from './remark-modal/remark-modal.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ErrorMessageComponent,
     AlertComponent,
     FilterModalComponent,
+    RemarkModalComponent,
   ],
   imports: [
     CommonModule,
@@ -26,6 +28,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ErrorMessageComponent,
     AlertComponent,
     FilterModalComponent,
+    RemarkModalComponent,
   ]
 })
 export class SharedModule { }

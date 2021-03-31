@@ -4,3 +4,6 @@
 <confirm-modal *ngIf="exists" title = "Authorize waiver request"  (accept) = "confirm()"
 content = "Do you authorize this waiver request? " trigger = "Authorize" >
 </confirm-modal>
+
+<remark (send)="sendComment($event)">
+</remark>

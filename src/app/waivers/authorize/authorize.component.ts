@@ -46,4 +46,8 @@ export class AuthorizeComponent implements OnInit {
           this.alert.error("Server error. Try again later");
         });
   }
+
+  sendComment($event){
+    console.log($event);
+  }
 }
