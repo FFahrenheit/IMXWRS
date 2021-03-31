@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { AuthorizationsService } from 'src/app/services/authorizations.service';
 import { AlertService } from 'src/app/shared/alert';
 
@@ -12,11 +13,14 @@ export class AuthorizeComponent implements OnInit {
 
   public waiverId : string;
   public exists = false;
+  public wr;
+  public cannotApprove = true;
 
   constructor(private route : ActivatedRoute,
               private router : Router,
               private alert : AlertService,
-              private authorizationsService : AuthorizationsService) { 
+              private authorizationsService : AuthorizationsService,
+              private loginService : AuthenticationService) { 
   }
 
   ngOnInit() : void {
@@ -70,5 +74,16 @@ export class AuthorizeComponent implements OnInit {
         },error=>{
           this.alert.error("Couldn't remark waiver. Try again");
         });
+  }
+
+  getWaiver($event){
+    this.wr = $event;
+    this.wr.remarks?.forEach( r => {
+      if(r.manager == this.loginService.getUser().username){
+        this.cannotApprove = true; //!!!ASK BEFORE
+        return;
+      }
+    });
+    this.cannotApprove = true; // ^^^^ CHANGE
   }
 }
