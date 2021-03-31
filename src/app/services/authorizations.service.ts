@@ -16,6 +16,23 @@ export class AuthorizationsService {
 
   constructor(private http : HttpClient) { }
 
+  addRemark(body){
+    return this.http.post(`${ base_url }/authorizations/remark`,body)
+               .pipe(
+                 map((resp:any)=>{
+                   console.log(resp);
+                   if(resp['ok']){
+                     return true;
+                   }
+                   return false;
+                 }),
+                 catchError(error=>{
+                   console.log(error);
+                   return of(false);
+                 })
+               );
+  }
+
   loadRecent(){
     return this.http.get(`${ base_url }/authorizations/approved`)
     .pipe(

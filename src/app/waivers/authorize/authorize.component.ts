@@ -10,7 +10,7 @@ import { AlertService } from 'src/app/shared/alert';
 })
 export class AuthorizeComponent implements OnInit {
 
-  public waiverId;
+  public waiverId : string;
   public exists = false;
 
   constructor(private route : ActivatedRoute,
@@ -48,6 +48,24 @@ export class AuthorizeComponent implements OnInit {
   }
 
   sendComment($event){
-    console.log($event);
+    window.scroll(0,0);
+    this.alert.info('Adding remark...');
+    let body = {
+      comment: $event,
+      request: this.waiverId
+    };
+    this.authorizationsService.addRemark(body)
+        .subscribe(resp=>{
+          if(resp){
+            this.alert.success("Remark sent");
+            setTimeout(() => {
+              this.router.navigate(['waivers','authorize',this.waiverId]);
+            }, 3010);
+          }else{
+            this.alert.error("Couldn't send remark. Try again");
+          }
+        },error=>{
+          this.alert.error("Couldn't remark waiver. Try again");
+        });
   }
 }

@@ -59,7 +59,7 @@ export class RemarkModalComponent implements OnInit {
       this.modalReference.close();
       let comment : string = this.form.controls['comment'].value;
       this.send.emit(comment);
-      this.form.reset();
+      //this.form.reset();
     }
   }
 
