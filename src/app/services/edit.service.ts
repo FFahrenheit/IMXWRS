@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { GetWaiverService } from './get-waiver.service';
 
 @Injectable({
@@ -7,16 +6,14 @@ import { GetWaiverService } from './get-waiver.service';
 })
 export class EditService {
 
-  public wr : any;
+  public wr: any;
+  public number: string;
 
-  constructor(public waiverService : GetWaiverService,
-              private router : Router) { }
+  constructor(public waiverService: GetWaiverService) {
+  }
 
-  isValid(){
-    this.wr = this.waiverService.getWaiver();
-    if(this.wr != null && this.wr.status == 'on hold'){
-      return true;
-    }
-    this.router.navigate(['403']);
+  isValid(waiverId : string) {
+    this.number = waiverId;
+    return this.waiverService.loadWaiverGuard(this.number);
   }
 }

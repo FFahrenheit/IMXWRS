@@ -12,7 +12,7 @@ export class EditGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot){
-      return this.editService.isValid();
+      return this.editService.isValid(route.params.id);
   }
   
 }

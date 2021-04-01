@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { WaiverDetailsComponent } from './waiver-details/waiver-details.component';
 import { RouterModule } from '@angular/router';
 import { EditRoutes } from './edit.routing';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { EditRoutes } from './edit.routing';
   imports: [
     CommonModule,
     RouterModule.forChild(EditRoutes),
+    SharedModule,
   ]
 })
 export class EditModule { }

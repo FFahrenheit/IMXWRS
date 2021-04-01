@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-waiver-details',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WaiverDetailsComponent implements OnInit {
 
-  constructor() { }
+  public number : string;
+  constructor(private route : ActivatedRoute) { }
 
   ngOnInit(): void {
+
   }
 
 }

@@ -1,1 +1,191 @@
-<p>waiver-details works!</p>
+<div class="container text-center pt-2">
+    <alert></alert>
+    <h4 class="text-left my-3">Edit Waiver Request {{ number }} 
+    </h4>
+    <!-- <form >
+
+        <div class="row d-flex justify-content-center">
+
+            <div class="col-md-6">
+                <div class="form-group row pt-2 has-error has-feedback">
+                    <label for="" class="col-md-4 col-form-label">Area</label>
+                    <div class="col-md-8">
+                        <input formControlName="area" type="text" class="form-control" placeholder="Area" [class]="getClass('area')">
+                    </div>
+                </div>
+                <div class="form-group row pt-2">
+                    <legend class="col-form-label col-md-4 pt-0">Type</legend>
+                    <div class="col-md-8">
+                        <div class="form-check">
+                            <input formControlName="type" class="form-check-input" type="radio" name="type" id="type1"
+                                value="internal">
+                            <label class="form-check-label" for="type1">
+                                Internal
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input formControlName="type" class="form-check-input" type="radio" name="type" id="type2"
+                                value="external">
+                            <label class="form-check-label" for="type2">
+                                External
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row pt-2">
+                    <label for="" class="col-md-4 col-form-label">Customer</label>
+                    <div class="col-md-8">
+                        <input [class] = "getClass('customer')" type="text" formControlName="customer" class="form-control" placeholder="Customer">
+                    </div>
+                </div>
+
+                <div class="form-group row pt-2">
+                    <label for="" class="col-md-4 col-form-label">Type of deviation</label>
+                    <div class="col-md-7">
+                        <select [class]="getClass('typeNo')" formControlName="typeNo" class="custom-select mb-2 mr-sm-2 mb-sm-0"
+                            id="inlineFormCustomSelect">
+                            <option value="1">Type 1</option>
+                            <option value="2">Type 2</option>
+                            <option value="3">Type 3</option>
+                            <option value="4">Type 4</option>
+                        </select>
+                    </div>
+                    <div class="col-md-1 d-flex justify-content-center deviation-info">
+                        <button class="btn btn-disabled fa fa-info">
+                        </button>
+                        <span class="deviation-info-text">
+                            <font style="font-weight: bold;">Type 1:</font> Forward documentation only <br>
+                            <font style="font-weight: bold;">Type 2:</font> Any product feature <br>
+                            <font style="font-weight: bold;">Type 3:</font> 
+                            Any product deviation that affects components and / or costs, Scrap and inventory
+                            <br>
+                            <font style="font-weight: bold;">Type 4:</font> Any product recurrent deviation
+
+                        </span>
+
+
+                    </div>
+                </div>
+                <div class="form-group row pt-2" *ngIf="waiverDetails.controls['typeNo'].value == '3'">
+                    <div class="col-md-4">
+                        <label>
+                            Mannager approval
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-check">
+                            <input formControlName="needsManager" class="form-check-input" type="checkbox" id="gridCheck1">
+                            <label class="form-check-label" for="gridCheck1">
+                                This WR will costs more than $500 USD
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="waiverDetails.controls['type'].value == 'external'">
+                    <h5 class="text-left m-3">External authorization</h5>
+                    <div class="form-group row pt-2">
+                        <label for="" class="col-md-4 col-form-label">Title</label>
+                        <div class="col-md-8">
+                            <input [class] = "getClass('extTitle')" formControlName="extTitle" type="text" class="form-control" placeholder="Title of authorizer">
+                        </div>
+                    </div>
+                    <div class="form-group row pt-2">
+                        <label for="" class="col-md-4 col-form-label">Name</label>
+                        <div class="col-md-8">
+                            <input [class] = "getClass('extName')"  formControlName="extName" type="text" class="form-control" placeholder="Name of authorizer">
+                        </div>
+                    </div>
+                    <div class="form-group row pt-2">
+                        <label for="" class="col-md-4 col-form-label">Date</label>
+                        <div class="col-md-8">
+                            <input [class] = "getClass('extDate')" class="form-control" formControlName="extDate" type="date">
+                        </div>
+                    </div>
+                    <div class="form-group row pt-2">
+                        <label for="" class="col-md-4 col-form-label">Comments</label>
+                        <div class="col-md-8">
+                            <textarea [class] = "getClass('extComments')"  class="form-control area" formControlName="extComments" placeholder="Details" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+                <form [formGroup]="formPieces">
+                    <h5 class="text-left">Pieces</h5>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Customer P/N</th>
+                                <th scope="col">IMX P/N</th>
+                                <th scope="col">&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody formArrayName="pieces">
+                            <tr *ngFor="let piece of pieces.controls; let i = index" [formGroupName]="i">
+                                <td>
+                                    <input class="form-control" type="text" formControlName="customer"
+                                        [class] = "checkPiece(piece,'customer')"
+                                        placeholder="Customer P/N">
+                                </td>
+                                <td>
+                                    <input class="form-control" type="text" formControlName="internal"
+                                        [class] = "checkPiece(piece,'internal')"
+                                        placeholder="Interplex P/N">
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary fa fa-plus" *ngIf="i == 0" type="button"
+                                        (click)="addPiece()"></button>
+                                    <button class="btn btn-danger fa fa-trash" *ngIf="i != 0" type="button"
+                                        (click)="deletePiece(i)"></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+                <div class="form-group row pt-2 pr-4">
+                    <legend class="col-form-label col-md-4 pt-0">Lasts for</legend>
+                    <div class="col-md-8 pr-4">
+                        <div class="form-check">
+                            <input formControlName="lapse" class="form-check-input" type="radio" name="lapse" id="lapse1" value="quantity">
+                            <label class="form-check-label" for="lapse1">
+                                Quantity
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input  formControlName="lapse" class="form-check-input" type="radio" name="lapse" id="lapse2" value="time">
+                            <label class="form-check-label" for="lapse2">
+                                Time
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="waiverDetails.controls['lapse'].value == 'quantity'" class="form-group row pt-2 pl-2 pr-4">
+                    <div class="col-md-8">
+                        <input [class]="getClass('quantity')" type="number" formControlName="quantity" class="form-control" placeholder="Quantity">
+                    </div>
+                    <div class="col-md-4">
+                        <select [class]="getClass('specification')"  formControlName="specification" class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+                            <option value="lb">lb</option>
+                            <option value="pieces">pieces</option>
+                        </select>
+                    </div>
+                </div>
+                <div *ngIf="waiverDetails.controls['lapse'].value == 'time'" class="form-group row pt-2">
+                    <div class="col-md-6">
+                        <label>Start date</label>
+                        <input [min] = "today" [class]="getClass('startDate')" formControlName="startDate" class="form-control" type="date">
+                    </div>
+                    <div class="col-md-6">
+                        <label>End date or deadline</label>
+                        <input [min] = "waiverDetails.controls['startDate'].value" formControlName="endDate" [class]="getClass('endDate')" class="form-control" type="date">
+                    </div>
+                </div>
+
+                <button [ngClass]="{'no-ok' : !waiverDetails.valid || !formPieces.valid}" type="button" (click)="next()" class="btn px-5 btn-success float-right">Next</button>
+            </div>
+
+        </div>
+    </form> -->
+</div>
