@@ -25,6 +25,6 @@ export class EditWaiverComponent implements OnInit {
   }
 
   goEdit(){
-    this.router.navigate(['edit','details',this.waiverId]);
+    this.router.navigate(['edit',this.waiverId,'info']);
   }
 }

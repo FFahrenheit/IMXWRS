@@ -44,6 +44,13 @@ export const AppRoutes: Routes = [
                 )
             },
             {
+                path: 'edit/:id',
+                loadChildren: ()=>
+                import('./edit/edit.module').then(
+                    (m) => m.EditModule
+                )
+            },
+            {
                 path: '',
                 pathMatch: 'full',
                 redirectTo: 'waivers'

@@ -25,6 +25,9 @@ import { ResponsableInputComponent } from './responsable-input/responsable-input
     RouterModule.forChild(CreateRoutes),
     SharedModule,
     NgbTypeaheadModule,
+  ],
+  exports : [
+    ResponsableInputComponent
   ]
 })
 export class CreateModule { }
