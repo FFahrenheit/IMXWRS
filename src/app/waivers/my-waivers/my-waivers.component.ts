@@ -38,4 +38,8 @@ export class MyWaiversComponent implements OnInit {
       }
     );
   }
+
+  goToEdit(id){
+    this.router.navigate(['waivers','edit',id]);
+  }
 }

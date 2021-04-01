@@ -52,6 +52,9 @@
                     <button *ngIf="waiver.status == 'open'" class="btn btn-success offset" (click)="console.log('xd')">
                         Complete
                     </button>
+                    <button *ngIf="waiver.status == 'on hold'" class="btn btn-info offset" (click)="goToEdit(waiver.number)">
+                        Edit
+                    </button>
                 </td>
             </tr>
         </tbody>
