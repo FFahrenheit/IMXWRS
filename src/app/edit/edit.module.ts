@@ -6,11 +6,14 @@ import { EditRoutes } from './edit.routing';
 import { SharedModule } from '../shared/shared.module';
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DeviationDetailsComponent } from './deviation-details/deviation-details.component';
+import { CreateModule } from '../create/create.module';
 
 
 @NgModule({
   declarations: [
-    WaiverDetailsComponent
+    WaiverDetailsComponent,
+    DeviationDetailsComponent
   ],
   imports: [
     CommonModule,

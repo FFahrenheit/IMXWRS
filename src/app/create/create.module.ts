@@ -9,7 +9,6 @@ import { ActionPlanComponent } from './action-plan/action-plan.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { SharedModule } from '../shared/shared.module';
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
-import { ResponsableInputComponent } from './responsable-input/responsable-input.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +16,6 @@ import { ResponsableInputComponent } from './responsable-input/responsable-input
     DeviationDetailsComponent,
     ActionPlanComponent,
     ConfirmComponent,
-    ResponsableInputComponent,
   ],
   imports: [
     CommonModule,
@@ -26,8 +24,5 @@ import { ResponsableInputComponent } from './responsable-input/responsable-input
     SharedModule,
     NgbTypeaheadModule,
   ],
-  exports : [
-    ResponsableInputComponent
-  ]
 })
 export class CreateModule { }

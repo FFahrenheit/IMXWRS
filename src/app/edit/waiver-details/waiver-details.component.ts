@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ExternalAuth, Piece } from 'src/app/interfaces/create-wr.interface';
 import { EditService } from 'src/app/services/edit.service';
 
@@ -17,7 +18,8 @@ export class WaiverDetailsComponent implements OnInit {
 
   constructor(public editService : EditService,
               private fb : FormBuilder,
-              public datePipe : DatePipe) { }
+              public datePipe : DatePipe,
+              private router : Router) { }
 
   ngOnInit(): void {
     this.formPieces = this.fb.group({
@@ -25,6 +27,8 @@ export class WaiverDetailsComponent implements OnInit {
     });
 
     let wr = this.editService.getWaiver();
+    this.number = this.editService.number;
+
     let defaultDate = this.datePipe.transform(new Date(),"yyyy-MM-dd");
 
     this.waiverDetails = this.fb.group({
@@ -124,17 +128,16 @@ export class WaiverDetailsComponent implements OnInit {
     }else{
       this.waiverDetails.markAllAsTouched();
       this.formPieces.markAllAsTouched();
-    }  }
+    }  
+  }
 
   ngOnDestroy(){
     this.editService.changeDetails(this.waiverDetails.value);
     this.editService.changePieces(this.getPieces());
 
     console.log(this.editService.wr);
-  }
-
-  getForm(){
-    return '';
+    this.router.navigate(['edit',this.number,'details']);
+    console.log('xd');
   }
 
   get(control){

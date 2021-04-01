@@ -6,7 +6,7 @@ import { Action } from 'src/app/interfaces/create-wr.interface';
 import { CreateWrService } from 'src/app/services/create-wr.service';
 import { UsersService } from 'src/app/services/users.service';
 import { ActionUser } from 'src/app/interfaces/action-user.interface';
-import { ResponsableInputComponent } from '../responsable-input/responsable-input.component';
+import { ResponsableInputComponent } from 'src/app/shared/responsable-input/responsable-input.component';
 
 @Component({
   selector: 'app-action-plan',
