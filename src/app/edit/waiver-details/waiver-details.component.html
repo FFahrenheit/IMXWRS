@@ -2,7 +2,7 @@
     <alert></alert>
     <h4 class="text-left my-3">Edit Waiver Request {{ number }} 
     </h4>
-    <!-- <form >
+    <form [formGroup]="waiverDetails">
 
         <div class="row d-flex justify-content-center">
 
@@ -42,7 +42,7 @@
                 <div class="form-group row pt-2">
                     <label for="" class="col-md-4 col-form-label">Type of deviation</label>
                     <div class="col-md-7">
-                        <select [class]="getClass('typeNo')" formControlName="typeNo" class="custom-select mb-2 mr-sm-2 mb-sm-0"
+                        <select [class]="getClass('typeNumber')" formControlName="typeNumber" class="custom-select mb-2 mr-sm-2 mb-sm-0"
                             id="inlineFormCustomSelect">
                             <option value="1">Type 1</option>
                             <option value="2">Type 2</option>
@@ -66,7 +66,7 @@
 
                     </div>
                 </div>
-                <div class="form-group row pt-2" *ngIf="waiverDetails.controls['typeNo'].value == '3'">
+                <div class="form-group row pt-2" *ngIf="waiverDetails.controls['typeNumber'].value == '3'">
                     <div class="col-md-4">
                         <label>
                             Mannager approval
@@ -187,5 +187,5 @@
             </div>
 
         </div>
-    </form> -->
+    </form>
 </div>

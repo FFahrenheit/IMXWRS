@@ -41,7 +41,7 @@ export class GetWaiverService {
                  map((resp:any)=>{
                    console.log(resp);
                    if(resp['ok'] == true){
-                     this.wr = resp['waiver'];
+                    this.wr = resp['waiver'];
                      if(this.wr.status == 'on hold'){
                       return true;
                      }
@@ -50,7 +50,8 @@ export class GetWaiverService {
                    return false;
                  }),
                  catchError((error)=>{
-                  this.router.navigate(['']);
+                   console.log(error);
+                  this.router.navigate(['403']);
                   return of(false);
                  })
                );

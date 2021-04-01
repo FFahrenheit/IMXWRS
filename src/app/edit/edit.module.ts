@@ -4,6 +4,8 @@ import { WaiverDetailsComponent } from './waiver-details/waiver-details.componen
 import { RouterModule } from '@angular/router';
 import { EditRoutes } from './edit.routing';
 import { SharedModule } from '../shared/shared.module';
+import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -14,6 +16,8 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     RouterModule.forChild(EditRoutes),
     SharedModule,
+    ReactiveFormsModule,
+    NgbTypeaheadModule,
   ]
 })
 export class EditModule { }
