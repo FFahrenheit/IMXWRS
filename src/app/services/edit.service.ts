@@ -14,7 +14,11 @@ export class EditService {
 
   isValid(waiverId : string) {
     this.number = waiverId;
-    return this.waiverService.loadWaiverGuard(this.number);
+    let waiver = this.waiverService.getWaiver();
+    if(waiver == null || waiver['number'] != waiverId){
+      return this.waiverService.loadWaiverGuard(this.number);
+    }
+    return waiver;
   }
 
   getWaiver(){

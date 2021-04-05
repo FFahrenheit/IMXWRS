@@ -13,6 +13,7 @@ const base_url = environment.base_url;
 export class GetWaiverService {
 
   private wr : any = null;
+  
   constructor(private http : HttpClient,
               private router : Router) { 
   }
