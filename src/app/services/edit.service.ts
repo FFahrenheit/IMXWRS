@@ -54,7 +54,6 @@ export class EditService {
   }
 
   changePieces(pieces){
-    console.log(pieces);
     this.wr.parts = [];
     pieces.forEach(p => {
       const piece = {
@@ -72,10 +71,21 @@ export class EditService {
   }
 
   changeWaivers(waivers){
-    console.log(waivers);
     this.wr.waivers = [];
     waivers.forEach(w => {
       this.wr.waivers.push(w);
+    });
+  }
+
+  changeActions(actions){
+    this.wr.actions = [];
+    actions.forEach(a => {
+      const action = {
+        responsable : a['username'],
+        date : a['date'],
+        description : a['action']
+      };
+      this.wr.actions.push(action);
     });
   }
 }

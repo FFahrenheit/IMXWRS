@@ -1,12 +1,13 @@
 import { Routes } from "@angular/router";
 import { EditGuard } from "../guards/edit.guard";
+import { ActionPlanComponent } from "./action-plan/action-plan.component";
 import { DeviationDetailsComponent } from "./deviation-details/deviation-details.component";
 import { WaiverDetailsComponent } from "./waiver-details/waiver-details.component";
 
 export const EditRoutes: Routes = [
     {
       path: '',
-      canActivate: [EditGuard],
+      canActivate: [ EditGuard ],
       children: [
         {
           path: 'info',
@@ -15,6 +16,10 @@ export const EditRoutes: Routes = [
         {
           path: 'details',
           component: DeviationDetailsComponent
+        },
+        {
+          path: 'actions',
+          component: ActionPlanComponent
         },
         {
           path: '',
