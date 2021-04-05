@@ -18,7 +18,7 @@ export class EditService {
     if(waiver == null || waiver['number'] != waiverId){
       return this.waiverService.loadWaiverGuard(this.number);
     }
-    return waiver;
+    return true;
   }
 
   getWaiver(){

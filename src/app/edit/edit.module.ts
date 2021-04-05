@@ -9,13 +9,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DeviationDetailsComponent } from './deviation-details/deviation-details.component';
 import { CreateModule } from '../create/create.module';
 import { ActionPlanComponent } from './action-plan/action-plan.component';
+import { ConfirmComponent } from './confirm/confirm.component';
+import { WaiversModule } from '../waivers/waivers.module';
 
 
 @NgModule({
   declarations: [
     WaiverDetailsComponent,
     DeviationDetailsComponent,
-    ActionPlanComponent
+    ActionPlanComponent,
+    ConfirmComponent
   ],
   imports: [
     CommonModule,
@@ -23,6 +26,7 @@ import { ActionPlanComponent } from './action-plan/action-plan.component';
     SharedModule,
     ReactiveFormsModule,
     NgbTypeaheadModule,
+    WaiversModule,
   ]
 })
 export class EditModule { }

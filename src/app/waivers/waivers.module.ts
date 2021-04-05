@@ -28,6 +28,9 @@ import { EditWaiverComponent } from './edit-waiver/edit-waiver.component';
     CommonModule,
     RouterModule.forChild(WaiversRoutes),
     SharedModule,
+  ],
+  exports: [
+    WaiverComponent
   ]
 })
 export class WaiversModule { }

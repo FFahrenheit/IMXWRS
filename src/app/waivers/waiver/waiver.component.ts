@@ -12,6 +12,7 @@ export class WaiverComponent implements OnInit {
 
   @Input() public id = '';
   @Input() public title = '';
+  @Input() public waiver = null;
   @Output() public hasError = new EventEmitter<boolean>();
   @Output() public receive = new EventEmitter<any>();
 
@@ -24,21 +25,27 @@ export class WaiverComponent implements OnInit {
               public router : Router) { }
 
   ngOnInit(): void {
-    this.waiverService.loadWaiver(this.id)
-        .subscribe(resp=>{
-          this.exists = resp;
-          if(this.exists){
-            this.wr = this.waiverService.getWaiver();
-            this.receive.emit(this.wr);
-            if(this.wr != this.wr?.number){ //Changing url to keep things updated
-              let route = this.router.url;
-              route = route.replace(this.id,this.wr?.number);
-              this.id = this.wr?.number;
-              this.router.navigate(route.split('/'));
-            }
+    if(this.waiver == null){
+      this.waiverService.loadWaiver(this.id)
+      .subscribe(resp=>{
+        this.exists = resp;
+        if(this.exists){
+          this.wr = this.waiverService.getWaiver();
+          this.receive.emit(this.wr);
+          if(this.wr != this.wr?.number){ //Changing url to keep things updated
+            let route = this.router.url;
+            route = route.replace(this.id,this.wr?.number);
+            this.id = this.wr?.number;
+            this.router.navigate(route.split('/'));
           }
-          this.hasError.emit(this.exists);
-        });
+        }
+        this.hasError.emit(this.exists);
+      });
+    }else{
+      this.wr = this.waiver;
+      this.id = this.wr.number;
+    }
+
   }
 
   goBack(){
