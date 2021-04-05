@@ -12,33 +12,46 @@ export class DeviationDetailsComponent implements OnInit {
 
   formDeviations : FormGroup = Object.create(null);
   riskDetails : FormGroup = Object.create(null);
+  number : string;
 
   constructor(private fb : FormBuilder,
               private router : Router,
-              private waiverService : EditService) {
+              private editService : EditService) {
    }
 
    ngOnDestroy(){
-      //this.waiverService.setSecondStep(this.getForm());
-      //this.waiverService.setDeviations(this.getDeviations());
-      //this.router.navigate(['create','actions']);
+      this.editService.changeRisks(this.getForm());
+      this.editService.changeWaivers(this.getDeviations());
+      console.log(this.editService.wr);
+      this.router.navigate(['edit',this.number,'actions']);
+    }
+
+   getForm(){
+     let body = this.riskDetails.value;
+     if(body.requiredCorrectiveAction == 'other'){
+       body.requiredCorrectiveAction = body.auxAction;
+     }
+     delete body.auxAction;
+     return body;
    }
 
   ngOnInit(): void {
+
+    this.number = this.editService.getWaiver()['number'];
 
     this.formDeviations = this.fb.group({
       deviations: this.fb.array([]),
     });
 
     this.riskDetails = this.fb.group({
-      riskAnalysis: [this.waiverService.wr?.riskAnalysis || '', Validators.compose([Validators.required])],
-      rpnBefore : [this.waiverService.wr?.rpnBefore || '0',Validators.compose([Validators.required])],
-      rpnAfter : [this.waiverService.wr?.rpnAfter || '0',Validators.compose([Validators.required])],
-      originalRisk: [this.waiverService.wr?.originalRisk || '', Validators.compose([Validators.required])],
-      currentRisk : [this.waiverService.wr?.currentRisk || '', Validators.compose([Validators.required])],
-      riskWithActions: [this.waiverService.wr?.riskWithActions || '',Validators.compose([Validators.required])],
+      riskAnalysis: [this.editService.wr?.riskAnalysis || '', Validators.compose([Validators.required])],
+      rpnBefore : [this.editService.wr?.rpnBefore || '0',Validators.compose([Validators.required])],
+      rpnAfter : [this.editService.wr?.rpnAfter || '0',Validators.compose([Validators.required])],
+      originalRisk: [this.editService.wr?.originalRisk || '', Validators.compose([Validators.required])],
+      currentRisk : [this.editService.wr?.currentRisk || '', Validators.compose([Validators.required])],
+      riskWithActions: [this.editService.wr?.riskWithActions || '',Validators.compose([Validators.required])],
       requiredCorrectiveAction: [this.getRequiredAction() || '',Validators.compose([Validators.required])],
-      auxAction: [this.waiverService.wr.risk?.requiredAction ||''] 
+      auxAction: [this.editService.wr?.requiredCorrectiveAction ||''] 
     });
 
     this.riskDetails.get('requiredCorrectiveAction').valueChanges.subscribe(action=>{
@@ -51,10 +64,10 @@ export class DeviationDetailsComponent implements OnInit {
     });
     
 
-    if(this.waiverService.wr?.waivers == null || this.waiverService.wr.waivers.length == 0){
+    if(this.editService.wr?.waivers == null || this.editService.wr.waivers.length == 0){
       this.addDeviation();
     }else{
-      this.waiverService.wr.deviations.forEach(d=>{
+      this.editService.wr.waivers.forEach(d=>{
         const deviation = this.fb.group({
           currentSpecification: [ d.currentSpecification ||'', Validators.compose([Validators.required])],
           requiredSpecification: [ d.requiredSpecification || '', Validators.compose([Validators.required])],
@@ -68,10 +81,10 @@ export class DeviationDetailsComponent implements OnInit {
   }
 
   getRequiredAction(){
-    if(this.waiverService.wr.risk?.requiredAction == null){
+    if(this.editService.wr?.requiredCorrectiveAction == null){
       return '';
     }else{
-      let action = this.waiverService.wr.risk.requiredAction;
+      let action = this.editService.wr?.requiredCorrectiveAction;
       if(action != 'PDCA' && action != '8DS' && action != 'A3'){
         return 'other';
       }
@@ -110,8 +123,8 @@ export class DeviationDetailsComponent implements OnInit {
     let deviations = [];
     this.deviations.value.forEach(d=>{
       const deviation  = {
-        current : d['currentSpecification'],
-        required : d['requiredSpecification'],
+        currentSpecification : d['currentSpecification'],
+        requiredSpecification : d['requiredSpecification'],
         reason : d['reason'],
       }
       deviations.push(deviation);

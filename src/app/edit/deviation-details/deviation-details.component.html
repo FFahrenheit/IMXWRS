@@ -1,1 +1,138 @@
-<p>Hola</p>
+<div class="container text-center pt-2">
+    <h4 class="text-left my-3">Deviation details</h4>
+    <form [formGroup]="riskDetails">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+
+                <div class="form-group row pt-2">
+                    <div class="col-md-6">
+                        <div class="form-group row pt-2">
+                            <label for="" class="col-md-4 col-form-label">Risk analysis</label>
+                            <div class="col-md-8">
+                                <textarea [class] = "getStyle('riskAnalysis')" formControlName="riskAnalysis" class="form-control area" rows="3"
+                                    placeholder="Please describe the risk of the required deviation(s)"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-form-label">AMEF RPN before</label>
+                            <div class="col-sm-6 ">
+                                <input min="0" value="0" [class] = "getStyle('rpnBefore')" formControlName="rpnBefore" type="number" class="form-control" value="0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-form-label">AMEF RPN after</label>
+                            <div class="col-sm-6 ">
+                                <input min="0" value="0" [class] = "getStyle('rpnAfter')" formControlName="rpnAfter" type="number" class="form-control" value="0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h5 class="text-left ml-2"> Required deviation(s) </h5>
+
+                <div class="form-group row pt-2 table-responsive">
+                    <form [formGroup]="formDeviations">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Current specification</th>
+                                    <th scope="col">Required deviation</th>
+                                    <th scope="col">Reason</th>
+                                    <th scope="col">&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody formArrayName="deviations">
+                                <tr *ngFor="let deviation of deviations.controls;let i = index" [formGroupName]="i">
+                                    <td>
+                                        <textarea class="form-control mini-area" formControlName="currentSpecification"
+                                            [class]="check(deviation,'currentSpecification')" placeholder="Current deviation"></textarea>
+                                    </td>
+                                    <td>
+                                        <textarea class="form-control mini-area" formControlName="requiredSpecification"
+                                            [class]="check(deviation,'requiredSpecification')" placeholder="Required deviation"></textarea>
+                                    </td>
+                                    <td>
+                                        <textarea class="form-control mini-area" formControlName="reason"
+                                        [class]="check(deviation,'reason')" placeholder="Reason"></textarea>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-primary fa fa-plus" *ngIf="i == 0" type="button"
+                                            (click)="addDeviation()"></button>
+                                        <button class="btn btn-danger fa fa-trash" *ngIf="i != 0" type="button"
+                                            (click)="deleteDeviation(i)"></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+                <h5 class="text-left ml-2">Risk summary</h5><br>
+
+                <div class="form-group row pt-2">
+                    <div class="col-md-3">
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-form-label">Corrective action required</label>
+                            <div class="col-sm-6 ">
+                                <select [class] = "getStyle('requiredCorrectiveAction')" formControlName="requiredCorrectiveAction" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+                                    <option value="PDCA" selected>PDCA</option>
+                                    <option value="8DS">8DS</option>
+                                    <option value="A3">A3</option>
+                                    <option value="other">Other (specify)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-form-label">Original risk</label>
+                            <div class="col-sm-6 ">
+                                <select [class] = "getStyle('originalRisk')" formControlName="originalRisk" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+                                    <option value="low" selected>Low</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="high">High</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-form-label">Current risk</label>
+                            <div class="col-sm-6 ">
+                                <select [class] = "getStyle('currentRisk')" formControlName="currentRisk" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+                                    <option value="low" selected>Low</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="high">High</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-form-label">Risk with actions</label>
+                            <div class="col-sm-6 ">
+                                <select [class] = "getStyle('riskWithActions')" formControlName="riskWithActions" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+                                    <option value="low" selected>Low</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="high">High</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row pt-2 mb-5">
+                    <div class="col-md-3 mb-2">
+                        <input [class] = "getStyle('auxAction')" type="text" class="form-control" formControlName = "auxAction" placeholder="Corrective action"
+                        *ngIf = "riskDetails.get('requiredCorrectiveAction').value == 'other'">
+                    </div>
+                    <div class="col-md-9">
+                        <button [ngClass]="{'no-ok' : !riskDetails.valid || !formDeviations.valid}" type="button" (click)="next()" class="btn px-5 btn-success float-right">Next</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>

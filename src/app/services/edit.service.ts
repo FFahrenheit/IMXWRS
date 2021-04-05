@@ -64,4 +64,18 @@ export class EditService {
       this.wr.parts.push(piece);
     });
   }
+
+  changeRisks(body){
+    Object.keys(body).forEach(k => {
+      this.wr[k] = body[k]; 
+    });
+  }
+
+  changeWaivers(waivers){
+    console.log(waivers);
+    this.wr.waivers = [];
+    waivers.forEach(w => {
+      this.wr.waivers.push(w);
+    });
+  }
 }

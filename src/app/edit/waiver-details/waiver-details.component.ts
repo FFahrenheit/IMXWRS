@@ -137,7 +137,6 @@ export class WaiverDetailsComponent implements OnInit {
 
     console.log(this.editService.wr);
     this.router.navigate(['edit',this.number,'details']);
-    console.log('xd');
   }
 
   get(control){
