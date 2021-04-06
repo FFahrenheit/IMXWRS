@@ -1,9 +1,10 @@
 import { DatePipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { Authorization } from '../interfaces/create-wr.interface';
 import { GetWaiverService } from './get-waiver.service';
 
 const base_url = environment.base_url;
@@ -54,26 +55,38 @@ export class EditService {
     this.wr.area = body.area;
     this.wr.customer = body.customer;
     this.wr.typeNumber = body.typeNumber;
-    this.wr.requiresManager = body.requiresManager;
+    this.wr.requiresManager = body.needsManager;
+    
+    this.wr.expiration = {};
+
     if(body.lapse == 'quantity'){
-      this.wr.quantity = body.quantity;
-      this.wr.specification = body.specification;
-      this.wr.startDate = null;
-      this.wr.endDate = null;
+      this.wr.expiration.quantity = body.quantity;
+      this.wr.expiration.specification = body.specification;
+      delete this.wr.expiration.startDate;
+      delete this.wr.expiration.endDate;
     }else{
-      this.wr.quantity = null;
-      this.wr.specification = null;
-      this.wr.startDate = body.startDate;
-      this.wr.endDate = body.endDate;
+      delete this.wr.expiration.quantity;
+      delete this.wr.expiration.specification;
+      this.wr.expiration.startDate = body.startDate;
+      this.wr.expiration.endDate = body.endDate;
     }
     this.wr.type = body.type;
     if(this.wr.type == 'external'){
       this.wr.externalAuthorization = {};
       this.wr.externalAuthorization.title = body.extTitle;
       this.wr.externalAuthorization.name = body.extName;
-      this.wr.externalAuthorization.date = body.extDate;
-      this.wr.externalAuthorization.comments = body.extComments;
+      this.wr.externalAuthorization.dateSigned = body.extDate;
+      this.wr.externalAuthorization.comment = body.extComments;
+    }else{
+      delete this.wr?.externalAuthorization;
     }
+
+    this.getManagers().subscribe((resp)=>{
+      console.log('Got managers');
+    },error=>{
+      console.log('Failing managers: ' + error);
+    })
+
   }
 
   changePieces(pieces){
@@ -166,7 +179,39 @@ export class EditService {
     this.wr['modifiedActions'] = modifiedActions;
   }
 
+  getManagers(){
+    let type = this.wr.typeNumber.toString();
+    let needsManager =  this.wr.requiresManager.toString();
+    let params = new HttpParams();
+
+    params = params.append('number', type);
+    params = params.append('needsManager', needsManager);
+
+    return this.http.get(`${ base_url }/waivers/authorizations`,{
+      params: params
+    }).pipe(
+        map( (resp:any)=>{
+          console.log(resp);
+          this.wr.authorizations = [];
+          resp.managers.forEach(m=>{
+            const manager  = {
+              name: m['name'],
+              title: m['position'],
+              manager: m['username'],
+              signed: 'requires re-confirmation'
+            }
+            this.wr.authorizations.push(manager);
+          });
+        }),
+        catchError((error)=>{
+          console.log(error);
+          return of(false);
+        })
+      );
+  }
+
   prepare(){
+
     this.wr?.newActions?.forEach(a=>{
       delete a.name;
       delete a.id;
@@ -175,7 +220,14 @@ export class EditService {
     delete this.wr?.name;
 
     this.wr.status = 'pending';
-    
+
+    this.wr.authorizations?.forEach(a=>{
+      delete a.name;
+      delete a.position;
+      delete a.title;
+      delete a.signed;
+    });
+
     console.log(this.wr);
   }
 }
