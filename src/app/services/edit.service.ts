@@ -212,10 +212,10 @@ export class EditService {
 
   prepare(){
 
-    this.wr?.newActions?.forEach(a=>{
-      delete a.name;
-      delete a.id;
-    });
+    // this.wr?.newActions?.forEach(a=>{
+    //   delete a.name;
+    //   delete a.id;
+    // });
 
     delete this.wr?.name;
 
@@ -227,6 +227,18 @@ export class EditService {
       delete a.title;
       delete a.signed;
     });
+
+    let actions = [...(this.wr.newActions||[]),...(this.wr.modifiedActions||[])];
+
+    actions.forEach(a=>{
+      delete a?.id;
+      delete a?.name;
+      delete a?.signed;
+    });
+
+    this.wr.newActions = actions;
+
+    delete this.wr?.modifiedActions;
 
     console.log(this.wr);
   }
