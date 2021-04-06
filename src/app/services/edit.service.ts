@@ -29,7 +29,6 @@ export class EditService {
   }
 
   changeDetails(body){
-    console.log(body);
     this.wr.area = body.area;
     this.wr.customer = body.customer;
     this.wr.typeNumber = body.typeNumber;
@@ -83,11 +82,8 @@ export class EditService {
     let isEqual = true;
     let i = 0;
     this.wr.actions.forEach((act,index)=>{
+      
       if(act.id == action.id){
-        console.log(act.description + ' - ' + action.action);
-        console.log(this.datePipe.transform(act.date,'yyyy-MM-dd') + ' - ' + action.date);
-        console.log(act.responsable + ' - ' + action.username);
-
         isEqual = act.description == action.action &&
                   this.datePipe.transform(act.date,'yyyy-MM-dd')  == action.date &&
                  act.responsable == action.username;
@@ -101,7 +97,6 @@ export class EditService {
     if(i!=0){
       this.wr.actions.splice(i,1);
     }
-    console.log('Is modified ' + !isEqual);
     return  !isEqual;
   }
 
@@ -112,6 +107,8 @@ export class EditService {
 
     actions.forEach((action)=>{
 
+      console.log(action);
+
       const act = {
         responsable : action['username'],
         date : action['date'],
@@ -120,16 +117,14 @@ export class EditService {
         id : action['id']
       };
 
-      console.log(act);
-
       if(action.id == 0){
-        console.log('New action');
+        act['signed'] = 'New';
         newActions.push(act);
       }else if(this.isModified(action)){
-        console.log('Modified actions')
+        act['signed'] = 'Modified';
         modifiedActions.push(act);
       }else{
-        console.log('Equal action');
+        act['signed'] = 'No changes';
         equalActions.push(act);
       }
 

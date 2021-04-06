@@ -69,7 +69,6 @@ export class ActionPlanComponent implements OnInit {
   }
 
   ngOnDestroy(){
-    this.editService.changeActions(this.getActions());
     console.log(this.editService.wr);
     this.router.navigate(['edit',this.number,'confirm']);
   }
@@ -96,6 +95,7 @@ export class ActionPlanComponent implements OnInit {
 
   next(){
     if(this.actionPlan.valid){
+      this.editService.changeActions(this.getActions());
       this.ngOnDestroy();
     }else{
       console.log(this.getActions());
