@@ -1,6 +1,12 @@
 import { DatePipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { GetWaiverService } from './get-waiver.service';
+
+const base_url = environment.base_url;
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +17,23 @@ export class EditService {
   public number: string;
 
   constructor(public waiverService: GetWaiverService,
-              private datePipe : DatePipe) {
+              private datePipe : DatePipe,
+              private http : HttpClient) {
+  }
+
+  update(){
+    this.prepare();
+    return this.http.put(`${ base_url }/waiver` , this.wr)
+               .pipe(
+                 map((resp:any)=>{
+                   console.log(resp);
+                   return true;
+                 }),
+                 catchError(error=>{
+                   console.log(error);
+                   return of(false);
+                 })
+               );
   }
 
   isValid(waiverId : string) {
@@ -139,7 +161,7 @@ export class EditService {
     console.log('Modified actions');
     console.log(modifiedActions);
 
-    this.wr['actions'] = equalActions;
+    this.wr['equalActions'] = equalActions;
     this.wr['newActions'] = newActions;
     this.wr['modifiedActions'] = modifiedActions;
   }
@@ -149,5 +171,11 @@ export class EditService {
       delete a.name;
       delete a.id;
     });
+
+    delete this.wr?.name;
+
+    this.wr.status = 'pending';
+    
+    console.log(this.wr);
   }
 }
