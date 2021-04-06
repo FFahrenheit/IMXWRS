@@ -2,7 +2,6 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Action } from 'src/app/interfaces/create-wr.interface';
 import { ActionUser } from 'src/app/interfaces/action-user.interface';
 import { EditService } from 'src/app/services/edit.service';
 import { UsersService } from 'src/app/services/users.service';
@@ -39,12 +38,16 @@ export class ActionPlanComponent implements OnInit {
     if(this.editService.wr.actions == null || this.editService.wr?.actions.length == 0){
       this.addAction();
     }else{
-      this.editService.wr.actions.forEach(a=>{
+      let srv = this.editService.wr;
+      let actions = [...(srv.actions),...(srv.newActions|| []),...(srv.modifiedActions || [])];
+      console.log(actions);
+      actions.forEach(a=>{
         const action = this.fb.group({
           responsable: [ a.name || '', Validators.compose([Validators.required])],
           action: [ a.description || '', Validators.compose([Validators.required])],
           date: [this.datePipe.transform(a.date,'yyyy-MM-dd') ||'', Validators.compose([Validators.required])],
-          username: [a.responsable|| '', Validators.compose([Validators.required])]
+          username: [a.responsable|| '', Validators.compose([Validators.required])],
+          id: [a.id]
         });
     
         this.actions.push(action);
@@ -80,7 +83,8 @@ export class ActionPlanComponent implements OnInit {
       responsable: [ '', Validators.compose([Validators.required])],
       action: [ '', Validators.compose([Validators.required])],
       date: ['', Validators.compose([Validators.required])],
-      username: ''
+      username: '',
+      id : 0
     });
 
     this.actions.push(action);
@@ -106,11 +110,12 @@ export class ActionPlanComponent implements OnInit {
   getActions(){
     let actions = [];
     this.actions.value.forEach(a=>{
-      const action : Action = {
+      const action = {
         action : a['action'],
         date : a['date'],
         responsable : a['responsable'], 
-        username : a['username']
+        username : a['username'],
+        id : a['id']
       }
       actions.push(action);
     });

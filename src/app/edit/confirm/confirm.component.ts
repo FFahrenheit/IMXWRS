@@ -13,7 +13,11 @@ export class ConfirmComponent implements OnInit {
   constructor(private editService : EditService) { }
 
   ngOnInit(): void {
+
     this.waiver = this.editService.getWaiver();
+    let srv = this.editService.wr;
+    this.waiver.actions =  [...(srv.actions),...(srv.newActions|| []),...(srv.modifiedActions || [])];
+    console.log(this.waiver.actions);
   }
 
   confirm(){

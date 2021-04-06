@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { GetWaiverService } from './get-waiver.service';
 
@@ -9,7 +10,8 @@ export class EditService {
   public wr: any;
   public number: string;
 
-  constructor(public waiverService: GetWaiverService) {
+  constructor(public waiverService: GetWaiverService,
+              private datePipe : DatePipe) {
   }
 
   isValid(waiverId : string) {
@@ -58,7 +60,7 @@ export class EditService {
     pieces.forEach(p => {
       const piece = {
         interplexPN : p.internal,
-        customerPN : p.external
+        customerPN : p.customer
       }
       this.wr.parts.push(piece);
     });
@@ -77,15 +79,80 @@ export class EditService {
     });
   }
 
+  private isModified(action){
+    let isEqual = true;
+    let i = 0;
+    this.wr.actions.forEach((act,index)=>{
+      if(act.id == action.id){
+        console.log(act.description + ' - ' + action.action);
+        console.log(this.datePipe.transform(act.date,'yyyy-MM-dd') + ' - ' + action.date);
+        console.log(act.responsable + ' - ' + action.username);
+
+        isEqual = act.description == action.action &&
+                  this.datePipe.transform(act.date,'yyyy-MM-dd')  == action.date &&
+                 act.responsable == action.username;
+
+        if(!isEqual){
+          i = index;
+        }
+        return;
+      }
+    });
+    if(i!=0){
+      this.wr.actions.splice(i,1);
+    }
+    console.log('Is modified ' + !isEqual);
+    return  !isEqual;
+  }
+
   changeActions(actions){
-    this.wr.actions = [];
-    actions.forEach(a => {
-      const action = {
-        responsable : a['username'],
-        date : a['date'],
-        description : a['action']
+    let newActions = [];
+    let modifiedActions = [];
+    let equalActions = [];
+
+    actions.forEach((action)=>{
+
+      const act = {
+        responsable : action['username'],
+        date : action['date'],
+        description : action['action'],
+        name : action['responsable'],
+        id : action['id']
       };
-      this.wr.actions.push(action);
+
+      console.log(act);
+
+      if(action.id == 0){
+        console.log('New action');
+        newActions.push(act);
+      }else if(this.isModified(action)){
+        console.log('Modified actions')
+        modifiedActions.push(act);
+      }else{
+        console.log('Equal action');
+        equalActions.push(act);
+      }
+
+    });
+    
+    console.log('Equal actions');
+    console.log(equalActions);
+
+    console.log('New Actions');
+    console.log(newActions);
+    
+    console.log('Modified actions');
+    console.log(modifiedActions);
+
+    this.wr['actions'] = equalActions;
+    this.wr['newActions'] = newActions;
+    this.wr['modifiedActions'] = modifiedActions;
+  }
+
+  prepare(){
+    this.wr?.newActions?.forEach(a=>{
+      delete a.name;
+      delete a.id;
     });
   }
 }
