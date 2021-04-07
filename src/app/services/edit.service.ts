@@ -23,8 +23,8 @@ export class EditService {
   }
 
   update(){
-    this.prepare();
-    return this.http.put(`${ base_url }/waiver` , this.wr)
+    let waiver = this.prepare();
+    return this.http.put(`${ base_url }/waiver` , waiver)
                .pipe(
                  map((resp:any)=>{
                    console.log(resp);
@@ -211,24 +211,20 @@ export class EditService {
   }
 
   prepare(){
+    let wr = { ... this.wr };
 
-    // this.wr?.newActions?.forEach(a=>{
-    //   delete a.name;
-    //   delete a.id;
-    // });
+    delete wr?.name;
 
-    delete this.wr?.name;
+    wr.status = 'pending';
 
-    this.wr.status = 'pending';
-
-    this.wr.authorizations?.forEach(a=>{
+    wr.authorizations?.forEach(a=>{
       delete a.name;
       delete a.position;
       delete a.title;
       delete a.signed;
     });
 
-    let actions = [...(this.wr.newActions||[]),...(this.wr.modifiedActions||[])];
+    let actions = [...(wr.newActions||[]),...(wr.modifiedActions||[])];
 
     actions.forEach(a=>{
       delete a?.id;
@@ -236,10 +232,12 @@ export class EditService {
       delete a?.signed;
     });
 
-    this.wr.newActions = actions;
+    wr.newActions = actions;
 
-    delete this.wr?.modifiedActions;
+    delete wr?.modifiedActions;
 
-    console.log(this.wr);
+    console.log(wr);
+
+    return wr;
   }
 }

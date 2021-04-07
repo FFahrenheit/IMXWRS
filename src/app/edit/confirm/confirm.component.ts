@@ -30,8 +30,8 @@ export class ConfirmComponent implements OnInit {
           this.alert.success("Updated")
         }, 1010 );
         setTimeout(() => {
-          // this.router.navigate(['waivers','view',this.waiver.number]);
-        }, 4040);
+          this.router.navigate(['waivers','view',this.waiver.number]);
+        }, 3030);
       }else{
         this.alert.error("Couldn't update waiver",{autoClose : false});
       }

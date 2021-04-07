@@ -44,8 +44,8 @@ export class WaiverDetailsComponent implements OnInit {
       lapse: [(wr?.expiration?.endDate == null) ? 'quantity' :  'time'|| 'quantity',Validators.compose([Validators.required])],
       quantity : [wr?.expiration?.quantity || ''],
       specification: [wr?.expiration?.specification || ''],
-      startDate : [wr?.expiration?.startDate || defaultDate],
-      endDate : [wr?.expiration?.endDate || '']
+      startDate : [this.datePipe.transform(wr?.expiration?.startDate,'yyyy-MM-dd') || defaultDate],
+      endDate : [this.datePipe.transform(wr?.expiration?.endDate,'yyyy-MM-dd') || '']
     });
 
     this.waiverDetails.get('type').valueChanges.subscribe(t =>{
