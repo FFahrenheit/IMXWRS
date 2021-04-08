@@ -1,0 +1,67 @@
+<div class="table-responsive container text-center pt-1">
+    <alert></alert>
+    <div class="table-responsive">
+        <table class="table table-borderless">
+            <tr>
+                <td>
+                    <h4 class="text-left my-3">On Hold waivers</h4>
+                </td>
+                <td>
+                    <div class="text-right">
+                        <filter [blocked]="blockedList" *ngIf="waivers != null" (apply)="filter($event)"> </filter>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <p class="text-left">These waiver requests needs an edit</p>
+
+    <table class="table table-hover" *ngIf="waivers?.length != 0;else empty_body">
+        <thead>
+            <tr class="header">
+                <th scope="col"[appSort]="waivers" data-order="desc" data-name="number" >
+                    <i class="fas fa-filter float-left"></i>WR ID
+                </th>
+                <th scope="col"  [appSort]="waivers" data-order="desc" data-name="customer">
+                    <i class="fas fa-filter float-left"></i>Customer
+                </th>
+                <th scope="col" [appSort]="waivers" data-order="desc" data-name="creationDate">
+                    <i class="fas fa-filter float-left"></i>Creation date
+                </th>
+                <th scope="col" [appSort]="waivers" data-order="desc" data-name="status">
+                    <i class="fas fa-filter float-left"></i>Status
+                </th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let waiver of waivers">
+                <td>
+                    {{ waiver.number }}
+                </td>
+                <td>
+                    {{ waiver.customer }}
+                </td>
+                <td>
+                    {{ waiver.creationDate | date:'medium':'UTC' }}
+                </td>
+                <td>
+                    {{ waiver.status | titlecase }}
+                </td>
+                <td>
+                    <button class="btn btn-primary" (click)="goToWaiver(waiver.number)">
+                        Details
+                    </button>
+                    <button class="btn btn-info offset" (click)="goToEdit(waiver.number)">
+                        Edit
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <ng-template #empty_body>
+        <error-message type="empty" title="Nothing here..." 
+        description="You don't have any waiver request yet">
+        </error-message>
+    </ng-template>
+</div>

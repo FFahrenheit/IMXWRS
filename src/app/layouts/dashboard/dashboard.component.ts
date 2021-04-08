@@ -37,6 +37,10 @@ export class DashboardComponent implements OnInit {
       name: "My waiver requests",
       route: ['waivers', 'status']
     },
+    {
+      name: "Remarked waivers",
+      route: ['waivers','remarked']
+    }
   ]
 
   private adminSidebar = [

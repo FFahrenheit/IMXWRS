@@ -11,6 +11,7 @@ import { MyWaiversComponent } from './my-waivers/my-waivers.component';
 import { SignActivityComponent } from './sign-activity/sign-activity.component';
 import { LogComponent } from './log/log.component';
 import { EditWaiverComponent } from './edit-waiver/edit-waiver.component';
+import { RemarkedComponent } from './remarked/remarked.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { EditWaiverComponent } from './edit-waiver/edit-waiver.component';
     SignActivityComponent, 
     LogComponent,
     EditWaiverComponent,
+    RemarkedComponent,
   ],
   imports: [
     CommonModule,
