@@ -6,9 +6,11 @@ import { AuthorizationRoutes } from './authorizations.routing';
 import { ApprovedWaiversComponent } from './approved-waivers/approved-waivers.component';
 import { SharedModule } from '../shared/shared.module';
 
-
 @NgModule({
-  declarations: [PendingAuthorizationsComponent, ApprovedWaiversComponent],
+  declarations: [
+    PendingAuthorizationsComponent, 
+    ApprovedWaiversComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(AuthorizationRoutes),

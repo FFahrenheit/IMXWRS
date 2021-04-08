@@ -3,11 +3,20 @@
     <h4 class="text-left my-3">Waivers request that need your approval</h4>
     <table class="table table-hover" *ngIf=" authorizations?.length != 0; else empty_body">
         <thead>
-            <tr>
-                <th scope="col">WR ID</th>
-                <th scope="col">Customer</th>
-                <th scope="col">Originator</th>
-                <th scope="col">Creation date</th>
+            <tr class="header">
+                <th scope="col" [appSort]="authorizations" data-order="desc" data-name="request">
+                    <i class="fas fa-filter float-left"></i>WR ID
+                </th>
+                <th scope="col" [appSort]="authorizations" data-order="desc" data-name="customer">
+                    <i class="fas fa-filter float-left"></i>Customer
+                </th>
+                <th scope="col" [appSort]="authorizations" data-order="desc" data-name="originator">
+                    <i class="fas fa-filter float-left"></i>Originator
+                </th>
+                <th scope="col" [appSort]="authorizations" data-order="desc" data-name="creationDate">
+                    <i class="fas fa-filter float-left"></i>Creation date
+                </th>
+                <th scope="col">Status</th>
                 <th scope="col">Details</th>
             </tr>
         </thead>
@@ -26,7 +35,21 @@
                     {{ auth.creationDate|date:'medium':'UTC' }}
                 </td>
                 <td>
-                    <button class="btn btn-success" (click)="goToWaiver(auth.request)">
+                    <div *ngIf="auth.pendingActivities == '0'; else pending_act">
+                        Ready to authorize
+                    </div>
+                    <ng-template #pending_act>
+                        Waiting actions confirmation <br>
+                        {{ auth.totalActivities - auth.pendingActivities }} / {{ auth.totalActivities }} confirmed
+                    </ng-template>
+                </td>
+                <td>
+                    <button *ngIf="auth.pendingActivities == '0'" 
+                    class="btn btn-success" (click)="goToWaiver(auth.request)">
+                        Review and authorize
+                    </button>
+                    <button *ngIf="auth.pendingActivities != '0'"
+                    class="btn btn-primary" (click)="goToWaiver(auth.request)">
                         Review
                     </button>
                 </td>

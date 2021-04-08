@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RemarkModalComponent } from './remark-modal/remark-modal.component';
 import { ResponsableInputComponent } from './responsable-input/responsable-input.component';
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { SortDirective } from '../directives/sort.directive';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
     FilterModalComponent,
     RemarkModalComponent,
     ResponsableInputComponent,
+    SortDirective,
   ],
   imports: [
     CommonModule,
@@ -34,6 +36,7 @@ import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
     FilterModalComponent,
     RemarkModalComponent,
     ResponsableInputComponent,
+    SortDirective,
   ]
 })
 export class SharedModule { }

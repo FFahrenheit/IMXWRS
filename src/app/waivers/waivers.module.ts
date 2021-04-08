@@ -10,7 +10,6 @@ import { AuthorizeComponent } from './authorize/authorize.component';
 import { MyWaiversComponent } from './my-waivers/my-waivers.component';
 import { SignActivityComponent } from './sign-activity/sign-activity.component';
 import { LogComponent } from './log/log.component';
-import { SortDirective } from '../directives/sort.directive';
 import { EditWaiverComponent } from './edit-waiver/edit-waiver.component';
 
 @NgModule({
@@ -21,7 +20,6 @@ import { EditWaiverComponent } from './edit-waiver/edit-waiver.component';
     MyWaiversComponent, 
     SignActivityComponent, 
     LogComponent,
-    SortDirective,
     EditWaiverComponent,
   ],
   imports: [
