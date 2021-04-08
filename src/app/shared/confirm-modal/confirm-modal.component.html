@@ -1,8 +1,8 @@
 <div>
-    <button class="btn btn-md btn-success" [ngClass]="{'btn-disabled':disabled}" 
-    [class] = "myClass" (click)="open(confirmModal)"> 
-    {{ trigger }} 
-</button>
+    <button class="btn btn-md" [ngClass]="{'btn-disabled btn-secondary': isDisabled, 'btn-success' : !isDisabled}" [class]="myClass"
+        (click)="open(confirmModal)">
+        {{ trigger }}
+    </button>
 </div>
 <ng-template #confirmModal let-modal>
     <div class="modal-header">
@@ -12,10 +12,19 @@
         </button>
     </div>
     <div class="modal-body m-content">
-        {{ content }}
+        <div *ngIf="!isDisabled; else reason_content">
+            {{ content }}
+        </div>
+        <ng-template #reason_content>
+            You can't perfom this action due these reason(s): <br>
+            <p *ngFor="let r of reason" class="reasons">
+                * {{ r }}
+            </p>
+        </ng-template>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-success px-3" (click)="modal.close('YES')">Yes</button>
-        <button type="button" class="btn btn-danger px-3" (click)="modal.close('NO')">No</button>
+        <button *ngIf="!isDisabled" type="button" class="btn btn-success px-3" (click)="modal.close('YES')">Yes</button>
+        <button *ngIf="!isDisabled" type="button" class="btn btn-danger px-3" (click)="modal.close('NO')">No</button>
+        <button *ngIf="isDisabled" type="button" class="btn btn-primary px-3" (click)="modal.close('')">Ok</button>
     </div>
 </ng-template>

@@ -12,21 +12,25 @@ export class ConfirmModalComponent implements OnInit {
   @Input() public content = 'Do you want to confirm this action?';
   @Input() public trigger = 'Confirm';
   @Input() public myClass = 'float-right px-5 mx-3 my-3';
-  @Input() public disabled = false;
+  @Input() public isDisabled = false;
+  @Input() public reason = ['It is currently disabled'];
 
   @Output() public accept = new EventEmitter<void>();
   @Output() public cancel = new EventEmitter<void>();
   @Output() public reject = new EventEmitter<void>();
 
-  constructor(private modalService : NgbModal) { }
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void {
+    if(this.reason.length==0){
+      this.reason = ['It is currently disabled']; 
+    }
   }
 
   open(content) {
-    if(!this.disabled){
-      this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-        switch(result){
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      if(!this.isDisabled){
+        switch (result) {
           case 'YES':
             this.accept.emit();
             break;
@@ -37,9 +41,9 @@ export class ConfirmModalComponent implements OnInit {
             this.cancel.emit();
             break;
         }
-      }, (reason) => {
-        this.cancel.emit();
-      });
-    }
+      }
+    }, (reason) => {
+      this.cancel.emit();
+    });
   }
 }

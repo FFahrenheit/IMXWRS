@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+//import { AuthenticationService } from 'src/app/services/authentication.service';
 import { AuthorizationsService } from 'src/app/services/authorizations.service';
 import { AlertService } from 'src/app/shared/alert';
 
@@ -15,12 +15,13 @@ export class AuthorizeComponent implements OnInit {
   public exists = false;
   public wr;
   public cannotApprove = true;
+  public reason : string[];
 
   constructor(private route : ActivatedRoute,
               private router : Router,
               private alert : AlertService,
               private authorizationsService : AuthorizationsService,
-              private loginService : AuthenticationService) { 
+              /*private loginService : AuthenticationService*/) { 
   }
 
   ngOnInit() : void {
@@ -78,12 +79,30 @@ export class AuthorizeComponent implements OnInit {
 
   getWaiver($event){
     this.wr = $event;
-    this.wr.remarks?.forEach( r => {
-      if(r.manager == this.loginService.getUser().username){
-        this.cannotApprove = true; //!!!ASK BEFORE
-        return;
-      }
-    });
-    this.cannotApprove = true; // ^^^^ CHANGE
+    this.reason = [];
+    // this.wr.remarks?.forEach( r => {
+    //   if(r.manager == this.loginService.getUser().username){
+    //     this.cannotApprove = true; //!!!ASK BEFORE
+    //     return;
+    //   }
+    // });
+    // this.cannotApprove = true; // ^^^^ CHANGE
+
+    if(this.wr.status == 'on hold'){
+      this.reason.push("Can't approve a waiver in on hold status. Please ask the originator to edit it");
+    }
+
+    const BreakException = {};
+    try{
+      this.wr.actions.forEach(a=>{
+        if(a['signed'] == 'pending'){
+          this.reason.push("Can't authorize a waiver with pending confirmed tasks. Please wait until every colaborator has signed");
+          throw BreakException;
+        }
+      });
+    }catch(e){}
+
+    this.cannotApprove = this.reason.length > 0;
+
   }
 }
