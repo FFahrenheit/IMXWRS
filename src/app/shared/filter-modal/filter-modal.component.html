@@ -48,7 +48,8 @@
                         </div>
                     </div>
 
-                    <div class="form-group row pt-0 has-error has-feedback">
+                    <div class="form-group row pt-0 has-error has-feedback"
+                    *ngIf="!blocked.includes('area')">
                         <label for="" class="col-md-4 col-form-label">Area</label>
                         <div class="col-md-8">
                             <input formControlName="area" type="text" class="form-control" [class]="getClass('area')"
@@ -56,7 +57,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row pt-0">
+                    <div class="form-group row pt-0" *ngIf="!blocked.includes('customer')">
                         <label for="" class="col-md-4 col-form-label">Customer</label>
                         <div class="col-md-8">
                             <input type="text" formControlName="customer" class="form-control" placeholder="Customer"
@@ -64,7 +65,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row pt-0">
+                    <div class="form-group row pt-0" *ngIf="!blocked.includes('date')">
                         <label for="" class="col-md-1 col-form-label">From</label>
                         <div class="col-md-5">
                             <input [class]="getClass('from')" formControlName="from"
@@ -77,7 +78,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row pt-0">
+                    <div class="form-group row pt-0" *ngIf="!blocked.includes('type')">
                         <label for="" class="col-md-4 col-form-label">Type</label>
                         <div class="col-md-8">
                             <select [class]="getClass('type')" formControlName="type"
@@ -89,7 +90,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row pt-0">
+                    <div class="form-group row pt-0" *ngIf="!blocked.includes('status')">
                         <label for="" class="col-md-4 col-form-label">Status</label>
                         <div class="col-md-8">
                             <select [class]="getClass('status')" formControlName="status"
@@ -103,7 +104,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row pt-0">
+                    <div class="form-group row pt-0" *ngIf="!blocked.includes('typeNumber')">
                         <label for="" class="col-md-4 col-form-label">Type of deviation</label>
                         <div class="col-md-7">
                             <select [class]="getClass('typeNumber')" formControlName="typeNumber"

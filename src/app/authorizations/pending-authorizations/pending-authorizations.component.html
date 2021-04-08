@@ -35,20 +35,25 @@
                     {{ auth.creationDate|date:'medium':'UTC' }}
                 </td>
                 <td>
-                    <div *ngIf="auth.pendingActivities == '0'; else pending_act">
+                    <div *ngIf="auth.pendingActivities == '0' && auth.status != 'on hold'; else pending_act">
                         Ready to authorize
                     </div>
                     <ng-template #pending_act>
-                        Waiting actions confirmation <br>
-                        {{ auth.totalActivities - auth.pendingActivities }} / {{ auth.totalActivities }} confirmed
+                        <div *ngIf="auth.pendingActivities != '0'">
+                            Waiting actions confirmation <br>
+                            {{ auth.totalActivities - auth.pendingActivities }} / {{ auth.totalActivities }} confirmed
+                        </div>
+                        <div *ngIf="auth.status == 'on hold'">
+                            Waiver remarked, waiting for edit
+                        </div>
                     </ng-template>
                 </td>
                 <td>
-                    <button *ngIf="auth.pendingActivities == '0'" 
+                    <button *ngIf="auth.pendingActivities == '0' && auth.status != 'on hold'" 
                     class="btn btn-success" (click)="goToWaiver(auth.request)">
                         Review and authorize
                     </button>
-                    <button *ngIf="auth.pendingActivities != '0'"
+                    <button *ngIf="auth.pendingActivities != '0' || auth.status == 'on hold'"
                     class="btn btn-primary" (click)="goToWaiver(auth.request)">
                         Review
                     </button>

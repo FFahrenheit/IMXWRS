@@ -30,7 +30,7 @@ export class PendingAuthorizationsComponent implements OnInit {
         })
   }
 
-  goToWaiver(id){
+  goToWaiver(id : string){
     this.router.navigate(['waivers','authorize',id])
   }
 

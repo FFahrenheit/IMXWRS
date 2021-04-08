@@ -21,8 +21,10 @@
                 <th scope="col"[appSort]="waivers" data-order="desc" data-name="number" >
                     <i class="fas fa-filter float-left"></i>WR ID
                 </th>
-                <th scope="col">Customer</th>
-                <th scope="col" [appSort]="waivers" data-order="desc" data-name="status">
+                <th scope="col"  [appSort]="waivers" data-order="desc" data-name="customer">
+                    <i class="fas fa-filter float-left"></i>Customer
+                </th>
+                <th scope="col" [appSort]="waivers" data-order="desc" data-name="creationDate">
                     <i class="fas fa-filter float-left"></i>Creation date
                 </th>
                 <th scope="col" [appSort]="waivers" data-order="desc" data-name="status">
