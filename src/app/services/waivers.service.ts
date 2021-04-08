@@ -15,6 +15,7 @@ export class WaiversService {
   public savedObject : any;
   private waiversLog = [];
   private myWaivers = [];
+  private myRemarks = [];
 
   constructor(private http : HttpClient) { }
 
@@ -25,6 +26,24 @@ export class WaiversService {
                  map((resp:any)=>{
                    if(resp.ok){
                      this.myWaivers = resp.waivers;
+                     return true;
+                   }
+                   return false;
+                 }),
+                 catchError(error=>{
+                   console.log(error);
+                   return of(false);
+                 })
+               );
+  }
+
+  getMyRemarks(body){
+    let query = this.geyMyFilters(body);
+    return this.http.get(`${ base_url }/waivers/remarks?${ query }`)
+               .pipe(
+                 map((resp:any)=>{
+                   if(resp.ok){
+                     this.myRemarks = resp.waivers;
                      return true;
                    }
                    return false;
@@ -86,5 +105,9 @@ export class WaiversService {
 
   getMyLog(){
     return this.myWaivers;
+  }
+
+  getMyRemarked(){
+    return this.myRemarks;
   }
 }

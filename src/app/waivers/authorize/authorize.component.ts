@@ -53,8 +53,8 @@ export class AuthorizeComponent implements OnInit {
   }
 
   sendComment($event){
-    window.scroll(0,0);
     this.alert.info('Adding remark...');
+    window.scroll(0,0);
     let body = {
       comment: $event,
       request: this.waiverId

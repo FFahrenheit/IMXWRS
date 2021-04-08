@@ -26,11 +26,11 @@ export class RemarkedComponent implements OnInit {
   }
 
   filter(data : any = ''){
-    this.waiverService.getMyWaivers(data)
+    this.waiverService.getMyRemarks(data)
     .subscribe(
       resp=>{
         if(resp){
-          this.waivers = this.waiverService.getMyLog();
+          this.waivers = this.waiverService.getMyRemarked();
         }else{
           this.alert.error("Couldn't load waivers, try again",{ autoClose : false });
         }
