@@ -48,6 +48,9 @@ export class WaiverDetailsComponent implements OnInit {
       endDate : [this.datePipe.transform(wr?.expiration?.endDate,'yyyy-MM-dd') || '']
     });
 
+    let lapse = (wr?.expiration?.endDate == null) ? 'quantity' : 'time';
+    this.updateLapse(lapse);
+
     this.waiverDetails.get('type').valueChanges.subscribe(t =>{
       this.updateExtAuth(t);
     });

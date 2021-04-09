@@ -153,10 +153,10 @@ export class EditService {
       };
 
       if(action.id == 0){
-        act['signed'] = 'New';
+        act['signed'] = '*New';
         newActions.push(act);
       }else if(this.isModified(action)){
-        act['signed'] = 'Modified';
+        act['signed'] = '*Modified';
         modifiedActions.push(act);
       }else{
         act['signed'] = 'No changes';
@@ -213,6 +213,9 @@ export class EditService {
   prepare(){
     let wr = { ... this.wr };
 
+    if(wr.type == 'external'){
+      wr['externalAuthorization'] = { ... this.wr?.externalAuthorization };
+    }
     delete wr?.name;
 
     wr.status = 'pending';
@@ -237,6 +240,7 @@ export class EditService {
     delete wr?.modifiedActions;
 
     console.log(wr);
+    console.log(this.wr);
 
     return wr;
   }

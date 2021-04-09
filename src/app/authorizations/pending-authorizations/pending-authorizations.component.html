@@ -43,7 +43,7 @@
                             Waiting actions confirmation <br>
                             {{ auth.totalActivities - auth.pendingActivities }} / {{ auth.totalActivities }} confirmed
                         </div>
-                        <div *ngIf="auth.status == 'on hold'">
+                        <div *ngIf="auth.status == 'on hold'" class="urgent">
                             Waiver remarked, waiting for edit
                         </div>
                     </ng-template>
