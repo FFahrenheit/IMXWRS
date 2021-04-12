@@ -213,19 +213,29 @@ export class EditService {
   prepare(){
     let wr = { ... this.wr };
 
-    if(wr.type == 'external'){
-      wr['externalAuthorization'] = { ... this.wr?.externalAuthorization };
-    }
     delete wr?.name;
 
     wr.status = 'pending';
 
-    wr.authorizations?.forEach(a=>{
-      delete a.name;
-      delete a.position;
-      delete a.title;
-      delete a.signed;
+    if(wr.type == 'external'){
+      wr['externalAuthorization'] = { ... this.wr?.externalAuthorization };
+    }
+
+    let auth = [...(wr.authorizations||[])];
+    let auth2 = [ ... auth ];
+   
+    delete wr.authorizations;
+
+    auth.forEach(a=>{
+      delete a?.name;
+      delete a?.position;
+      delete a?.title;
+      delete a?.signed;
     });
+
+    wr.authorizations = auth;
+
+    this.wr.authorizations = auth2;
 
     let actions = [...(wr.newActions||[]),...(wr.modifiedActions||[])];
 
