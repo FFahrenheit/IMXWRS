@@ -12,6 +12,7 @@ import { SignActivityComponent } from './sign-activity/sign-activity.component';
 import { LogComponent } from './log/log.component';
 import { EditWaiverComponent } from './edit-waiver/edit-waiver.component';
 import { RemarkedComponent } from './remarked/remarked.component';
+import { RepeatedWaiversComponent } from './repeated-waivers/repeated-waivers.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { RemarkedComponent } from './remarked/remarked.component';
     LogComponent,
     EditWaiverComponent,
     RemarkedComponent,
+    RepeatedWaiversComponent,
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,8 @@ import { RemarkedComponent } from './remarked/remarked.component';
     SharedModule,
   ],
   exports: [
-    WaiverComponent
+    WaiverComponent,
+    RepeatedWaiversComponent,
   ]
 })
 export class WaiversModule { }

@@ -1,0 +1,56 @@
+<div *ngIf="true">
+    <div class="alert alert-warning my-3 alert-waivers text-center" role="alert" (click)="open(confirmModal)">
+        There are *n* waiver requests with similar data provided. Check them by cliking here before sending this waiver request.
+      </div>
+</div>
+<ng-template #confirmModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title m-title" id="modal-basic-title"> Similar waiver requests </h4>
+        <button type="button" class="close" style="outline:none;" aria-label="Close" (click)="modal.dismiss('CANCEL')">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body m-content">
+        <div>
+            <h6 class="title-warning">
+                Please check that your requests is new and unique before sending it to revision.
+                These are similar waiver request we found
+            </h6>
+                <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">WR ID</th>
+                        <th scope="col">Customer</th>
+                        <th scope="col">Creation date</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let repeat of repeated">
+                        <td>
+                            id {{ repeat }}
+                        </td>
+                        <td>
+                            customer {{ repeat }}
+                        </td>
+                        <td>
+                            {{ (repeat.creationDate||"")| date:'medium':'UTC' }}
+                        </td>
+                        <td>
+                            status
+                        </td>
+                        <td>
+                            <button class="btn btn-primary" (click)="goToWaiver('TWR210001')">
+                                Details
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary px-3" (click)="modal.close('')">Ok</button>
+    </div>
+</ng-template>
