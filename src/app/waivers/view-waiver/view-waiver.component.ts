@@ -17,7 +17,7 @@ export class ViewWaiverComponent implements OnInit {
   ngOnInit() : void {
     this.route.paramMap.subscribe(params => {
       this.waiverId = params.get('id');
-    })
+    });
   }
 
 }

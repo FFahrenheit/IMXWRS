@@ -51,7 +51,7 @@
                     <button class="btn btn-primary" (click)="goToWaiver(waiver.number)">
                         Details
                     </button>
-                    <button *ngIf="waiver.status == 'open'" class="btn btn-success offset" (click)="console.log('xd')">
+                    <button *ngIf="waiver.status == 'open'" class="btn btn-success offset" (click)="goToClose(waiver.number)">
                         Complete
                     </button>
                     <button *ngIf="waiver.status == 'on hold'" class="btn btn-info offset" (click)="goToEdit(waiver.number)">

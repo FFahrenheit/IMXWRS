@@ -13,6 +13,7 @@ import { LogComponent } from './log/log.component';
 import { EditWaiverComponent } from './edit-waiver/edit-waiver.component';
 import { RemarkedComponent } from './remarked/remarked.component';
 import { RepeatedWaiversComponent } from './repeated-waivers/repeated-waivers.component';
+import { CloseComponent } from './close/close.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { RepeatedWaiversComponent } from './repeated-waivers/repeated-waivers.co
     EditWaiverComponent,
     RemarkedComponent,
     RepeatedWaiversComponent,
+    CloseComponent,
   ],
   imports: [
     CommonModule,

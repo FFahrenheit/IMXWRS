@@ -39,7 +39,12 @@ export class MyWaiversComponent implements OnInit {
     );
   }
 
-  goToEdit(id){
+  goToEdit(id : string){
     this.router.navigate(['waivers','edit',id]);
   }
+
+  goToClose(id : string){
+    this.router.navigate(['waivers','close',id]);
+  }
+  
 }

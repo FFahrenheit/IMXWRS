@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthorizeComponent } from './authorize/authorize.component';
+import { CloseComponent } from './close/close.component';
 import { EditWaiverComponent } from './edit-waiver/edit-waiver.component';
 import { LogComponent } from './log/log.component';
 import { MyWaiversComponent } from './my-waivers/my-waivers.component';
@@ -27,6 +28,10 @@ export const WaiversRoutes: Routes = [
       {
         path: 'sign/:id',
         component: SignActivityComponent,
+      },
+      {
+        path: 'close/:id',
+        component: CloseComponent
       },
       {
         path: 'all',
