@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -9,11 +8,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class RepeatedWaiversComponent implements OnInit {
 
-  public repeated = [1,2,3,4,5,6,7,8,9,10];
-
+  @Input() public body = [];
+  
   constructor(public modalService : NgbModal) { }
 
   ngOnInit(): void {
+    
   }
 
   open(content) {
@@ -35,10 +35,9 @@ export class RepeatedWaiversComponent implements OnInit {
     const { protocol, host } = window.location;
 
     const path = 'waivers/view/' + id;
-
     const url = `${protocol}//${host}/${path}`;
 
-    window.open(url,'_blank');
+    window.open(url,'_blank'); //Can't use router.navigate 
   }
 
 }

@@ -18,6 +18,7 @@ export class ConfirmComponent implements OnInit {
   public wr : WR;
   public managers : Authorization[];
   public user : User;
+  public repeated = [];
 
   constructor(private router : Router,
               private waiverService : CreateWrService,
@@ -28,18 +29,23 @@ export class ConfirmComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.loginService.getUser();
+
     let origin : Origin = {
       originator: this.user.username,
       date :new Date(),
       number : 'To be assigned'
     };
+    
     this.waiverService.setOrigin(origin);
     this.wr = this.waiverService.wr;
+    
     this.waiverService.getManagers().subscribe((resp)=>{
       this.managers = this.wr.managers;
     },error=>{
       console.log('Failing managers: ' + error);
-    })
+    });
+
+    this.getRepeated();
   }
 
   confirm(){
@@ -62,4 +68,31 @@ export class ConfirmComponent implements OnInit {
     }); 
   }
 
+  getRepeated(){
+    let parts = [];
+    this.wr.pieces.forEach(p=>{
+      const piece = {
+        'customerPN' : p.customer,
+        'interplexPN' : p.internal
+      };
+      parts.push(piece);
+    });
+
+    const body = {
+      'type' : this.wr.details.type,
+      'customer' : this.wr.details.customer,
+      'parts' : parts
+    };
+
+    this.waiverService.getRepeated(body)
+        .subscribe(resp=>{
+          if(resp){
+            this.repeated = this.waiverService.getSimilar();
+          }else{
+            this.alert.error("Couldn't get repeated");
+          }
+        },error=>{
+          this.alert.error("Failed retrieving repeated waivers");
+        });
+  }
 }

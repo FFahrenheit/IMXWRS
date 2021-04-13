@@ -9,6 +9,7 @@ import { ActionPlanComponent } from './action-plan/action-plan.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { SharedModule } from '../shared/shared.module';
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { WaiversModule } from '../waivers/waivers.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
     RouterModule.forChild(CreateRoutes),
     SharedModule,
     NgbTypeaheadModule,
+    WaiversModule,
   ],
 })
 export class CreateModule { }

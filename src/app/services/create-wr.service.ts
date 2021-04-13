@@ -14,8 +14,31 @@ const base_url = environment.base_url;
 export class CreateWrService {
 
   public wr : WR = {};
+  public similar : [];
 
   constructor(private http: HttpClient) { 
+  }
+
+  getRepeated(body){
+    return this.http.post(`${ base_url }/waiver/ia`,body)
+               .pipe(
+                 map((resp:any)=>{
+                   console.log(resp);
+                   if(resp?.ok){
+                     this.similar = resp?.coincidences;
+                     return true;
+                   }
+                   return false;
+                 },
+                 catchError(error=>{
+                   console.log(error);
+                   return of(false);
+                 }))
+               )
+  }
+
+  getSimilar(){
+    return this.similar;
   }
 
   getManagers(){

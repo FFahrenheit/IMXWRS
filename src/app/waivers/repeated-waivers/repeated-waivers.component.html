@@ -1,6 +1,6 @@
-<div *ngIf="true">
+<div *ngIf="body.length != 0">
     <div class="alert alert-warning my-3 alert-waivers text-center" role="alert" (click)="open(confirmModal)">
-        There are *n* waiver requests with similar data provided. Check them by cliking here before sending this waiver request.
+        There are {{ body.length }} waiver request(s) with similar data provided. Check them by cliking here before sending this waiver request.
       </div>
 </div>
 <ng-template #confirmModal let-modal>
@@ -27,21 +27,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let repeat of repeated">
+                    <tr *ngFor="let repeat of body">
                         <td>
-                            id {{ repeat }}
+                            {{ repeat.number }}
                         </td>
                         <td>
-                            customer {{ repeat }}
+                            {{ repeat.customer }}
                         </td>
                         <td>
                             {{ (repeat.creationDate||"")| date:'medium':'UTC' }}
                         </td>
                         <td>
-                            status
+                            {{ repeat.status }}
                         </td>
                         <td>
-                            <button class="btn btn-primary" (click)="goToWaiver('TWR210001')">
+                            <button class="btn btn-primary" (click)="goToWaiver(repeat.number)">
                                 Details
                             </button>
                         </td>
