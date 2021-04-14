@@ -1,0 +1,17 @@
+<div class="table-responsive container text-center pt-2">
+    <h5 class="text-left my-3">Upload files</h5>
+
+    <div class="col-md-6">
+        <form enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="example-input-file"> </label>
+                <input formControlName="fileInput" (change)="addFile($event)" type="file" name="multi-files" multiple id="input-multi-files" class="form-control-file border"/>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <p *ngFor="let file of files">
+            {{ file.name }}
+        </p>
+    </div>
+</div>

@@ -10,6 +10,7 @@ import { RemarkModalComponent } from './remark-modal/remark-modal.component';
 import { ResponsableInputComponent } from './responsable-input/responsable-input.component';
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { SortDirective } from '../directives/sort.directive';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { SortDirective } from '../directives/sort.directive';
     RemarkModalComponent,
     ResponsableInputComponent,
     SortDirective,
+    FileUploadComponent,
   ],
   imports: [
     CommonModule,
@@ -37,6 +39,7 @@ import { SortDirective } from '../directives/sort.directive';
     RemarkModalComponent,
     ResponsableInputComponent,
     SortDirective,
+    FileUploadComponent,
   ]
 })
 export class SharedModule { }
