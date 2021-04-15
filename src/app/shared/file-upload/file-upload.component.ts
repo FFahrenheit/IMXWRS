@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import * as $ from 'jquery';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'file-upload',
@@ -9,27 +7,22 @@ import * as $ from 'jquery';
 })
 export class FileUploadComponent implements OnInit {
 
+  @Input() public type = 'file';
+  
   files = [];
 
   constructor() { }
 
   ngOnInit() {
-    // let imagesPreview = (input) => {
-    //   if (input.files) {
-    //     let filesAmount = input.files.length;
-    //     for (let i = 0; i < filesAmount; i++) {
-    //       console.log(input.files[i]);
-    //     }
-    //   }
-    // };
-
-    // $("#input-multi-files").on("change", function() {
-    //   imagesPreview(this);
-    // });
-
   }
 
   addFile($event){
-    console.log($event);
+    this.files = [...(this.files||[]), ...($event.target.files||[])];
+    console.log([$event, this.files]);
+  }
+
+  clearFile(index : number){
+    this.files.splice(index,1);
+    console.log([index, this.files]);
   }
 }
