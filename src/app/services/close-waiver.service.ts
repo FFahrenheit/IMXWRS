@@ -10,12 +10,14 @@ const base_url = environment.base_url;
 export class CloseWaiverService {
   constructor(private http : HttpClient) { }
 
-  closeWaiver(files, request : string){
+  closeWaiver(files : File[], request : string){
     let headers = new HttpHeaders();
     headers.set('Conent-Type','multipart/form-data');
     let formData = new FormData;
     formData.append("request",request);
-    formData.append("multi-files",files);
+    files.forEach(file=>{
+      formData.append("multi-files",file);
+    });
     return this.http.post(
       `${base_url}/waiver/${request}`,
       formData,{
