@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'file-upload',
@@ -8,8 +8,9 @@ import { Component, Input, OnInit } from '@angular/core';
 export class FileUploadComponent implements OnInit {
 
   @Input() public type = 'file';
+  @Output() public receive = new EventEmitter<any>();
   
-  files = [];
+  files : File[] = [];
 
   constructor() { }
 
@@ -17,12 +18,17 @@ export class FileUploadComponent implements OnInit {
   }
 
   addFile($event){
-    this.files = [...(this.files||[]), ...($event.target.files||[])];
-    console.log([$event, this.files]);
+    // this.files = [...(this.files||[]), ...($event.target.files||[])];
+    let fileList = $event.target.files;
+    for(let i=0; i<fileList.length; i++){
+      console.log(fileList.item(i));
+      this.files.push(fileList.item(i));
+    }
+    this.receive.emit(this.files);
   }
 
   clearFile(index : number){
     this.files.splice(index,1);
-    console.log([index, this.files]);
+    this.receive.emit(this.files);
   }
 }
