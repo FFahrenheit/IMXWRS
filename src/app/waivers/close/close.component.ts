@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CloseWaiverService } from 'src/app/services/close-waiver.service';
+import { AlertService } from 'src/app/shared/alert';
 
 @Component({
   selector: 'app-close',
@@ -13,7 +14,9 @@ export class CloseComponent implements OnInit {
   public files = [];
 
   constructor(private route : ActivatedRoute,
-              private closeService : CloseWaiverService) { }
+              private closeService : CloseWaiverService,
+              private alert : AlertService,
+              private router : Router) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -27,11 +30,20 @@ export class CloseComponent implements OnInit {
   }
 
   confirm(){
+    window.scroll(0,0);
     this.closeService.closeWaiver(this.files,this.waiverId)
         .subscribe(resp=>{
-          console.log(resp);
+          if(resp['ok']){
+            this.alert.success("Waiver closed");
+            setTimeout(() => {
+              this.router.navigate(['waivers','view',this.waiverId]);
+            }, 3030);
+          }else{
+            let msg = resp['message'] || "Error";
+            this.alert.warn(msg,{ autoClose: false});
+          }
         },error=>{
-          console.log(error);
+          this.alert.error("Server error: " + error,{ autoClose: false});
         });
   }
 

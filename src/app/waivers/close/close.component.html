@@ -1,7 +1,8 @@
+<alert></alert>
 <app-waiver [id] = " waiverId " title="Close"> </app-waiver>
 <file-upload type="evidence" (receive)="getFiles($event)"> </file-upload>
 
 <confirm-modal title = "Close waiver request"  
 (accept) = "confirm()" content = "Do you want to close this waiver request? " trigger = "Mark as closed" 
-[isDisabled] = "files.length == 0" [reason] = "['You need to attach at least one evidente']">
+[isDisabled] = "files.length == 0" [reason]="['You need to attach at least one evidence']">
 </confirm-modal>
