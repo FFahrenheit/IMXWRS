@@ -52,4 +52,8 @@ export class WaiverComponent implements OnInit {
     this.location.back();
   }
 
+  downloadFile(filename : string){
+    return this.waiverService.downloadFile(filename);
+  }
+
 }

@@ -55,6 +55,32 @@
                     </table>
                 </div>
 
+                <div *ngIf="wr?.evidences.length != 0">
+                    <h5 class="text-left subtitle-att">Evidences</h5>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Filename</th>
+                                    <th scrope="col">Uploaded</th>
+                                    <th scrope="col">Download</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let file of wr?.evidences">
+                                    <td> {{ file.filename || '' }} </td>
+                                    <td> {{ (file.date | date:'medium':'UTC') || '' }} </td>
+                                    <td> 
+                                        <a class="btn btn-primary" [href]="downloadFile(file.filename)">
+                                            <i class="fas fa-download"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
                 <h5 class="text-left subtitle-att ">Risks</h5>
                 <attribute name="Original risk:" [value]="( wr?.originalRisk | titlecase ) || ''"></attribute>
                 <attribute name="Risk analysis: " [value]="wr?.riskAnalysis || ''"></attribute>
