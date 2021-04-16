@@ -14,9 +14,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Error403Component } from './errors/error403/error403.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './services/token-interceptor.service';
-import { AlertComponent } from './shared/alert/alert.component';
-import { AlertModule } from './shared/alert';
-
 
 @NgModule({
   declarations: [

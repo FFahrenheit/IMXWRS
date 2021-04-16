@@ -27,7 +27,7 @@
                                 {{ file.name }}
                             </td>
                             <td>
-                                {{ (file.size/(1024*1024)) | number: '1.0-2'}} MB
+                                {{ file.size|size}} 
                             </td>
                             <td>
                                 <button (click)="clearFile(i)" type="button" class="btn btn-danger">
