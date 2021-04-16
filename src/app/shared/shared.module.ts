@@ -11,7 +11,7 @@ import { ResponsableInputComponent } from './responsable-input/responsable-input
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { SortDirective } from '../directives/sort.directive';
 import { FileUploadComponent } from './file-upload/file-upload.component';
-import { SizePipe } from '../pipes/size.pipe';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -24,13 +24,13 @@ import { SizePipe } from '../pipes/size.pipe';
     ResponsableInputComponent,
     SortDirective,
     FileUploadComponent,
-    SizePipe,
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     NgbTypeaheadModule,
+    PipesModule.forRoot(),
   ],
   exports: [
     AttributeComponent,

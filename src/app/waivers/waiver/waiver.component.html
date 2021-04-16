@@ -68,10 +68,10 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let file of wr?.evidences">
-                                    <td> {{ file.filename || '' }} </td>
+                                    <td> {{ (filePipe.transform(file.filename)) || '' }} </td>
                                     <td> {{ (file.date | date:'medium':'UTC') || '' }} </td>
                                     <td> 
-                                        <a class="btn btn-primary" [href]="downloadFile(file.filename)">
+                                        <a class="btn btn-primary" [href]="downloadFile(file.filename)" target="_blank">
                                             <i class="fas fa-download"></i>
                                         </a>
                                     </td>

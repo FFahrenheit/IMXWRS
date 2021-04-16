@@ -5,6 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'size'
 })
 export class SizePipe extends DecimalPipe implements PipeTransform {
+
   transform(value: number | string , ...args : any): any {
     let sizes = ['bytes' , 'KB', 'MB','GB'];
     let index = 0;
@@ -16,8 +17,7 @@ export class SizePipe extends DecimalPipe implements PipeTransform {
     }
 
     let decimalValue = super.transform(value,'1.0-2');
-    return decimalValue + ' ' + sizes[index];  
-
+    return decimalValue + ' ' + sizes[index];
   }
 
 }

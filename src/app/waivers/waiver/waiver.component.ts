@@ -1,6 +1,7 @@
 import { DatePipe, Location } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { FilenamePipe } from 'src/app/pipes/filename.pipe';
 import { GetWaiverService } from 'src/app/services/get-waiver.service';
 
 @Component({
@@ -22,7 +23,8 @@ export class WaiverComponent implements OnInit {
   constructor(public datePipe : DatePipe,
               public waiverService : GetWaiverService,
               public location : Location,
-              public router : Router) { }
+              public router : Router,
+              public filePipe : FilenamePipe) { }
 
   ngOnInit(): void {
     if(this.waiver == null){
