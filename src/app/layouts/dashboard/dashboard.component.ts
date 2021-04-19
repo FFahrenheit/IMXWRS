@@ -90,4 +90,8 @@ export class DashboardComponent implements OnInit {
     sessionStorage.removeItem('index');
   }
 
+  changePassword(){
+    console.log("Workinggg...");
+  }
+
 }
