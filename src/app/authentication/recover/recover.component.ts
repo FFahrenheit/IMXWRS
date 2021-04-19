@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RecoverPasswordService } from 'src/app/services/recover-password.service';
+import { AlertService } from 'src/app/shared/alert';
 
 @Component({
   selector: 'app-recover',
@@ -13,7 +15,9 @@ export class RecoverComponent implements OnInit {
   public submitted = false;
 
   constructor(private router : Router,
-              private fb : FormBuilder) { }
+              private fb : FormBuilder,
+              private alert : AlertService,
+              private recoverService : RecoverPasswordService) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -23,5 +27,19 @@ export class RecoverComponent implements OnInit {
 
   onSubmit(){
     this.submitted = true;
+    this.alert.info("Sending email...");
+    this.recoverService.sendEmail(this.form.value)
+        .subscribe(resp=>{
+          if(resp){
+            this.alert.success("Password recovered, please check your email");
+            setTimeout(() => {
+              this.router.navigate(['authentication','login']);
+            }, 10000);
+          }else{
+            this.alert.error("Couldn't send email, check your username");
+          }
+        },error=>{
+          this.alert.error("Server error", { autoClose : false });
+        });
   }
 }
