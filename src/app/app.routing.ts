@@ -51,6 +51,13 @@ export const AppRoutes: Routes = [
                 )
             },
             {
+                path: 'profile',
+                loadChildren: ()=>
+                import('./profile/profile.module').then(
+                    (m)=> m.ProfileModule
+                )
+            },
+            {
                 path: '',
                 pathMatch: 'full',
                 redirectTo: 'waivers'

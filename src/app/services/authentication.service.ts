@@ -36,6 +36,10 @@ export class AuthenticationService {
                      resp.user.name
                    );
 
+                   if(resp['user']['recover']){
+                     this.router.navigate(['waivers','status']);
+                   }
+
                    return true;
                  }else{
                    return false;

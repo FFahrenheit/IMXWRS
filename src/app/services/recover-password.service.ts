@@ -15,7 +15,7 @@ export class RecoverPasswordService {
   }
 
   public sendEmail(username){
-    return this.http.post(`${ base_url }/user/recover`,username)
+    return this.http.post(`${ base_url }/user/recover`, username)
         .pipe(
           (map((resp:any)=>{
             console.log(resp);

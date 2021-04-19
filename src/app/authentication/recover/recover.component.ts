@@ -34,7 +34,7 @@ export class RecoverComponent implements OnInit {
             this.alert.success("Password recovered, please check your email");
             setTimeout(() => {
               this.router.navigate(['authentication','login']);
-            }, 10000);
+            }, 3500);
           }else{
             this.alert.error("Couldn't send email, check your username");
           }
