@@ -91,7 +91,7 @@ export class DashboardComponent implements OnInit {
   }
 
   changePassword(){
-    console.log("Workinggg...");
+    this.router.navigate(['profile','password','change']);
   }
 
 }
