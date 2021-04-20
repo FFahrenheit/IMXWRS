@@ -4,6 +4,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { RouterModule } from '@angular/router';
 import { ProfileRoutes } from './profile.routing';
 import { SharedModule } from '../shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ChangePasswordComponent],
@@ -11,6 +12,7 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     RouterModule.forChild(ProfileRoutes),
     SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class ProfileModule { }
