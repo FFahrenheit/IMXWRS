@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Authorization } from '../interfaces/create-wr.interface';
 import { GetWaiverService } from './get-waiver.service';
 
 const base_url = environment.base_url;

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { ChangePasswordService } from 'src/app/services/change-password.service';
+import { AlertService } from 'src/app/shared/alert';
 
 @Component({
   selector: 'app-change-password',
@@ -14,7 +16,9 @@ export class ChangePasswordComponent implements OnInit {
   public user : User;
 
   constructor(private fb : FormBuilder,
-              private loginService : AuthenticationService) { }
+              private loginService : AuthenticationService,
+              private alert : AlertService,
+              private changePassword : ChangePasswordService) { }
 
   ngOnInit(): void {
     this.user = this.loginService.getUser();
@@ -52,7 +56,7 @@ export class ChangePasswordComponent implements OnInit {
 
   regex(){
     let control = this.get('password');
-    return control.touched && control.value.length < 6;
+    return control.touched && (control.value == null || control.value.length < 6);
   }
 
   passwordMatch(){
@@ -67,7 +71,28 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   next(){
-    console.log('xd');
+    console.log(this.get('password').touched)
+    if(this.form.valid && !this.passwordMatch()){
+      this.alert.info("Changing password...");
+      setTimeout(() => {
+        this.changePassword.changePassword(this.form.value)
+            .subscribe(resp=>{
+              if(resp){
+                this.alert.success("Password changed");
+                setTimeout(() => {
+                  this.form.reset();
+                  this.form.updateValueAndValidity();
+                }, 3000);
+              }else{
+                this.alert.error("Couldn't change password...");
+              }
+            },error=>{
+              this.alert.error("Server error");
+            })
+      }, 2000);
+    }else{
+      this.form.markAllAsTouched();
+    }
   }
 
 }

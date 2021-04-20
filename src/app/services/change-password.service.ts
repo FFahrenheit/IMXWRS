@@ -9,24 +9,25 @@ const base_url = environment.base_url;
 @Injectable({
   providedIn: 'root'
 })
-export class RecoverPasswordService {
+export class ChangePasswordService {
 
   constructor(private http : HttpClient) { 
   }
 
-  public sendEmail(username){
-    return this.http.post(`${ base_url }/user/recover`, username)
+  changePassword(password){
+
+    return this.http.put(`${base_url}/user/recover`,password)
         .pipe(
-          (map((resp:any)=>{
+          map(resp=>{
             console.log(resp);
             if(resp['ok']){
               return true;
             }
             return false;
-          }),catchError(error=>{
-            console.log(error);
+          },catchError(err=>{
+            console.log(err);
             return of(false);
           }))
-        );
+        )
   }
 }
