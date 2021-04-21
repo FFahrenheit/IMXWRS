@@ -38,7 +38,8 @@
                     </button>
                 </td>
                 <td>
-                    <confirm-modal [disabled]="activity.status == 'pending'" class="margin-zero" 
+                    <confirm-modal [disabled]="activity.status == 'pending'" class="margin-zero"
+                    [isDisabled] = "activity.status != 'open'" [reason] = "['The waiver request is not currently open']"
                     [title]="(activity.status != 'open')? 'You can not do this activity until is open' :'Confirm activity done'" content="Mark activiy as done?"
                     trigger = "Done" myClass="" (accept)="confirm(activity.id)">
                     </confirm-modal>

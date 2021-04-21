@@ -22,6 +22,7 @@ export class PendingTasksComponent implements OnInit {
         .subscribe(resp=>{
           if(resp){
             this.activities = this.activitiesService.getPending();
+            console.log(this.activities);
           }
         },error=>{
           console.log(error);
