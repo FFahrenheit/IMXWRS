@@ -78,7 +78,7 @@ export class ChangePasswordComponent implements OnInit {
         this.changePassword.changePassword(this.form.value)
             .subscribe(resp=>{
               if(resp){
-                this.alert.success("Password changed");
+                this.alert.success("Password changed", { autoClose : false });
                 setTimeout(() => {
                   this.form.reset();
                   this.form.updateValueAndValidity();

@@ -39,7 +39,10 @@ export class LoginComponent implements OnInit {
       }; 
   
       this.login.login(loginForm).subscribe((resp)=>{
-        if(resp){
+        if(resp == null){
+          this.router.navigate(['profile','password','change']);
+        }
+        else if(resp){
           this.router.navigateByUrl(this.returnUrl);
         }else{
           this.alert.error('Incorrect credentials', { autoClose : true } );

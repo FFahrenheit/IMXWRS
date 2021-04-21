@@ -37,7 +37,7 @@ export class AuthenticationService {
                    );
 
                    if(resp['user']['recover']){
-                     this.router.navigate(['waivers','status']);
+                     return null;
                    }
 
                    return true;
