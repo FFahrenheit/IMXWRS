@@ -14,6 +14,8 @@ export class WaiverComponent implements OnInit {
   @Input() public id = '';
   @Input() public title = '';
   @Input() public waiver = null;
+  @Input() public hasGuard = false;
+
   @Output() public hasError = new EventEmitter<boolean>();
   @Output() public receive = new EventEmitter<any>();
 
@@ -27,7 +29,11 @@ export class WaiverComponent implements OnInit {
               public filePipe : FilenamePipe) { }
 
   ngOnInit(): void {
-    if(this.waiver == null){
+    if(this.hasGuard){
+      this.wr = this.waiverService.getWaiver();
+      this.id = this.wr.number;
+    }else if(this.waiver == null){
+
       this.waiverService.loadWaiver(this.id)
       .subscribe(resp=>{
         this.exists = resp;
@@ -35,13 +41,17 @@ export class WaiverComponent implements OnInit {
           this.wr = this.waiverService.getWaiver();
           this.receive.emit(this.wr);
           if(this.wr != this.wr?.number){ //Changing url to keep things updated
+            
             let route = this.router.url;
             route = route.replace(this.id,this.wr?.number);
             this.id = this.wr?.number;
             this.router.navigate(route.split('/'));
+          
           }
         }
+        
         this.hasError.emit(this.exists);
+        
       });
     }else{
       this.wr = this.waiver;

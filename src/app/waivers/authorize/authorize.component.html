@@ -1,5 +1,5 @@
 <alert></alert>
-<app-waiver (receive)="getWaiver($event)"  title="Authorize" 
+<app-waiver [hasGuard]="true" (receive)="getWaiver($event)"  title="Authorize" 
 (hasError) = "updateExistance($event)" [id] = " waiverId "> </app-waiver>
 
 <confirm-modal *ngIf="exists" title = "Authorize waiver request"  
