@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthorizeGuard } from '../guards/authorize.guard';
 import { AuthorizeComponent } from './authorize/authorize.component';
 import { CloseComponent } from './close/close.component';
 import { EditWaiverComponent } from './edit-waiver/edit-waiver.component';
@@ -20,6 +21,7 @@ export const WaiversRoutes: Routes = [
       {
         path: 'authorize/:id',
         component: AuthorizeComponent,
+        canActivate: [ AuthorizeGuard ]
       },
       {
         path: 'status',

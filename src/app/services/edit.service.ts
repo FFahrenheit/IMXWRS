@@ -40,7 +40,7 @@ export class EditService {
     this.number = waiverId;
     let waiver = this.waiverService.getWaiver();
     if(waiver == null || waiver['number'] != waiverId){
-      return this.waiverService.loadWaiverGuard(this.number);
+      return this.waiverService.loadWaiverGuardOnHold(this.number);
     }
     return true;
   }

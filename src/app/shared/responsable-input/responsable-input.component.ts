@@ -29,7 +29,10 @@ export class ResponsableInputComponent implements OnInit,AfterContentInit {
     this.cdRef.detectChanges(); 
 
     if(this.defaultUser != null){
-      this.form.controls['name'].setValue({name:this.defaultUser['responsable'], username:this.defaultUser['username']});
+      this.form.controls['name'].setValue({
+        name:this.defaultUser['responsable'], 
+        username:this.defaultUser['username']
+      });
     }
   }
 
@@ -75,7 +78,7 @@ export class ResponsableInputComponent implements OnInit,AfterContentInit {
       this.savedUser = uName;
     }
 
-    this.users.forEach(u=>{
+    this.users?.forEach(u=>{
       if(u.name == uName){
         this.name.setErrors(null);
         this.savedUser = u;

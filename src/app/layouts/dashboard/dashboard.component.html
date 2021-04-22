@@ -26,11 +26,17 @@
                         </span>
                     </button>
                     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                        <button ngbDropdownItem (click)="logout()"> 
-                            <i class="fas fa-sign-out-alt pr-1"></i> Log out
-                        </button>
                         <button ngbDropdownItem (click)="changePassword()">
                             <i class="fas fa-key pr-1"></i>Change password
+                        </button>
+                        <button ngbDropdownItem (click)="changePassword()">
+                            <i class="fas fa-users-cog pr-1"></i>Change managers
+                        </button>
+                        <button ngbDropdownItem (click)="changePassword()">
+                            <i class="fas fa-users pr-1"></i>Add user
+                        </button>
+                        <button ngbDropdownItem (click)="logout()"> 
+                            <i class="fas fa-sign-out-alt pr-1"></i> Log out
                         </button>
                         <button ngbDropdownItem>Something else</button>
                     </div>
