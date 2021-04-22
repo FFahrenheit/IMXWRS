@@ -30,32 +30,43 @@ export class WaiverComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.hasGuard){
+      console.log(['Has guard' , this.waiverService.getWaiver()]);
       this.wr = this.waiverService.getWaiver();
+      if(this.wr == null){
+        this.exists = false;
+      }
       this.id = this.wr.number;
     }else if(this.waiver == null){
 
       this.waiverService.loadWaiver(this.id)
       .subscribe(resp=>{
         this.exists = resp;
+        this.hasError.emit(this.exists);
+        console.log(['Loading waiver...', this.waiverService.getWaiver()]);
         if(this.exists){
           this.wr = this.waiverService.getWaiver();
-          this.receive.emit(this.wr);
           if(this.wr != this.wr?.number){ //Changing url to keep things updated
             
             let route = this.router.url;
             route = route.replace(this.id,this.wr?.number);
             this.id = this.wr?.number;
             this.router.navigate(route.split('/'));
-          
+                      this.receive.emit(this.wr);
           }
         }
-        
-        this.hasError.emit(this.exists);
-        
+         
       });
-    }else{
+    }else if(this.waiver != null){
+      console.log(['Waiver already loaded',this.waiver]);
       this.wr = this.waiver;
       this.id = this.wr.number;
+    }else{
+      console.log('To do...');
+    }
+
+    this.hasError.emit(this.exists);
+    if(this.exists){
+      this.receive.emit(this.wr);
     }
 
   }

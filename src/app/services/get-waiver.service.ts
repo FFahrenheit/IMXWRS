@@ -21,6 +21,7 @@ export class GetWaiverService {
   }
 
   loadWaiver(waiverId: string) {
+    this.wr = null;
     return this.http.get(`${base_url}/waiver/${waiverId}`)
       .pipe(
         map((resp: any) => {
@@ -39,6 +40,7 @@ export class GetWaiverService {
   }
 
   loadWaiverGuardOnHold(waiverId: string) {
+    this.wr = null;
     return this.http.get(`${base_url}/waiver/${waiverId}`)
       .pipe(
         map((resp: any) => {
@@ -62,6 +64,7 @@ export class GetWaiverService {
 
 
   loadWaiverGuardApproveSelf(waiverId: string) {
+    this.wr = null;
     return this.http.get(`${base_url}/waiver/${waiverId}`)
       .pipe(
         map((resp: any) => {

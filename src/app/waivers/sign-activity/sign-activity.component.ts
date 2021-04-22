@@ -45,6 +45,7 @@ export class SignActivityComponent implements OnInit {
   }
 
   updateExistance($event){
+    console.log('Existance = ' + $event);
     this.exists = $event;
   }
 }

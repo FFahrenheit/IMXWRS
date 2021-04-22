@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthorizeGuard } from '../guards/authorize.guard';
+import { EditGuard } from '../guards/edit.guard';
 import { AuthorizeComponent } from './authorize/authorize.component';
 import { CloseComponent } from './close/close.component';
 import { EditWaiverComponent } from './edit-waiver/edit-waiver.component';
@@ -42,6 +43,7 @@ export const WaiversRoutes: Routes = [
       {
         path: 'edit/:id',
         component: EditWaiverComponent,
+        canActivate: [ EditGuard ]
       },
       {
         path: 'remarked',
