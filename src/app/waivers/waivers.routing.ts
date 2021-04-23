@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { ActivityGuard } from '../guards/activity.guard';
 import { AuthorizeGuard } from '../guards/authorize.guard';
 import { EditGuard } from '../guards/edit.guard';
 import { AuthorizeComponent } from './authorize/authorize.component';
@@ -31,6 +32,7 @@ export const WaiversRoutes: Routes = [
       {
         path: 'sign/:id',
         component: SignActivityComponent,
+        canActivate: [ ActivityGuard ]
       },
       {
         path: 'close/:id',
