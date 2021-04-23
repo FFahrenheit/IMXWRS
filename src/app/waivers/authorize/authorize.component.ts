@@ -77,6 +77,7 @@ export class AuthorizeComponent implements OnInit {
   }
 
   getWaiver($event){
+    console.log('Got');
     this.wr = $event;
     this.reason = [];
     // this.wr.remarks?.forEach( r => {
@@ -103,5 +104,6 @@ export class AuthorizeComponent implements OnInit {
 
     this.cannotApprove = this.reason.length > 0;
 
+    console.log([this.cannotApprove, this.reason.length]);
   }
 }

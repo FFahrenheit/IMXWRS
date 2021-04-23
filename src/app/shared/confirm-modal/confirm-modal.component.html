@@ -16,10 +16,18 @@
             {{ content }}
         </div>
         <ng-template #reason_content>
-            You can't perfom this action due these reason(s): <br>
-            <p *ngFor="let r of reason" class="reasons">
-                * {{ r }}
-            </p>
+            <div *ngIf="areReasons();else one_reason">
+                You can't perfom this action due these reason(s): <br>
+                <p *ngFor="let r of reason" class="reasons">
+                    * {{ r }}
+                </p>
+            </div>
+            <ng-template #one_reason>
+                You can't perform this action: 
+                <span class="reasons">
+                    {{ reason }}
+                </span>
+            </ng-template>
         </ng-template>
     </div>
     <div class="modal-footer">

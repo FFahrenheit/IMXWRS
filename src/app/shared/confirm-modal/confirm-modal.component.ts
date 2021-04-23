@@ -13,7 +13,7 @@ export class ConfirmModalComponent implements OnInit {
   @Input() public trigger = 'Confirm';
   @Input() public myClass = 'float-right px-5 mx-3 my-3';
   @Input() public isDisabled = false;
-  @Input() public reason = ['It is currently disabled'];
+  @Input() public reason = 'It is currently disabled';
 
   @Output() public accept = new EventEmitter<void>();
   @Output() public cancel = new EventEmitter<void>();
@@ -23,7 +23,7 @@ export class ConfirmModalComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.reason.length==0){
-      this.reason = ['It is currently disabled']; 
+      this.reason = 'It is currently disabled'; 
     }
   }
 
@@ -45,5 +45,9 @@ export class ConfirmModalComponent implements OnInit {
     }, (reason) => {
       this.cancel.emit();
     });
+  }
+
+  areReasons(){
+    return Array.isArray(this.reason);
   }
 }
