@@ -113,6 +113,31 @@ export class GetWaiverService {
       );
   }
 
+  loadWaiverCloseWaiver(waiverId : string){
+    this.wr = null;
+    return this.http.get(`${base_url}/waiver/${waiverId}`)
+      .pipe(
+        map((resp: any) => {
+          console.log(resp);
+          if (resp['ok'] == true) {
+            let user = this.loggedUser.getUser();
+            this.wr = resp['waiver'];
+            //May add new conditions
+            if (this.wr.status == 'open' && user.username == this.wr.originator) {
+              return true;
+            }
+          }
+          this.router.navigate(['403']);
+          return false;
+        }),
+        catchError((error) => {
+          console.log(error);
+          this.router.navigate(['403']);
+          return of(false);
+        })
+      );
+  }
+
   getWaiver() {
     return this.wr;
   }

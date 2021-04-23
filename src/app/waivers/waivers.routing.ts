@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { ActivityGuard } from '../guards/activity.guard';
 import { AuthorizeGuard } from '../guards/authorize.guard';
+import { CloseGuard } from '../guards/close.guard';
 import { EditGuard } from '../guards/edit.guard';
 import { AuthorizeComponent } from './authorize/authorize.component';
 import { CloseComponent } from './close/close.component';
@@ -10,7 +11,6 @@ import { MyWaiversComponent } from './my-waivers/my-waivers.component';
 import { RemarkedComponent } from './remarked/remarked.component';
 import { SignActivityComponent } from './sign-activity/sign-activity.component';
 import { ViewWaiverComponent } from './view-waiver/view-waiver.component';
-
 
 export const WaiversRoutes: Routes = [
   {
@@ -36,7 +36,8 @@ export const WaiversRoutes: Routes = [
       },
       {
         path: 'close/:id',
-        component: CloseComponent
+        component: CloseComponent,
+        canActivate: [ CloseGuard ]
       },
       {
         path: 'all',
