@@ -47,7 +47,7 @@ export class GetWaiverService {
           console.log(resp);
           if (resp['ok'] == true) {
             this.wr = resp['waiver'];
-            if (this.wr.status == 'on hold') {
+            if (this.wr.status == 'on hold' && this.wr.originator == this.loggedUser.getUser().username) {
               return true;
             }
           }

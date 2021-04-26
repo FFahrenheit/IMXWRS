@@ -1,5 +1,6 @@
 import { Routes } from "@angular/router";
 import { LogComponent } from "../waivers/log/log.component";
+import { AddUserComponent } from "./add-user/add-user.component";
 import { ChangePasswordComponent } from "./change-password/change-password.component";
 
 export const ProfileRoutes : Routes = [
@@ -13,6 +14,10 @@ export const ProfileRoutes : Routes = [
         {
           path: 'password/change',
           component: ChangePasswordComponent
+        },
+        {
+          path: 'users/add',
+          component: AddUserComponent
         },
         {
           path: '',

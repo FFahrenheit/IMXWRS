@@ -94,4 +94,8 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['profile','password','change']);
   }
 
+  addUsers(){
+    this.router.navigate(['profile','users','add'])
+  }
+
 }
