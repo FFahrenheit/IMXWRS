@@ -14,7 +14,6 @@ export class CloseWaiverService {
     let headers = new HttpHeaders();
     headers.set('Conent-Type','multipart/form-data');
     let formData = new FormData;
-    formData.append("request",request);
     files.forEach(file=>{
       formData.append("multi-files",file);
     });
