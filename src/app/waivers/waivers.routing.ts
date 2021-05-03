@@ -3,6 +3,7 @@ import { ActivityGuard } from '../guards/activity.guard';
 import { AuthorizeGuard } from '../guards/authorize.guard';
 import { CloseGuard } from '../guards/close.guard';
 import { EditGuard } from '../guards/edit.guard';
+import { ReopenGuard } from '../guards/reopen.guard';
 import { AuthorizeComponent } from './authorize/authorize.component';
 import { CloseComponent } from './close/close.component';
 import { EditWaiverComponent } from './edit-waiver/edit-waiver.component';
@@ -56,7 +57,7 @@ export const WaiversRoutes: Routes = [
       {
         path: 'reopen/:id',
         component: ReopenComponent,
-        //canActivate : [ ]
+        canActivate : [ ReopenGuard ]
       },
       {
         path: '',

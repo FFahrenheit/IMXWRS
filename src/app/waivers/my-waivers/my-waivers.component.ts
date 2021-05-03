@@ -24,6 +24,10 @@ export class MyWaiversComponent implements OnInit {
     this.router.navigate(['waivers','view',id]);
   }
 
+  reopen(id){
+    this.router.navigate(['waivers','reopen',id]);
+  }
+
   filter(data : any = ''){
     this.waiverService.getMyWaivers(data)
     .subscribe(

@@ -39,6 +39,30 @@ export class GetWaiverService {
       );
   }
 
+  loadWaiverIsRecurring(waiverId: string) {
+    this.wr = null;
+    return this.http.get(`${base_url}/waiver/${waiverId}`)
+      .pipe(
+        map((resp: any) => {
+          console.log(resp);
+          if (resp['ok'] == true) {
+            this.wr = resp['waiver'];
+            if (this.wr.typeNumber == 4 && this.wr.originator == this.loggedUser.getUser().username
+                && (this.wr.status == 'open' || this.wr.status == 'closed')) {
+              return true;
+            }
+          }
+          this.router.navigate(['403']);
+          return false;
+        }),
+        catchError((error) => {
+          console.log(error);
+          this.router.navigate(['403']);
+          return of(false);
+        })
+      );
+  }
+
   loadWaiverGuardOnHold(waiverId: string) {
     this.wr = null;
     return this.http.get(`${base_url}/waiver/${waiverId}`)

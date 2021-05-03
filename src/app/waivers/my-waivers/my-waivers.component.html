@@ -51,6 +51,10 @@
                     <button class="btn btn-primary" (click)="goToWaiver(waiver.number)">
                         Details
                     </button>
+                    <button *ngIf="(waiver.status == 'open' || waiver.status == 'closed') && waiver.typeNumber == 4"
+                    class="btn btn-warning offset" (click)="reopen(waiver.number)">
+                        Reopen
+                    </button>
                     <button *ngIf="waiver.status == 'open'" class="btn btn-success offset" (click)="goToClose(waiver.number)">
                         Close
                     </button>
