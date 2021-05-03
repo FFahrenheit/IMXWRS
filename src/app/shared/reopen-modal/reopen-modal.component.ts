@@ -66,7 +66,25 @@ export class ReopenModalComponent implements OnInit {
     if(!ctrl.touched){
       return '';
     }
-    return ctrl.value == '' ? 'is-invalid' : 'is-valid';
+    return ctrl.value == '' || ctrl.value == null ? 'is-invalid' : 'is-valid';
+  }
+
+  getContent(){
+    return `Do you want to reopen this waiver 
+    from ${ this.datePipe.transform(this.dateForm.controls['startDate'].value,'longDate') } 
+    to ${ this.datePipe.transform(this.dateForm.controls['endDate'].value,'longDate') }?`;
+  }
+
+  getReasons(){
+    let reasons = [];
+    if(this.dateForm.controls['startDate'].value == ''){
+      reasons.push('You must provide a start date');
+    }
+    if(this.dateForm.controls['endDate'].value == ''){
+      reasons.push('You must provide an end date');
+    }
+
+    return reasons;
   }
 
 }

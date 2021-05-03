@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'confirm-modal',
+  selector: 'confirm-modal', 
   templateUrl: './confirm-modal.component.html',
   styleUrls: ['./confirm-modal.component.scss']
 })
@@ -18,6 +18,7 @@ export class ConfirmModalComponent implements OnInit {
   @Output() public accept = new EventEmitter<void>();
   @Output() public cancel = new EventEmitter<void>();
   @Output() public reject = new EventEmitter<void>();
+  @Output() public triggered = new EventEmitter<void>();
 
   constructor(private modalService: NgbModal) { }
 
@@ -28,6 +29,7 @@ export class ConfirmModalComponent implements OnInit {
   }
 
   open(content) {
+    this.triggered.emit();
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       if(!this.isDisabled){
         switch (result) {
