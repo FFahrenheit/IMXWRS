@@ -12,6 +12,7 @@ import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { SortDirective } from '../directives/sort.directive';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { PipesModule } from '../pipes/pipes.module';
+import { ReopenModalComponent } from './reopen-modal/reopen-modal.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { PipesModule } from '../pipes/pipes.module';
     ResponsableInputComponent,
     SortDirective,
     FileUploadComponent,
+    ReopenModalComponent,
   ],
   imports: [
     CommonModule,
@@ -42,6 +44,7 @@ import { PipesModule } from '../pipes/pipes.module';
     ResponsableInputComponent,
     SortDirective,
     FileUploadComponent,
+    ReopenModalComponent,
   ]
 })
 export class SharedModule { }

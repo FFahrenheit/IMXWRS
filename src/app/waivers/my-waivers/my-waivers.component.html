@@ -18,10 +18,10 @@
     <table class="table table-hover" *ngIf="waivers?.length != 0;else empty_body">
         <thead>
             <tr class="header">
-                <th scope="col"[appSort]="waivers" data-order="desc" data-name="number" >
+                <th scope="col" [appSort]="waivers" data-order="desc" data-name="number">
                     <i class="fas fa-filter float-left"></i>WR ID
                 </th>
-                <th scope="col"  [appSort]="waivers" data-order="desc" data-name="customer">
+                <th scope="col" [appSort]="waivers" data-order="desc" data-name="customer">
                     <i class="fas fa-filter float-left"></i>Customer
                 </th>
                 <th scope="col" [appSort]="waivers" data-order="desc" data-name="creationDate">
@@ -48,26 +48,27 @@
                     {{ waiver.status | titlecase }}
                 </td>
                 <td>
-                    <button class="btn btn-primary" (click)="goToWaiver(waiver.number)">
-                        Details
+                    <button class="btn btn-primary" (click)="goToWaiver(waiver.number)" title="Details">
+                        <i class="fas fa-info-circle"></i>
                     </button>
                     <button *ngIf="(waiver.status == 'open' || waiver.status == 'closed') && waiver.typeNumber == 4"
-                    class="btn btn-warning offset" (click)="reopen(waiver.number)">
-                        Reopen
+                        class="btn btn-warning offset" (click)="reopen(waiver.number)" title="Reopen">
+                        <i class="fas fa-sync-alt"></i>
                     </button>
-                    <button *ngIf="waiver.status == 'open'" class="btn btn-success offset" (click)="goToClose(waiver.number)">
-                        Close
+                    <button *ngIf="waiver.status == 'open'" class="btn btn-success offset"
+                        (click)="goToClose(waiver.number)" title="Close">
+                        <i class="fas fa-check-circle"></i>
                     </button>
-                    <button *ngIf="waiver.status == 'on hold'" class="btn btn-info offset" (click)="goToEdit(waiver.number)">
-                        Edit
+                    <button *ngIf="waiver.status == 'on hold'" class="btn btn-info offset"
+                        (click)="goToEdit(waiver.number)" title="Edit">
+                        <i class="fas fa-edit"></i> 
                     </button>
                 </td>
             </tr>
         </tbody>
     </table>
     <ng-template #empty_body>
-        <error-message type="empty" title="Nothing here..." 
-        description="You don't have any waiver request yet">
+        <error-message type="empty" title="Nothing here..." description="You don't have any waiver request yet">
         </error-message>
     </ng-template>
 </div>
