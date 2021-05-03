@@ -9,6 +9,7 @@ import { EditWaiverComponent } from './edit-waiver/edit-waiver.component';
 import { LogComponent } from './log/log.component';
 import { MyWaiversComponent } from './my-waivers/my-waivers.component';
 import { RemarkedComponent } from './remarked/remarked.component';
+import { ReopenComponent } from './reopen/reopen.component';
 import { SignActivityComponent } from './sign-activity/sign-activity.component';
 import { ViewWaiverComponent } from './view-waiver/view-waiver.component';
 
@@ -51,6 +52,11 @@ export const WaiversRoutes: Routes = [
       {
         path: 'remarked',
         component: RemarkedComponent,
+      },
+      {
+        path: 'reopen/:id',
+        component: ReopenComponent,
+        //canActivate : [ ]
       },
       {
         path: '',
