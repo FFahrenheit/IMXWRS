@@ -1,5 +1,5 @@
 <div>
-    <button class="btn btn-md btn-primary my-3 float-right" (click)="open(confirmModal)">
+    <button class="btn btn-md btn-primary my-3 float-right mx-3" (click)="open(confirmModal)">
         {{ trigger }}
     </button>    
 </div>
@@ -44,7 +44,8 @@
     </div>
 
     <div class="modal-footer">
-        <confirm-modal myClass="btn-success" title="Reopen Recurring Waiver" (triggered)="dateForm.markAllAsTouched()" 
+        <confirm-modal myClass="btn-success" title="Reopen Recurring Waiver" 
+        (triggered)="dateForm.markAllAsTouched()" (accept)="confirm()" 
         [content]="getContent()" [isDisabled]="!dateForm.valid" [reason]="getReasons()"></confirm-modal>
 
         <button type="button" class="btn btn-primary px-3" (click)="resetForm()">Reset</button>

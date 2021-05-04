@@ -1,3 +1,3 @@
 <alert></alert>
 <app-waiver [id] = " waiverId " title="Reopen Recurring" [hasGuard]="true"> </app-waiver>
-<reopen-modal></reopen-modal>
+<reopen-modal (apply)="reopen($event)"></reopen-modal>

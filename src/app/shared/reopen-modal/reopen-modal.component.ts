@@ -21,6 +21,7 @@ export class ReopenModalComponent implements OnInit {
   public touched;
   public today;
   public dateForm;
+  private currentModal;
 
   constructor(private modalService : NgbModal,
               private datePipe : DatePipe,
@@ -36,7 +37,7 @@ export class ReopenModalComponent implements OnInit {
   }
 
   open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.currentModal = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       switch(result){
         case 'YES':
           let dates = this.dateForm.getValue();
@@ -85,6 +86,11 @@ export class ReopenModalComponent implements OnInit {
     }
 
     return reasons;
+  }
+
+  confirm(){
+    this.apply.emit(this.dateForm.value);
+    this.modalService.dismissAll();
   }
 
 }

@@ -20,7 +20,7 @@ export class CreateWrService {
   }
 
   getRepeated(body){
-    return this.http.post(`${ base_url }/waiver/ia`,body)
+    return this.http.post(`${ base_url }/ia`,body)
                .pipe(
                  map((resp:any)=>{
                    console.log(resp);
