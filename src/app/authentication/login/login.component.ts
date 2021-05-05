@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   public form: FormGroup = Object.create(null);
   public submitted = false;
   public returnUrl = '/';
+  public showPassword = false;
 
   constructor(private router : Router,
               private fb : FormBuilder,
@@ -52,6 +53,13 @@ export class LoginComponent implements OnInit {
         this.alert.error('Server error: ', { autoClose : true });
       }); 
     }
+  }
+
+  getClass(control){
+    if(!this.form.controls[control].touched){
+      return '';
+    }
+    return this.form.controls[control].hasError('required') ? 'is-invalid' : 'is-valid';
   }
 
 }
