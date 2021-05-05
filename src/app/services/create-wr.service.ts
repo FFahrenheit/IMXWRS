@@ -44,10 +44,12 @@ export class CreateWrService {
   getManagers(){
     let type = this.wr.details.typeNo.toString();
     let needsManager = this.wr.details.needsManager.toString();
+    let customer = this.wr.details.customer;
     let params = new HttpParams();
 
     params = params.append('number', type);
     params = params.append('needsManager', needsManager);
+    params = params.append('customer', customer);
 
     console.log(params);
 

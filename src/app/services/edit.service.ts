@@ -181,10 +181,12 @@ export class EditService {
   getManagers(){
     let type = this.wr.typeNumber.toString();
     let needsManager =  this.wr.requiresManager.toString();
+    let customer = this.wr.customer;
     let params = new HttpParams();
 
     params = params.append('number', type);
     params = params.append('needsManager', needsManager);
+    params = params.append('customer',customer);
 
     return this.http.get(`${ base_url }/waivers/authorizations`,{
       params: params
