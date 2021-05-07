@@ -56,7 +56,7 @@ export class ConfirmComponent implements OnInit {
         window.scroll(0,0);
         this.alert.success('Waiver sucessfully created');
         setTimeout(() => {
-          this.waiverService.wr = null;
+          this.waiverService.wr = {} as WR;
           this.router.navigate(['waivers','view',this.wr.number]);
         }, 3500);
       }else{

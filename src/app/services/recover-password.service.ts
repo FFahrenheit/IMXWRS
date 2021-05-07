@@ -17,7 +17,7 @@ export class RecoverPasswordService {
   public sendEmail(username){
     return this.http.post(`${ base_url }/user/recover`, username)
         .pipe(
-          (map((resp:any)=>{
+          map((resp:any)=>{
             console.log(resp);
             if(resp['ok']){
               return true;
@@ -26,7 +26,7 @@ export class RecoverPasswordService {
           }),catchError(error=>{
             console.log(error);
             return of(false);
-          }))
+          })
         );
   }
 }
