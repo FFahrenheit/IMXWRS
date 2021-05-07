@@ -8,11 +8,12 @@ import { FilterModalComponent } from './filter-modal/filter-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RemarkModalComponent } from './remark-modal/remark-modal.component';
 import { ResponsableInputComponent } from './responsable-input/responsable-input.component';
-import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { SortDirective } from '../directives/sort.directive';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { ReopenModalComponent } from './reopen-modal/reopen-modal.component';
+import { WaiverActionsComponent } from './waiver-actions/waiver-actions.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ReopenModalComponent } from './reopen-modal/reopen-modal.component';
     SortDirective,
     FileUploadComponent,
     ReopenModalComponent,
+    WaiverActionsComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +35,7 @@ import { ReopenModalComponent } from './reopen-modal/reopen-modal.component';
     ReactiveFormsModule,
     NgbTypeaheadModule,
     PipesModule.forRoot(),
+    NgbModule,
   ],
   exports: [
     AttributeComponent,
@@ -45,6 +48,7 @@ import { ReopenModalComponent } from './reopen-modal/reopen-modal.component';
     SortDirective,
     FileUploadComponent,
     ReopenModalComponent,
+    WaiverActionsComponent,
   ]
 })
 export class SharedModule { }

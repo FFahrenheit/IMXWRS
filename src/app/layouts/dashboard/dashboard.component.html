@@ -5,7 +5,7 @@
             <a *ngFor="let link of sidebar;let i = index"
                 class="list-group-item list-group-item-action bg-light clickable" (click)="goTo(link.route,i)"
                 [class.active-link]="selectedIndex === i">
-                {{link.name}}
+                {{ link.name }}
             </a>
         </div>
     </div>
@@ -19,6 +19,7 @@
                 <span class="nav-logo title-logo"> Waiver Requests System </span>
             </a>
             <span class="navbar-text float-right ml-auto">
+
                 <div ngbDropdown class="">
                     <button class="btn btn-light" id="dropdownBasic1" ngbDropdownToggle>
                         <span class="signed-user px-2">
@@ -29,7 +30,7 @@
                         <button ngbDropdownItem (click)="changePassword()">
                             <i class="fas fa-key pr-1"></i>Change password
                         </button>
-                        <button ngbDropdownItem (click)="logout()"> 
+                        <button ngbDropdownItem (click)="logout()">
                             <i class="fas fa-sign-out-alt pr-1"></i> Log out
                         </button>
                         <button ngbDropdownItem>Something else</button>
