@@ -70,8 +70,8 @@ export class NewWaiverComponent implements OnInit, OnDestroy {
       });
     }
     
-    this.updateLapse('quantity');
-    this.updateExtAuth('internal');
+    this.updateLapse(this.waiverDetails.controls['lapse'].value);
+    this.updateExtAuth(this.waiverDetails.controls['type'].value);
 
   }
 
