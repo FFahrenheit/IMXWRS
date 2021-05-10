@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { RecoverPasswordGuard } from "../guards/recover-password.guard";
 import { LogComponent } from "../waivers/log/log.component";
 import { AddUserComponent } from "./add-user/add-user.component";
 import { ChangePasswordComponent } from "./change-password/change-password.component";
@@ -13,7 +14,8 @@ export const ProfileRoutes : Routes = [
         },
         {
           path: 'password/change',
-          component: ChangePasswordComponent
+          component: ChangePasswordComponent,
+          canDeactivate: [ RecoverPasswordGuard ]
         },
         {
           path: 'users/add',

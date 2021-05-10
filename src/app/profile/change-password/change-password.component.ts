@@ -78,7 +78,12 @@ export class ChangePasswordComponent implements OnInit {
         this.changePassword.changePassword(this.form.value)
             .subscribe(resp=>{
               if(resp){
-                this.alert.success("Password changed", { autoClose : false });
+                let message = "Password changed";
+                if(!this.changePassword.canNavigate()){
+                  message += ". You can use the site now";
+                }
+                this.alert.success(message, { autoClose : false });
+                this.changePassword.deactivateGuard();
                 setTimeout(() => {
                   this.form.reset();
                   this.form.updateValueAndValidity();

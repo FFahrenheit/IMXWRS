@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginForm } from 'src/app/interfaces/login.interface';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { ChangePasswordService } from 'src/app/services/change-password.service';
 import { AlertService } from 'src/app/shared/alert';
 
 @Component({
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
               private fb : FormBuilder,
               private login : AuthenticationService,
               private alert : AlertService,
-              private route : ActivatedRoute) {}
+              private route : ActivatedRoute,
+              private change : ChangePasswordService) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -41,6 +43,7 @@ export class LoginComponent implements OnInit {
   
       this.login.login(loginForm).subscribe((resp)=>{
         if(resp == null){
+          this.change.activateGuard();
           this.router.navigate(['profile','password','change']);
         }
         else if(resp){
