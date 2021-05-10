@@ -29,6 +29,10 @@ export class ChangePasswordComponent implements OnInit {
     });
   }
 
+  isLocked(){
+    return !this.changePassword.canNavigate();
+  }
+
   passwordValid(){
     if(!this.form.controls['password'].touched){
       return '';    
@@ -81,6 +85,7 @@ export class ChangePasswordComponent implements OnInit {
                 let message = "Password changed";
                 if(!this.changePassword.canNavigate()){
                   message += ". You can use the site now";
+                  // this.alert.clear();
                 }
                 this.alert.success(message, { autoClose : false });
                 this.changePassword.deactivateGuard();

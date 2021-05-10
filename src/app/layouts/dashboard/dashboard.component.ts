@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import * as $ from 'jquery';
 import { User } from 'src/app/models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { ChangePasswordService } from 'src/app/services/change-password.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -59,7 +60,8 @@ export class DashboardComponent implements OnInit {
   ]
 
   constructor(private router: Router,
-              private loginService : AuthenticationService) { }
+              private loginService : AuthenticationService,
+              private changeService : ChangePasswordService) { }
 
   ngOnInit(): void {
     this.selectedIndex = + sessionStorage.getItem('index') || 0;
@@ -85,6 +87,7 @@ export class DashboardComponent implements OnInit {
   }
 
   logout(){
+    this.changeService.deactivateGuard();
     this.loginService.logout();
     this.router.navigate(['authentication','login']);
     sessionStorage.removeItem('index');
