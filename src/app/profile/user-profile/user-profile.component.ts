@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { UsersService } from 'src/app/services/users.service';
+import { AlertService } from 'src/app/shared/alert';
 
 @Component({
   selector: 'app-user-profile',
@@ -10,16 +12,30 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class UserProfileComponent implements OnInit {
 
-  private username : string;
-  public user : User;
+  public username : string;
+  public user : User = null;
 
-  constructor(private route : ActivatedRoute) { 
+  constructor(private route : ActivatedRoute,
+              private userService : UsersService,
+              private alert : AlertService) { 
   }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.username = params.get('user');
     });
+
+    this.userService.getUser(this.username).subscribe(
+      resp=>{
+        console.log(resp);
+        if(resp){
+          this.user = this.userService.getCurrentUser();
+        }
+      },
+      error=>{
+        this.alert.error("The information of this user couldn't be retrieved");
+      }
+    )
   }
 
 }

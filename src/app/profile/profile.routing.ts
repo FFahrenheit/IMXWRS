@@ -23,7 +23,7 @@ export const ProfileRoutes : Routes = [
           component: AddUserComponent
         },
         {
-          path: 'profile/:user',
+          path: ':user',
           component: UserProfileComponent
         },
         {

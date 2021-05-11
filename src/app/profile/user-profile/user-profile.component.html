@@ -1,19 +1,25 @@
 <div class="table-responsive container text-center pt-2">
     <alert></alert>
-    <h4 class="text-left my-3">Profile</h4>
 
-    <div class="row d-flex justify-content-center">
+    <h4 class="text-left my-3"> {{ username }}'s profile</h4>
+    <hr>
+    <div *ngIf="user != null">
 
-        <div class="col-md-5">
-            <i class="fas fa-user-circle bigger-icon"></i>
-            <h5>My profile</h5>
-            <!-- <attribute name="Display name: " [value]="user.name"></attribute>
-            <attribute name="Email: " [value]="user.email"></attribute>
-            <attribute name="Position: " [value]="user.position | titlecase"></attribute> -->
-        </div>
+        <div class="row d-flex justify-content-center">
 
-        <div class="col-md-7">
+            <div class="col-md-6">
+                <i class="fas fa-user-circle bigger-icon"></i>
+                <h4>User profile</h4>
+                <attribute name="Display name: " [value]="user.name"></attribute>
+                <attribute name="Email: " [value]="user.email"></attribute>
+                <attribute name="Position: " [value]="user.position | titlecase"></attribute>
+            </div>
 
+            <div class="col-md-6">
+                <i class="fas fa-chart-pie bigger-icon"></i>
+                <h4>User stats</h4>
+                
+            </div>
         </div>
     </div>
 
