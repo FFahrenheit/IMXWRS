@@ -101,4 +101,8 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['profile','users','add'])
   }
 
+  goToProfile(){
+    this.router.navigate(['profile',this.user.username]);
+  }
+
 }
