@@ -14,6 +14,7 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { ReopenModalComponent } from './reopen-modal/reopen-modal.component';
 import { WaiverActionsComponent } from './waiver-actions/waiver-actions.component';
+import { ChartComponent } from './chart/chart.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { WaiverActionsComponent } from './waiver-actions/waiver-actions.componen
     FileUploadComponent,
     ReopenModalComponent,
     WaiverActionsComponent,
+    ChartComponent,
   ],
   imports: [
     CommonModule,
@@ -49,6 +51,7 @@ import { WaiverActionsComponent } from './waiver-actions/waiver-actions.componen
     FileUploadComponent,
     ReopenModalComponent,
     WaiverActionsComponent,
+    ChartComponent
   ]
 })
 export class SharedModule { }
