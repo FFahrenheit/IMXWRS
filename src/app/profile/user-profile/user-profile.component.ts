@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { UsersService } from 'src/app/services/users.service';
 import { AlertService } from 'src/app/shared/alert';
+import { Charting } from 'src/app/util/charting';
 
 @Component({
   selector: 'app-user-profile',
@@ -30,6 +31,14 @@ export class UserProfileComponent implements OnInit {
         console.log(resp);
         if(resp){
           this.user = this.userService.getCurrentUser();
+          let stats = this.userService.getStats();
+          console.log(stats);
+
+          let data = new Charting();
+          
+          let info = data.getCharts();
+
+          console.log(info);
         }
       },
       error=>{

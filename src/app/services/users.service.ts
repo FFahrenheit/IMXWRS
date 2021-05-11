@@ -13,6 +13,7 @@ const base_url = environment.base_url;
 export class UsersService {
 
   private loadedUser : User;
+  private stats : any;
 
   constructor(private http : HttpClient) { }
 
@@ -34,6 +35,7 @@ export class UsersService {
                        position : resp.user.position
                      };
                      this.loadedUser = user;
+                     this.stats = resp['stats'];
                      
                      return true;
 
@@ -48,5 +50,9 @@ export class UsersService {
 
   getCurrentUser(){
     return this.loadedUser;
+  }
+
+  getStats(){
+    return this.stats;
   }
 }
