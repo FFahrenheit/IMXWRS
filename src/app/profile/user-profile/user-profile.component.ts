@@ -15,6 +15,7 @@ export class UserProfileComponent implements OnInit {
   public username : string;
   public user : User = null;
   public tests = Array(5).fill(0).map((x,i)=>i);
+  public charts = [];
 
   constructor(private route : ActivatedRoute,
               private userService : UsersService,
@@ -36,9 +37,8 @@ export class UserProfileComponent implements OnInit {
 
           let data = new Charting();
           
-          let info = data.getCharts();
-
-          console.log(info);
+          this.charts = data.getCharts(stats);
+          console.log(this.charts);
         }
       },
       error=>{

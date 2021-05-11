@@ -3,7 +3,7 @@
 	<canvas id="canvasChart" #canvasChart></canvas>
 	
     <div class="card-content">
-		<h3> {{ title }} </h3>
-		<p> {{ description }}</p>
+		<h3> {{ chart?.title || title }} </h3>
+		<p> {{ chart?.description || description }}</p>
 	</div>
 </div>

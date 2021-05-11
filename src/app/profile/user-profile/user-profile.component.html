@@ -7,7 +7,7 @@
 
         <div class="row d-flex justify-content-center">
 
-            <div class="col-md-5">
+            <div class="col-md-4">
                 <i class="fas fa-user-circle bigger-icon"></i>
                 <h4>User profile</h4>
                 <attribute name="Display name: " [value]="user.name"></attribute>
@@ -15,13 +15,16 @@
                 <attribute name="Position: " [value]="user.position | titlecase"></attribute>
             </div>
 
-            <div class="col-md-7">
+            <div class="col-md-8">
                 <i class="fas fa-chart-pie bigger-icon"></i>
                 <h4>User stats</h4>
                 
                 <div class="card-columns">
-                    <chart *ngFor="test of tests">
-                    </chart> 
+                    <div *ngFor="let chart of charts">
+        
+                        <chart [chart]="chart">
+                        </chart>
+                    </div>
                 </div>
 
             </div>
