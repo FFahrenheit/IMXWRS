@@ -8,12 +8,9 @@
         <div class="row d-flex justify-content-center">
 
             <div class="col-md-4">
-                <i class="fas fa-user-circle bigger-icon"></i>
-                <h4 class="title">User profile</h4>
-                
-                <attribute name="Display name: " [value]="user.name"></attribute>
-                <attribute name="Email: " [value]="user.email"></attribute>
-                <attribute name="Position: " [value]="user.position | titlecase"></attribute>
+                <profile-view [user]="user">
+
+                </profile-view>
             </div>
 
             <div class="col-md-8">

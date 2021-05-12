@@ -15,6 +15,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import { ReopenModalComponent } from './reopen-modal/reopen-modal.component';
 import { WaiverActionsComponent } from './waiver-actions/waiver-actions.component';
 import { ChartComponent } from './chart/chart.component';
+import { ProfileViewComponent } from './profile-view/profile-view.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ChartComponent } from './chart/chart.component';
     ReopenModalComponent,
     WaiverActionsComponent,
     ChartComponent,
+    ProfileViewComponent,
   ],
   imports: [
     CommonModule,
@@ -51,7 +53,8 @@ import { ChartComponent } from './chart/chart.component';
     FileUploadComponent,
     ReopenModalComponent,
     WaiverActionsComponent,
-    ChartComponent
+    ChartComponent,
+    ProfileViewComponent
   ]
 })
 export class SharedModule { }
