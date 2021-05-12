@@ -34,6 +34,7 @@ export class UsersService {
                        name : resp.user.name,
                        position : resp.user.position
                      };
+
                      this.loadedUser = user;
                      this.stats = resp['stats'];
                      
@@ -43,7 +44,7 @@ export class UsersService {
                    return false;
                  })),
                  catchError(error=>{
-                   return of(false);
+                   return of(null);
                  })
                );
   }

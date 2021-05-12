@@ -97,7 +97,7 @@ export class GetWaiverService {
             let user = this.loggedUser.getUser();
             this.wr = resp['waiver'];
             //May add new conditions
-            if (this.wr.status != 'closed' && user.position != 'employee') {
+            if ((this.wr.status != 'closed'||true) && user.position != 'employee') {
               return true;
             }
           }

@@ -29,6 +29,9 @@ export class UserProfileComponent implements OnInit {
 
     this.userService.getUser(this.username).subscribe(
       resp=>{
+        if(resp == null){
+          this.alert.error("The information of this user couldn't be retrieved");
+        }
         console.log(resp);
         if(resp){
           this.user = this.userService.getCurrentUser();

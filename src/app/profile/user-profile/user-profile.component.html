@@ -3,7 +3,7 @@
 
     <h4 class="text-left my-3"> {{ username }}'s profile</h4>
     <hr>
-    <div *ngIf="user != null; else not_found">
+    <div *ngIf="user?.username != null; else not_found">
 
         <div class="row d-flex justify-content-center">
 
@@ -24,6 +24,7 @@
         
                         <chart [chart]="chart">
                         </chart>
+                        
                     </div>
                 </div>
 
