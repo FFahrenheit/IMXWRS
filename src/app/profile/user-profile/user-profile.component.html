@@ -9,7 +9,8 @@
 
             <div class="col-md-4">
                 <i class="fas fa-user-circle bigger-icon"></i>
-                <h4>User profile</h4>
+                <h4 class="title">User profile</h4>
+                
                 <attribute name="Display name: " [value]="user.name"></attribute>
                 <attribute name="Email: " [value]="user.email"></attribute>
                 <attribute name="Position: " [value]="user.position | titlecase"></attribute>
@@ -17,16 +18,21 @@
 
             <div class="col-md-8">
                 <i class="fas fa-chart-pie bigger-icon"></i>
-                <h4>User stats</h4>
-                
-                <div class="card-columns">
+                <h4 class="title">User stats</h4>
+
+                <div *ngIf="charts.length > 0; else no_participation" class="card-columns">
                     <div *ngFor="let chart of charts">
-        
+
                         <chart [chart]="chart">
                         </chart>
-                        
+
                     </div>
                 </div>
+                <ng-template #no_participation>
+                    <error-message styles="small-size" type="empty-sub" title="Nothing here..."
+                        description="This user has no participation in the system">
+                    </error-message>
+                </ng-template>
 
             </div>
         </div>

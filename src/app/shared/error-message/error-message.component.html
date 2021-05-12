@@ -1,6 +1,6 @@
-<div class="text-center body">
+<div class="text-center" [ngClass]="{'body' : !type.includes('sub')}" [class]="styles">
     <img (click)="goBack()" class="my-1 logo" [src]="url">
     <h1 class="big-404 mb-3">{{ title }}</h1>
     <h2 class="error-content">{{ description }}</h2>
-    <span (click)="goBack()" class="go-back">Go back </span>
+    <span *ngIf="!type.includes('sub')" (click)="goBack()" class="go-back">Go back </span>
 </div>
