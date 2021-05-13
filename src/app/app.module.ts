@@ -14,6 +14,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Error403Component } from './errors/error403/error403.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './services/token-interceptor.service';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
     RouterModule.forRoot(AppRoutes),
     NgbModule,
     HttpClientModule,
+    SharedModule,
   ],
   providers: [
     DatePipe,
