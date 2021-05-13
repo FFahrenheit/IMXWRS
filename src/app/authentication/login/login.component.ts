@@ -27,8 +27,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      username: ["", Validators.compose([Validators.required])],
-      password: ["", Validators.compose([Validators.required])]
+      username: [localStorage.getItem("remember-user")||"", Validators.compose([Validators.required])],
+      password: ["", Validators.compose([Validators.required])],
+      remember: [false, Validators.compose([Validators.required])]
     });
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
@@ -42,6 +43,11 @@ export class LoginComponent implements OnInit {
       }; 
   
       this.login.login(loginForm).subscribe((resp)=>{
+        if(resp == null || resp){
+          if(this.form.controls['remember']){
+            localStorage.setItem("remember-user",loginForm.username);
+          }
+        } 
         if(resp == null){
           this.change.activateGuard();
           this.router.navigate(['profile','password','change']);

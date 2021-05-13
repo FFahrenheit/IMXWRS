@@ -43,3 +43,16 @@ body,html{
 .show-password{
     cursor: pointer;
 }
+
+.remember-label{
+    color: rgb(61, 61, 61);
+}
+
+.remember-label input{
+    margin-top: 10px;
+}
+
+.remember-label label{
+    margin-bottom: 10px;
+    font-size: 18px;
+}
