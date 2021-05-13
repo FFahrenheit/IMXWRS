@@ -8,11 +8,17 @@ export const AuthenticationRoutes: Routes = [
         children: [
             {
                 path: 'login',
-                component : LoginComponent
+                component : LoginComponent,
+                data : {
+                    title : 'IMXWRS - Login'
+                }
             },
             {
                 path: 'recover',
-                component: RecoverComponent
+                component: RecoverComponent,
+                data : {
+                    title : 'Recover password'
+                }
             },
             {
                 path: '',

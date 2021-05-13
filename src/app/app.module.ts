@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -39,7 +39,8 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
       useClass: TokenInterceptorService,
       multi: true
     },
-    TitleCasePipe
+    TitleCasePipe,
+    Title,
   ],
   bootstrap: [AppComponent]
 })
