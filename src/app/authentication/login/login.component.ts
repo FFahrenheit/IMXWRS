@@ -44,8 +44,13 @@ export class LoginComponent implements OnInit {
   
       this.login.login(loginForm).subscribe((resp)=>{
         if(resp == null || resp){
-          if(this.form.controls['remember']){
+          if(this.form.controls['remember'].value){
             localStorage.setItem("remember-user",loginForm.username);
+          }
+          else{
+            if(localStorage.getItem("remember-user") == loginForm.username){
+              localStorage.removeItem("remember-user");
+            }
           }
         } 
         if(resp == null){
