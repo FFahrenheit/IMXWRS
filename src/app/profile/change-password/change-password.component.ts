@@ -13,15 +13,12 @@ import { AlertService } from 'src/app/shared/alert';
 export class ChangePasswordComponent implements OnInit {
 
   public form;
-  public user : User;
 
   constructor(private fb : FormBuilder,
-              private loginService : AuthenticationService,
               private alert : AlertService,
               private changePassword : ChangePasswordService) { }
 
   ngOnInit(): void {
-    this.user = this.loginService.getUser();
 
     this.form = this.fb.group({
       password : ['', Validators.compose([Validators.required, Validators.minLength(6)])],
