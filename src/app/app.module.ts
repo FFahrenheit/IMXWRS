@@ -15,6 +15,7 @@ import { Error403Component } from './errors/error403/error403.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { SharedModule } from './shared/shared.module';
+import { Error500Component } from './errors/error500/error500.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SharedModule } from './shared/shared.module';
     Error404Component,
     DashboardComponent,
     Error403Component,
+    Error500Component,
   ],
   imports: [
     BrowserModule,
