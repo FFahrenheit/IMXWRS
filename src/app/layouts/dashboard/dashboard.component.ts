@@ -4,6 +4,7 @@ import * as $ from 'jquery';
 import { User } from 'src/app/models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ChangePasswordService } from 'src/app/services/change-password.service';
+import { userSidebar, adminSidebar } from './dashboard.component.sidebar'
 
 @Component({
   selector: 'app-dashboard',
@@ -17,48 +18,6 @@ export class DashboardComponent implements OnInit {
   public selectedIndex = 0;
   public sidebar;
 
-  private userSidebar = [
-    {
-      name: "Waivers log",
-      route: [ 'waivers', 'all']
-    },
-    {
-      name: "New WR",
-      route: [ 'create' , 'new'],
-    },
-    {
-      name: "Assigned activities",
-      route: [ 'tasks','assigned']
-    },
-    {
-      name: "My activities",
-      route: ['tasks','pending']
-    },
-    {
-      name: "My waiver requests",
-      route: ['waivers', 'status']
-    },
-    {
-      name: "Remarked waivers",
-      route: ['waivers','remarked']
-    }
-  ]
-
-  private adminSidebar = [
-    {
-      name: "Waivers log",
-      route: ['waivers','all']
-    },
-    {
-      name: "Pending authorizations",
-      route: ['authorizations','pending']
-    },
-    {
-      name: "My approved WR",
-      route: ['authorizations','approved']
-    }
-  ]
-
   constructor(private router: Router,
               private loginService : AuthenticationService,
               private changeService : ChangePasswordService) { }
@@ -71,12 +30,12 @@ export class DashboardComponent implements OnInit {
     });
     this.user = this.loginService.getUser();
     if(this.user.position == 'developer'){
-      this.sidebar = this.userSidebar.concat(this.adminSidebar);
+      this.sidebar = userSidebar.concat(adminSidebar);
     }
     else if(this.user.position == 'employee'){
-      this.sidebar = this.userSidebar;
+      this.sidebar = userSidebar;
     }else{
-      this.sidebar = this.adminSidebar;
+      this.sidebar = adminSidebar;
     }
 }
 
