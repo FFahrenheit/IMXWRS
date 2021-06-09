@@ -15,7 +15,6 @@ import { RemarkedComponent } from './remarked/remarked.component';
 import { RepeatedWaiversComponent } from './repeated-waivers/repeated-waivers.component';
 import { CloseComponent } from './close/close.component';
 import { ReopenComponent } from './reopen/reopen.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [

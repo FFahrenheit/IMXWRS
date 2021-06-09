@@ -25,11 +25,12 @@ export class TokenInterceptorService implements HttpInterceptor{
 
     return next.handle(tokenizedRequest).pipe(
       catchError((error) => {
-        this.retryCount += 1;
-        console.log('Error: ' + this.retryCount + ' retries');
-
-        if(this.retryCount > 5){
-          this.router.navigate(['500'])
+        if(error.status == 0){
+          this.retryCount += 1;
+          console.log('Error: ' + this.retryCount + ' retries');
+          if(this.retryCount >= 4){
+            this.router.navigate(['500'])
+          }
         }
         console.warn(error);
         return throwError('Error');

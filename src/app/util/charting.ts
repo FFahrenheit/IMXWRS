@@ -1,4 +1,3 @@
-import { TitleCasePipe } from "@angular/common";
 import { ChartData } from "../interfaces/chart.interface";
 
 export class Charting{
