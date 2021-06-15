@@ -122,7 +122,7 @@ export class GetWaiverService {
             let user = this.loggedUser.getUser();
             this.wr = resp['waiver'];
             //May add new conditions
-            if (this.wr.status == 'pending' && user.position == 'employee') {
+            if (this.wr.status == 'pending' /*&& user.position == 'employee'*/) {
               return true;
             }
           }

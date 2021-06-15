@@ -17,7 +17,8 @@ export class RepeatedWaiversComponent implements OnInit {
   }
 
   open(content) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg' }).result.then((result) => {
+
         switch (result) {
           case 'YES':
             break;
