@@ -17,6 +17,7 @@ import { WaiverActionsComponent } from './waiver-actions/waiver-actions.componen
 import { ChartComponent } from './chart/chart.component';
 import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { FooterComponent } from './footer/footer.component';
+import { StatsDetailsModalComponent } from './stats-details-modal/stats-details-modal.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { FooterComponent } from './footer/footer.component';
     ChartComponent,
     ProfileViewComponent,
     FooterComponent,
+    StatsDetailsModalComponent,
   ],
   imports: [
     CommonModule,
@@ -58,6 +60,7 @@ import { FooterComponent } from './footer/footer.component';
     ChartComponent,
     ProfileViewComponent,
     FooterComponent,
+    StatsDetailsModalComponent
   ]
 })
 export class SharedModule { }

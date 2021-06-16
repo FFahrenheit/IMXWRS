@@ -17,6 +17,8 @@ export class ChartComponent implements OnInit {
   @Input() public data = [300, 50, 100];
 
   @ViewChild('canvasChart') canvasChart;
+  @ViewChild('viewStats') statsModal;
+
   private canvas;
   private ctx;
   
@@ -44,6 +46,7 @@ export class ChartComponent implements OnInit {
 
   public details(){
     console.log(this.chart);
+    this.statsModal.hi();
   }
 
 }
