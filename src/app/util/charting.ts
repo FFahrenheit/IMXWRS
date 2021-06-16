@@ -15,7 +15,7 @@ export class Charting{
     constructor(){
     }
 
-    getCharts(data : any){
+    getCharts(data : any, username = 'all'){
         this.chartList = [];
         Object.keys(data).forEach(key=>{
             
@@ -35,7 +35,9 @@ export class Charting{
                     description : 'This chart shows the participation of the user in ' + key,
                     colorSet : color,
                     dataSet : points,
-                    labelSet : labels
+                    labelSet : labels,
+                    type: key,
+                    username: username
                 };
                 
                 console.log(chart);

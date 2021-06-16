@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { ChartData } from 'src/app/interfaces/chart.interface';
 
@@ -39,7 +39,11 @@ export class ChartComponent implements OnInit {
           hoverOffset: 4
         }]
       }
-    })
+    });
+  }
+
+  public details(){
+    console.log(this.chart);
   }
 
 }

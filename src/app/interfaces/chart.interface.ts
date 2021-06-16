@@ -4,4 +4,6 @@ export interface ChartData{
     labelSet : string[]
     dataSet : Number[],
     colorSet : string[]
+    type : string,
+    username: string
 }
