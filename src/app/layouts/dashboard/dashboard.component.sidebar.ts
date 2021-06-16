@@ -37,5 +37,13 @@ export const adminSidebar = [
     {
         name: "My approved WR",
         route: ['authorizations', 'approved']
+    },
+    {
+        name: "Overall performance",
+        route: ['performance', 'dashboard']
+    },
+    {
+        name: "Individual performance",
+        route: ['performance', 'users']
     }
 ];

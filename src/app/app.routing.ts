@@ -55,7 +55,14 @@ export const AppRoutes: Routes = [
                 path: 'profile',
                 loadChildren: ()=>
                 import('./profile/profile.module').then(
-                    (m)=> m.ProfileModule
+                    (m) => m.ProfileModule
+                )
+            },
+            {
+                path: 'performance',
+                loadChildren: () =>
+                import('./performance/performance.module').then(
+                    (m) => m.PerformanceModule
                 )
             },
             {
