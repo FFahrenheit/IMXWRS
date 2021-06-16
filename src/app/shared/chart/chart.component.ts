@@ -22,6 +22,7 @@ export class ChartComponent implements OnInit {
 
   private canvas;
   private ctx;
+  private myChart : Chart;
   
   constructor() { }
 
@@ -31,7 +32,7 @@ export class ChartComponent implements OnInit {
     this.canvas = this.canvasChart.nativeElement; 
     this.ctx = this.canvas.getContext('2d');
 
-    let myChart = new Chart(this.ctx, {
+    this.myChart = new Chart(this.canvasChart.nativeElement, {
       type: 'pie',
       data: {
         labels: this.chart?.labelSet || this.labels,
@@ -41,8 +42,22 @@ export class ChartComponent implements OnInit {
           backgroundColor: this.chart?.colorSet || this.colors,
           hoverOffset: 4
         }]
+      },
+      options: {
+        onClick: this.showData.bind(this)
       }
     });
+  }
+
+  showData(evt, arr){
+    if(arr?.length){
+      let index = arr[0].index;
+      console.log(index);
+  
+      console.log(this.chart.labelSet[index].toLowerCase());
+    }else{
+      console.log('all');
+    }
   }
 
   public details(){
