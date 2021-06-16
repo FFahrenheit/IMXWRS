@@ -18,6 +18,7 @@ import { ChartComponent } from './chart/chart.component';
 import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { FooterComponent } from './footer/footer.component';
 import { StatsDetailsModalComponent } from './stats-details-modal/stats-details-modal.component';
+import { TableGeneratorComponent } from './table-generator/table-generator.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { StatsDetailsModalComponent } from './stats-details-modal/stats-details-
     ProfileViewComponent,
     FooterComponent,
     StatsDetailsModalComponent,
+    TableGeneratorComponent,
   ],
   imports: [
     CommonModule,
@@ -60,7 +62,8 @@ import { StatsDetailsModalComponent } from './stats-details-modal/stats-details-
     ChartComponent,
     ProfileViewComponent,
     FooterComponent,
-    StatsDetailsModalComponent
+    StatsDetailsModalComponent,
+    TableGeneratorComponent
   ]
 })
 export class SharedModule { }

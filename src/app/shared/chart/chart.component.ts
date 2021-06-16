@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { ChartData } from 'src/app/interfaces/chart.interface';
+import { StatsDetailsModalComponent } from '../stats-details-modal/stats-details-modal.component';
 
 @Component({
   selector: 'chart',
@@ -17,7 +18,7 @@ export class ChartComponent implements OnInit {
   @Input() public data = [300, 50, 100];
 
   @ViewChild('canvasChart') canvasChart;
-  @ViewChild('viewStats') statsModal;
+  @ViewChild('viewStats') statsModal : StatsDetailsModalComponent;
 
   private canvas;
   private ctx;
@@ -46,7 +47,7 @@ export class ChartComponent implements OnInit {
 
   public details(){
     console.log(this.chart);
-    this.statsModal.hi();
+    this.statsModal.openDetails();
   }
 
 }
