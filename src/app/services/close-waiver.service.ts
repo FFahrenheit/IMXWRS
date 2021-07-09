@@ -12,7 +12,7 @@ export class CloseWaiverService {
 
   closeWaiver(files : File[], request : string){
     let headers = new HttpHeaders();
-    headers.set('Conent-Type','multipart/form-data');
+    headers.set('Content-Type','multipart/form-data');
     let formData = new FormData;
     files.forEach(file=>{
       formData.append("multi-files",file);

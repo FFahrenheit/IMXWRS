@@ -78,5 +78,4 @@ export class WaiverComponent implements OnInit {
   downloadFile(filename : string){
     return this.waiverService.downloadFile(filename);
   }
-
-}
+} 

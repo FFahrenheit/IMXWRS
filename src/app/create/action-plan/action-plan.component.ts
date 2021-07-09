@@ -18,7 +18,7 @@ export class ActionPlanComponent implements OnInit, OnDestroy {
   public actionPlan : FormGroup = Object.create(null);
   public today = this.datePipe.transform(new Date(),"yyyy-MM-dd");
   public users : ActionUser[];
-  public model : any;
+  //Check if it works
   @ViewChildren('responsable') responsables: QueryList<ResponsableInputComponent>;
 
   constructor(private fb : FormBuilder,

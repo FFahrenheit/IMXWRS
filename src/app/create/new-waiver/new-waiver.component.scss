@@ -1,51 +1,52 @@
-label, legend{
-    color: black;
+label,
+legend {
+  color: black;
 }
 
 .deviation-info {
-    position: relative;
-    display: inline-block;
-    // border-bottom: 1px dotted black;
-  }
-  
-  .deviation-info .deviation-info-text {
-    visibility: hidden;
-    width: 220px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 1px;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -110px;
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  
-  .deviation-info .deviation-info-text::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
-  }
-  
-  .deviation-info:hover .deviation-info-text {
-    visibility: visible;
-    opacity: 1;
-  }
-
-  .area{
-    min-height: 80px;
+  position: relative;
+  display: inline-block;
+  // border-bottom: 1px dotted black;
 }
 
-.no-ok{
+.deviation-info .deviation-info-text {
+  visibility: hidden;
+  width: 220px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 1px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -110px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.deviation-info .deviation-info-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.deviation-info:hover .deviation-info-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.area {
+  min-height: 80px;
+}
+
+.no-ok {
   background-color: rgb(134, 134, 134);
   cursor: default;
   border-color: rgb(133, 133, 133);

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { User } from 'src/app/models/user.model';
-import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ChangePasswordService } from 'src/app/services/change-password.service';
 import { AlertService } from 'src/app/shared/alert';
 
