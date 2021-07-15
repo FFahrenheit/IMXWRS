@@ -8,6 +8,13 @@
                 </th>
             </tr>
         </thead>
+        <tbody class="click">
+            <tr *ngFor="let d of data; let i = index" (click)="goTo(i)">
+                <td *ngFor="let key of getKeys()">
+                    {{ d[key] }}
+                </td>
+            </tr>
+        </tbody>
     </table>
     <ng-template #empty_content>
         Hola

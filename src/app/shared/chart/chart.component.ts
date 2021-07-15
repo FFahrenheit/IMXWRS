@@ -81,7 +81,7 @@ export class ChartComponent implements OnInit {
     
     this.statsModal.title = title;
     this.statsModal.content = 'Here is information for ' + title;
-    
+
     this.statsModal.openDetails();
   }
 

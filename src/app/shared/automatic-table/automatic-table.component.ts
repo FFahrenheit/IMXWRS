@@ -27,4 +27,8 @@ export class AutomaticTableComponent implements OnInit {
     return Object.keys(this.data[0]);
   }
 
+  goTo(index : number){
+    console.log(index);
+  }
+
 }
