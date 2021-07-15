@@ -13,6 +13,7 @@ export class StatsDetailsModalComponent implements OnInit {
   @Input() public isDisabled = false;
   @Input() public data = null;
   @Input() public error = null;
+  @Input() public key = '';
 
   @Output() public close = new EventEmitter<void>();
   @Output() public triggered = new EventEmitter<void>();
@@ -39,6 +40,10 @@ export class StatsDetailsModalComponent implements OnInit {
   public clearModal(){
     this.data = null;
     this.error = null;
+  }
+
+  public seeWaiver(id){
+    console.log(id);
   }
 
 }

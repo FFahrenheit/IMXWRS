@@ -12,7 +12,9 @@
                 Click on the row to see the details of the respective waiver
             </div>
 
-            <app-table [data]="data"></app-table>
+            <app-table [data]="data"
+            (onSelect)="seeWaiver($event)"
+            [key]="key"></app-table>
     </div>
     <div class="modal-footer">
         <button *ngIf="!isDisabled" type="button" class="btn btn-primary px-3" (click)="modal.close('')">Close</button>

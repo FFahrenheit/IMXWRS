@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-table',
@@ -17,6 +18,9 @@ export class AutomaticTableComponent implements OnInit {
     {a:10,b:100,c:200},
   ];
 
+  @Input() public key = 'number';
+  @Output() public onSelect = new EventEmitter<string>();
+
   constructor() { }
 
   ngOnInit(): void {
@@ -28,6 +32,7 @@ export class AutomaticTableComponent implements OnInit {
 
   goTo(index : number){
     console.log(index);
+    this.onSelect.emit(this.data[index][this.key]);
   }
 
 }

@@ -81,6 +81,7 @@ export class ChartComponent implements OnInit {
     
     this.statsModal.title = title;
     this.statsModal.content = 'Here is information for ' + title;
+    this.statsModal.key = action.toLowerCase() == 'waivers' ? 'number' : 'request';
 
     this.statsModal.data = null;
 

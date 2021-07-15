@@ -4,14 +4,14 @@
             <tr class="header">
                 <th *ngFor="let key of getKeys()" class="align-middle"
                 scope="col" [appSort]="data" data-order="desc" [data-name]="key">
-                    {{ key }}
+                    {{ key | dbcase }}
                 </th>
             </tr>
         </thead>
         <tbody class="click">
             <tr *ngFor="let d of data; let i = index" (click)="goTo(i)">
                 <td *ngFor="let key of getKeys()">
-                    {{ d[key] }}
+                    {{ d[key] === d[key].toString().toLowerCase() ? d[key] : d[key].toString() | titlecase }}
                 </td>
             </tr>
         </tbody>
