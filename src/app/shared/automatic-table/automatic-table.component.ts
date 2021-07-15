@@ -20,7 +20,6 @@ export class AutomaticTableComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(Object.keys(this.data[0]));
   }
 
   getKeys(){

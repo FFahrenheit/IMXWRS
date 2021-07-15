@@ -1,8 +1,8 @@
 import { TitleCasePipe } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { ChartData } from 'src/app/interfaces/chart.interface';
+import { StatsService } from 'src/app/services/stats.service';
 import { StatsDetailsModalComponent } from '../stats-details-modal/stats-details-modal.component';
 
 @Component({
@@ -30,8 +30,8 @@ export class ChartComponent implements OnInit {
   private dataTable = [];
   private modalReference;
 
-  constructor(private modalService  : NgbModal,
-              private titleCase     : TitleCasePipe) { }
+  constructor(private titleCase     : TitleCasePipe,
+              private statsService  : StatsService) { }
 
   ngOnInit(){}
 
@@ -81,6 +81,19 @@ export class ChartComponent implements OnInit {
     
     this.statsModal.title = title;
     this.statsModal.content = 'Here is information for ' + title;
+
+    this.statsModal.data = null;
+
+    this.statsService.getStatData(action.toLowerCase(), user, type)
+        .subscribe(resp=>{
+          if(resp){
+            this.statsModal.data = this.statsService.getData();
+          }else{
+            this.statsModal.error = 'Error retreiving data';
+          }
+        },error=>{
+          this.statsModal.error = 'Error retreiving data';
+        });
 
     this.statsModal.openDetails();
   }

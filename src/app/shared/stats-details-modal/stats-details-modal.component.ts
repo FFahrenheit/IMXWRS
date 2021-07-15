@@ -11,6 +11,8 @@ export class StatsDetailsModalComponent implements OnInit {
   @Input() public title = 'Stats details';
   @Input() public content = 'Stats detailf for current user';
   @Input() public isDisabled = false;
+  @Input() public data = null;
+  @Input() public error = null;
 
   @Output() public close = new EventEmitter<void>();
   @Output() public triggered = new EventEmitter<void>();
@@ -34,8 +36,9 @@ export class StatsDetailsModalComponent implements OnInit {
     });
   }
 
-  public hi(){
-    console.log('hoLa');
+  public clearModal(){
+    this.data = null;
+    this.error = null;
   }
 
 }
