@@ -1,10 +1,11 @@
 <div class="card p-3 pointer">
 
 	<canvas id="canvasChart" #canvasChart></canvas>
-	
-    <div class="card-content" (click)="showData($event,null)">
+
+	<div class="card-content" (click)="showData($event,null)">
 		<h3> {{ chart?.title || title }} </h3>
 		<p> {{ chart?.description || description }}</p>
 	</div>
 	<view-stats id="viewStats" #viewStats></view-stats>
+
 </div>

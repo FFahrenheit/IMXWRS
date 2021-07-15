@@ -1,4 +1,6 @@
+import { TitleCasePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Chart from 'chart.js/auto';
 import { ChartData } from 'src/app/interfaces/chart.interface';
 import { StatsDetailsModalComponent } from '../stats-details-modal/stats-details-modal.component';
@@ -19,12 +21,17 @@ export class ChartComponent implements OnInit {
 
   @ViewChild('canvasChart') canvasChart;
   @ViewChild('viewStats') statsModal : StatsDetailsModalComponent;
+  @ViewChild('detailsModal') ModalComponent;
 
   private canvas;
   private ctx;
   private myChart : Chart;
   
-  constructor() { }
+  private dataTable = [];
+  private modalReference;
+
+  constructor(private modalService  : NgbModal,
+              private titleCase     : TitleCasePipe) { }
 
   ngOnInit(){}
 
@@ -52,16 +59,29 @@ export class ChartComponent implements OnInit {
   showData(evt, arr){
     if(arr?.length){
       let index = arr[0].index;
-      console.log(index);
-  
-      console.log(this.chart.labelSet[index].toLowerCase());
+
+      this.details(
+        this.chart.username,
+        this.chart.title,
+        this.chart.labelSet[index].toLowerCase()
+      );
+
     }else{
-      console.log('all');
+      this.details(
+        this.chart.username,
+        this.chart.title,
+        'all'
+      );
     }
   }
 
-  public details(){
-    console.log(this.chart);
+  public details(user : string, action : string, type : string){
+    let title = `${ user }'s ${ type } ${ action }`;
+    title = this.titleCase.transform(title);
+    
+    this.statsModal.title = title;
+    this.statsModal.content = 'Here is information for ' + title;
+    
     this.statsModal.openDetails();
   }
 

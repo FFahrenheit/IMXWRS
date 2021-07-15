@@ -1,0 +1,15 @@
+<div class="table-responsive text-center">
+    <table class="table table-hover table-bordered table-sm" *ngIf="data != null && data.length > 0; else empty_content">
+        <thead>
+            <tr class="header">
+                <th *ngFor="let key of getKeys()" class="align-middle"
+                scope="col" [appSort]="data" data-order="desc" [data-name]="key">
+                    {{ key }}
+                </th>
+            </tr>
+        </thead>
+    </table>
+    <ng-template #empty_content>
+        Hola
+    </ng-template>
+</div>

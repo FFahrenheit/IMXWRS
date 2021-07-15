@@ -7,6 +7,7 @@
     </div>
     <div class="modal-body m-content">
             {{ content }}
+            <app-table></app-table>
     </div>
     <div class="modal-footer">
         <button *ngIf="!isDisabled" type="button" class="btn btn-primary px-3" (click)="modal.close('')">Close</button>

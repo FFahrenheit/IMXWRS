@@ -19,6 +19,7 @@ import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { FooterComponent } from './footer/footer.component';
 import { StatsDetailsModalComponent } from './stats-details-modal/stats-details-modal.component';
 import { TableGeneratorComponent } from './table-generator/table-generator.component';
+import { AutomaticTableComponent } from './automatic-table/automatic-table.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { TableGeneratorComponent } from './table-generator/table-generator.compo
     FooterComponent,
     StatsDetailsModalComponent,
     TableGeneratorComponent,
+    AutomaticTableComponent,
   ],
   imports: [
     CommonModule,
