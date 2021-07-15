@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -22,7 +23,8 @@ export class StatsDetailsModalComponent implements OnInit {
 
   public modalReference : any;
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal,
+              private router      : Router) { }
 
   ngOnInit(): void {
   }
@@ -43,7 +45,8 @@ export class StatsDetailsModalComponent implements OnInit {
   }
 
   public seeWaiver(id){
-    console.log(id);
+    this.modalReference.close();
+    this.router.navigate(['waivers','view',id]);
   }
 
 }
