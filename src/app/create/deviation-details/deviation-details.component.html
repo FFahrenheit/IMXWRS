@@ -38,8 +38,8 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col">Current specification</th>
-                                    <th scope="col">Required deviation</th>
+                                    <th scope="col">Original specification</th>
+                                    <th scope="col">Required change</th>
                                     <th scope="col">Reason</th>
                                     <th scope="col">&nbsp;</th>
                                 </tr>
@@ -48,11 +48,11 @@
                                 <tr *ngFor="let deviation of deviations.controls;let i = index" [formGroupName]="i">
                                     <td>
                                         <textarea class="form-control mini-area" formControlName="current"
-                                            [class]="check(deviation,'current')" placeholder="Current deviation"></textarea>
+                                            [class]="check(deviation,'current')" placeholder="Original specified process to follow"></textarea>
                                     </td>
                                     <td>
                                         <textarea class="form-control mini-area" formControlName="required"
-                                            [class]="check(deviation,'required')" placeholder="Required deviation"></textarea>
+                                            [class]="check(deviation,'required')" placeholder="Required change / deviation"></textarea>
                                     </td>
                                     <td>
                                         <textarea class="form-control mini-area" formControlName="reason"
@@ -72,7 +72,7 @@
                 <h5 class="text-left ml-2">Risk summary</h5><br>
 
                 <div class="form-group row pt-2">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group row">
                             <label class="col-sm-6 col-form-label">Corrective action required</label>
                             <div class="col-sm-6 ">
@@ -85,19 +85,19 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group row">
-                            <label class="col-sm-6 col-form-label">Original risk</label>
+                            <label class="col-sm-6 col-form-label">Client impact</label>
                             <div class="col-sm-6 ">
                                 <select [class] = "getStyle('original_risk')" formControlName="original_risk" class="custom-select mb-2 mr-sm-2 mb-sm-0">
-                                    <option value="low" selected>Low</option>
-                                    <option value="medium">Medium</option>
-                                    <option value="high">High</option>
+                                    <option value="yes" selected>Yes</option>
+                                    <option value="no">No</option>
+                                    <option value="partial">Partially</option>
                                 </select>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group row">
                             <label class="col-sm-6 col-form-label">Current risk</label>
                             <div class="col-sm-6 ">
@@ -109,7 +109,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <!-- <div class="col-md-3">
                         <div class="form-group row">
                             <label class="col-sm-6 col-form-label">Risk with actions</label>
                             <div class="col-sm-6 ">
@@ -120,7 +120,7 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="form-group row pt-2 mb-5">
                     <div class="col-md-3 mb-2">

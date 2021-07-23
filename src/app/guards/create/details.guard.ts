@@ -12,6 +12,7 @@ export class DetailsGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
+    return true;
     if (this.waiverService.wr.pieces == null || this.waiverService.wr.pieces == null) {
       this.router.navigate(['create', 'new']);
     }

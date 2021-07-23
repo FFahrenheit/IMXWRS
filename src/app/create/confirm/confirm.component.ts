@@ -51,6 +51,7 @@ export class ConfirmComponent implements OnInit {
   confirm(){
     let waiver = this.waiverService.getRequest() as WaiverBody;
     console.log(waiver);
+    this.alert.info('Creating waiver', { autoClose: true });
     this.waiverService.confirmWaiver(waiver).subscribe((resp)=>{
       if(resp){
         window.scroll(0,0);
