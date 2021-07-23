@@ -5,6 +5,7 @@ import { TaskDashboardComponent } from './task-dashboard/task-dashboard.componen
 import { TasksRoutes } from './tasks.routing';
 import { SharedModule } from '../shared/shared.module';
 import { PendingTasksComponent } from './pending-tasks/pending-tasks.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -17,6 +18,7 @@ import { PendingTasksComponent } from './pending-tasks/pending-tasks.component';
     CommonModule,
     RouterModule.forChild(TasksRoutes),
     SharedModule,
+    FormsModule
   ]
 })
 export class TasksModule { }

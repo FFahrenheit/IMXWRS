@@ -1,5 +1,15 @@
 <div class="table-responsive container text-center pt-2">
     <h4 class="text-left my-3">Assigned activities</h4>
+    <div class="row my-2">
+        <label for="" class="col-md-3 col-form-label">Waiver number:</label>
+        <div class="col-md-4">
+            <select class="custom-select mb-2 mr-sm-2 mb-sm-0"
+                id="inlineFormCustomSelect"[(ngModel)]="filter">
+                <option value="" selected>All</option>
+                <option *ngFor="let f of filters" [value]="f"> {{ f }} </option>
+            </select>
+        </div>
+    </div>
     <table *ngIf=" activities?.length != 0; else empty_mesage" class="table table-hover">
         <thead>
             <tr>
@@ -7,11 +17,12 @@
                 <th scope="col">Customer</th>
                 <th scope="col">Task description</th>
                 <th scope="col">Commitment date</th>
+                <th scope="col">Remaining days</th>
                 <th scope="col">Sign</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let act of activities">
+            <tr *ngFor="let act of getActivities()">
                 <td>
                     <i title="Upcoming activity" class="fas fa-exclamation-triangle upcoming" *ngIf=" dateDiff(act.date)>=1 && dateDiff(act.date) <= 3 "></i>
                     <i title="This activity is late" class="fas fa-exclamation-circle late" *ngIf="dateDiff(act.date)<=0"></i>
@@ -25,6 +36,9 @@
                 </td>
                 <td>
                     {{ act.date| date:'mediumDate' }}
+                </td>
+                <td>
+                    {{ dateDiff(act.date) + ' days'}}
                 </td>
                 <td>
                     <button class="btn btn-success" (click)="sign(act.request)">
