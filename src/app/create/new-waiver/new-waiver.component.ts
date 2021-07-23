@@ -132,7 +132,8 @@ export class NewWaiverComponent implements OnInit, OnDestroy {
     }else{
       this.waiverDetails.markAllAsTouched();
       this.formPieces.markAllAsTouched();
-    }  }
+    }  
+  }
 
   ngOnDestroy(){
     this.waiverService.setFirstStep(this.getForm());

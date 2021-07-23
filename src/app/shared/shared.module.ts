@@ -20,6 +20,7 @@ import { FooterComponent } from './footer/footer.component';
 import { StatsDetailsModalComponent } from './stats-details-modal/stats-details-modal.component';
 import { TableGeneratorComponent } from './table-generator/table-generator.component';
 import { AutomaticTableComponent } from './automatic-table/automatic-table.component';
+import { InfoBaloonComponent } from './info-baloon/info-baloon.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { AutomaticTableComponent } from './automatic-table/automatic-table.compo
     StatsDetailsModalComponent,
     TableGeneratorComponent,
     AutomaticTableComponent,
+    InfoBaloonComponent,
   ],
   imports: [
     CommonModule,
@@ -65,7 +67,8 @@ import { AutomaticTableComponent } from './automatic-table/automatic-table.compo
     ProfileViewComponent,
     FooterComponent,
     StatsDetailsModalComponent,
-    TableGeneratorComponent
+    TableGeneratorComponent,
+    InfoBaloonComponent,
   ]
 })
 export class SharedModule { }

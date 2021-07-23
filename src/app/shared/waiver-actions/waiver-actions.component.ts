@@ -1,8 +1,6 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { GetWaiverService } from 'src/app/services/get-waiver.service';
 
 @Component({
   selector: 'waiver-actions',
