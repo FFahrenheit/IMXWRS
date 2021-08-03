@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ExternalAuth, FirstStep, Piece } from 'src/app/interfaces/create-wr.interface';
 import { CreateWrService } from 'src/app/services/create-wr.service';
@@ -16,6 +16,7 @@ export class NewWaiverComponent implements OnInit, OnDestroy {
   public today = this.datePipe.transform(new Date(),"yyyy-MM-dd");
   formPieces : FormGroup = Object.create(null);
   waiverDetails : FormGroup = Object.create(null);
+  private extAuth : File;
 
   constructor(
     private fb: FormBuilder,
@@ -41,6 +42,7 @@ export class NewWaiverComponent implements OnInit, OnDestroy {
       extName : [this.waiverService.wr.details?.externalAuthorization?.name || ''],
       extDate : [this.waiverService.wr.details?.externalAuthorization?.date || defaultDate],   
       extComments : [this.waiverService.wr.details?.externalAuthorization?.comment || ''],
+      extFile: [this.waiverService.extAuthFile?.file?.name || '' ],
       needsManager : [this.waiverService.wr.details?.needsManager || false],
       lapse: [this.waiverService.wr.details?.appliesTo || 'quantity',Validators.compose([Validators.required])],
       quantity : [this.waiverService.wr.details?.quantity || ''],
@@ -80,15 +82,28 @@ export class NewWaiverComponent implements OnInit, OnDestroy {
       this.waiverDetails.controls['extTitle'].setValidators([Validators.required]);
       this.waiverDetails.controls['extName'].setValidators([Validators.required]);
       this.waiverDetails.controls['extDate'].setValidators([Validators.required]);
+      this.waiverDetails.controls['extFile'].setValidators([Validators.required]);
     }
     else{
       this.waiverDetails.controls['extTitle'].clearValidators();
       this.waiverDetails.controls['extName'].clearValidators();
       this.waiverDetails.controls['extDate'].clearValidators();
+      this.waiverDetails.controls['extFile'].clearValidators();
     }
     this.waiverDetails.controls['extTitle'].updateValueAndValidity();
     this.waiverDetails.controls['extName'].updateValueAndValidity();
     this.waiverDetails.controls['extDate'].updateValueAndValidity();  
+    this.waiverDetails.controls['extFile'].updateValueAndValidity();
+  }
+
+  public extEvent($event){
+    if ($event.target.files.length > 0) {
+      this.extAuth = $event.target.files[0] as File;
+      this.waiverDetails.controls['extFile'].setValue(this.extAuth.name);
+    }else{
+      this.extAuth = $event.target.files[0] as File;
+      this.waiverDetails.controls['extFile'].setValue('');
+    }
   }
 
   updateLapse(t){
@@ -138,6 +153,9 @@ export class NewWaiverComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     this.waiverService.setFirstStep(this.getForm());
     this.waiverService.setPieces(this.getPieces());
+    if(this.get('type') == 'external'){
+      this.waiverService.attachExtAuth(this.extAuth);
+    }
     this.router.navigate(['create', 'details'])
   }
 

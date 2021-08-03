@@ -7,7 +7,8 @@ const base_url = environment.base_url;
 @Injectable({
   providedIn: 'root'
 })
-export class CloseWaiverService {
+export class UploadFilesService {
+
   constructor(private http : HttpClient) { }
 
   closeWaiver(files : File[], request : string){
@@ -19,7 +20,7 @@ export class CloseWaiverService {
     });
     formData.append('description','Evidences for closed waiver');
     return this.http.post(
-      `${base_url}/waiver/${request}`,
+      `${base_url}/upload/${request}`,
       formData,{
         headers: headers
       }

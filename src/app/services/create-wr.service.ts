@@ -4,6 +4,7 @@ import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { WR, FirstStep, Piece , SecondStep, Deviation, Action, Origin, Authorization } from '../interfaces/create-wr.interface';
+import { FileUpload } from '../interfaces/file.upload.interface';
 import { WExternalAuth, WaiverRequest, WAction, Waiver, WPart, Expiration, WaiverBody, Manager } from '../interfaces/waiver-request.interface';
 
 const base_url = environment.base_url;
@@ -15,6 +16,8 @@ export class CreateWrService {
 
   public wr : WR = {};
   public similar : [];
+  public files : FileUpload[] = [];
+  public extAuthFile : FileUpload = null;
 
   constructor(private http: HttpClient) { 
   }
@@ -220,4 +223,14 @@ export class CreateWrService {
     });
     return newObj;
   };
+
+  attachExtAuth(file : File){
+    const _file : FileUpload = {
+      description: 'External Authorization evidence',
+      file: file
+    }
+    this.extAuthFile = _file;
+    this.files.push(_file);
+  }
 }
+ 

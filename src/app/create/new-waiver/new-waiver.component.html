@@ -90,7 +90,7 @@
                         </div>
                     </div>
                 </div>
-                <div *ngIf="waiverDetails.controls['type'].value == 'external'">
+                <div *ngIf="waiverDetails.controls['type'].value == 'external'" class="mb-5">
                     <h5 class="text-left m-3">External authorization</h5>
                     <div class="form-group row pt-2">
                         <label for="" class="col-md-4 col-form-label">Title</label>
@@ -114,6 +114,20 @@
                         <label for="" class="col-md-4 col-form-label">Comments</label>
                         <div class="col-md-8">
                             <textarea [class] = "getClass('extComments')"  class="form-control area" formControlName="extComments" placeholder="Details" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row pt-2">
+                        <label for="" class="col-md-4 col-form-label">Evidence</label>
+                        <div class="col-md-8">
+                            <input type="file" class="form-control file-input" (change)="extEvent($event)">
+                            <span *ngIf="get('extFile') == ''">
+                                <i class="fas fa-exclamation-triangle not-ok-icon-st"></i>
+                                No se ha adjuntado un archivo
+                            </span>
+                            <span *ngIf="get('extFile') != ''">
+                                <i class="fas fa-check-circle ok-icon-st"></i>
+                                Archivo adjunto : {{ get('extFile') }}
+                            </span>
                         </div>
                     </div>
                 </div>
