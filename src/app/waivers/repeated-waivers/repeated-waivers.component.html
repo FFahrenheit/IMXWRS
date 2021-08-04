@@ -1,11 +1,15 @@
 <div *ngIf="body.length != 0">
     <div class="alert alert-warning my-3 alert-waivers text-center" role="alert" (click)="open(confirmModal)">
-        There are {{ body.length }} waiver request(s) with similar data provided. Check them by cliking here before sending this waiver request.
+        Note:
+        There are {{ body.length }} waiver request(s) with similar data provided
+        (parts, type, area).
+        You check them by cliking here before sending this waiver request and decide
+        you want to continue
       </div>
 </div>
 <ng-template #confirmModal let-modal>
     <div class="modal-header">
-        <h4 class="modal-title m-title" id="modal-basic-title"> Similar waiver requests </h4>
+        <h4 class="modal-title m-title" id="modal-basic-title"> Waiver requests with similar data </h4>
         <button type="button" class="close" style="outline:none;" aria-label="Close" (click)="modal.dismiss('CANCEL')">
             <span aria-hidden="true">×</span>
         </button>
@@ -13,8 +17,8 @@
     <div class="modal-body m-content">
         <div>
             <h6 class="title-warning">
-                Please check that your requests is new and unique before sending it to revision.
-                These are similar waiver request we found
+                Consider these waiver requests before sending your waiver requests.
+                You can check the details of the waivers by cliking in the button below.
             </h6>
                 <table class="table table-hover text-center">
                 <thead>

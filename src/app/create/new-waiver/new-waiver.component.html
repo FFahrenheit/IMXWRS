@@ -52,6 +52,7 @@
                     <div class="col-md-7">
                         <select [class]="getClass('typeNo')" formControlName="typeNo" class="custom-select mb-2 mr-sm-2 mb-sm-0"
                             id="inlineFormCustomSelect">
+                            <option value="" selected disabled>Type according to changes</option>
                             <option value="1">Type 1</option>
                             <option value="2">Type 2</option>
                             <option value="3">Type 3</option>
@@ -190,6 +191,7 @@
                     </div>
                     <div class="col-md-4">
                         <select [class]="getClass('specification')"  formControlName="specification" class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+                            <option value="" selected disabled>lb, pieces, etc.</option>
                             <option value="lb">lb</option>
                             <option value="pieces">pieces</option>
                         </select>
