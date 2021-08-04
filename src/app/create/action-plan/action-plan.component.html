@@ -6,8 +6,8 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">Responsable</th>
                             <th scope="col">Action to do</th>
+                            <th scope="col">Responsable</th>
                             <th scope="col">Commitment date</th>
                             <th scope="col">&nbsp;</th>
                         </tr>
@@ -15,16 +15,16 @@
                     <tbody formArrayName="actions">
                         <tr *ngFor="let action of actions.controls;let i = index" [formGroupName]="i">
                             <td>
+                                <textarea class="form-control action" formControlName="action"
+                                    placeholder="Describe the action" [class]="getStyle(action,'action')"></textarea>
+                            </td>
+                            <td>
                                 <responsable-input #responsable 
                                 (update)="setValues($event)" 
                                 [index]="i" 
                                 [users] = "users"
                                 [defaultUser]="getUserIfAny(i)">
                                 </responsable-input>
-                            </td>
-                            <td>
-                                <textarea class="form-control action" formControlName="action"
-                                    placeholder="Describe the action" [class]="getStyle(action,'action')"></textarea>
                             </td>
                             <td>
                                 <input type="date" [min]="today" class="form-control date" formControlName="date"

@@ -64,32 +64,6 @@
                     </table>
                 </div>
 
-                <div *ngIf="wr?.evidences.length != 0">
-                    <h5 class="text-left subtitle-att">Evidences</h5>
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Filename</th>
-                                    <th scrope="col">Uploaded</th>
-                                    <th scrope="col">Download</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let file of wr?.evidences">
-                                    <td> {{ (filePipe.transform(file.filename)) || '' }} </td>
-                                    <td> {{ (file.date | date:'medium':'UTC') || '' }} </td>
-                                    <td> 
-                                        <a class="btn btn-primary" [href]="downloadFile(file.filename)" target="_blank">
-                                            <i class="fas fa-download"></i> 
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
                 <h5 class="text-left subtitle-att ">Risks</h5>
                 <attribute name="Original risk:" [value]="( wr?.originalRisk | titlecase ) || ''"></attribute>
                 <attribute name="Risk analysis: " [value]="wr?.riskAnalysis || ''"></attribute>
@@ -100,6 +74,7 @@
                 <attribute name="Risk with actions: " [value]="( wr?.riskWithActions | titlecase) || ''"></attribute>
                 <attribute name="Corrective action required:" [value]="wr?.requiredCorrectiveAction || ''"></attribute>
                 <attribute name="AMEF RPN after: " [value]="wr?.rpnAfter || '0' "></attribute>
+
             </div>
 
             <div class="col-md-7">
@@ -109,8 +84,8 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th scope="col">Current</th>
-                                <th scope="col">Required</th>
+                                <th scope="col">Original process</th>
+                                <th scope="col">Required deviation</th>
                                 <th scope="col">Reason</th>
                             </tr>
                         </thead>
@@ -119,27 +94,6 @@
                                 <td> {{ deviation.currentSpecification }} </td>
                                 <td> {{ deviation.requiredSpecification }} </td>
                                 <td> {{ deviation.reason }} </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <h5 class="text-left subtitle-att">Action plan</h5>
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">Responsable</th>
-                                <th scope="col">Action</th>
-                                <th scope="col">Commitment date</th>
-                                <th scope="col">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let action of wr?.actions">
-                                <td> {{ action.name }} </td>
-                                <td> {{ action.description }} </td>
-                                <td> {{ datePipe.transform(action.date,'yyyy-MM-dd') || '' }} </td>
-                                <td> {{ action.signed | titlecase }} </td>
                             </tr>
                         </tbody>
                     </table>
@@ -188,9 +142,65 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div *ngIf="wr?.evidences.length != 0">
+                    <h5 class="text-left subtitle-att">Evidences</h5>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Filename</th>
+                                    <th scrope="col">Uploaded</th>
+                                    <th scope="col">Author</th>
+                                    <th scrope="col">Download</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let file of wr?.evidences">
+                                    <td class="bold"> {{ file.description }}</td>
+                                    <td> {{ (filePipe.transform(file.filename)) || '' }} </td>
+                                    <td> {{ (file.date | date:'medium':'UTC') || '' }} </td>
+                                    <td> {{ file.name }}</td>
+                                    <td> 
+                                        <a class="btn btn-primary" [href]="downloadFile(file.filename)" target="_blank">
+                                            <i class="fas fa-download"></i> 
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
             </div>
         </div>
 
+        <div class="row">
+            <h5 class="text-left subtitle-att">Action plan</h5>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Action</th>
+                                <th scope="col">Responsable</th>
+                                <th scope="col">Commitment date</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Closure date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let action of wr?.actions">
+                                <td> {{ action.description }} </td>
+                                <td> {{ action.name }} </td>
+                                <td> {{ datePipe.transform(action.date,'yyyy-MM-dd') || '' }} </td>
+                                <td> {{ action.signed | titlecase }} </td>
+                                <td> TBD </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+        </div>
     </div>
 </div>
 <ng-template #not_found>
