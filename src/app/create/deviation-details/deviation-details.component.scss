@@ -1,18 +1,35 @@
-label, legend{
+label,
+legend {
     color: black;
 }
 
-.area{
+.area {
     min-height: 80px;
 }
 
-.mini-area{
-    min-height: 70px;
+.mini-area {
+    min-height: 40px;
     min-width: 100px;
 }
 
-.no-ok{
+.no-ok {
     background-color: rgb(134, 134, 134);
     cursor: default;
     border-color: rgb(133, 133, 133);
-  }
+}
+
+.top {
+    z-index: 10;
+}
+
+.bot {
+    z-index: 1;
+}
+
+.mid {
+    z-index: 5;
+}
+
+.details {
+    font-weight: normal;
+}

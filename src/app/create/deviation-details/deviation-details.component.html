@@ -1,20 +1,60 @@
-<div class="container text-center pt-2">
+<div class="container text-center pt-2 bot">
     <h4 class="text-left my-3">Deviation details</h4>
-    <form [formGroup]="riskDetails">
+    <form>
         <div class="row justify-content-center">
             <div class="col-md-12">
 
-                
                 <h5 class="text-left ml-2"> Required deviation(s) </h5>
 
-                <div class="form-group row pt-2 table-responsive">
+                <span class="explain">
+                    Please fullfil this form with the details of the required waiver.
+                    Please be as specific as possible, check every column to see
+                    the minimum required information you have to provide.
+                </span>
+
+
+
+                <div class="form-group row pt-2 table-responsive mid">
                     <form [formGroup]="formDeviations">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col">Original specification</th>
-                                    <th scope="col">Required change</th>
-                                    <th scope="col">Reason</th>
+                                    <th scope="col" class="top">
+                                        Original specification
+                                        <info-baloon [hideOnTop]="true">
+                                            <div sample class="details">
+                                                Please describe the exact specification of the
+                                                original process, e.g., measures, times, materials, etc.
+                                            </div>
+                                        </info-baloon>
+                                        <button class="btn btn-disabled fa fa-info" title="Click to see details"
+                                            (click)="scroll()">
+                                        </button>
+                                    </th>
+                                    <th scope="col">
+                                        Required change
+                                        <info-baloon [hideOnTop]="true">
+                                            <div sample class="details">
+                                                Please describe exactly what are you requesting to change in
+                                                the previous process including the new specification measures,
+                                                times, materials, etc.
+                                            </div>
+                                        </info-baloon>
+                                        <button class="btn btn-disabled fa fa-info" title="Click to see details"
+                                            (click)="scroll()">
+                                        </button>
+                                    </th>
+                                    <th scope="col">
+                                        Reason
+                                        <info-baloon [hideOnTop]="true">
+                                            <div sample class="details">
+                                                Please justify the required deviation
+                                            </div>
+                                        </info-baloon>
+                                        <button class="btn btn-disabled fa fa-info" title="Click to see details"
+                                            (click)="scroll()">
+                                        </button>
+                                    </th>
                                     <th scope="col">&nbsp;</th>
                                 </tr>
                             </thead>
@@ -22,15 +62,17 @@
                                 <tr *ngFor="let deviation of deviations.controls;let i = index" [formGroupName]="i">
                                     <td>
                                         <textarea class="form-control mini-area" formControlName="current"
-                                            [class]="check(deviation,'current')" placeholder="Original specified process to follow"></textarea>
+                                            [class]="check(deviation,'current')"
+                                            placeholder="Original specified process to follow"></textarea>
                                     </td>
                                     <td>
                                         <textarea class="form-control mini-area" formControlName="required"
-                                            [class]="check(deviation,'required')" placeholder="Required change / deviation"></textarea>
+                                            [class]="check(deviation,'required')"
+                                            placeholder="Required change / deviation"></textarea>
                                     </td>
                                     <td>
                                         <textarea class="form-control mini-area" formControlName="reason"
-                                        [class]="check(deviation,'reason')" placeholder="Reason"></textarea>
+                                            [class]="check(deviation,'reason')" placeholder="Reason"></textarea>
                                     </td>
                                     <td>
                                         <button class="btn btn-primary fa fa-plus" *ngIf="i == 0" type="button"
@@ -46,106 +88,13 @@
 
                 <hr>
 
-                <h5 class="text-left ml-2"> Risk Analysis </h5>
-
-                <div class="form-group row pt-2">
-                    <div class="col-md-6">
-                        <div class="form-group row pt-2">
-                            <label for="" class="col-md-4 col-form-label">Risk analysis</label>
-                            <div class="col-md-8">
-                                <input type="file" class="form-control file-input mb-2" 
-                                (change)="fileEvent($event)">
-                                <span *ngIf="riskDetails.controls['risk_analysis'].value == ''">
-                                    <i class="fas fa-exclamation-triangle not-ok-icon-st"></i>
-                                    No se ha adjuntado un archivo
-                                </span>
-                                <span *ngIf="riskDetails.controls['risk_analysis'].value != ''">
-                                    <i class="fas fa-check-circle ok-icon-st"></i>
-                                    Archivo adjunto : {{ riskDetails.controls['risk_analysis'].value }}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group row">
-                            <label class="col-sm-6 col-form-label">AMEF RPN before</label>
-                            <div class="col-sm-6 ">
-                                <input min="0" value="0" [class] = "getStyle('rpn_before')" formControlName="rpn_before" type="number" class="form-control" value="0">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group row">
-                            <label class="col-sm-6 col-form-label">AMEF RPN after</label>
-                            <div class="col-sm-6 ">
-                                <input min="0" value="0" [class] = "getStyle('rpn_after')" formControlName="rpn_after" type="number" class="form-control" value="0">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <hr>
-
-                <h5 class="text-left ml-2">Risk summary</h5><br>
-
-                <div class="form-group row pt-2">
-                    <div class="col-md-4">
-                        <div class="form-group row">
-                            <label class="col-sm-6 col-form-label">Corrective action required</label>
-                            <div class="col-sm-6 ">
-                                <select [class] = "getStyle('required_action')" formControlName="required_action" class="custom-select mb-2 mr-sm-2 mb-sm-0">
-                                    <option value="PDCA" selected>PDCA</option>
-                                    <option value="8DS">8DS</option>
-                                    <option value="A3">A3</option>
-                                    <option value="other">Other (specify)</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group row">
-                            <label class="col-sm-6 col-form-label">Client impact</label>
-                            <div class="col-sm-6 ">
-                                <select [class] = "getStyle('original_risk')" formControlName="original_risk" class="custom-select mb-2 mr-sm-2 mb-sm-0">
-                                    <option value="yes" selected>Yes</option>
-                                    <option value="no">No</option>
-                                    <option value="partial">Partially</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group row">
-                            <label class="col-sm-6 col-form-label">Current risk</label>
-                            <div class="col-sm-6 ">
-                                <select [class] = "getStyle('current_risk')" formControlName="current_risk" class="custom-select mb-2 mr-sm-2 mb-sm-0">
-                                    <option value="low" selected>Low</option>
-                                    <option value="medium">Medium</option>
-                                    <option value="high">High</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div class="col-md-3">
-                        <div class="form-group row">
-                            <label class="col-sm-6 col-form-label">Risk with actions</label>
-                            <div class="col-sm-6 ">
-                                <select [class] = "getStyle('risk_with_actions')" formControlName="risk_with_actions" class="custom-select mb-2 mr-sm-2 mb-sm-0">
-                                    <option value="low" selected>Low</option>
-                                    <option value="medium">Medium</option>
-                                    <option value="high">High</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div> -->
-                </div>
                 <div class="form-group row pt-2 mb-5">
-                    <div class="col-md-3 mb-2">
-                        <input [class] = "getStyle('aux_action')" type="text" class="form-control" formControlName = "aux_action" placeholder="Corrective action"
-                        *ngIf = "riskDetails.get('required_action').value == 'other'">
+                    <div class="col-md-3">
+                        &nbsp;
                     </div>
                     <div class="col-md-9">
-                        <button [ngClass]="{'no-ok' : !riskDetails.valid || !formDeviations.valid}" type="button" (click)="next()" class="btn px-5 btn-success float-right">Next</button>
+                        <button [ngClass]="{'no-ok' : !formDeviations.valid}" type="button" (click)="next()"
+                            class="btn px-5 btn-success float-right">Next</button>
                     </div>
                 </div>
 

@@ -1,5 +1,6 @@
 <div class="deviation-info">
-    <button class="btn btn-disabled fa fa-info">
+    <button class="btn btn-disabled" 
+    [ngClass]="{ 'fa fa-info' : !hideOnTop}">
     </button>
     <span class="deviation-info-text">
         <ng-content select="[sample]"></ng-content>

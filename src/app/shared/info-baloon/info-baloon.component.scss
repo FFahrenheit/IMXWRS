@@ -1,7 +1,6 @@
 .deviation-info {
-    position: relative;
+    position: fixed;
     display: inline-block;
-    z-index: 10;
     // border-bottom: 1px dotted black;
 }
 
@@ -34,6 +33,8 @@
 }
 
 .deviation-info:hover .deviation-info-text {
+    // position: fixed !important;
+    z-index: 10;
     visibility: visible;
     opacity: 1;
 }

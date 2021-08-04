@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'info-baloon',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./info-baloon.component.scss']
 })
 export class InfoBaloonComponent implements OnInit {
+
+  @Input() public hideOnTop = false;
 
   constructor() { }
 

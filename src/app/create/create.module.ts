@@ -10,6 +10,7 @@ import { ConfirmComponent } from './confirm/confirm.component';
 import { SharedModule } from '../shared/shared.module';
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { WaiversModule } from '../waivers/waivers.module';
+import { RiskAnalysisComponent } from './risk-analysis/risk-analysis.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { WaiversModule } from '../waivers/waivers.module';
     DeviationDetailsComponent,
     ActionPlanComponent,
     ConfirmComponent,
+    RiskAnalysisComponent,
   ],
   imports: [
     CommonModule,
