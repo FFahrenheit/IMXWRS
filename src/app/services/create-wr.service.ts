@@ -16,8 +16,8 @@ export class CreateWrService {
 
   public wr : WR = {};
   public similar : [];
-  public files : FileUpload[] = [];
   public extAuthFile : FileUpload = null;
+  public riskAnalysis : FileUpload = null;
 
   constructor(private http: HttpClient) { 
   }
@@ -224,13 +224,28 @@ export class CreateWrService {
     return newObj;
   };
 
-  attachExtAuth(file : File){
-    const _file : FileUpload = {
-      description: 'External Authorization evidence',
-      file: file
+  public attachExtAuth(file : File) : void{
+    if(file != null){
+      const _file : FileUpload = {
+        description: 'External Authorization evidence',
+        file: file
+      }
+      this.extAuthFile = _file;
+    }else{
+      this.extAuthFile = null;
     }
-    this.extAuthFile = _file;
-    this.files.push(_file);
+  }
+
+  public attachRiskAnalysis(file : File) : void{
+    if(file != null){
+      const _file : FileUpload = {
+        description: 'Risk analysis',
+        file: file
+      }
+      this.riskAnalysis = _file;
+    }else{
+      this.riskAnalysis = null;
+    }
   }
 }
  

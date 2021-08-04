@@ -155,6 +155,8 @@ export class NewWaiverComponent implements OnInit, OnDestroy {
     this.waiverService.setPieces(this.getPieces());
     if(this.get('type') == 'external'){
       this.waiverService.attachExtAuth(this.extAuth);
+    }else{
+      this.waiverService.attachExtAuth(null);    
     }
     this.router.navigate(['create', 'details'])
   }

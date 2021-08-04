@@ -13,6 +13,8 @@ export class DeviationDetailsComponent implements OnInit, OnDestroy {
 
   formDeviations : FormGroup = Object.create(null);
   riskDetails : FormGroup = Object.create(null);
+  
+  private riskAnalysis : File;
 
   constructor(private fb : FormBuilder,
               private router : Router,
@@ -22,6 +24,7 @@ export class DeviationDetailsComponent implements OnInit, OnDestroy {
    ngOnDestroy(){
       this.waiverService.setSecondStep(this.getForm());
       this.waiverService.setDeviations(this.getDeviations());
+      this.waiverService.attachRiskAnalysis(this.riskAnalysis);
       this.router.navigate(['create','actions']);
    }
 
@@ -67,8 +70,19 @@ export class DeviationDetailsComponent implements OnInit, OnDestroy {
 
   }
 
+  public fileEvent($event){
+    if ($event.target.files.length > 0) {
+      this.riskAnalysis = $event.target.files[0] as File;
+      this.riskDetails.controls['risk_analysis'].setValue(this.riskAnalysis.name);
+    }else{
+      this.riskAnalysis = $event.target.files[0] as File;
+      this.riskDetails.controls['risk_analysis'].setValue('');
+    }
+  }
+
   getRequiredAction(){
-    if(this.waiverService.wr.risk?.requiredAction == null){
+    if(this.waiverService.wr.risk?.requiredAction == null
+      || typeof this.waiverService.wr.risk?.requiredAction == 'undefined'){
       return '';
     }else{
       let action = this.waiverService.wr.risk.requiredAction;
