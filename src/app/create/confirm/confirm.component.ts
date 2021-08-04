@@ -55,11 +55,20 @@ export class ConfirmComponent implements OnInit {
     this.waiverService.confirmWaiver(waiver).subscribe((resp)=>{
       if(resp){
         window.scroll(0,0);
-        this.alert.success('Waiver sucessfully created');
-        setTimeout(() => {
-          this.waiverService.wr = {} as WR;
-          this.router.navigate(['waivers','view',this.wr.number]);
-        }, 3500);
+        this.waiverService.uploadFiles().subscribe(resp=>{
+          if(resp){
+            this.alert.success('Waiver sucessfully created');
+            setTimeout(() => {
+              this.waiverService.wr = {} as WR;
+              this.router.navigate(['waivers','view',this.wr.number]);
+            }, 3500);
+          }else{
+            this.alert.error('Can not upload files to create WR, please try again', { autoClose: true });
+          }
+        },error=>{
+          this.alert.error('Can not upload files to create WR, please try again', { autoClose: true });
+        });
+
       }else{
         this.alert.error('Can not create WR, please try again', { autoClose: true });
       }
