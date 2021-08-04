@@ -65,7 +65,7 @@ export class ActionPlanComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
       this.waiverService.setActions(this.getActions());
-      this.router.navigate(['create','confirm']);
+      this.router.navigate(['create','risks']);
   }
 
   get actions(): FormArray {
