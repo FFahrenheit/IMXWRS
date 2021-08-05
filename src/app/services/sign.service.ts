@@ -13,7 +13,7 @@ export class SignService {
 
   constructor(private http: HttpClient) { }
 
-  signActivity(waiverId : number){
+  signActivity(waiverId : string){
     let body = {
       waiver: waiverId
     };

@@ -37,8 +37,8 @@ export class TaskDashboardComponent implements OnInit {
     console.log(waivers);
   }
 
-  sign(id){
-    this.router.navigate(['waivers','sign',id]);
+  sign(id : string, activity : string){
+    this.router.navigate(['waivers','mark',id, activity]);
   }
 
   dateDiff(str){

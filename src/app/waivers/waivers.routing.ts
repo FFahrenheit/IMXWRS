@@ -5,6 +5,7 @@ import { CloseGuard } from '../guards/close.guard';
 import { EditGuard } from '../guards/edit.guard';
 import { ReopenGuard } from '../guards/reopen.guard';
 import { AuthorizeComponent } from './authorize/authorize.component';
+import { CloseActivityComponent } from './close-activity/close-activity.component';
 import { CloseComponent } from './close/close.component';
 import { EditWaiverComponent } from './edit-waiver/edit-waiver.component';
 import { LogComponent } from './log/log.component';
@@ -35,6 +36,10 @@ export const WaiversRoutes: Routes = [
         path: 'sign/:id',
         component: SignActivityComponent,
         canActivate: [ ActivityGuard ]
+      },
+      {
+        path: 'mark/:id/:activity',
+        component: CloseActivityComponent
       },
       {
         path: 'close/:id',

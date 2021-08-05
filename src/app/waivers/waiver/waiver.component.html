@@ -194,8 +194,11 @@
                                 <td> {{ action.description }} </td>
                                 <td> {{ action.name }} </td>
                                 <td> {{ datePipe.transform(action.date,'yyyy-MM-dd') || '' }} </td>
-                                <td> {{ action.signed | titlecase }} </td>
-                                <td> TBD </td>
+                                <td colspan="2" *ngIf="action.closed == null">
+                                    {{ action.signed | titlecase }}
+                                </td>
+                                <td *ngIf="action.closed != null"> {{ action.signed | titlecase }} </td>
+                                <td *ngIf="action.closed != null"> {{ action.closed | date:'medium' }} </td>
                             </tr>
                         </tbody>
                     </table>

@@ -8,13 +8,13 @@ export const userSidebar = [
         route: ['create', 'new'],
     },
     {
-        name: "Assigned activities",
+        name: "My activities",
         route: ['tasks', 'assigned']
     },
-    {
-        name: "My activities",
-        route: ['tasks', 'pending']
-    },
+    // {
+    //     name: "My activities",
+    //     route: ['tasks', 'pending']
+    // },
     {
         name: "My waiver requests",
         route: ['waivers', 'status']

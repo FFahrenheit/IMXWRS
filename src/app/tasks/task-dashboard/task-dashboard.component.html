@@ -18,7 +18,7 @@
                 <th scope="col">Task description</th>
                 <th scope="col">Commitment date</th>
                 <th scope="col">Remaining days</th>
-                <th scope="col">Sign</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -41,8 +41,9 @@
                     {{ dateDiff(act.date) + ' days'}}
                 </td>
                 <td>
-                    <button class="btn btn-success" (click)="sign(act.request)">
-                        See WR & sign
+                    <button class="btn btn-success" (click)="sign(act.request, act.id)">
+                        <i class="fas fa-check"></i>
+                        Close activity
                     </button>
                 </td>
             </tr>
