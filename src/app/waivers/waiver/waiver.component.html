@@ -7,12 +7,13 @@
             <div class="col-md-4 text-right">
                 <waiver-actions [wr]="wr"></waiver-actions>
             </div>
-        </div> 
+        </div>
         <div class="row justify-content-center">
             <div class="col-md-5">
                 <attribute name="Request No: " [value]="wr?.number || ''"></attribute>
-                <attribute  *ngIf="wr?.oldNumber" name="Previous request No: " [value]="wr?.oldNumber || '' ">
+                <attribute *ngIf="wr?.oldNumber" name="Previous request No: " [value]="wr?.oldNumber || '' ">
                 </attribute>
+                <attribute name="Revision: " [value]="wr?.revision || '1' "></attribute>
                 <attribute name="Customer: " [value]="wr?.customer || '' "></attribute>
                 <attribute name="Originator: " [value]="wr?.name + ' (' + wr?.originator + ')'|| '' ">
                 </attribute>
@@ -100,7 +101,7 @@
                 </div>
 
                 <div *ngIf="wr?.remarks?.length != 0">
-                    <h5 class="text-left subtitle-att">Remarks</h5>
+                    <h5 class="text-left subtitle-att">Rejections</h5>
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
@@ -109,6 +110,7 @@
                                     <th scrope="col">Comment</th>
                                     <th scope="col">Date</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col">Solved on</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -116,28 +118,47 @@
                                     <td> {{ remark.name || '' }} </td>
                                     <td> {{ remark.comment || '' }} </td>
                                     <td> {{ remark.date | date:'medium':'UTC' || '' }}</td>
-                                    <td> {{ (remark.status | titlecase) || ''}}</td>
+                                    <td colspan="2" *ngIf="remark.status == 'sent'">
+                                        {{ (remark.status | titlecase) || ''}}
+                                    </td>
+                                    <td *ngIf="remark.status != 'sent'">
+                                        {{ remark.status | titlecase}}
+                                    </td>
+                                    <td *ngIf="remark.status != 'sent'">
+                                        {{ remark.solved|date:'medium':'UTC' }}
+                                        on
+                                        <span class="font-weight-bold">
+                                            Rev.
+                                            {{ remark.revision }}
+                                        </span>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <h5 class="text-left subtitle-att">Required authorizations</h5>
+                <h5 class="text-left subtitle-att">Required acknowledgments</h5>
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">Title</th>
                                 <th scope="col">Name</th>
-                                <th scope="col">Signed</th>
+                                <th scope="col">Acknowledgment</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let auth of wr?.authorizations">
                                 <td> {{ auth.title | titlecase }} </td>
                                 <td> {{ auth.name }}</td>
-                                <td> {{ auth.signed | titlecase }}</td>
+                                <td *ngIf="auth.signed == 'pending'">
+                                    {{ auth.signed | titlecase }}
+                                </td>
+                                <td *ngIf="auth.signed != 'pending'">
+                                    {{ auth.signed | titlecase }} 
+                                    on {{ auth.date | date:'medium':'UTC' }}
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -162,9 +183,9 @@
                                     <td> {{ (filePipe.transform(file.filename)) || '' }} </td>
                                     <td> {{ (file.date | date:'medium':'UTC') || '' }} </td>
                                     <td> {{ file.name }}</td>
-                                    <td> 
+                                    <td>
                                         <a class="btn btn-primary" [href]="downloadFile(file.filename)" target="_blank">
-                                            <i class="fas fa-download"></i> 
+                                            <i class="fas fa-download"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -178,31 +199,31 @@
 
         <div class="row">
             <h5 class="text-left subtitle-att">Action plan</h5>
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">Action</th>
-                                <th scope="col">Responsable</th>
-                                <th scope="col">Commitment date</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Closure date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let action of wr?.actions">
-                                <td> {{ action.description }} </td>
-                                <td> {{ action.name }} </td>
-                                <td> {{ datePipe.transform(action.date,'yyyy-MM-dd') || '' }} </td>
-                                <td colspan="2" *ngIf="action.closed == null">
-                                    {{ action.signed | titlecase }}
-                                </td>
-                                <td *ngIf="action.closed != null"> {{ action.signed | titlecase }} </td>
-                                <td *ngIf="action.closed != null"> {{ action.closed | date:'medium' }} </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Action</th>
+                            <th scope="col">Responsable</th>
+                            <th scope="col">Commitment date</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Closure date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let action of wr?.actions">
+                            <td> {{ action.description }} </td>
+                            <td> {{ action.name }} </td>
+                            <td> {{ datePipe.transform(action.date,'yyyy-MM-dd') || '' }} </td>
+                            <td colspan="2" *ngIf="action.closed == null">
+                                {{ action.signed | titlecase }}
+                            </td>
+                            <td *ngIf="action.closed != null"> {{ action.signed | titlecase }} </td>
+                            <td *ngIf="action.closed != null"> {{ action.closed | date:'medium' }} </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

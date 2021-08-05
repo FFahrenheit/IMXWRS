@@ -10,8 +10,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class RemarkModalComponent implements OnInit {
 
   @Input() public title = 'Add comment to waiver request';
-  @Input() public content = 'Please describe the issue. This waiver will change its status to pending editing';
-  @Input() public trigger = 'Remark';
+  @Input() public content = 'Please describe the issue. This waiver will change its status to "On hold" and you\'ll need to wait until it is edited';
+  @Input() public trigger = 'Reject';
   @Input() public myClass = 'float-right px-5 mx-3 my-3';
   @Input() public disabled = false;
 
