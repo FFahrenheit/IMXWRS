@@ -15,6 +15,7 @@
             <tr>
                 <th scope="col">WR ID</th>
                 <th scope="col">Customer</th>
+                <th scope="col">Waiver status</th>
                 <th scope="col">Task description</th>
                 <th scope="col">Commitment date</th>
                 <th scope="col">Remaining days</th>
@@ -30,6 +31,9 @@
                 </td>
                 <td>
                     {{ act.customer }}
+                </td>
+                <td>
+                    {{ act.status | titlecase }}
                 </td>
                 <td>
                     {{ act.description }}

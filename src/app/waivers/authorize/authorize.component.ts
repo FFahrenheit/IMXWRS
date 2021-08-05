@@ -38,12 +38,12 @@ export class AuthorizeComponent implements OnInit {
         .subscribe(resp=>{
           window.scroll(0,0);
           if(resp){
-            this.alert.success('Waiver authorized');
+            this.alert.success('Waiver acknowledged');
             setTimeout(()=>{
               this.router.navigate(['waivers','view',this.waiverId]);
             },3010);
           }else{
-            this.alert.error("Could't authorize waiver. Try again please");
+            this.alert.error("Could't acknowledge waiver. Try again please");
           }
         },error=>{
           window.scroll(0,0);
@@ -92,15 +92,15 @@ export class AuthorizeComponent implements OnInit {
       this.reason.push("Can't approve a waiver in on hold status. Please ask the originator to edit it");
     }
 
-    const BreakException = {};
-    try{
-      this.wr.actions.forEach(a=>{
-        if(a['signed'] == 'pending'){
-          this.reason.push("Can't authorize a waiver with pending confirmed tasks. Please wait until every colaborator has signed");
-          throw BreakException;
-        }
-      });
-    }catch(e){}
+    // const BreakException = {};
+    // try{
+    //   this.wr.actions.forEach(a=>{
+    //     if(a['signed'] == 'pending'){
+    //       this.reason.push("Can't authorize a waiver with pending confirmed tasks. Please wait until every colaborator has signed");
+    //       throw BreakException;
+    //     }
+    //   });
+    // }catch(e){}
 
     this.cannotApprove = this.reason.length > 0;
 

@@ -1,6 +1,6 @@
 <div class="table-responsive container text-center pt-2">
     <alert></alert>
-    <h4 class="text-left my-3">Waivers request that need your approval</h4>
+    <h4 class="text-left my-3">Waivers request that need your akcnowledgment</h4>
     <table class="table table-hover" *ngIf=" authorizations?.length != 0; else empty_body">
         <thead>
             <tr class="header">
@@ -35,35 +35,38 @@
                     {{ auth.creationDate|date:'medium':'UTC' }}
                 </td>
                 <td>
-                    <div *ngIf="auth.pendingActivities == '0' && auth.status != 'on hold'; else pending_act">
-                        Ready to authorize
+                    <div *ngIf="auth.status != 'on hold'; else pending_act">
+                        <span class="bold">
+                            {{ auth.status | titlecase }} : 
+                        </span>
+                        Ready to acknowledge
                     </div>
                     <ng-template #pending_act>
-                        <div *ngIf="auth.pendingActivities != '0'">
+                        <!-- <div *ngIf="auth.pendingActivities != '0'">
                             Waiting actions confirmation <br>
                             {{ auth.totalActivities - auth.pendingActivities }} / {{ auth.totalActivities }} confirmed
-                        </div>
+                        </div> -->
                         <div *ngIf="auth.status == 'on hold'" class="urgent">
                             Waiver remarked, waiting for edit
                         </div>
                     </ng-template>
                 </td>
                 <td>
-                    <button *ngIf="auth.pendingActivities == '0' && auth.status != 'on hold'" 
-                    class="btn btn-success" (click)="goToWaiver(auth.request)">
-                        Review and authorize
+                    <button *ngIf="auth.status != 'on hold'" class="btn btn-success" (click)="goToWaiver(auth.request)">
+                        <i class="fas fa-check"></i>
+                        Mark as acknowledged
                     </button>
-                    <button *ngIf="auth.pendingActivities != '0' || auth.status == 'on hold'"
+                    <!-- <button *ngIf="auth.pendingActivities != '0' || auth.status == 'on hold'"
                     class="btn btn-primary" (click)="goToWaiver(auth.request)">
                         Review
-                    </button>
+                    </button> -->
                 </td>
             </tr>
         </tbody>
     </table>
     <ng-template #empty_body>
-        <error-message type="empty" title="Nothing here..." 
-        description="Congrats! You don't have any pending waiver request"> 
+        <error-message type="empty" title="Nothing here..."
+            description="Congrats! You don't have any pending waiver request">
         </error-message>
     </ng-template>
 </div>

@@ -31,11 +31,11 @@ export const adminSidebar = [
         route: ['waivers', 'all']
     },
     {
-        name: "Pending authorizations",
+        name: "Pending acknowledgments",
         route: ['authorizations', 'pending']
     },
     {
-        name: "My approved WR",
+        name: "Recent acknowledgments",
         route: ['authorizations', 'approved']
     },
     {
