@@ -39,7 +39,7 @@
                         <button ngbDropdownItem>Something else</button>
                         <div *ngIf="user.position != 'employee'">
                             <div class="dropdown-divider"></div>
-                            <button ngbDropdownItem (click)="changePassword()">
+                            <button ngbDropdownItem (click)="changeManagers()">
                                 <i class="fas fa-users-cog pr-1"></i>Change managers
                             </button>
                             <button ngbDropdownItem (click)="addUsers()">

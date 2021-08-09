@@ -64,4 +64,8 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['profile',this.user.username]);
   }
 
+  changeManagers(){
+    this.router.navigate(['profile','managers','change']);
+  }
+
 }

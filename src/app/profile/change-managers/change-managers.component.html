@@ -1,0 +1,94 @@
+<div class="table-responsive container text-center pt-2">
+
+    <alert></alert>
+
+    <h4 class="text-left my-3">Change managers</h4>
+
+    <form [formGroup]="form">
+
+        <div class="row d-flex justify-content-center">
+
+            <div class="col-md-6">
+
+                <div class="form-group row pt-2 has-error has-feedback">
+                    <label for="" class="col-md-4 col-form-label">General manager</label>
+                    <div class="col-md-8">
+                        <select formControlName="general" class="custom-select mb-2 mr-sm-2 mb-sm-0"
+                            [class]="getClass('general')">
+                            <option *ngFor="let u of users" [value]="u.username"> {{ u.name }} </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row pt-2 has-error has-feedback">
+                    <label for="" class="col-md-4 col-form-label">NPI manager</label>
+                    <div class="col-md-8">
+                        <select formControlName="npi" class="custom-select mb-2 mr-sm-2 mb-sm-0"
+                            [class]="getClass('npi')">
+                            <option *ngFor="let u of users" [value]="u.username"> {{ u.name }} </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row pt-2 has-error has-feedback">
+                    <label for="" class="col-md-4 col-form-label">Operations manager</label>
+                    <div class="col-md-8">
+                        <select formControlName="operations" class="custom-select mb-2 mr-sm-2 mb-sm-0"
+                            [class]="getClass('operations')">
+                            <option *ngFor="let u of users" [value]="u.username"> {{ u.name }} </option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6">
+
+                <div class="form-group row pt-2 has-error has-feedback">
+                    <label for="" class="col-md-4 col-form-label">Engineering Manager</label>
+                    <div class="col-md-8">
+                        <select formControlName="engineering" class="custom-select mb-2 mr-sm-2 mb-sm-0"
+                            [class]="getClass('engineering')">
+                            <option *ngFor="let u of users" [value]="u.username"> {{ u.name }} </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row pt-2 has-error has-feedback">
+                    <label for="" class="col-md-4 col-form-label">Quality Manager</label>
+                    <div class="col-md-8">
+                        <select formControlName="quality" class="custom-select mb-2 mr-sm-2 mb-sm-0"
+                            [class]="getClass('quality')">
+                            <option *ngFor="let u of users" [value]="u.username"> {{ u.name }} </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row pt-2 has-error has-feedback">
+                    <label for="" class="col-md-4 col-form-label">Finances Manager</label>
+                    <div class="col-md-8">
+                        <select formControlName="finances" class="custom-select mb-2 mr-sm-2 mb-sm-0"
+                            [class]="getClass('finances')">
+                            <option *ngFor="let u of users" [value]="u.username"> {{ u.name }} </option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <confirm-modal 
+        [isDisabled]="form.invalid" 
+        reason="The form isn't valid"
+        title="Save changes"
+        content="Are you sure you want to save these changes?" 
+        trigger="Save changes" 
+        myClass="float-right" 
+        (accept)="next()">
+        </confirm-modal>
+
+    </form>
+
+</div>
