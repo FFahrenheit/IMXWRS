@@ -68,4 +68,8 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['profile','managers','change']);
   }
 
+  myBackup(){
+    this.router.navigate(['profile', this.user.username, 'backup']);
+  }
+
 }

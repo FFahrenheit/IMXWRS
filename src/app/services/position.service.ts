@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { User } from '../models/user.model';
 
 const base_url = environment.base_url;
 
@@ -12,6 +13,8 @@ const base_url = environment.base_url;
 export class PositionService {
 
   private errorMessage = 'Service error';
+  private user : User;
+  private backups : [];
 
   constructor(private http: HttpClient) { }
 
@@ -31,7 +34,41 @@ export class PositionService {
                );
   }
 
+  public loadBackups(username : string){
+    return this.http.get(`${base_url}/position/${username}`)
+               .pipe(
+                 map(resp=>{
+                   console.log(resp);
+                   if(resp['ok']){
+                     let u = resp['user'];
+                     this.user = new User(
+                       u.username,
+                       u.email,
+                       u.position,
+                       u.name
+                     );
+                     this.backups = resp['backups'];         
+                     return true;     
+                   }
+                   this.errorMessage = "Couldn't load backup users";
+                   return false;
+                 }),catchError(error=>{
+                   console.log(error);
+                   this.errorMessage = "Couldn't get the backup users";
+                   return of(false);
+                 })
+               )
+  }
+
   public getError() : string{
     return this.errorMessage;
+  }
+
+  public getUser() : User{
+    return this.user;
+  }
+
+  public getBackups() : []{
+    return this.backups;
   }
 }

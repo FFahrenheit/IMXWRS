@@ -8,11 +8,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AddUserComponent } from './add-user/add-user.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ChangeManagersComponent } from './change-managers/change-managers.component';
+import { BackupUserComponent } from './backup-user/backup-user.component';
 
 @NgModule({
   declarations: [
     ChangePasswordComponent, 
-    AddUserComponent, UserProfileComponent, ChangeManagersComponent],
+    AddUserComponent, UserProfileComponent, ChangeManagersComponent, BackupUserComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(ProfileRoutes),
