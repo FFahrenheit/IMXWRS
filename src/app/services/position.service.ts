@@ -60,6 +60,26 @@ export class PositionService {
                )
   }
 
+  public saveBackups(username : string, users : string[]){
+    let body = {
+      backups : users
+    };
+
+    return this.http.post(`${base_url}/position/${username}`, body)
+              .pipe(
+                map(resp=>{
+                  if(resp['ok']){
+                    return true;
+                  }
+                  this.errorMessage = "Error saving backup users";
+                  return false;
+                }),catchError(error=>{
+                  this.errorMessage = "Couldn't save backup users";
+                  return of(false);
+                })
+              );
+  }
+
   public getError() : string{
     return this.errorMessage;
   }
