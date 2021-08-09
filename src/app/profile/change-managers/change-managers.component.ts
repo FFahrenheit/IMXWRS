@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PositionService } from 'src/app/services/position.service';
 import { UsersService } from 'src/app/services/users.service';
 import { AlertService } from 'src/app/shared/alert';
 
@@ -15,7 +16,8 @@ export class ChangeManagersComponent implements OnInit {
 
   constructor(private fb : FormBuilder,
               private usersService : UsersService,
-              private alert : AlertService) { }
+              private alert : AlertService,
+              private position : PositionService) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -65,7 +67,37 @@ export class ChangeManagersComponent implements OnInit {
   }
 
   public next() : void{
-    console.log('Waiting...');
+    let body = Object.create(null);
+    let managers = this.form.controls;
+    
+    body.managers = [];
+
+    Object.keys(managers).forEach(m => {
+      let key = m + ' ' + 'manager';
+      
+      const obj = {
+        username: managers[m].value,
+        position: key 
+      }
+      
+      body.managers.push(obj);
+    });
+
+    console.log(body);
+
+    this.position.updateManagers(body)
+        .subscribe(resp=>{
+          if(resp){
+            this.alert.success("Managers updated");
+            setTimeout(() => {
+              window.location.reload();
+            }, 2500);
+          }else{
+            this.alert.error(this.position.getError());
+          }
+        },error=>{
+          this.alert.error(this.position.getError());
+        });
   }
 
 }
