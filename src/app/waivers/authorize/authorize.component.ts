@@ -26,7 +26,7 @@ export class AuthorizeComponent implements OnInit {
   ngOnInit() : void {
     this.route.paramMap.subscribe(params => {
       this.waiverId = params.get('id');
-    })
+    });
   }
 
   updateExistance($event){
@@ -122,5 +122,7 @@ export class AuthorizeComponent implements OnInit {
     },error=>{
       window.scroll(0,0);
       this.alert.error("Server error. Try again later");
-    });  }
+    });  
+  }
+  
 }

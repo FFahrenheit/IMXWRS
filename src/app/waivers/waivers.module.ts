@@ -16,6 +16,7 @@ import { RepeatedWaiversComponent } from './repeated-waivers/repeated-waivers.co
 import { CloseComponent } from './close/close.component';
 import { ReopenComponent } from './reopen/reopen.component';
 import { CloseActivityComponent } from './close-activity/close-activity.component';
+import { AttachComponent } from './attach/attach.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { CloseActivityComponent } from './close-activity/close-activity.componen
     CloseComponent,
     ReopenComponent,
     CloseActivityComponent,
+    AttachComponent,
   ],
   imports: [
     CommonModule,

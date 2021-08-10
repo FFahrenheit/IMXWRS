@@ -51,4 +51,7 @@ export class MyWaiversComponent implements OnInit {
     this.router.navigate(['waivers','close',id]);
   }
   
+  upload(id: string){
+    this.router.navigate(['waivers','attach',id]);
+  }
 }

@@ -4,6 +4,7 @@ import { AuthorizeGuard } from '../guards/authorize.guard';
 import { CloseGuard } from '../guards/close.guard';
 import { EditGuard } from '../guards/edit.guard';
 import { ReopenGuard } from '../guards/reopen.guard';
+import { AttachComponent } from './attach/attach.component';
 import { AuthorizeComponent } from './authorize/authorize.component';
 import { CloseActivityComponent } from './close-activity/close-activity.component';
 import { CloseComponent } from './close/close.component';
@@ -22,6 +23,10 @@ export const WaiversRoutes: Routes = [
       {
         path: 'view/:id',
         component: ViewWaiverComponent,
+      },
+      {
+        path: 'attach/:id',
+        component: AttachComponent
       },
       {
         path: 'authorize/:id',
