@@ -32,7 +32,8 @@ export class UsersService {
                        username : resp.user.username,
                        email : resp.user.email,
                        name : resp.user.name,
-                       position : resp.user.position
+                       position : resp.user.position,
+                       roles: []
                      };
 
                      this.loadedUser = user;

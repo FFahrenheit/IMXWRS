@@ -33,7 +33,8 @@ export class AuthenticationService {
                      resp.user.username,
                      resp.user.email,
                      resp.user.position,
-                     resp.user.name
+                     resp.user.name,
+                     resp.roles
                    );
 
                    if(resp['user']['recover']){
@@ -88,7 +89,8 @@ export class AuthenticationService {
                       resp.user.username,
                       resp.user.email,
                       resp.user.position,
-                      resp.user.name
+                      resp.user.name,
+                      resp.roles
                     );
  
                     return true;

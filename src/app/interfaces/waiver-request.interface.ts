@@ -9,7 +9,8 @@ export interface WaiverBody{
 }
 
 export interface Manager{
-    manager: string
+    manager: string,
+    position: string,
 }
 
 export interface WaiverRequest{

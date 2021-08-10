@@ -150,7 +150,7 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let auth of wr?.authorizations">
-                                <td> {{ auth.title | titlecase }} </td>
+                                <td> {{ auth.position | titlecase }} </td>
                                 <td> {{ auth.name }}</td>
                                 <td *ngIf="auth.signed == 'pending'">
                                     {{ auth.signed | titlecase }}

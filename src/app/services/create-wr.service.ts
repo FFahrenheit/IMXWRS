@@ -102,6 +102,7 @@ export class CreateWrService {
     let actions: WAction[] = [];
     let waivers: Waiver[] = [];
     let parts: WPart[] = [];
+
     this.wr.actions.forEach(a => {
       let action: WAction = {
         date: a.date,
@@ -170,11 +171,13 @@ export class CreateWrService {
       rpnBefore: this.wr.risk.rpnBefore || 0,
       status: 'pending',
     }
+    
     let managers: Manager[] = [];
 
     this.wr.managers.forEach(m => {
       const manager: Manager = {
-        manager: m.username
+        manager: m.username,
+        position: m.position
       }
       managers.push(manager);
     });

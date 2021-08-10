@@ -31,7 +31,7 @@ export class TaskDashboardComponent implements OnInit {
   }
 
   private filterActivities(){
-    let waivers = this.activities.map(v => v.request);
+    let waivers = this.activities?.map(v => v.request);
     waivers = Array.from(new Set(waivers));
     this.filters = waivers;
     console.log(waivers);
@@ -49,7 +49,7 @@ export class TaskDashboardComponent implements OnInit {
   }
 
   getActivities(){
-    return this.activities.filter( a => this.filter == '' || a.request == this.filter);
+    return this.activities?.filter( a => this.filter == '' || a.request == this.filter);
   }
 
 }

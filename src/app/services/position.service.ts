@@ -45,7 +45,8 @@ export class PositionService {
                        u.username,
                        u.email,
                        u.position,
-                       u.name
+                       u.name,
+                       []
                      );
                      this.backups = resp['backups'];         
                      return true;     
