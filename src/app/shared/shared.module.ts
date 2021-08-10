@@ -21,6 +21,7 @@ import { StatsDetailsModalComponent } from './stats-details-modal/stats-details-
 import { TableGeneratorComponent } from './table-generator/table-generator.component';
 import { AutomaticTableComponent } from './automatic-table/automatic-table.component';
 import { InfoBaloonComponent } from './info-baloon/info-baloon.component';
+import { AcknowledgeModalComponent } from './acknowledge-modal/acknowledge-modal.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { InfoBaloonComponent } from './info-baloon/info-baloon.component';
     TableGeneratorComponent,
     AutomaticTableComponent,
     InfoBaloonComponent,
+    AcknowledgeModalComponent,
   ],
   imports: [
     CommonModule,
@@ -69,6 +71,7 @@ import { InfoBaloonComponent } from './info-baloon/info-baloon.component';
     StatsDetailsModalComponent,
     TableGeneratorComponent,
     InfoBaloonComponent,
+    AcknowledgeModalComponent
   ]
 })
 export class SharedModule { }

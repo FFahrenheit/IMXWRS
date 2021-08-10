@@ -1,12 +1,15 @@
 <alert></alert>
-<app-waiver [hasGuard]="true" (receive)="getWaiver($event)"  title="Acknowledge" 
-(hasError) = "updateExistance($event)" [id] = " waiverId "> </app-waiver>
+<app-waiver [hasGuard]="true" (receive)="getWaiver($event)" title="Acknowledge" (hasError)="updateExistance($event)"
+    [id]=" waiverId "> </app-waiver>
 
-<confirm-modal *ngIf="exists" title = "Acknowledge waiver request"  
+<!-- <confirm-modal *ngIf="exists" title = "Acknowledge waiver request"  
 (accept) = "confirm()" content = "Do you akcnowledge the content of this waiver request? " 
 trigger = "Acknowledge" 
 [isDisabled] = "cannotApprove" [reason] = "reason">
-</confirm-modal>
+</confirm-modal> -->
+<acknowledge (accept)="acknowledge($event)" [isDisabled]="cannotApprove" [reason]="reason">
+
+</acknowledge>
 
 <remark (send)="sendComment($event)">
 </remark>

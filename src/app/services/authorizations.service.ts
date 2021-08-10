@@ -49,8 +49,8 @@ export class AuthorizationsService {
     );
   }
 
-  authorizeWaiver(waiver : string){
-    let body = { waiver };
+  authorizeWaiver(waiver : string, position : string){
+    let body = { waiver, position };
     return this.http.put(`${ base_url }/authorizations`,body)
         .pipe(map((resp:any)=>{
           if(resp.ok){

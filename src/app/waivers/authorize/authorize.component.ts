@@ -34,21 +34,21 @@ export class AuthorizeComponent implements OnInit {
   }
 
   confirm(){
-    this.authorizationsService.authorizeWaiver(this.waiverId)
-        .subscribe(resp=>{
-          window.scroll(0,0);
-          if(resp){
-            this.alert.success('Waiver acknowledged');
-            setTimeout(()=>{
-              this.router.navigate(['waivers','view',this.waiverId]);
-            },3010);
-          }else{
-            this.alert.error("Could't acknowledge waiver. Try again please");
-          }
-        },error=>{
-          window.scroll(0,0);
-          this.alert.error("Server error. Try again later");
-        });
+    // this.authorizationsService.authorizeWaiver(this.waiverId,'')
+    //     .subscribe(resp=>{
+    //       window.scroll(0,0);
+    //       if(resp){
+    //         this.alert.success('Waiver acknowledged');
+    //         setTimeout(()=>{
+    //           this.router.navigate(['waivers','view',this.waiverId]);
+    //         },3010);
+    //       }else{
+    //         this.alert.error("Could't acknowledge waiver. Try again please");
+    //       }
+    //     },error=>{
+    //       window.scroll(0,0);
+    //       this.alert.error("Server error. Try again later");
+    //     });
   }
 
   sendComment($event){
@@ -106,4 +106,21 @@ export class AuthorizeComponent implements OnInit {
 
     console.log([this.cannotApprove, this.reason.length]);
   }
+
+  public acknowledge($event : string){
+    this.authorizationsService.authorizeWaiver(this.waiverId, $event)
+    .subscribe(resp=>{
+      window.scroll(0,0);
+      if(resp){
+        this.alert.success('Waiver acknowledged');
+        setTimeout(()=>{
+          this.router.navigate(['waivers','view',this.waiverId]);
+        },3010);
+      }else{
+        this.alert.error("Could't acknowledge waiver. Try again please");
+      }
+    },error=>{
+      window.scroll(0,0);
+      this.alert.error("Server error. Try again later");
+    });  }
 }
