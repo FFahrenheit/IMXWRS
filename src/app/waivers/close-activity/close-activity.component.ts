@@ -13,6 +13,7 @@ export class CloseActivityComponent implements OnInit {
   public waiverId : string; 
   public exists = false;
   public activityId : string;
+  public files = [];
 
   constructor(private route : ActivatedRoute,
               private router : Router,
@@ -33,17 +34,35 @@ export class CloseActivityComponent implements OnInit {
   }
 
   confirm(){
-    this.signService.signActivity(this.waiverId)
+    setTimeout(() => {
+      window.scroll(0,0);
+    }, 10);
+
+    this.signService.closeAction(this.activityId)
         .subscribe(resp=>{
           console.log(resp);
           if(resp){
             window.scroll(0,0);
-            this.alert.success('Activity signed');
-            setTimeout(() => {
-              this.router.navigate(['waivers','view',this.waiverId]);             
-            }, 3010);
+            this.signService.uploadFiles(this.files, this.activityId, this.waiverId)
+              .subscribe(resp=>{
+              if(resp){
+                this.alert.success('Action correctly closed');
+                setTimeout(() => {
+                  this.router.navigate(['waivers','view',this.waiverId]);
+                }, 3500);
+              }else{
+                this.alert.error('Can not upload files to close action, please try again', { autoClose: true });
+              }
+            },error=>{
+              this.alert.error('Can not upload files to close action, please try again', { autoClose: true });
+            });
+
+            // this.alert.success('Activity signed');
+            // setTimeout(() => {
+            //   this.router.navigate(['waivers','view',this.waiverId]);             
+            // }, 3010);
           }else{
-            this.alert.error('Can not sign activity. Reload and try again', { autoClose: false });
+            this.alert.error('Can not close activity. Reload and try again', { autoClose: false });
           }
         },err=>{
           this.alert.error('Server error');
@@ -54,6 +73,11 @@ export class CloseActivityComponent implements OnInit {
   updateExistance($event){
     console.log('Existance = ' + $event);
     this.exists = $event;
+  }
+
+  public getFiles($event) : void{
+    this.files = $event;
+    console.log(this.files);
   }
 
 }

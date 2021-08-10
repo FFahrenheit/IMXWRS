@@ -9,7 +9,6 @@ const base_url = environment.base_url;
 })
 export class CloseWaiverService {
   constructor(private http : HttpClient) { }
-
   closeWaiver(files : File[], request : string){
     let headers = new HttpHeaders();
     headers.set('Content-Type','multipart/form-data');

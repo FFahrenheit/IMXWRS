@@ -1,9 +1,14 @@
 <alert></alert>
 
-<app-waiver [title]="'Close activity #' + activityId + ' on'" (hasError) = "updateExistance($event)" [id] = " waiverId " [hasGuard]="false">
+<app-waiver [title]="'Close action #' + activityId + ' on'" (hasError)="updateExistance($event)" [id]=" waiverId "
+    [hasGuard]="false">
 </app-waiver>
 
-<confirm-modal *ngIf="exists" trigger="Confirm participation" title="Sign activity" 
-content="Do you confirm your participation on this waiver's action plan?"
-(accept)="confirm()">
+<file-upload type="evidence" (receive)="getFiles($event)"> </file-upload>
+
+<confirm-modal *ngIf="exists"
+    [isDisabled]="files.length == 0" [reason]="['You need to attach at least one evidence']"
+    [trigger]="'Mark action #' + activityId + ' as done'" [title]="'Close action #' + activityId"
+    content="Do you confirm the closure of this action as part of this waiver's action plan?" 
+    (accept)="confirm()">
 </confirm-modal>
