@@ -40,10 +40,10 @@ export const adminSidebar = [
     },
     {
         name: "Overall performance",
-        route: ['performance', 'dashboard']
+        route: ['stats', 'overall']
     },
     {
         name: "Individual performance",
-        route: ['performance', 'users']
+        route: ['stats']
     }
 ];

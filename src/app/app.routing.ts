@@ -66,6 +66,13 @@ export const AppRoutes: Routes = [
                 )
             },
             {
+                path: 'stats',
+                loadChildren: () =>
+                import('./stats/stats.module').then(
+                    (m) => m.StatsModule
+                )
+            },
+            {
                 path: '',
                 pathMatch: 'full',
                 redirectTo: 'waivers'

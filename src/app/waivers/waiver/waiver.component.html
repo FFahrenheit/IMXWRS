@@ -157,7 +157,8 @@
                                 </td>
                                 <td *ngIf="auth.signed != 'pending'">
                                     {{ auth.signed | titlecase }} 
-                                    on {{ auth.date | date:'medium':'UTC' }}
+                                    on {{ auth.date | date:'medium':'UTC' }} 
+                                    by {{ auth. authBy || auth.name }}
                                 </td>
                             </tr>
                         </tbody>

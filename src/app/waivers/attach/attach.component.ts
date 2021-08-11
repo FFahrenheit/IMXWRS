@@ -47,7 +47,6 @@ export class AttachComponent implements OnInit {
   }
 
   public getClass(ctrl : string){
-    console.log(this.get(ctrl));
     if(this.get(ctrl).untouched){
       return '';
     }
@@ -96,7 +95,6 @@ export class AttachComponent implements OnInit {
 
   show(){
     this.form.markAllAsTouched();
-
   }
 
 }
