@@ -1,1 +1,36 @@
-<p>overall works!</p>
+<div class="table-responsive container text-center pt-2">
+    <alert></alert>
+    <h4 class="text-left align-top align-text-top">
+        Overall performance
+    </h4>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>
+            <i class="fas fa-chart-pie bigger-icon"></i>
+                Branch's stats
+            </h5>
+
+
+            <div *ngIf="charts.length > 0; else no_participation" class="card-columns">
+                <div *ngFor="let chart of charts">
+
+                    <chart [chart]="chart">
+                    </chart>
+
+                </div>
+            </div>
+            <ng-template #no_participation>
+                <error-message styles="small-size" type="empty-sub" title="Nothing here..."
+                    description="This user has no participation in the system">
+                </error-message>
+            </ng-template>
+        </div>
+
+        <!-- <div class="col-md-8">
+            <h5>
+                Progress
+            </h5>
+        </div> -->
+    </div>
+</div>
