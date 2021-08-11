@@ -1,5 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { forkJoin, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { FileUpload } from '../interfaces/file.upload.interface';
 
@@ -11,6 +13,33 @@ const base_url = environment.base_url;
 export class UploadFilesService {
 
   constructor(private http : HttpClient) { }
+
+  public attachFiles(files : File[], description: string, request : string){
+    let calls = [];
+    
+    files.forEach(f => {
+      const file : FileUpload ={
+        description: description,
+        file: f,
+        request: request
+      }
+
+      calls.push(this.uploadFile(file, request));
+    });
+
+    return forkJoin(calls).pipe(
+      map(resps=>{
+        let count = 0;
+        resps.forEach(r =>{
+          count += r['ok'];
+        });
+        return count == resps.length;
+      }),catchError(error=>{
+        console.log(error);
+        return of(false);
+      })
+    )
+  }
 
   uploadFile(file : FileUpload, request : string){
 

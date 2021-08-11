@@ -17,6 +17,7 @@ import { CloseComponent } from './close/close.component';
 import { ReopenComponent } from './reopen/reopen.component';
 import { CloseActivityComponent } from './close-activity/close-activity.component';
 import { AttachComponent } from './attach/attach.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { AttachComponent } from './attach/attach.component';
     CommonModule,
     RouterModule.forChild(WaiversRoutes),
     SharedModule,
+    ReactiveFormsModule,
   ],
   exports: [
     WaiverComponent,

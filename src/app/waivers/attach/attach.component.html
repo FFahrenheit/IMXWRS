@@ -1,3 +1,38 @@
 <alert></alert>
 <app-waiver (receive)="getWaiver($event)" title="Attach files to" (hasError)="updateExistance($event)"
     [id]=" waiverId "> </app-waiver>
+
+<div *ngIf="wr" class="mb-5">
+    <h5>Attach reference files to waiver</h5>
+
+    <file-upload type="evidence" (receive)="getFiles($event)" type="reference"> </file-upload>
+
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group pt-2 row">
+                    <label for="" class="col-md-4 col-form-label">Description</label>
+                    <div class="col-md-8">
+                        <input 
+                            type="text"
+                            formControlName="description" 
+                            class="form-control"
+                            [class]="getClass('description')"
+                            placeholder="Describe the files you are uploading">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <confirm-modal title="Attach reference files"
+        trigger="Attach files"
+        content="Are you sure you want to upload these files as a reference for this waiver?"
+        (accept)="next()"
+        [isDisabled]="!form.valid || files?.length <= 0"
+        [reason]="getReasons()"
+        (triggered)="show()">
+
+    </confirm-modal>
+
+</div>
