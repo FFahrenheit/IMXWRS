@@ -88,25 +88,7 @@
                         </tbody>
                     </table>
                 </div>
-                <h5 class="text-left subtitle-att">Action plan</h5>
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">Responsable</th>
-                                <th scope="col">Action</th>
-                                <th scope="col">Commitment date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let action of wr.actions">
-                                <td> {{ action.responsable }} </td>
-                                <td> {{ action.action }} </td>
-                                <td> {{ action.date }} </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                
                 <h5 class="text-left subtitle-att">Required authorizations</h5>
                 <div class="table-responsive">
                     <table class="table table-hover">
@@ -126,7 +108,46 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Description</th>
+                                <th scope="col">Filename</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let file of evidences">
+                                <td class="bold"> {{ file.description }}</td>
+                                <td> {{ file.file.name }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
+        </div>
+        <div class="row">
+            <h5 class="text-left subtitle-att">Action plan</h5>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Responsable</th>
+                                <th scope="col">Action</th>
+                                <th scope="col">Commitment date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let action of wr.actions">
+                                <td> {{ action.responsable }} </td>
+                                <td> {{ action.action }} </td>
+                                <td> {{ action.date }} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
         </div>
     </div>
 </div>

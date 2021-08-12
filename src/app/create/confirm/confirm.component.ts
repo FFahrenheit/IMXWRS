@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Authorization, Origin, WR } from 'src/app/interfaces/create-wr.interface';
+import { FileUpload } from 'src/app/interfaces/file.upload.interface';
 import { WaiverBody } from 'src/app/interfaces/waiver-request.interface';
 import { User } from 'src/app/models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -19,6 +20,7 @@ export class ConfirmComponent implements OnInit {
   public managers : Authorization[];
   public user : User;
   public repeated = [];
+  public evidences : FileUpload[];
 
   constructor(private router : Router,
               private waiverService : CreateWrService,
@@ -46,6 +48,7 @@ export class ConfirmComponent implements OnInit {
     });
 
     this.getRepeated();
+    this.evidences = this.waiverService.getEvidences();
   }
 
   confirm(){
