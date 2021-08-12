@@ -81,15 +81,18 @@ export class WaiverDetailsComponent implements OnInit {
       this.waiverDetails.controls['extTitle'].setValidators([Validators.required]);
       this.waiverDetails.controls['extName'].setValidators([Validators.required]);
       this.waiverDetails.controls['extDate'].setValidators([Validators.required]);
+      this.waiverDetails.controls['extFile'].setValidators([Validators.required]);
     }
     else{
       this.waiverDetails.controls['extTitle'].clearValidators();
       this.waiverDetails.controls['extName'].clearValidators();
       this.waiverDetails.controls['extDate'].clearValidators();
+      this.waiverDetails.controls['extFile'].clearValidators();
     }
     this.waiverDetails.controls['extTitle'].updateValueAndValidity();
     this.waiverDetails.controls['extName'].updateValueAndValidity();
-    this.waiverDetails.controls['extDate'].updateValueAndValidity();  
+    this.waiverDetails.controls['extDate'].updateValueAndValidity();
+    this.waiverDetails.controls['extFile'].updateValueAndValidity();
   }
 
   updateLapse(t){
