@@ -1,6 +1,6 @@
 <div class="container text-center pt-2">
     <alert></alert>
-    <h4 class="text-left my-3">Edit Waiver Request {{ number }} 
+    <h4 class="text-left my-3">Edit Waiver Request {{ number }}
     </h4>
     <form [formGroup]="waiverDetails">
 
@@ -10,7 +10,8 @@
                 <div class="form-group row pt-2 has-error has-feedback">
                     <label for="" class="col-md-4 col-form-label">Area</label>
                     <div class="col-md-8">
-                        <input formControlName="area" type="text" class="form-control" placeholder="Area" [class]="getClass('area')">
+                        <input formControlName="area" type="text" class="form-control" placeholder="Area"
+                            [class]="getClass('area')">
                     </div>
                 </div>
                 <div class="form-group row pt-2">
@@ -35,15 +36,16 @@
                 <div class="form-group row pt-2">
                     <label for="" class="col-md-4 col-form-label">Customer</label>
                     <div class="col-md-8">
-                        <input [class] = "getClass('customer')" type="text" formControlName="customer" class="form-control" placeholder="Customer">
+                        <input [class]="getClass('customer')" type="text" formControlName="customer"
+                            class="form-control" placeholder="Customer">
                     </div>
                 </div>
 
                 <div class="form-group row pt-2">
                     <label for="" class="col-md-4 col-form-label">Type of deviation</label>
                     <div class="col-md-7">
-                        <select [class]="getClass('typeNumber')" formControlName="typeNumber" class="custom-select mb-2 mr-sm-2 mb-sm-0"
-                            id="inlineFormCustomSelect">
+                        <select [class]="getClass('typeNumber')" formControlName="typeNumber"
+                            class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
                             <option value="1">Type 1</option>
                             <option value="2">Type 2</option>
                             <option value="3">Type 3</option>
@@ -57,7 +59,7 @@
                         <span class="deviation-info-text">
                             <font style="font-weight: bold;">Type 1:</font> Forward documentation only <br>
                             <font style="font-weight: bold;">Type 2:</font> Any product feature <br>
-                            <font style="font-weight: bold;">Type 3:</font> 
+                            <font style="font-weight: bold;">Type 3:</font>
                             Any product deviation that affects components and / or costs, Scrap and inventory
                             <br>
                             <font style="font-weight: bold;">Type 4:</font> Any product recurrent deviation<br>
@@ -76,37 +78,56 @@
                     </div>
                     <div class="col-md-8">
                         <div class="form-check">
-                            <input formControlName="needsManager" class="form-check-input" type="checkbox" id="gridCheck1">
+                            <input formControlName="needsManager" class="form-check-input" type="checkbox"
+                                id="gridCheck1">
                             <label class="form-check-label" for="gridCheck1">
                                 This WR will costs more than $500 USD
                             </label>
                         </div>
                     </div>
                 </div>
-                <div *ngIf="waiverDetails.controls['type'].value == 'external'">
+                <div *ngIf="waiverDetails.controls['type'].value == 'external'" class="mb-5">
                     <h5 class="text-left m-3">External authorization</h5>
                     <div class="form-group row pt-2">
                         <label for="" class="col-md-4 col-form-label">Title</label>
                         <div class="col-md-8">
-                            <input [class] = "getClass('extTitle')" formControlName="extTitle" type="text" class="form-control" placeholder="Title of authorizer">
+                            <input [class]="getClass('extTitle')" formControlName="extTitle" type="text"
+                                class="form-control" placeholder="Title of authorizer">
                         </div>
                     </div>
                     <div class="form-group row pt-2">
                         <label for="" class="col-md-4 col-form-label">Name</label>
                         <div class="col-md-8">
-                            <input [class] = "getClass('extName')"  formControlName="extName" type="text" class="form-control" placeholder="Name of authorizer">
+                            <input [class]="getClass('extName')" formControlName="extName" type="text"
+                                class="form-control" placeholder="Name of authorizer">
                         </div>
                     </div>
                     <div class="form-group row pt-2">
                         <label for="" class="col-md-4 col-form-label">Date</label>
                         <div class="col-md-8">
-                            <input [class] = "getClass('extDate')" class="form-control" formControlName="extDate" type="date">
+                            <input [class]="getClass('extDate')" class="form-control" formControlName="extDate"
+                                type="date">
                         </div>
                     </div>
                     <div class="form-group row pt-2">
                         <label for="" class="col-md-4 col-form-label">Comments</label>
                         <div class="col-md-8">
-                            <textarea [class] = "getClass('extComments')"  class="form-control area" formControlName="extComments" placeholder="Details" rows="3"></textarea>
+                            <textarea [class]="getClass('extComments')" class="form-control area"
+                                formControlName="extComments" placeholder="Details" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row pt-2">
+                        <label for="" class="col-md-4 col-form-label">Evidence</label>
+                        <div class="col-md-8">
+                            <input type="file" class="form-control file-input" (change)="extEvent($event)">
+                            <span *ngIf="get('extFile') == ''">
+                                <i class="fas fa-exclamation-triangle not-ok-icon-st"></i>
+                                No se ha adjuntado un archivo
+                            </span>
+                            <span *ngIf="get('extFile') != ''">
+                                <i class="fas fa-check-circle ok-icon-st"></i>
+                                Archivo adjunto : {{ get('extFile') }}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -128,13 +149,11 @@
                             <tr *ngFor="let piece of pieces.controls; let i = index" [formGroupName]="i">
                                 <td>
                                     <input class="form-control" type="text" formControlName="customer"
-                                        [class] = "checkPiece(piece,'customer')"
-                                        placeholder="Customer P/N">
+                                        [class]="checkPiece(piece,'customer')" placeholder="Customer P/N">
                                 </td>
                                 <td>
                                     <input class="form-control" type="text" formControlName="internal"
-                                        [class] = "checkPiece(piece,'internal')"
-                                        placeholder="Interplex P/N">
+                                        [class]="checkPiece(piece,'internal')" placeholder="Interplex P/N">
                                 </td>
                                 <td>
                                     <button class="btn btn-primary fa fa-plus" *ngIf="i == 0" type="button"
@@ -150,13 +169,15 @@
                     <legend class="col-form-label col-md-4 pt-0">Lasts for</legend>
                     <div class="col-md-8 pr-4">
                         <div class="form-check">
-                            <input formControlName="lapse" class="form-check-input" type="radio" name="lapse" id="lapse1" value="quantity">
+                            <input formControlName="lapse" class="form-check-input" type="radio" name="lapse"
+                                id="lapse1" value="quantity">
                             <label class="form-check-label" for="lapse1">
                                 Quantity
                             </label>
                         </div>
                         <div class="form-check">
-                            <input  formControlName="lapse" class="form-check-input" type="radio" name="lapse" id="lapse2" value="time">
+                            <input formControlName="lapse" class="form-check-input" type="radio" name="lapse"
+                                id="lapse2" value="time">
                             <label class="form-check-label" for="lapse2">
                                 Time
                             </label>
@@ -165,10 +186,12 @@
                 </div>
                 <div *ngIf="waiverDetails.controls['lapse'].value == 'quantity'" class="form-group row pt-2 pl-2 pr-4">
                     <div class="col-md-8">
-                        <input [class]="getClass('quantity')" type="number" formControlName="quantity" class="form-control" placeholder="Quantity">
+                        <input [class]="getClass('quantity')" type="number" formControlName="quantity"
+                            class="form-control" placeholder="Quantity">
                     </div>
                     <div class="col-md-4">
-                        <select [class]="getClass('specification')"  formControlName="specification" class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+                        <select [class]="getClass('specification')" formControlName="specification"
+                            class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
                             <option value="lb">lb</option>
                             <option value="pieces">pieces</option>
                         </select>
@@ -177,15 +200,18 @@
                 <div *ngIf="waiverDetails.controls['lapse'].value == 'time'" class="form-group row pt-2">
                     <div class="col-md-6">
                         <label>Start date</label>
-                        <input [min] = "today" [class]="getClass('startDate')" formControlName="startDate" class="form-control" type="date">
+                        <input [min]="today" [class]="getClass('startDate')" formControlName="startDate"
+                            class="form-control" type="date">
                     </div>
                     <div class="col-md-6">
                         <label>End date or deadline</label>
-                        <input [min] = "waiverDetails.controls['startDate'].value" formControlName="endDate" [class]="getClass('endDate')" class="form-control" type="date">
+                        <input [min]="waiverDetails.controls['startDate'].value" formControlName="endDate"
+                            [class]="getClass('endDate')" class="form-control" type="date">
                     </div>
                 </div>
 
-                <button [ngClass]="{'no-ok' : !waiverDetails.valid || !formPieces.valid}" type="button" (click)="next()" class="btn px-5 btn-success float-right">Next</button>
+                <button [ngClass]="{'no-ok' : !waiverDetails.valid || !formPieces.valid}" type="button" (click)="next()"
+                    class="btn px-5 btn-success float-right">Next</button>
             </div>
 
         </div>

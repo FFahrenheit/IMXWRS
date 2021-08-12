@@ -15,6 +15,7 @@ export class WaiverDetailsComponent implements OnInit {
   public number : string;
   public formPieces : FormGroup = Object.create(null);
   public waiverDetails : FormGroup = Object.create(null);
+  private extAuth : File;
 
   constructor(public editService : EditService,
               private fb : FormBuilder,
@@ -41,6 +42,7 @@ export class WaiverDetailsComponent implements OnInit {
       extDate : [wr?.externalAuthorization?.date || defaultDate],   
       extComments : [wr?.externalAuthorization?.comments || ''],
       needsManager : [false],
+      extFile: [this.editService.extAuthFile?.file?.name || ''],
       lapse: [(wr?.expiration?.endDate == null) ? 'quantity' :  'time'|| 'quantity',Validators.compose([Validators.required])],
       quantity : [wr?.expiration?.quantity || ''],
       specification: [wr?.expiration?.specification || ''],
@@ -138,7 +140,15 @@ export class WaiverDetailsComponent implements OnInit {
     this.editService.changeDetails(this.waiverDetails.value);
     this.editService.changePieces(this.getPieces());
 
-    console.log(this.editService.wr);
+    if(this.get('type') == 'external'){
+      this.editService.attachExtAuth(this.extAuth);
+    }else{
+      this.editService.attachExtAuth(null);    
+    }
+    console.log({
+      wr: this.editService.wr,
+      fike: this.editService.extAuthFile
+    });
     this.router.navigate(['edit',this.number,'details']);
   }
 
@@ -170,6 +180,16 @@ export class WaiverDetailsComponent implements OnInit {
       pieces.push(piece);
     })
     return pieces;
+  }
+
+  public extEvent($event){
+    if ($event.target.files.length > 0) {
+      this.extAuth = $event.target.files[0] as File;
+      this.waiverDetails.controls['extFile'].setValue(this.extAuth.name);
+    }else{
+      this.extAuth = $event.target.files[0] as File;
+      this.waiverDetails.controls['extFile'].setValue('');
+    }
   }
 
 }

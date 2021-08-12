@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { FileUpload } from '../interfaces/file.upload.interface';
 import { GetWaiverService } from './get-waiver.service';
 
 const base_url = environment.base_url;
@@ -15,6 +16,7 @@ export class EditService {
 
   public wr: any;
   public number: string;
+  public extAuthFile : FileUpload = null;
 
   constructor(public waiverService: GetWaiverService,
               private datePipe : DatePipe,
@@ -254,5 +256,17 @@ export class EditService {
     console.log(this.wr);
 
     return wr;
+  }
+
+  public attachExtAuth(file: File): void {
+    if (file != null) {
+      const _file: FileUpload = {
+        description: 'External Authorization evidence',
+        file: file
+      }
+      this.extAuthFile = _file;
+    } else {
+      this.extAuthFile = null;
+    }
   }
 }
