@@ -70,7 +70,7 @@ export class ActionPlanComponent implements OnInit {
 
   ngOnDestroy(){
     console.log(this.editService.wr);
-    this.router.navigate(['edit',this.number,'confirm']);
+    this.router.navigate(['edit',this.number,'risks']);
   }
 
   get actions(): FormArray {

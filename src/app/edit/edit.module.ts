@@ -10,6 +10,7 @@ import { DeviationDetailsComponent } from './deviation-details/deviation-details
 import { ActionPlanComponent } from './action-plan/action-plan.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { WaiversModule } from '../waivers/waivers.module';
+import { RiskAnalysisComponent } from './risk-analysis/risk-analysis.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { WaiversModule } from '../waivers/waivers.module';
     WaiverDetailsComponent,
     DeviationDetailsComponent,
     ActionPlanComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    RiskAnalysisComponent
   ],
   imports: [
     CommonModule,
