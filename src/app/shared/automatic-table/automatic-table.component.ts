@@ -35,4 +35,8 @@ export class AutomaticTableComponent implements OnInit {
     this.onSelect.emit(this.data[index][this.key]);
   }
 
+  isDate(value : string){
+    return new Date(value).toString() != 'Invalid Date' && value.toString().slice(-1) == 'Z'; 
+  }
+
 }
