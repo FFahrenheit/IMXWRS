@@ -14,6 +14,7 @@ export class RiskAnalysisComponent implements OnInit {
   riskDetails : FormGroup = Object.create(null);
   
   private riskAnalysis : File;
+  private files : File[] = [];
 
   constructor(private fb : FormBuilder,
               private router : Router,
@@ -23,6 +24,9 @@ export class RiskAnalysisComponent implements OnInit {
    ngOnDestroy(){
       this.waiverService.setSecondStep(this.getForm());
       this.waiverService.attachRiskAnalysis(this.riskAnalysis);
+      if(this.files.length>0){
+        this.waiverService.setResources(this.files);
+      }
       this.router.navigate(['create','confirm']);
    }
 
@@ -106,6 +110,11 @@ export class RiskAnalysisComponent implements OnInit {
       return '';
     }
     return (this.riskDetails.controls[field].valid) ? 'is-valid' : 'is-invalid';
+  }
+
+  getFiles($event){
+    console.log($event);
+    this.files = $event;
   }
 
 }

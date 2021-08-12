@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { forkJoin, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 import { WR, FirstStep, Piece, SecondStep, Deviation, Action, Origin, Authorization } from '../interfaces/create-wr.interface';
 import { FileUpload } from '../interfaces/file.upload.interface';
 import { WExternalAuth, WaiverRequest, WAction, Waiver, WPart, Expiration, WaiverBody, Manager } from '../interfaces/waiver-request.interface';
@@ -19,6 +20,7 @@ export class CreateWrService {
   public similar: [];
   public extAuthFile: FileUpload = null;
   public riskAnalysis: FileUpload = null;
+  public resources = null;
 
   constructor(private http: HttpClient,
     private upload: UploadFilesService) {
@@ -261,6 +263,17 @@ export class CreateWrService {
       );
     }
 
+    if(this.resources){
+      this.resources.forEach(r => {
+        const file : FileUpload = {
+          description: 'Waiver resource',
+          file: r,
+          request: this.wr.number
+        };
+        calls.push(this.upload.uploadFile(file,this.wr.number));
+      });
+    }
+
     calls.push(
       this.upload.uploadFile(this.riskAnalysis, this.wr.number)
     );
@@ -277,5 +290,9 @@ export class CreateWrService {
         return of(false);
       })
     )
+  }
+
+  public setResources(files : File[]){
+    this.resources = files;
   }
 }

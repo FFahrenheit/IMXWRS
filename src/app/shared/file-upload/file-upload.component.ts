@@ -10,6 +10,7 @@ export class FileUploadComponent implements OnInit {
   @Input() public type = 'file';
   @Input() public maxSize = 1024*1024*10;
   @Input() public maxFiles = 10;
+  @Input() public isRequired = true;
 
   @Output() public receive = new EventEmitter<any>();
 
