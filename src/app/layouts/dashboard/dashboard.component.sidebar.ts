@@ -44,6 +44,6 @@ export const adminSidebar = [
     },
     {
         name: "Individual performance",
-        route: ['stats']
+        route: ['stats', 'individual']
     }
 ];
