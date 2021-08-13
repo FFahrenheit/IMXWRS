@@ -1,1 +1,106 @@
-<p>risk-analysis works!</p>
+<div class="container text-center pt-2 bot">
+    <h4 class="text-left my-3">Risks</h4>
+    <form [formGroup]="riskDetails">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                
+                <h5 class="text-left ml-2"> Risk Analysis </h5>
+
+                <div class="form-group row pt-2">
+                    <div class="col-md-6">
+                        <div class="form-group row pt-2">
+                            <label for="" class="col-md-4 col-form-label">Risk analysis</label>
+                            <div class="col-md-8">
+                                <input type="file" class="form-control file-input mb-2" 
+                                (change)="fileEvent($event)">
+                                <span *ngIf="riskDetails.controls['riskAnalysis'].value == ''">
+                                    <i class="fas fa-exclamation-triangle not-ok-icon-st"></i>
+                                    No se ha adjuntado un archivo
+                                </span>
+                                <span *ngIf="riskDetails.controls['riskAnalysis'].value != ''">
+                                    <i class="fas fa-check-circle ok-icon-st"></i>
+                                    Archivo adjunto : {{ riskDetails.controls['riskAnalysis'].value }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-form-label">AMEF RPN before</label>
+                            <div class="col-sm-6 ">
+                                <input min="0" value="0" [class] = "getStyle('rpnBefore')" formControlName="rpnBefore" type="number" class="form-control" value="0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-form-label">AMEF RPN after</label>
+                            <div class="col-sm-6 ">
+                                <input min="0" value="0" [class] = "getStyle('rpnAfter')" formControlName="rpnAfter" type="number" class="form-control" value="0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <h5 class="text-left ml-2">Risk summary</h5><br>
+
+                <div class="form-group row pt-2">
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-form-label">Corrective action required</label>
+                            <div class="col-sm-6 ">
+                                <select [class] = "getStyle('requiredCorrectiveAction')" formControlName="requiredCorrectiveAction" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+                                    <option value="" selected disabled>Choose depending on the guide</option>                                
+                                    <option value="PDCA">PDCA</option>
+                                    <option value="8DS">8DS</option>
+                                    <option value="A3">A3</option>
+                                    <option value="other">Other (specify)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-form-label">Client impact</label>
+                            <div class="col-sm-6 ">
+                                <select [class] = "getStyle('originalRisk')" formControlName="originalRisk" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+                                    <option value="" selected disabled>Impact</option>                                
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
+                                    <option value="partial">Partially</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-form-label">Current risk</label>
+                            <div class="col-sm-6 ">
+                                <select [class] = "getStyle('currentRisk')" formControlName="currentRisk" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+                                    <option value="" selected disabled>Risk</option>
+                                    <option value="low">Low</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="high">High</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            
+                <div class="form-group row pt-2 mb-5">
+                    <div class="col-md-3 mb-2">
+                        <input [class] = "getStyle('auxAction')" type="text" class="form-control" formControlName = "auxAction" placeholder="Corrective action"
+                        *ngIf = "riskDetails.get('requiredCorrectiveAction').value == 'other'">
+                    </div>
+                    <div class="col-md-9">
+                        <button [ngClass]="{'no-ok' : !riskDetails.valid}" type="button" (click)="next()" class="btn px-5 btn-success float-right">Next</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>

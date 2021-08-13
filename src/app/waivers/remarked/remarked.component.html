@@ -53,7 +53,7 @@
                         <button class="btn btn-primary" (click)="goToWaiver(waiver.number)">
                             Details
                         </button>
-                        <button class="btn btn-info offset" (click)="goToEdit(waiver.number)">
+                        <button class="btn btn-info m-1" (click)="goToEdit(waiver.number)">
                             Edit
                         </button>
                     </td>
@@ -62,7 +62,7 @@
         </table>
     </div>
     <ng-template #empty_body>
-        <error-message type="empty" title="Nothing here..." description="Congratulations, you don't have any unsolved remark in your waiver requests">
+        <error-message type="empty" title="Nothing here..." description="Congratulations, you don't have any rejected waiver request">
         </error-message>
     </ng-template>
 </div>

@@ -17,6 +17,7 @@ export class EditService {
   public wr: any;
   public number: string;
   public extAuthFile : FileUpload = null;
+  public riskAnalysis: FileUpload = null;
 
   constructor(public waiverService: GetWaiverService,
               private datePipe : DatePipe,
@@ -269,4 +270,17 @@ export class EditService {
       this.extAuthFile = null;
     }
   }
+
+  public attachRiskAnalysis(file: File): void {
+    if (file != null) {
+      const _file: FileUpload = {
+        description: 'Risk analysis',
+        file: file
+      }
+      this.riskAnalysis = _file;
+    } else {
+      this.riskAnalysis = null;
+    }
+  }
+  
 }

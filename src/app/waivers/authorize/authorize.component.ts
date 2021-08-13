@@ -52,7 +52,7 @@ export class AuthorizeComponent implements OnInit {
   }
 
   sendComment($event){
-    this.alert.info('Adding remark...');
+    this.alert.info('Rejecting waiver with comment...');
     window.scroll(0,0);
     let body = {
       comment: $event,
@@ -62,17 +62,17 @@ export class AuthorizeComponent implements OnInit {
         .subscribe(resp=>{
           if(resp){
             setTimeout(() => {
-              this.alert.success("Remark sent");
+              this.alert.success("Rejection sent");
             }, 1600);
 
             setTimeout(() => {
               window.location.reload();//Restart the component
             }, 3200);
           }else{
-            this.alert.error("Couldn't send remark. Try again");
+            this.alert.error("Couldn't send rejection. Try again");
           }
         },error=>{
-          this.alert.error("Couldn't remark waiver. Try again");
+          this.alert.error("Couldn't reject waiver. Try again");
         });
   }
 
