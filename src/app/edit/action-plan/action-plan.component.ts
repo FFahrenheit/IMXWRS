@@ -7,7 +7,7 @@ import { EditService } from 'src/app/services/edit.service';
 import { UsersService } from 'src/app/services/users.service';
 import { ResponsableInputComponent } from 'src/app/shared/responsable-input/responsable-input.component';
 
-@Component({
+@Component({ 
   selector: 'app-action-plan',
   templateUrl: './action-plan.component.html',
   styleUrls: ['./action-plan.component.scss']
@@ -35,11 +35,23 @@ export class ActionPlanComponent implements OnInit {
       actions: this.fb.array([])
     });
 
+    this.actions.clear();
     if(this.editService.wr.actions == null || this.editService.wr?.actions.length == 0){
       this.addAction();
     }else{
       let srv = this.editService.wr;
-      let actions = [...(srv.actions),...(srv.newActions|| []),...(srv.modifiedActions || [])];
+
+      console.log({
+        actions: srv.actions,
+        equal : srv.equalActions
+      });
+
+      let actions;
+      if(typeof srv.equalActions == 'undefined'){
+        actions = [...(srv.actions)];
+      }else{
+        actions = [...(srv.equalActions),...(srv.newActions|| []),...(srv.modifiedActions || [])];
+      }
       console.log(actions);
       actions.forEach(a=>{
         const action = this.fb.group({

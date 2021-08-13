@@ -149,6 +149,10 @@ export class EditService {
     let modifiedActions = [];
     let equalActions = [];
 
+    console.log({
+      actions
+    });
+
     actions.forEach((action)=>{
 
       console.log(action);
@@ -173,15 +177,21 @@ export class EditService {
       }
 
     });
-    
-    console.log('Equal actions');
-    console.log(equalActions);
 
-    console.log('New Actions');
-    console.log(newActions);
+    console.log({
+      'equal': equalActions,
+      'new' : newActions,
+      'modified' : modifiedActions
+    });
     
-    console.log('Modified actions');
-    console.log(modifiedActions);
+    // console.log('Equal actions');
+    // console.log(equalActions);
+
+    // console.log('New Actions');
+    // console.log(newActions);
+    
+    // console.log('Modified actions');
+    // console.log(modifiedActions);
 
     this.wr['equalActions'] = equalActions;
     this.wr['newActions'] = newActions;
@@ -225,6 +235,8 @@ export class EditService {
     let wr = { ... this.wr };
 
     delete wr?.name;
+    delete wr?.evidences;
+    delete wr?.remarks;
 
     wr.status = 'pending';
 
@@ -238,6 +250,7 @@ export class EditService {
     delete wr.authorizations;
 
     auth.forEach(a=>{
+      a.position = a.title;
       delete a?.name;
       delete a?.position;
       delete a?.title;

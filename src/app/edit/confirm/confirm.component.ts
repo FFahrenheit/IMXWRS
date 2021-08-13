@@ -19,7 +19,14 @@ export class ConfirmComponent implements OnInit {
   ngOnInit(): void {
     this.waiver = this.editService.getWaiver();
     let srv = this.editService.wr;
-    this.waiver.actions =  [...(srv.actions),...(srv.newActions|| []),...(srv.modifiedActions || [])];
+    let actions;
+    if(typeof srv.equalActions == 'undefined'){
+      actions = [...(srv.actions)];
+    }else{
+      actions = [...(srv.equalActions),...(srv.newActions|| []),...(srv.modifiedActions || [])];
+    }
+    let act = Object.assign(actions);
+    this.waiver.actions = act;
     console.log(this.waiver.actions);
   }
 
