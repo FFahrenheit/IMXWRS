@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ExternalAuth, Piece } from 'src/app/interfaces/create-wr.interface';
+import { Piece } from 'src/app/interfaces/create-wr.interface';
 import { EditService } from 'src/app/services/edit.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class WaiverDetailsComponent implements OnInit {
   public number : string;
   public formPieces : FormGroup = Object.create(null);
   public waiverDetails : FormGroup = Object.create(null);
-  private extAuth : File;
+  private extAuth : File = null;
 
   constructor(public editService : EditService,
               private fb : FormBuilder,
@@ -41,8 +41,9 @@ export class WaiverDetailsComponent implements OnInit {
       extName : [wr?.externalAuthorization?.name || ''],
       extDate : [wr?.externalAuthorization?.date || defaultDate],   
       extComments : [wr?.externalAuthorization?.comments || ''],
+      extFile : [wr?.files?.auth || ''],
       needsManager : [false],
-      extFile: [this.editService.extAuthFile?.file?.name || ''],
+      // extFile: [this.editService.extAuthFile?.file?.name || ''],
       lapse: [(wr?.expiration?.endDate == null) ? 'quantity' :  'time'|| 'quantity',Validators.compose([Validators.required])],
       quantity : [wr?.expiration?.quantity || ''],
       specification: [wr?.expiration?.specification || ''],

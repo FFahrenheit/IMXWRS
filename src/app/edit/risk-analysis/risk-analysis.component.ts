@@ -12,11 +12,37 @@ export class RiskAnalysisComponent implements OnInit {
 
   riskDetails: FormGroup = Object.create(null);
   number: string;
-  private riskAnalysis: File;
+  private riskAnalysis: File = null;
 
   constructor(private fb: FormBuilder,
     private router: Router,
     private editService: EditService) {
+  }
+
+  ngOnInit(): void {
+
+    this.number = this.editService.getWaiver()['number'];
+
+    this.riskDetails = this.fb.group({
+      riskAnalysis: [this.editService.wr?.files?.risk || '', Validators.compose([Validators.required])],
+      rpnBefore: [this.editService.wr?.rpnBefore || '0', Validators.compose([Validators.required])],
+      rpnAfter: [this.editService.wr?.rpnAfter || '0', Validators.compose([Validators.required])],
+      originalRisk: [this.editService.wr?.originalRisk || '', Validators.compose([Validators.required])],
+      currentRisk: [this.editService.wr?.currentRisk || '', Validators.compose([Validators.required])],
+      riskWithActions: [this.editService.wr?.riskWithActions || '', Validators.compose([Validators.required])],
+      requiredCorrectiveAction: [this.getRequiredAction() || '', Validators.compose([Validators.required])],
+      auxAction: [this.editService.wr?.requiredCorrectiveAction || '']
+    });
+
+    this.riskDetails.get('requiredCorrectiveAction').valueChanges.subscribe(action => {
+      if (action == 'other') {
+        this.riskDetails.controls['auxAction'].setValidators([Validators.required]);
+      } else {
+        this.riskDetails.controls['auxAction'].clearValidators();
+      }
+      this.riskDetails.controls['auxAction'].updateValueAndValidity();
+    });
+
   }
 
   ngOnDestroy() {
@@ -44,32 +70,6 @@ export class RiskAnalysisComponent implements OnInit {
     }
     delete body.auxAction;
     return body;
-  }
-
-  ngOnInit(): void {
-
-    this.number = this.editService.getWaiver()['number'];
-
-    this.riskDetails = this.fb.group({
-      riskAnalysis: [this.editService.wr?.riskAnalysis || '', Validators.compose([Validators.required])],
-      rpnBefore: [this.editService.wr?.rpnBefore || '0', Validators.compose([Validators.required])],
-      rpnAfter: [this.editService.wr?.rpnAfter || '0', Validators.compose([Validators.required])],
-      originalRisk: [this.editService.wr?.originalRisk || '', Validators.compose([Validators.required])],
-      currentRisk: [this.editService.wr?.currentRisk || '', Validators.compose([Validators.required])],
-      riskWithActions: [this.editService.wr?.riskWithActions || '', Validators.compose([Validators.required])],
-      requiredCorrectiveAction: [this.getRequiredAction() || '', Validators.compose([Validators.required])],
-      auxAction: [this.editService.wr?.requiredCorrectiveAction || '']
-    });
-
-    this.riskDetails.get('requiredCorrectiveAction').valueChanges.subscribe(action => {
-      if (action == 'other') {
-        this.riskDetails.controls['auxAction'].setValidators([Validators.required]);
-      } else {
-        this.riskDetails.controls['auxAction'].clearValidators();
-      }
-      this.riskDetails.controls['auxAction'].updateValueAndValidity();
-    });
-
   }
 
   getRequiredAction() {

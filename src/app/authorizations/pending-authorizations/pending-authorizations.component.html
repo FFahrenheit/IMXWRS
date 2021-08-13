@@ -47,14 +47,14 @@
                             {{ auth.totalActivities - auth.pendingActivities }} / {{ auth.totalActivities }} confirmed
                         </div> -->
                         <div *ngIf="auth.status == 'on hold'" class="urgent">
-                            Waiver remarked, waiting for edit
+                            Waiver rejected, waiting for edit
                         </div>
                     </ng-template>
                 </td>
                 <td>
                     <button *ngIf="auth.status != 'on hold'" class="btn btn-success" (click)="goToWaiver(auth.request)">
                         <i class="fas fa-check"></i>
-                        Mark as acknowledged
+                        Review
                     </button>
                     <!-- <button *ngIf="auth.pendingActivities != '0' || auth.status == 'on hold'"
                     class="btn btn-primary" (click)="goToWaiver(auth.request)">

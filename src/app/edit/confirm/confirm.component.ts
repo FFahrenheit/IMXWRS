@@ -40,4 +40,8 @@ export class ConfirmComponent implements OnInit {
       console.log(error);
     })
   }
+
+  public testService(){
+    this.editService.uploadFiles();
+  }
 }

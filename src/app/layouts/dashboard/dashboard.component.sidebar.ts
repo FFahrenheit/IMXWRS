@@ -20,7 +20,7 @@ export const userSidebar = [
         route: ['waivers', 'status']
     },
     {
-        name: "Remarked waivers",
+        name: "Rejected waivers",
         route: ['waivers', 'remarked']
     }
 ];

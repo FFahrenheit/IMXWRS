@@ -1,11 +1,12 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { forkJoin, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { FileUpload } from '../interfaces/file.upload.interface';
 import { GetWaiverService } from './get-waiver.service';
+import { UploadFilesService } from './upload-files.service';
 
 const base_url = environment.base_url;
 
@@ -21,22 +22,12 @@ export class EditService {
 
   constructor(public waiverService: GetWaiverService,
               private datePipe : DatePipe,
-              private http : HttpClient) {
+              private http : HttpClient,
+              private upload : UploadFilesService) {
   }
 
-  update(){
-    let waiver = this.prepare();
-    return this.http.put(`${ base_url }/waiver` , waiver)
-               .pipe(
-                 map((resp:any)=>{
-                   console.log(resp);
-                   return true;
-                 }),
-                 catchError(error=>{
-                   console.log(error);
-                   return of(false);
-                 })
-               );
+  update(){ 
+    return this.uploadFiles();
   }
 
   isValid(waiverId : string) {
@@ -50,6 +41,22 @@ export class EditService {
 
   getWaiver(){
     this.wr = this.waiverService.getWaiver();
+    
+    this.wr.files = {
+      risk : null,
+      auth : null
+    };
+
+    this.wr.evidences.forEach(r => {
+      if(r.description.includes("Risk analysis") && !this.wr.files.risk){
+        this.wr.files.risk = r.filename;
+      }
+
+      if(r.description.includes("External Authorization evidence") && !this.wr.files.auth){
+        this.wr.files.auth = r.filename;
+      }
+    });
+
     return this.wr;
   }
 
@@ -262,7 +269,7 @@ export class EditService {
   public attachExtAuth(file: File): void {
     if (file != null) {
       const _file: FileUpload = {
-        description: 'External Authorization evidence',
+        description: 'External Authorization evidence rev. ' + (Number(this.wr.revision) + 1),
         file: file
       }
       this.extAuthFile = _file;
@@ -274,7 +281,7 @@ export class EditService {
   public attachRiskAnalysis(file: File): void {
     if (file != null) {
       const _file: FileUpload = {
-        description: 'Risk analysis',
+        description: 'Risk analysis rev. ' + (Number(this.wr.revision) + 1),
         file: file
       }
       this.riskAnalysis = _file;
@@ -283,4 +290,56 @@ export class EditService {
     }
   }
   
+  public uploadFiles(){
+    let calls = [];
+
+    if (this.extAuthFile != null) {
+      calls.push(
+        this.upload.uploadFile(this.extAuthFile, this.number)
+      );
+    }
+
+    if(this.riskAnalysis != null){
+      calls.push(
+        this.upload.uploadFile(this.riskAnalysis, this.number)
+      );
+    }
+
+    calls.push(this.put());
+
+    console.log(calls);
+
+    return forkJoin(calls).pipe(
+      map(resps=>{
+        console.log(resps);
+        let count = 0;
+        resps.forEach(r =>{
+          count += r['ok'] || 0;
+        });
+        console.log({
+          count,
+          length: resps.length
+        })
+        return count == resps.length;
+      }), catchError(error=>{
+        console.log(error);
+        return of(false);
+      })
+    )
+  }
+
+  private put(){
+    let waiver = this.prepare();
+    return this.http.put(`${ base_url }/waiver` , waiver)
+              //  .pipe(
+              //    map((resp:any)=>{
+              //      console.log(resp);
+              //      return true;
+              //    }),
+              //    catchError(error=>{
+              //      console.log(error);
+              //      return of(false);
+              //    })
+              //  );
+  }
 }
