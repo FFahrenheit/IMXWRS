@@ -56,10 +56,10 @@
                         <i class="fas fa-check"></i>
                         Review
                     </button>
-                    <!-- <button *ngIf="auth.pendingActivities != '0' || auth.status == 'on hold'"
+                    <button *ngIf="auth.status == 'on hold'"
                     class="btn btn-primary" (click)="goToWaiver(auth.request)">
                         Review
-                    </button> -->
+                    </button>
                 </td>
             </tr>
         </tbody>

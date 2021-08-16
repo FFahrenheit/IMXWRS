@@ -29,9 +29,10 @@
                                     [class]="getStyle(action,'date')">
                             </td>
                             <td>
-                                <button class="btn btn-primary fa fa-plus" *ngIf="i == 0" type="button"
+                                <button class="btn btn-primary fa fa-plus m-1" *ngIf="i == 0" type="button"
                                     (click)="addAction()"></button>
-                                <button class="btn btn-danger fa fa-trash" *ngIf="i != 0" type="button"
+                                <button class="btn btn-danger fa fa-trash" 
+                                *ngIf="i != 0 || actions.controls.length > 1" type="button"
                                     (click)="deleteAction(i)"></button>
                             </td>
                         </tr>

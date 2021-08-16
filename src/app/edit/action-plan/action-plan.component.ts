@@ -81,7 +81,9 @@ export class ActionPlanComponent implements OnInit {
   }
 
   ngOnDestroy(){
+    this.editService.loadManagers();
     console.log(this.editService.wr);
+
     this.router.navigate(['edit',this.number,'risks']);
   }
 

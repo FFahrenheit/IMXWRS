@@ -90,12 +90,6 @@ export class EditService {
       delete this.wr?.externalAuthorization;
     }
 
-    this.getManagers().subscribe((resp)=>{
-      console.log('Got managers');
-    },error=>{
-      console.log('Failing managers: ' + error);
-    })
-
   }
 
   changePieces(pieces){
@@ -213,22 +207,75 @@ export class EditService {
     }).pipe(
         map( (resp:any)=>{
           console.log(resp);
-          this.wr.authorizations = [];
-          resp.managers.forEach(m=>{
-            const manager  = {
-              name: m['name'],
-              title: m['position'],
-              manager: m['username'],
-              signed: 'requires re-confirmation'
-            }
-            this.wr.authorizations.push(manager);
-          });
+          this.getAuthorizations(resp.managers);
         }),
         catchError((error)=>{
           console.log(error);
           return of(false);
         })
       );
+  }
+
+  getAuthorizations(managers){
+    console.log({
+      newManagers: managers,
+      oldManagers: this.wr.authorizations
+    });
+
+    let oldAuth = this.wr.oldAuth || this.wr.authorizations;
+
+    this.wr.oldAuth = oldAuth;
+    
+    let showAuth = [];
+    let keepAuth = [];
+    let newAuth = [];
+
+    managers.forEach(m => {
+      let repeated = false;
+      oldAuth.forEach(a => {
+        if(a.position == m.position){
+          repeated = true;
+          showAuth.push(a);
+          keepAuth.push(a.position);
+        }
+      });
+      if(!repeated){
+        showAuth.push({
+          name: m.name,
+          position: m.position,
+          signed: 'pending'
+        });
+
+        newAuth.push({
+          manager: m.username,
+          position: m.position,
+          signed: 'pending',
+        });
+      }
+    });
+
+    console.log({
+      showAuth,
+      keepAuth,
+      newAuth
+    });
+
+    this.wr.authorizations = showAuth;
+
+    this.wr.newAuth = newAuth;
+    this.wr.keepAuth = keepAuth;
+    
+    // this.wr.authorizations = [];
+    // resp.managers.forEach(m=>{
+    //   const manager  = {
+    //     name: m['name'],
+    //     title: m['position'],
+    //     manager: m['username'],
+    //     signed: 'requires re-confirmation'
+    //   }
+    //   let needs = false;
+    //   this.wr.authorizations.push(manager);
+    // });
   }
 
   prepare(){
@@ -246,8 +293,12 @@ export class EditService {
 
     let auth = [...(wr.authorizations||[])];
     let auth2 = [ ... auth ];
-   
     delete wr.authorizations;
+
+    console.log({
+      auth, 
+      auth2
+    });
 
     auth.forEach(a=>{
       a.position = a.title;
@@ -260,6 +311,12 @@ export class EditService {
     wr.authorizations = auth;
 
     this.wr.authorizations = auth2;
+
+    console.log({
+      auth, 
+      auth2
+    });
+
 
     let actions = [...(wr.newActions||[]),...(wr.modifiedActions||[])];
 
@@ -354,5 +411,13 @@ export class EditService {
               //      return of(false);
               //    })
               //  );
+  }
+
+  loadManagers(){
+    this.getManagers().subscribe((resp)=>{
+      console.log('Got managers');
+    },error=>{
+      console.log('Failing managers: ' + error);
+    });
   }
 }
