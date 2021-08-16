@@ -105,4 +105,20 @@ export class AuthenticationService {
                );
 
   }
+
+  newUser(user){
+    let body = { user };
+    return this.http.post(`${base_url}/user`,body)
+          .pipe(
+            map(resp=>{
+              if(resp['ok']){
+                return true;
+              }
+              return false;
+            }),catchError(error=>{
+              console.log(error);
+              return of(false);
+            })
+          )
+  }
 }

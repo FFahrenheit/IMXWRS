@@ -1,1 +1,82 @@
-<p>add-user works!</p>
+<div class="containter text-center pt-2 mb-5 mx-3">
+    <alert></alert>
+    <h4 class="text-left my-3">Add new user</h4>
+    <form [formGroup]="form" autocomplete="off">
+        <div class="row d-flex justify-content-center">
+
+            <div class="col-md-12">
+
+                <h5 class="text-left">User's details</h5>
+
+                <div class="form-group row pt-2 has-error has-feedback">
+                    <label for="" class="col-md-4 col-form-label">
+                        <i class="fas fa-user"></i>Name
+                    </label>
+                    <div class="col-md-8 px-5">
+                        <input formControlName="name" type="text" class="form-control"
+                            placeholder="Display name" [class]="getClass('name')">
+                    </div>
+                </div>
+
+                <div class="form-group row pt-2 has-error has-feedback">
+                    <label for="" class="col-md-4 col-form-label">
+                        <i class="fas fa-id-card-alt"></i>
+                        Username
+                    </label>
+                    <div class="col-md-8 px-5">
+                        <input formControlName="username" type="text" class="form-control"
+                            placeholder="Username that will use to login" [class]="getClass('username')">
+                    </div>
+                </div>
+
+                <div class="form-group row pt-2 has-error has-feedback">
+                    <label for="" class="col-md-4 col-form-label">
+                        <i class="fas fa-key"></i>
+                        Temporary password
+                    </label>
+                    <div class="col-md-8 px-5">
+                        <input autocomplete="off" formControlName="password" type="text" class="form-control"
+                            placeholder="Password that will use to login" [class]="getClass('password')">
+                    </div>
+                </div>
+
+                <div class="form-group row pt-2 has-error has-feedback">
+                    <label for="" class="col-md-4 col-form-label">
+                        <i class="fas fa-envelope"></i>
+                        Email
+                    </label>
+                    <div class="col-md-8 px-5">
+                        <input autocomplete="off" formControlName="email" type="text" class="form-control"
+                            placeholder="User's email address" [class]="getClass('email')">
+                    </div>
+                </div>
+
+                <div class="form-group row pt-2 has-error has-feedback">
+                    <label for="" class="col-md-4 col-form-label">
+                        <i class="fas fa-sitemap"></i>
+                        Posicion
+                    </label>
+                    <div class="col-md-8 px-5">
+                        <select formControlName="position" [class]="getClass('position')"
+                            class="custom-select mb-2 mr-sm-2 mb-sm-0" disabled>
+                            <option value="employee" disabled selected>User</option>
+                            <!-- <option value="usuario">Usuario</option>
+                            <option value="encargado">Encargado</option>
+                            <option value="prestador">Prestador</option> -->
+                        </select>
+                    </div>
+                </div>
+
+                <confirm-modal [isDisabled]="!form.valid"
+                (triggered)="form.markAllAsTouched()"
+                (accept)="next()"
+                trigger="Add user"
+                reason="Fulfill the form"
+                title="New user"
+                content="Are you sure you want to add this user?">
+                </confirm-modal>
+            </div>
+
+        </div>
+    </form>
+</div>
