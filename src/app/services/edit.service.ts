@@ -19,6 +19,7 @@ export class EditService {
   public number: string;
   public extAuthFile : FileUpload = null;
   public riskAnalysis: FileUpload = null;
+  public authLock = false;
 
   constructor(public waiverService: GetWaiverService,
               private datePipe : DatePipe,
@@ -232,13 +233,15 @@ export class EditService {
 
     managers.forEach(m => {
       let repeated = false;
-      oldAuth.forEach(a => {
-        if(a.position == m.position){
-          repeated = true;
-          showAuth.push(a);
-          keepAuth.push(a.position);
-        }
-      });
+      if(!this.authLock){
+        oldAuth.forEach(a => {
+          if(a.position == m.position){
+            repeated = true;
+            showAuth.push(a);
+            keepAuth.push(a.position);
+          }
+        });
+      }
       if(!repeated){
         showAuth.push({
           name: m.name,

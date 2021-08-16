@@ -19,6 +19,7 @@ export class ActionPlanComponent implements OnInit {
   public users : ActionUser[];
   public model : any;
   private number : string;
+  private dateLock = false;
   @ViewChildren('responsable') responsables: QueryList<ResponsableInputComponent>;
 
   constructor(private fb : FormBuilder,
@@ -85,6 +86,9 @@ export class ActionPlanComponent implements OnInit {
     console.log(this.editService.wr);
 
     this.router.navigate(['edit',this.number,'risks']);
+    if(this.dateLock){
+      this.editService.authLock = true;
+    }
   }
 
   get actions(): FormArray {
@@ -161,6 +165,12 @@ export class ActionPlanComponent implements OnInit {
       };
     }
     return null;
+  }
+
+  onChange($event, action){
+    if(action.controls['id'].value != 0){
+      this.dateLock = true;
+    }
   }
 
 }
