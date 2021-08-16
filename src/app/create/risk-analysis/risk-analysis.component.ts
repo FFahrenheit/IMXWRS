@@ -16,6 +16,8 @@ export class RiskAnalysisComponent implements OnInit {
   private riskAnalysis : File;
   private files : File[] = [];
 
+  public loadedFiles;
+
   constructor(private fb : FormBuilder,
               private router : Router,
               private waiverService : CreateWrService) {
@@ -23,7 +25,9 @@ export class RiskAnalysisComponent implements OnInit {
 
    ngOnDestroy(){
       this.waiverService.setSecondStep(this.getForm());
-      this.waiverService.attachRiskAnalysis(this.riskAnalysis);
+      if(this.riskAnalysis != null){
+        this.waiverService.attachRiskAnalysis(this.riskAnalysis);
+      }
       if(this.files.length>0){
         this.waiverService.setResources(this.files);
       }
@@ -43,6 +47,8 @@ export class RiskAnalysisComponent implements OnInit {
       required_action: [this.getRequiredAction() || '',Validators.compose([Validators.required])],
       aux_action: [this.waiverService.wr.risk?.requiredAction ||''] 
     });
+
+    this.loadedFiles = this.waiverService?.resources || [];
 
     this.riskDetails.get('required_action').valueChanges.subscribe(action=>{
       if(action == 'other'){

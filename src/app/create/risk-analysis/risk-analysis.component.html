@@ -103,7 +103,10 @@
             
                 <div class="form-group row pt-2">
                     <div class="col-md-12">
-                        <file-upload type="resource" (receive)="getFiles($event)" [isRequired]="false">  
+                        <file-upload type="resource" 
+                        (receive)="getFiles($event)" 
+                        [isRequired]="false"
+                        [loaded]="loadedFiles">  
 
                         </file-upload>
                     </div>

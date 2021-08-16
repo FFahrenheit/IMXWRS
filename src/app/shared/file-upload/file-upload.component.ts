@@ -11,6 +11,7 @@ export class FileUploadComponent implements OnInit {
   @Input() public maxSize = 1024*1024*10;
   @Input() public maxFiles = 10;
   @Input() public isRequired = true;
+  @Input() public loaded : File[] = [];
 
   @Output() public receive = new EventEmitter<any>();
 
@@ -20,6 +21,7 @@ export class FileUploadComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.files = this.files.concat(this.loaded);
   }
 
   addFile($event) {
