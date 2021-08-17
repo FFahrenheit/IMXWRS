@@ -42,9 +42,9 @@ export class FilterModalComponent implements OnInit {
       area : [saved?.area || ''],
       from : [saved?.from ||''],
       to : [saved?.to || ''],
-      type : [saved?.type || ''],
-      typeNumber : [saved?.typeNumber||''],
-      status: [saved?.status || '']
+      type : [saved?.type || null],
+      typeNumber : [saved?.typeNumber||null],
+      status: [saved?.status || null]
     });
     this.getValue();
   }
@@ -76,7 +76,7 @@ export class FilterModalComponent implements OnInit {
 
   getClass(control){
     let ctrl = this.filterForm.controls[control];
-    if(!ctrl.touched || ctrl.value == ''){
+    if(  ctrl.value == null || !ctrl.touched || ctrl.value == ''){
       return '';
     }
     return 'is-valid';

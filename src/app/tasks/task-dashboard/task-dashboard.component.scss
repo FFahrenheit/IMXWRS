@@ -15,3 +15,17 @@
 .late{
     color: red;
 }
+
+.header:hover{
+    cursor: pointer;
+}
+
+.header i{
+    margin-right: 2px;
+    color: gray;
+    margin-top: 5px;
+}
+
+.header i:hover{
+    color: black;
+}

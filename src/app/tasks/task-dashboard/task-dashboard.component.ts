@@ -11,6 +11,7 @@ export class TaskDashboardComponent implements OnInit {
   
   public activities;
   public today : any = new Date();
+  public filteredActivities;
 
   public filters;
   public filter : string = '';
@@ -23,6 +24,7 @@ export class TaskDashboardComponent implements OnInit {
         .subscribe(res=>{
           if(res){
             this.activities = this.activityService.getUnsigned();
+            this.filteredActivities = this.activities;
             this.filterActivities();
           }
         },error=>{
@@ -52,4 +54,10 @@ export class TaskDashboardComponent implements OnInit {
     return this.activities?.filter( a => this.filter == '' || a.request == this.filter);
   }
 
+  change($event){
+    let filter = $event.target.value;
+    console.log({filter});
+    this.filter = filter;
+    this.filteredActivities = this.activities?.filter( a => this.filter == '' || a.request == this.filter);
+  }
 }

@@ -83,9 +83,10 @@
                         <div class="col-md-8">
                             <select [class]="getClass('type')" formControlName="type"
                                 class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-                                <option value=""></option>
+                                <option [value]="null">Select the type of waiver</option>
                                 <option value="external">External</option>
                                 <option value="internal">Internal</option>
+                                <option value="system">System</option>
                             </select>
                         </div>
                     </div>
@@ -95,7 +96,7 @@
                         <div class="col-md-8">
                             <select [class]="getClass('status')" formControlName="status"
                                 class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-                                <option value="">Approved</option>
+                                <option [value]="null">Select the status of the waiver</option>
                                 <option value="open">Open</option>
                                 <option value="closed">Closed</option>
                                 <option value="pending">In authorization process</option>
@@ -109,11 +110,12 @@
                         <div class="col-md-7">
                             <select [class]="getClass('typeNumber')" formControlName="typeNumber"
                                 class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-                                <option value=""></option>
+                                <option [value]="null">Select the type number of the waiver</option>
                                 <option value="1">Type 1</option>
                                 <option value="2">Type 2</option>
                                 <option value="3">Type 3</option>
                                 <option value="4">Type 4</option>
+                                <option value="5">Type 5 (PSW)</option>
                             </select>
                         </div>
                         <div class="col-md-1 d-flex justify-content-center deviation-info">

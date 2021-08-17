@@ -3,7 +3,7 @@
     <div class="row my-2">
         <label for="" class="col-md-3 col-form-label">Waiver number:</label>
         <div class="col-md-4">
-            <select class="custom-select mb-2 mr-sm-2 mb-sm-0"
+            <select class="custom-select mb-2 mr-sm-2 mb-sm-0" (change)="change($event)"
                 id="inlineFormCustomSelect"[(ngModel)]="filter">
                 <option value="" selected>All</option>
                 <option *ngFor="let f of filters" [value]="f"> {{ f }} </option>
@@ -12,18 +12,36 @@
     </div>
     <table *ngIf=" activities?.length != 0; else empty_mesage" class="table table-hover">
         <thead>
-            <tr>
-                <th scope="col">WR ID</th>
-                <th scope="col">Customer</th>
-                <th scope="col">Waiver status</th>
-                <th scope="col">Task description</th>
-                <th scope="col">Commitment date</th>
-                <th scope="col">Remaining days</th>
+            <tr class="header">
+                <th scope="col" [appSort]="filteredActivities" data-order="desc" data-name="request">
+                    <i class="fas fa-filter float-left"></i>
+                    WR ID
+                </th>
+                <th scope="col" [appSort]="filteredActivities" data-order="desc" data-name="customer">
+                    <i class="fas fa-filter float-left"></i>
+                    Customer
+                </th>
+                <th scope="col" [appSort]="filteredActivities" data-order="desc" data-name="status">
+                    <i class="fas fa-filter float-left"></i>
+                    Waiver status
+                </th>
+                <th scope="col" [appSort]="filteredActivities" data-order="desc" data-name="description">
+                    <i class="fas fa-filter float-left"></i>
+                    Task description
+                </th>
+                <th scope="col" [appSort]="filteredActivities" data-order="desc" data-name="date">
+                    <i class="fas fa-filter float-left"></i>
+                    Commitment date
+                </th>
+                <th scope="col" [appSort]="filteredActivities" data-order="asc" data-name="date">
+                    <i class="fas fa-filter float-left"></i>
+                    Remaining days
+                </th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let act of getActivities()">
+            <tr *ngFor="let act of filteredActivities">
                 <td>
                     <i title="Upcoming activity" class="fas fa-exclamation-triangle upcoming" *ngIf=" dateDiff(act.date)>=1 && dateDiff(act.date) <= 3 "></i>
                     <i title="This activity is late" class="fas fa-exclamation-circle late" *ngIf="dateDiff(act.date)<=0"></i>
