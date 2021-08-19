@@ -1,5 +1,5 @@
 <div *ngIf="exists; else not_found" class="card my-2 pb-5">
-    <div class="container text-center pt-2">
+    <div class="container text-center pt-2" *ngIf="exists != null; else loading">
         <div class="row">
             <div class="col-md-8">
                 <h4 class="text-left my-3"> {{ title }} Waiver Request # {{ id }}</h4>
@@ -66,13 +66,13 @@
                 </div>
 
                 <h5 class="text-left subtitle-att ">Risks</h5>
-                <attribute name="Original risk:" [value]="( wr?.originalRisk | titlecase ) || ''"></attribute>
+                <attribute name="Client impact:" [value]="( wr?.originalRisk | titlecase ) || ''"></attribute>
                 <attribute name="Risk analysis: " [value]="wr?.riskAnalysis || ''"></attribute>
                 <attribute name="AMEF RPN before: " [value]="wr?.rpnBefore || '0'"></attribute>
                 <hr class="separator">
                 <attribute name="Current risk: " [value]="( wr?.currentRisk | titlecase ) || '' "></attribute>
                 <hr class="separator">
-                <attribute name="Risk with actions: " [value]="( wr?.riskWithActions | titlecase) || ''"></attribute>
+                <!-- <attribute name="Risk with actions: " [value]="( wr?.riskWithActions | titlecase) || ''"></attribute> -->
                 <attribute name="Corrective action required:" [value]="wr?.requiredCorrectiveAction || ''"></attribute>
                 <attribute name="AMEF RPN after: " [value]="wr?.rpnAfter || '0' "></attribute>
 
@@ -204,7 +204,8 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">Action</th>
+                            <th scope="col">Action ID</th>
+                            <th scope="col">Description</th>
                             <th scope="col">Responsable</th>
                             <th scope="col">Commitment date</th>
                             <th scope="col">Status</th>
@@ -213,6 +214,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let action of wr?.actions">
+                            <td> #{{ action?.id || '---' }} </td>
                             <td> {{ action.description }} </td>
                             <td> {{ action.name }} </td>
                             <td> {{ datePipe.transform(action.date,'yyyy-MM-dd') || '' }} </td>
@@ -227,8 +229,13 @@
             </div>
         </div>
     </div>
+    <ng-template #loading>
+        Loading
+    </ng-template>
 </div>
 <ng-template #not_found>
-    <error-message title="ERROR" description="We couldn't find the requested waiver request">
+    <error-message title="ERROR" 
+    description="We couldn't find the requested waiver request"
+    [loading]="exists">
     </error-message>
 </ng-template>

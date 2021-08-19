@@ -55,14 +55,14 @@
                 </div>
 
                 <h5 class="text-left subtitle-att ">Risks</h5>
-                <attribute name="Original risk:" [value]="( wr.risk?.originalRisk | titlecase ) || ''"></attribute>
+                <attribute name="Client impact:" [value]="( wr.risk?.originalRisk | titlecase ) || ''"></attribute>
                 <attribute name="Risk analysis: " [value]="wr.risk?.riskAnalysis || ''"></attribute>
                 <attribute name="AMEF RPN before: " [value]="wr.risk?.rpnBefore || ''"></attribute>
                 <hr class="separator">
                 <attribute name="Current risk: " [value]="( wr.risk?.currentRisk | titlecase ) || '' "></attribute>
                 <hr class="separator">
-                <attribute name="Risk with actions: " [value]="( wr.risk?.riskWithActions | titlecase) || ''">
-                </attribute>
+                <!-- <attribute name="Risk with actions: " [value]="( wr.risk?.riskWithActions | titlecase) || ''">
+                </attribute> -->
                 <attribute name="Corrective action required:" [value]="wr.risk?.requiredAction || ''"></attribute>
                 <attribute name="AMEF RPN after: " [value]="wr.risk?.rpnAfter || '' "></attribute>
             </div>
@@ -136,7 +136,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Responsable</th>
-                                <th scope="col">Action</th>
+                                <th scope="col">Description</th>
                                 <th scope="col">Commitment date</th>
                             </tr>
                         </thead>

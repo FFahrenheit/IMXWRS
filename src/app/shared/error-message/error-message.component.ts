@@ -12,6 +12,7 @@ export class ErrorMessageComponent implements OnInit {
   @Input() public description = "We couldn't find the requested resource";
   @Input() public type = 'error';
   @Input() public styles = '';
+  @Input() public loading = null;
 
   constructor(public location : Location) { }
   
