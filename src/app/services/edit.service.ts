@@ -282,6 +282,7 @@ export class EditService {
   }
 
   prepare(){
+    let saved = this.wr.authorizations;
     let wr = { ... this.wr };
 
     delete wr?.name;
@@ -311,6 +312,11 @@ export class EditService {
       delete a?.signed;
     });
 
+    console.log({
+      auth1: this.wr.authorizations
+      ,auth2
+    })
+
     wr.authorizations = auth;
 
     this.wr.authorizations = auth2;
@@ -336,6 +342,8 @@ export class EditService {
     console.log(wr);
     console.log(this.wr);
 
+    this.wr.authorizations = saved;
+    console.log({saved});
     return wr;
   }
 

@@ -27,7 +27,14 @@ export class ConfirmComponent implements OnInit {
     }
     let act = Object.assign(actions);
     this.waiver.actions = act;
-    console.log(this.waiver.actions);
+    console.log(this.waiver.authorizations);
+    let saved = this.waiver;
+    
+    this.waiver = null;
+    this.waiver = Object.assign(saved);
+    console.log({
+      wr: this.waiver
+    });
   }
 
   confirm(){
@@ -49,6 +56,8 @@ export class ConfirmComponent implements OnInit {
   }
 
   public testService(){
+    console.log('Testing upload');
+    // console.log(this.editService.wr);
     this.editService.uploadFiles();
   }
 }

@@ -54,8 +54,11 @@ export class WaiverComponent implements OnInit {
 
         });
     } else if (this.waiver != null) {
+      this.exists = true;
       console.log(['Waiver already loaded', this.waiver]);
-      this.wr = this.waiver;
+      let a = Object.assign({},this.waiver);
+      let b = JSON.parse(JSON.stringify(a));
+      this.wr = b;
       this.id = this.wr.number;
     } else {
       console.log('To do...');
