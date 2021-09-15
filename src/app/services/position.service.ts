@@ -61,7 +61,7 @@ export class PositionService {
                )
   }
 
-  public saveBackups(username : string, users : string[]){
+  public saveBackups(username : string, users : any[]){
     let body = {
       backups : users
     };

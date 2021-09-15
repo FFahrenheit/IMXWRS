@@ -89,6 +89,8 @@ export class BackupUserComponent implements OnInit {
       fullUser
     });
 
+    fullUser['enabled'] = 0;
+
     if (backups.includes(user)) {
       this.alert.error('This user is already a backup user');
     } else {
@@ -102,7 +104,11 @@ export class BackupUserComponent implements OnInit {
   }
 
   public save() : void{
-    let body = this.backupUsers.map(b => b.username);
+    let body = this.backupUsers.map(b => ({
+       lender: this.username, 
+       granted: b.username, 
+       enabled: b.enabled }));
+
     this.positionService.saveBackups(this.username, body)
         .subscribe(resp=>{
           if(resp){
@@ -116,6 +122,13 @@ export class BackupUserComponent implements OnInit {
         },error=>{
           this.alert.error(this.positionService.getError());
         });
+  }
+
+  public toggleBackup(event, username){
+    let state = event.currentTarget.checked ? 1 : 0;
+    let u = this.backupUsers.find(n => n.username == username);
+    u.enabled = state;
+    // console.log({ u, users: this.backupUsers, state});
   }
 
 }
