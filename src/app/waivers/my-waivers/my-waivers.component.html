@@ -71,7 +71,8 @@
         </tbody>
     </table>
     <ng-template #empty_body>
-        <error-message type="empty" title="Nothing here..." description="You don't have any waiver request yet">
+        <error-message type="empty"
+        [loading]="waivers" title="Nothing here..." description="You don't have any waiver request yet">
         </error-message>
     </ng-template>
 </div>

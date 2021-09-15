@@ -82,7 +82,8 @@
         (accept)="save()">
     </confirm-modal>
     <ng-template #not_found>
-        <error-message title="ERROR" description="We couldn't find the requested user profile">
+        <error-message title="ERROR"
+        [loading]="user" description="We couldn't find the requested user profile">
         </error-message>
     </ng-template>
 

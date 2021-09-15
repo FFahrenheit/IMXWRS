@@ -43,6 +43,7 @@
     </table>
     <ng-template #empty_body>
         <error-message type="empty" title="Nothing here..." 
+        [loading]="authorizations"
         description = "No recent approved waivers right now">
         </error-message>
     </ng-template>

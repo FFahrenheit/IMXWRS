@@ -73,7 +73,8 @@
     </table>
     <ng-template #empty_mesage>
         <error-message type="empty" title="Nothing here..." 
-        description="Congrats, you don't have any pending activity">
+        description="Congrats, you don't have any pending activity"
+        [loading]="activities">
 
         </error-message>
     </ng-template>

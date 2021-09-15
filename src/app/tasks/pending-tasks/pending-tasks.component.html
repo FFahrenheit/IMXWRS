@@ -48,7 +48,8 @@
         </tbody>
     </table>
     <ng-template #empty_body>
-        <error-message type="empty" title="Nothing here..." 
+        <error-message type="empty" title="Nothing here..."
+        [loading]="activities" 
         description="Congrats, you just completed your tasks">
         </error-message>
     </ng-template>

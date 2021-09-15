@@ -63,7 +63,8 @@
     </table>
     <ng-template #empty_body>
         <error-message type="empty" title="Nothing here..."
-            description="There is no waiver requests with the specified filters">
+            description="There is no waiver requests with the specified filters"
+            [loading]="log">
         </error-message>
     </ng-template>
 </div>

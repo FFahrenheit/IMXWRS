@@ -47,6 +47,7 @@
             </div>
             <ng-template #no_participation>
                 <error-message styles="small-size" type="empty-sub" title="Nothing here..."
+                [loading]="charts"
                     description="This user has no participation in the system">
                 </error-message>
             </ng-template>

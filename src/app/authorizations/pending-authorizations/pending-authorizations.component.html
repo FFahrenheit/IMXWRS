@@ -68,6 +68,7 @@
     </table>
     <ng-template #empty_body>
         <error-message type="empty" title="Nothing here..."
+        [loading]="authorizations"
             description="Congrats! You don't have any pending waiver request">
         </error-message>
     </ng-template>
