@@ -39,7 +39,7 @@ export class BackupUserComponent implements OnInit {
     this.usersService.getUsers()
       .subscribe(resp => {
         if (resp['status']) {
-          this.users = resp['users'];
+          this.users = resp['users'].filter(u => u.position == 'employee');
         } else {
           this.alert.error("Couldn't load users");
         }

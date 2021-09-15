@@ -17,7 +17,7 @@ export class ManagerAuthorizationGuard implements CanActivate {
     state: RouterStateSnapshot): boolean{
       let user = this.loggedUser.getUser();
 
-      if(user.position == 'employee'){
+      if(user.position == 'employee' && user.roles.length == 0){
         this.router.navigate(['403']);
       }
       return true;

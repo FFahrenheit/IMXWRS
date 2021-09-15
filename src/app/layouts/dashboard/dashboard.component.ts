@@ -34,6 +34,10 @@ export class DashboardComponent implements OnInit {
     }
     else if(this.user.position == 'employee'){
       this.sidebar = userSidebar;
+
+      if(this.user.roles.length > 0){
+        this.sidebar = userSidebar.concat(adminSidebar);
+      }
     }else{
       this.sidebar = adminSidebar;
     }
