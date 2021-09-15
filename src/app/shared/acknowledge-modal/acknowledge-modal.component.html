@@ -17,9 +17,9 @@
             Acknowledge this action as:
             <form [formGroup]="form">
                 <div class="form-group row pt-2 has-error has-feedback">
-                    <label for="" class="col-md-4 col-form-label">Select position</label>
+                    <label for="" class="col-md-4 col-form-label">Acknowledging for</label>
                     <div class="col-md-8">
-                        <select formControlName="position" class="custom-select mb-2 mr-sm-2 mb-sm-0"
+                        <select disabled formControlName="position" class="custom-select mb-2 mr-sm-2 mb-sm-0"
                             [class]="getClass('position')">
                             <option value="" disabled selected>Role you want to acknowledge for</option>
                             <option *ngFor="let r of roles" [value]="r"> {{ r | titlecase }} </option>
