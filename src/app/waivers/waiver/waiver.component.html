@@ -67,7 +67,7 @@
 
                 <h5 class="text-left subtitle-att ">Risks</h5>
                 <attribute name="Customer impact:" [value]="( wr?.originalRisk | titlecase ) || ''"></attribute>
-                <attribute name="Risk analysis: " [value]="wr?.riskAnalysis || ''"></attribute>
+                <attribute name="Risk analysis: " value="Please review file on evidence section"></attribute>
                 <attribute name="AMEF RPN before: " [value]="wr?.rpnBefore || '0'"></attribute>
                 <hr class="separator">
                 <attribute name="Current risk: " [value]="( wr?.currentRisk | titlecase ) || '' "></attribute>
@@ -156,8 +156,8 @@
                                     {{ auth.signed | titlecase }}
                                 </td>
                                 <td *ngIf="auth.signed != 'pending'">
-                                    {{ auth.signed | titlecase }} 
-                                    on {{ auth.date | date:'medium':'UTC' }} 
+                                    {{ auth.signed | titlecase }}
+                                    on {{ auth.date | date:'medium':'UTC' }}
                                     by {{ auth. authBy || auth.name }}
                                 </td>
                             </tr>
@@ -234,8 +234,6 @@
     </ng-template>
 </div>
 <ng-template #not_found>
-    <error-message title="ERROR" 
-    description="We couldn't find the requested waiver request"
-    [loading]="exists">
+    <error-message title="ERROR" description="We couldn't find the requested waiver request" [loading]="exists">
     </error-message>
 </ng-template>

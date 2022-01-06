@@ -22,7 +22,7 @@ export class ChangeManagersComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.fb.group({
       engineering: ['', Validators.required],
-      finances: ['', Validators.required],
+      materials: ['', Validators.required],
       general: ['', Validators.required],
       npi: ['', Validators.required],
       operations: ['', Validators.required],

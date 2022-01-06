@@ -66,10 +66,10 @@
                 </div>
 
                 <div class="form-group row pt-2 has-error has-feedback">
-                    <label for="" class="col-md-4 col-form-label">Finances Manager</label>
+                    <label for="" class="col-md-4 col-form-label">Materials Manager</label>
                     <div class="col-md-8">
-                        <select formControlName="finances" class="custom-select mb-2 mr-sm-2 mb-sm-0"
-                            [class]="getClass('finances')">
+                        <select formControlName="materials" class="custom-select mb-2 mr-sm-2 mb-sm-0"
+                            [class]="getClass('materials')">
                             <option *ngFor="let u of users" [value]="u.username"> {{ u.name }} </option>
                         </select>
                     </div>

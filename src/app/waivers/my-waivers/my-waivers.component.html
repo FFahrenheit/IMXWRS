@@ -54,11 +54,11 @@
                     <button class="btn btn-info m-1" (click)="upload(waiver.number)" title="Upload reference">
                         <i class="fas fa-file-upload"></i>
                     </button>
-                    <button *ngIf="(waiver.status == 'open' || waiver.status == 'closed') && waiver.typeNumber == 4"
+                    <!-- <button *ngIf="(waiver.status == 'open' || waiver.status == 'closed') && waiver.typeNumber == 4"
                         class="btn btn-warning m-1" (click)="reopen(waiver.number)" title="Reopen">
                         <i class="fas fa-sync-alt"></i>
-                    </button>
-                    <button *ngIf="waiver.status == 'open'" class="btn btn-success m-1"
+                    </button> -->
+                    <button *ngIf="waiver.status == 'open' && waiver.pendingActions == 0" class="btn btn-success m-1"
                         (click)="goToClose(waiver.number)" title="Close">
                         <i class="fas fa-check-circle"></i>
                     </button>

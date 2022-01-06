@@ -26,6 +26,7 @@ export class WaiversService {
                  map((resp:any)=>{
                    if(resp.ok){
                      this.myWaivers = resp.waivers;
+                     console.log(this.myWaivers);
                      return true;
                    }
                    return false;
