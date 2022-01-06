@@ -70,11 +70,11 @@ export class WaiverActionsComponent implements OnInit {
       if (this.wr.typeNumber == 4 && this.wr.originator == this.username
         && (this.wr.status == 'open' || this.wr.status == 'closed')) {
 
-        this.actions.push({
-          action : 'Reopen',
-          link   : ['waivers', 'reopen', this.id],
-          icon   : 'fas fa-sync-alt'
-        });
+        // this.actions.push({
+        //   action : 'Reopen',
+        //   link   : ['waivers', 'reopen', this.id],
+        //   icon   : 'fas fa-sync-alt'
+        // });
       }
     }
 
@@ -97,11 +97,11 @@ export class WaiverActionsComponent implements OnInit {
 
         if (a['signed'] == 'pending') {
 
-          this.actions.push({
-            action : 'Confirm participation',
-            link   : ['waivers', 'sign', this.id],
-            icon   : 'fas fa-thumbtack'
-          });
+          // this.actions.push({
+          //   action : 'Confirm participation',
+          //   link   : ['waivers', 'sign', this.id],
+          //   icon   : 'fas fa-thumbtack'
+          // });
         } else if (a['signed'] == 'signed' && this.wr.status == 'open') {
 
           this.actions.push({
